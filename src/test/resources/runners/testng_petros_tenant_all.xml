@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Test Suite">
+	<test name="Regression Tests execution over Chrome Browser">
+		<parameter name="browser" value="CHROME"></parameter>
+		<packages>
+			<package name="galen.tenant.petros"></package>
+		</packages>
+	</test>
+</suite> 

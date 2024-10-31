@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Test Suite" parallel="tests" thread-count="10" data-provider-thread-count="2">
+	<test thread-count="2" name="Regression Tests execution over Chrome 
+		Browser" parallel="methods">
+		<parameter name="browser" value="CHROME"></parameter>
+<!--		<packages>-->
+<!--			<package name="org.selenium.tests"></package>-->
+<!--		</packages>-->
+		<classes>
+			<class name="galen.tests.RegressionSuite.VTP_FRD_022_023_024_215_DOB_Sex_at_Birth_Screen">
+				<methods>
+					<include name="VTP_FRD_022_023_024_215_DOB_Sex_at_Birth_Screen"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite> <!-- Suite -->

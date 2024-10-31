@@ -1,0 +1,8 @@
+/src/test/resources/
+/src/test/resources/runners/
+/src/test/resources/config.properties
+/src/test/resources/dev_config.properties
+/src/test/resources/int_config.properties
+/src/test/resources/preprod_config.properties
+/src/test/resources/qa_config.properties
+/src/test/resources/stg_config.properties
