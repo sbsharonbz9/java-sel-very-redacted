@@ -21,7 +21,7 @@ public class VTP_DEX_FRD_012_021_Welcome_Screen extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_012_021_Welcome_Screen()  {
-        VERSIONHISTORY.add("1.0;02NOV2022;Initial Test Script;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;02NOV2022;Initial Test Script;Name Redacted");
     }
 
     @Test

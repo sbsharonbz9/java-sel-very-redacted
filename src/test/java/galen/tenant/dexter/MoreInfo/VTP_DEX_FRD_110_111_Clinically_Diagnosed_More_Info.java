@@ -34,10 +34,10 @@ public class VTP_DEX_FRD_110_111_Clinically_Diagnosed_More_Info extends BaseTest
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_110_111_Clinically_Diagnosed_More_Info() {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script ;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script ;Name Redacted");
         VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-478: Updated Test Steps for FDA changes \n"+
                 "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;Name Redacted");
     }
 
     @Test

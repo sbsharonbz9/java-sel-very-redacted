@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_265_Know_Numbers_Clinician extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_265_Know_Numbers_Clinician()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
     }
 
     @Test

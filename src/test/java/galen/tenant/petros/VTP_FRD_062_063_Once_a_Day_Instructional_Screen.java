@@ -2,6 +2,7 @@ package galen.tenant.petros;
 
 import galen.base.BaseTest;
 import galen.driver.DriverManager;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.petros.PetrosNavigations;
 import galen.helpers.tenant.petros.PetrosUser;
@@ -34,7 +35,7 @@ public class VTP_FRD_062_063_Once_a_Day_Instructional_Screen extends BaseTest {
 
     VTP_FRD_062_063_Once_a_Day_Instructional_Screen() throws IOException {
         this.user = new PetrosUser();
-        VERSIONHISTORY.add("1.0;19JUL2023;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;19JUL2023;Initial Test Script;Name Redacted");
     }
 
     @Test

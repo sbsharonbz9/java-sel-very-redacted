@@ -106,16 +106,16 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_016_Display_App_Back_Button()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation\n" +
-                "for restructured cancer flow;Suresh Sunderraj");
+                "for restructured cancer flow;Name Redacted");
         VERSIONHISTORY.add("3.0;13JUN2024\n" +
                 ";Per CADENCE-476: Updated Test Steps for FDA changes\n" +
                 "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
                 "Per CADENCE-549: Removed Checkout related steps\n" +
                 "Per CADENCE-455: Updated Test Steps to change the button selection\n" +
                 "Per CADENCE-569: Update Test Steps to remove any reference to OAuth, Returning User, or Checkout\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment flow and response options;Gulzira Nurseilova");
+                "Per CADENCE-591: Update Test Steps for modified assessment flow and response options;Name Redacted");
     }
 
     boolean verifyMoreInfoBackDisplayed(int step, BasePage page) throws InterruptedException {
@@ -148,7 +148,6 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_016 – Display Application Back Button ";
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired();
         commonPageFeatures = new CommonPageFeatures(driver);
         pageObj.pritUnl.load(UrlType.DEXTER);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();

@@ -29,7 +29,7 @@ public class VTP_DEX_SP_FRD_019_Session_Timeout extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_SP_FRD_019_Session_Timeout()  {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script – Per CADENCE-191;James Reale");
+        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script – Per CADENCE-191;Name Redacted");
     }
 
     @Test

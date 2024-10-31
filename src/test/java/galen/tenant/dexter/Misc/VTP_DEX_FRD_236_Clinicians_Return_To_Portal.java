@@ -66,13 +66,13 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
     BasicHelpers bh;
 
     VTP_DEX_FRD_236_Clinicians_Return_To_Portal() {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;23OCT2023;Per CADENCE-359/360: Update Test Steps to reflect the List of Cancers screen " +
-                "flow;Suresh Sunderraj");
+                "flow;Name Redacted");
         VERSIONHISTORY.add("3.0;24JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation;" +
-                "Gulzira Nurseilova");
+                "Name Redacted");
         VERSIONHISTORY.add("4.0;29JUL2024;Per CADENCE-615: Update Test Step Scenarios to align to assessment end screens" +
-                ";James Reale");
+                ";Name Redacted");
     }
 
     void startNewRecord() {

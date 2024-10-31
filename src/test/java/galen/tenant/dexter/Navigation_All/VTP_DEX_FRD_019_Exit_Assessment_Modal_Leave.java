@@ -103,12 +103,12 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
     DexterHFWrappers hf;
 
     VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;20SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for" +
-                        " restructured cancer flow;Suresh Sunderraj");
+                        " restructured cancer flow;Name Redacted");
         VERSIONHISTORY.add("3.0;15JUN2024;Per CADENCE-476: Updated Test Steps for FDA Changes\n" +
                 "Per CADENCE-529: Removed N/A from Actual Result column for Happyflow execution steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Gulzira Nurseilova");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     void verifyMoreInfoExit(int step, BasePage page) {

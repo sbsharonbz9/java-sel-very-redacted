@@ -41,7 +41,7 @@ public class VTP_DEX_SP_FRD_014_Generate_Bulk_Metrics_CSV extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_014_Generate_Bulk_Metrics_CSV()  {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script – Per CADENCE-185;James Reale");
+        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script – Per CADENCE-185;Name Redacted");
     }
 
     @Test

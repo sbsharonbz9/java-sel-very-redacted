@@ -3,6 +3,7 @@ package galen.tenant.petros;
 import galen.base.BaseTest;
 import galen.driver.DriverManager;
 import galen.enums.common.Gender;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.petros.PetrosNavigations;

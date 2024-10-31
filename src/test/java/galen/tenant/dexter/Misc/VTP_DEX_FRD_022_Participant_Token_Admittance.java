@@ -30,8 +30,8 @@ public class VTP_DEX_FRD_022_Participant_Token_Admittance extends BaseTest {
     public BasicHelpers bh;
 
     VTP_DEX_FRD_022_Participant_Token_Admittance()  {
-        VERSIONHISTORY.add("1.0;07MAY2023;Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;02NOV2022;Per CADENCE-603: Update test Steps to reflect the deactivated user experience ;James Reale");
+        VERSIONHISTORY.add("1.0;07MAY2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;02NOV2022;Per CADENCE-603: Update test Steps to reflect the deactivated user experience ;Name Redacted");
     }
 
     @Test

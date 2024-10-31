@@ -33,11 +33,11 @@ public class VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA extends BaseTe
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA() {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add( "2.0;24JUN2024;Per CADENCE-476: Updated Test Steps for FDA changes\n" +
                 "Per CADENCE-529: Removed NA from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Gulzira Nurseilova");
-        VERSIONHISTORY.add("3.0;16JUL2024;Per CADENCE-598: Update Test Steps to algin with DTA new metrics column;James Reale\n");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("3.0;16JUL2024;Per CADENCE-598: Update Test Steps to algin with DTA new metrics column;Name Redacted\n");
     }
 
     @Test

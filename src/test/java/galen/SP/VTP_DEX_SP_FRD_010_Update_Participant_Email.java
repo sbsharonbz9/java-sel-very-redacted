@@ -41,7 +41,7 @@ public class VTP_DEX_SP_FRD_010_Update_Participant_Email extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_010_Update_Participant_Email()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Per CADENCE-173: Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;13OCT2022;Per CADENCE-173: Initial Test Script;Name Redacted");
     }
 
     @Test

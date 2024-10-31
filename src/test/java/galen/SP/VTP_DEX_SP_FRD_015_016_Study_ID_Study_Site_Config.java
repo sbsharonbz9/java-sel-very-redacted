@@ -40,9 +40,9 @@ public class VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config extends BaseTest 
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config()  {
-        VERSIONHISTORY.add("1.0;28FEB2023;Per CADENCE-173: Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;28FEB2023;Per CADENCE-173: Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;09JUN2023;Per CADENCE-343: Update Test Steps to align language with user navigation;" +
-                "James Reale");
+                "Name Redacted");
     }
 
     @Test

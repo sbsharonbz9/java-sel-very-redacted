@@ -23,12 +23,12 @@ public class VTP_DEX_FRD_038_Smoking_No_Navigation extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_038_Smoking_No_Navigation()  {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360/CADENCE-395: Updated Test Steps navigation for restructured " +
-                "cancer flow;Suresh Sunderraj");
+                "cancer flow;Name Redacted");
         VERSIONHISTORY.add("3.0;18JUN2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related " +
                 "steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     @Test

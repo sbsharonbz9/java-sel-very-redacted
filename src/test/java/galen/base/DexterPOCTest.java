@@ -35,7 +35,7 @@ public class DexterPOCTest extends BaseTest {
     BasicHelpers bh;
 
     DexterPOCTest() throws IOException {
-        VERSIONHISTORY.add("1.0 ;29SEP2023 ;Initial Test Script ;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0 ;29SEP2023 ;Initial Test Script ;Name Redacted");
 
         report = new GalenReport(getDriver(), reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

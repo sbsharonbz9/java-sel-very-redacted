@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP extends B
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP() {
-        VERSIONHISTORY.add("1.0;02FEB2024;Initial Test Script;Gulzira Nurseilova");
+        VERSIONHISTORY.add("1.0;02FEB2024;Initial Test Script;Name Redacted");
     }
 
     @Test

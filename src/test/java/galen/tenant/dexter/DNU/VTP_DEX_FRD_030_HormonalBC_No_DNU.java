@@ -25,8 +25,8 @@ public class VTP_DEX_FRD_030_HormonalBC_No_DNU extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_030_HormonalBC_No_DNU()  {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;James Reale;" +
-                "2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;James Reale");
+        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted;" +
+                "2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;Name Redacted");
     }
 
     @Test

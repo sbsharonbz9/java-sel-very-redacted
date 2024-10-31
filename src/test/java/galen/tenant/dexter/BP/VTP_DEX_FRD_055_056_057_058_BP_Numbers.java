@@ -45,9 +45,9 @@ public class VTP_DEX_FRD_055_056_057_058_BP_Numbers extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_055_056_057_058_BP_Numbers()  {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Gulzira Nurseilova");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     @Test

@@ -28,9 +28,9 @@ public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic() {
-        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     @Test

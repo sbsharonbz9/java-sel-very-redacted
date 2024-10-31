@@ -35,14 +35,14 @@ public class VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts() {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;17MAY2023;Update Test Steps for correct language ;James Reale");
+        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;17MAY2023;Update Test Steps for correct language ;Name Redacted");
         VERSIONHISTORY.add("3.0;18JUN2024;Per CADENCE-508: Updated Test Steps based on ADBU flows \n" +
                 "Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
                 "Per CADENCE-569: Update Test Steps to remove any reference to OAuth, Returning User, or Checkout ;" +
-                "Gulzira Nurseilova");
+                "Name Redacted");
         VERSIONHISTORY.add("4.0;25OCT2024;Per CADENCE-616: Update Test Steps to click the Next button to trigger 3 Month" +
-                " Modal and update Diastolic DNU Scenario to use value less than Systolic based on rules;James Reale");
+                " Modal and update Diastolic DNU Scenario to use value less than Systolic based on rules;Name Redacted");
     }
 
     @Test

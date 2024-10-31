@@ -112,7 +112,7 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Gulzira Nurseilova");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
     }
 
     void refreshMoreInfo(int step, BasePage page) throws InterruptedException {
@@ -138,7 +138,7 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         report.reportTitle = "VTP_DEX_FRD_015_249 – Refresh Button Returns to Current Screen";
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);;
         commonPageFeatures = new CommonPageFeatures(driver);
         pageObj.pritUnl.load(UrlType.DEXTER);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();

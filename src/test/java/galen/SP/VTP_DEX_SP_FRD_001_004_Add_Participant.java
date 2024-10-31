@@ -60,7 +60,7 @@ public class VTP_DEX_SP_FRD_001_004_Add_Participant extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_001_004_Add_Participant()  {
-        VERSIONHISTORY.add("1.0;27FEB2023;Initial Test Script – Per CADENCE-173;James Reale");
+        VERSIONHISTORY.add("1.0;27FEB2023;Initial Test Script – Per CADENCE-173;Name Redacted");
     }
 
     @Test

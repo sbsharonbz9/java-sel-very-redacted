@@ -44,9 +44,9 @@ public class VTP_DEX_FRD_042_Smoking_Birth_Year_35_or_Older_DNU extends BaseTest
     CommonPageFeatures common;
 
     VTP_DEX_FRD_042_Smoking_Birth_Year_35_or_Older_DNU()  {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
 
     }
 

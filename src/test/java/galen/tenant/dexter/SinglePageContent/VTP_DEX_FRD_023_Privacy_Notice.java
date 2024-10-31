@@ -26,8 +26,8 @@ public class VTP_DEX_FRD_023_Privacy_Notice extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_023_Privacy_Notice()  {
-        VERSIONHISTORY.add("1.0;02NOV2022;Initial Test Script;James Reale;" +
-                "2.0;18JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation;James Reale");
+        VERSIONHISTORY.add("1.0;02NOV2022;Initial Test Script;Name Redacted;" +
+                "2.0;18JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     @Test

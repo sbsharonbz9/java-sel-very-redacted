@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_261_262_Clinical_Depression_Modal extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_261_262_Clinical_Depression_Modal() {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
     }
 
     @Test

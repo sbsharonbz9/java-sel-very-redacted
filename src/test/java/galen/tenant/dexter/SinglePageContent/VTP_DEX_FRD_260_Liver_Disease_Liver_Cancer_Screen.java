@@ -34,7 +34,7 @@ public class VTP_DEX_FRD_260_Liver_Disease_Liver_Cancer_Screen extends BaseTest 
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_260_Liver_Disease_Liver_Cancer_Screen()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
     }
 
     @Test

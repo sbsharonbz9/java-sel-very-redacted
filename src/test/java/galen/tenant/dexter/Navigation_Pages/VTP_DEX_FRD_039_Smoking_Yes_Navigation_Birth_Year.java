@@ -38,10 +38,10 @@ public class VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year extends BaseTest 
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year()  {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
                 "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Sharon Graves");
-        VERSIONHISTORY.add("3.0;26JUL2024;Per CADENCE-607: Updated Step 4 to reflect the FRD;Gulzira Nurseilova");
+        VERSIONHISTORY.add("3.0;26JUL2024;Per CADENCE-607: Updated Step 4 to reflect the FRD;Name Redacted");
     }
 
     @Test

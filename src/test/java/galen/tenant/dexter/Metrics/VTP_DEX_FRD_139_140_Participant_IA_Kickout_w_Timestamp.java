@@ -68,13 +68,13 @@ public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends Base
     DexterPageObj pageObj;
 
     VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp()  {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
         VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Suresh Sunderraj");
-        VERSIONHISTORY.add("3.0;07DEC2023;Per CADENCE-468: Updated Step 2;Suresh Sunderraj");
+                "cancer flow;Name Redacted");
+        VERSIONHISTORY.add("3.0;07DEC2023;Per CADENCE-468: Updated Step 2;Name Redacted");
         VERSIONHISTORY.add("4.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow\n" +
-                "Per CADENCE 591: Update Test Steps for modified assessment and navigation;Gulzira Nurseilova");
-        VERSIONHISTORY.add("5.0;17JUL2024;Per CADENCE-598: Update Test Objective and Metrics Verification table to include new column;James Reale");
+                "Per CADENCE 591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("5.0;17JUL2024;Per CADENCE-598: Update Test Objective and Metrics Verification table to include new column;Name Redacted");
     }
 
     public void checkMetrics(String outcome,String step, String dnuReason) {

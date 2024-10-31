@@ -25,7 +25,7 @@ public class VTP_DEX_FRD_263_Clinical_Depression_Screen  extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_263_Clinical_Depression_Screen()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;James Reale");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
     }
 
     @Test

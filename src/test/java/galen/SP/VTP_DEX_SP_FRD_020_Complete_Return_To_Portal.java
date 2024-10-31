@@ -40,8 +40,8 @@ public class VTP_DEX_SP_FRD_020_Complete_Return_To_Portal extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_020_Complete_Return_To_Portal() {
-        VERSIONHISTORY.add("1.0;28FEB2023;Per CADENCE-191: Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;30JUL2024;Per CADENCE-624: Update Test Steps to reflect changes made to the assessment flow;James Reale\n");
+        VERSIONHISTORY.add("1.0;28FEB2023;Per CADENCE-191: Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;30JUL2024;Per CADENCE-624: Update Test Steps to reflect changes made to the assessment flow;Name Redacted\n");
     }
 
     @Test

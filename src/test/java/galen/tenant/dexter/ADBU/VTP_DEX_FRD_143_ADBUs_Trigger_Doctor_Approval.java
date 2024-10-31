@@ -36,12 +36,12 @@ public class VTP_DEX_FRD_143_ADBUs_Trigger_Doctor_Approval extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_143_ADBUs_Trigger_Doctor_Approval() {
-        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Name Redacted");
         VERSIONHISTORY.add("3.0;20JUN2024;Per CADENCE-476/CADENCE-503: Updated Test Steps for FDA changes   \n" +
                 "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;Gulzira Nurseilova");
-        VERSIONHISTORY.add("4.0;28FEB2024;Per CADENCE-632: Update Test Steps to align with language requested by FDA ;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;Name Redacted");
+        VERSIONHISTORY.add("4.0;28FEB2024;Per CADENCE-632: Update Test Steps to align with language requested by FDA ;Name Redacted");
     }
 
     @Test

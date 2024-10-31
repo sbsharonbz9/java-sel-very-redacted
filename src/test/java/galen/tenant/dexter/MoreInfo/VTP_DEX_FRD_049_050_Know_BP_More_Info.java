@@ -28,9 +28,9 @@ public class VTP_DEX_FRD_049_050_Know_BP_More_Info extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_049_050_Know_BP_More_Info()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;James Reale;" +
+        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted;" +
                 "2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Tural Aslanov");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
     }
 
     @Test

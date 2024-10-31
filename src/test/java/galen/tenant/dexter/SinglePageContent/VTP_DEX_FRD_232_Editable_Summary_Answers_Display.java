@@ -33,13 +33,13 @@ public class VTP_DEX_FRD_232_Editable_Summary_Answers_Display extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_232_Editable_Summary_Answers_Display() {
-        VERSIONHISTORY.add("1.0;09MAR2023;Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;17MAY2023;Update Test Steps for correct language;James Reale");
-        VERSIONHISTORY.add("3.0;28SEP2023;Per CADENCE-360: Update Test Steps for Correct Screen name and flow; Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;09MAR2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;17MAY2023;Update Test Steps for correct language;Name Redacted");
+        VERSIONHISTORY.add("3.0;28SEP2023;Per CADENCE-360: Update Test Steps for Correct Screen name and flow; Name Redacted");
         VERSIONHISTORY.add("4.0;21JUN2024;Per CADENCE-476: Updated Test Steps for FDA changes\n" +
                 "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation\n;Gulzira Nurseilova");
-        VERSIONHISTORY.add("5.0;29JUL2024;Per CADENCE-617: Update Test steps to reflect the correct Editable Summary language ;James Reale");
+                "Per CADENCE-591: Update Test Steps for modified assessment and navigation\n;Name Redacted");
+        VERSIONHISTORY.add("5.0;29JUL2024;Per CADENCE-617: Update Test steps to reflect the correct Editable Summary language ;Name Redacted");
     }
 
     @Test

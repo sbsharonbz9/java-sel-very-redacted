@@ -65,10 +65,10 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
     BasicHelpers bh;
 
     VTP_DEX_FRD_010_Radio_Button_Default_Unselected()  {
-        VERSIONHISTORY.add("1.0;16FEB2023;Initial Test Script;James Reale");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Suresh Sunderraj");
+        VERSIONHISTORY.add("1.0;16FEB2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Name Redacted");
         VERSIONHISTORY.add("3.0;13JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment flow and Test Objective;Gulzira Nurseilova");
+                "Per CADENCE-591: Update Test Steps for modified assessment flow and Test Objective;Name Redacted");
     }
 
     @Test

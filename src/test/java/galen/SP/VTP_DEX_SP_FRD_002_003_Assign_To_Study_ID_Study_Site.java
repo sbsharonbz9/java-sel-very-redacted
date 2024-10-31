@@ -40,7 +40,7 @@ public class VTP_DEX_SP_FRD_002_003_Assign_To_Study_ID_Study_Site extends BaseTe
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_002_003_Assign_To_Study_ID_Study_Site()  {
-        VERSIONHISTORY.add("1.0;27FEB2023;Initial Test Script – Per CADENCE-173;James Reale");
+        VERSIONHISTORY.add("1.0;27FEB2023;Initial Test Script – Per CADENCE-173;Name Redacted");
     }
 
     @Test
