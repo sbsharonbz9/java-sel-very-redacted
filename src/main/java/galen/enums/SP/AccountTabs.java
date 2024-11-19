@@ -1,5 +1,7 @@
 package galen.enums.SP;
 
+import java.util.ArrayList;
+
 public enum AccountTabs {
     ACCOUNTS("//a[@href='/dashboard/accounts']"),
     PARTICIPANTS("//a[@href='/dashboard/participants']"),
@@ -14,5 +16,6 @@ public enum AccountTabs {
     AccountTabs(String selector ) {
         this.selector=selector;
     }
+
 }
 

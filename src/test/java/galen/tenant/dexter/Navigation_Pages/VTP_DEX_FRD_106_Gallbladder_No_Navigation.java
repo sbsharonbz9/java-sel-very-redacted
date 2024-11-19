@@ -6,7 +6,6 @@ import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -24,9 +23,7 @@ public class VTP_DEX_FRD_106_Gallbladder_No_Navigation extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_106_Gallbladder_No_Navigation() {
-        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;" +
-                "Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -39,7 +36,7 @@ public class VTP_DEX_FRD_106_Gallbladder_No_Navigation extends BaseTest {
         DexterUser user = new DexterUser();
         DexterPageObj pageObj = new DexterPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.gallbladder, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.depression, report);
         report.addScreenshotStep("Step2_Depression_Screen");

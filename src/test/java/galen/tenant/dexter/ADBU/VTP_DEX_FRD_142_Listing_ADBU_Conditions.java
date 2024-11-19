@@ -8,7 +8,7 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterNavigations;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
+import galen.pages.tenant.dexter.InitialAssessment.ADBUBP;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -17,17 +17,10 @@ import java.util.HashMap;
 
 
 public class VTP_DEX_FRD_142_Listing_ADBU_Conditions extends BaseTest {
-    static String OBJECTIVE = "To verify on the on the ADBU/BP screen, if the user did not previously enter BP and " +
-            "triggered ADBUs, the application shall display a notification that BP is required and a listing of all " +
-            "ADBUs that were triggered, ask the user if they have talked to a doctor about whether Zena is safe to use, " +
-            "and include controls to input a confirmation or denial response.";
-    static String NOTES = "This protocol contains the following verification scenarios:\n" +
-            "o\tThe following is displayed on the ADBU/BP Screen:\n" +
-            "\uF0A7\tAll ADBUs triggered \n" +
-            "\uF0A7\tLanguage notifying user BP is required \n" +
-            "\uF0A7\tConfirmation and denial responses";
-    static String REQUIREMENTS = "DEX_FRD_142";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_ADBU_noBP.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_142_Listing_ADBU_Conditions";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
@@ -35,12 +28,7 @@ public class VTP_DEX_FRD_142_Listing_ADBU_Conditions extends BaseTest {
     BasicHelpers bh;
 
     VTP_DEX_FRD_142_Listing_ADBU_Conditions() {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Suresh Sunderrraj");
-        VERSIONHISTORY.add("3.0;20JUN2024;Per CADENCE-476/CADENCE-503: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;Tester");
     }
 
     @Test
@@ -54,29 +42,30 @@ public class VTP_DEX_FRD_142_Listing_ADBU_Conditions extends BaseTest {
         bh = new BasicHelpers(driver);
         DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         DexterPageObj pageObj = new DexterPageObj(driver);
+        ADBUBP adbuBP = pageObj.adbubpScreen;
 
         user.weight="300";
-        user.conditionType=pageObj.ddiCondition.allButNone;
-        user.hepCMeds=pageObj.ddiHepC.allButNoneHepC;
-        user.thyroidMeds=pageObj.ddiThyroid.allButNoneThyroid;
-        user.epBipolarMeds=pageObj.ddiEpBipolar.allButNoneBipolar;
-        user.hivMeds=pageObj.ddihiv.allButNoneHIV;
-        user.highCholMeds=pageObj.ddiHighCholesterol.allButNoneHC;
-        user.otherMedicationType=pageObj.otherMedication.allButNone;
-        user.antiFungalMeds= pageObj.antifungalMeds.allButNone;
+        user.conditionType=pageObj.ddiCondition.getAllButNone();
+        user.hepCMeds=pageObj.ddiHepC.getAllButNone();
+        user.thyroidMeds=pageObj.ddiThyroid.getAllButNone();
+        user.epBipolarMeds=pageObj.ddiEpBipolar.getAllButNone();
+        user.hivMeds=pageObj.ddihiv.getAllButNone();
+        user.highCholMeds=pageObj.ddiHighCholesterol.getAllButNone();
+        user.otherMedicationType=pageObj.otherMedication.getAllButNone();
+        user.antiFungalMeds= pageObj.antifungalMeds.getAllButNone();
         user.gallbladder="Yes";
         user.depression="Yes";
         user.diagnosedDepression="Yes";
         user.isAntifungal="Yes";
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
-        new DexterNavigations(driver).partialNavigationIA(user, pageObj.adbubpScreen, report);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+        new DexterNavigations(driver).partialNavigationIA(user, adbuBP, report);
 
-        pageObj.adbubpScreen.verifyTitle(pageObj.adbubpScreen.titleText, report);
-        pageObj.adbubpScreen.verifySubtitle(pageObj.adbubpScreen.askADoctor, report);
-        pageObj.adbubpScreen.verifyConditionIsListed(pageObj.adbubpScreen.obesityCondition, report);
-        pageObj.adbubpScreen.verifyConditionIsListed(pageObj.adbubpScreen.gallBladderCondition, report);
-        pageObj.adbubpScreen.verifyConditionIsListed(pageObj.adbubpScreen.depressionCondition, report);
+        adbuBP.verifyTitle(adbuBP.titleText, report);
+        adbuBP.verifySubtitle(adbuBP.askADoctor, report);
+        adbuBP.verifyConditionIsListed(adbuBP.obesityCondition, report);
+        adbuBP.verifyConditionIsListed(adbuBP.gallBladderCondition, report);
+        adbuBP.verifyConditionIsListed(adbuBP.depressionCondition, report);
 
         pageObj.ddiHepC.verifyAllOptionsInADBU(report);
         pageObj.ddiThyroid.verifyAllOptionsInADBU(report);
@@ -85,8 +74,8 @@ public class VTP_DEX_FRD_142_Listing_ADBU_Conditions extends BaseTest {
         pageObj.ddiHighCholesterol.verifyAllOptionsInADBU(report);
         pageObj.otherMedication.verifyAllOptionsInADBU(report);
         pageObj.antifungalMeds.verifyAllOptionsInADBU(report);
-        pageObj.adbubpScreen.verifyDocDecide(report);
-        pageObj.adbubpScreen.verifyZenaSafe(report);
+        adbuBP.verifyDocDecide(report);
+        adbuBP.verifyZenaSafe(report);
 
         bh.verifyDisplayedFlex(common.btnYesModal, "Yes", report);
         bh.verifyDisplayedFlex(common.btnNoModal, "No", report);

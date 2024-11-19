@@ -9,7 +9,7 @@ public class StudyAdminPageObj extends GalenPageObj {
     public DownloadRecords downloadRecords;
     public ViewRecords viewRecords;
     public MyPassword myPassword;
-    public Studies study;
+    public Studies studies;
     public Sites sites;
     public Accounts accounts;
 
@@ -21,7 +21,7 @@ public class StudyAdminPageObj extends GalenPageObj {
         viewRecords = new ViewRecords(driver);
         myPassword = new MyPassword(driver);
         sites = new Sites(driver);
-        study = new Studies(driver);
+        studies = new Studies(driver);
         accounts = new Accounts(driver);
     }
 }

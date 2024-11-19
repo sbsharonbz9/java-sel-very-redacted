@@ -1,13 +1,14 @@
 package galen.tenant.dexter.Metrics;
 
 import galen.base.BaseTest;
-import galen.enums.SP.AccountTabs;
 import galen.enums.framework.UrlType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CSVHelpers;
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.dexter.*;
-import galen.pages.common.PritUnlPage;
+import galen.helpers.tenant.dexter.DexterHFWrappers;
+import galen.helpers.tenant.dexter.DexterMetricsRecord;
+import galen.helpers.tenant.dexter.DexterUser;
+import galen.helpers.tenant.dexter.DexterUserTemplates;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import galen.utils.ConfigLoader;
@@ -20,160 +21,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_OK extends BaseTest {
-    static String OBJECTIVE = "To verify the application shall collect the following metrics for each assessment:\n" +
-            "\n" +
-            "·\tAssessmentID – unique assessment ID assigned to the Assessment\n" +
-            "·\tAssessmentNumber – unique assessment number that is displayed on the UI for the user to reference\n" +
-            "·\tParticipantID – unique study participant ID\n" +
-            "·\tExecutedBy – Participant ID or Clinician name who performed the health survey\n" +
-            "·\tHealthSurveyStartTimestamp – timestamp of when the user starts taking the health survey\n" +
-            "·\tPrivacyAcknowledgement – TRUE upon response\n" +
-            "·\tPrivacyAcknowledgementTimestamp – timestamp of when user acknowledges privacy notice\n" +
-            "·\tViewFullPrivacyNotice – TRUE upon user viewing full notice\t\n" +
-            "·\tPriorUse – TRUE/FALSE upon response\n" +
-            "·\tConfCustomer – populated with TRUE/FALSE upon response\n" +
-            "·\tInitialOutcome – populated when the user confirms answers as OK, Exit, ADBU, BP, ADBU+BP, DNU or " +
-            "Blank if answers are not confirmed\n" +
-            "·\tDNUReason – populated with default to N/A, updates to capture DNU reason if outcome is DNU\n" +
-            "·\tDNUTimestamp - populated with default to N/A, updates to capture timestamp of outcome if the " +
-            "outcome is DNU\n" +
-            "·\tPreventPregnancy – populated with TRUE/FALSE upon response\n" +
-            "·\tMenstrualPeriods – populated with TRUE/FALSE upon response\n" +
-            "·\tHormonalBC(A) – populated with TRUE/FALSE upon response\n" +
-            "·\tHormonalBC(B) – populated with TRUE/FALSE upon response\n" +
-            "·\tHormonalBCRiskModal – N/A when user selects ‘No’ on HormonalBC(A), TRUE upon response\n" +
-            "·\tSmoking – populated with selection upon response\n" +
-            "·\tBirthYear – populated with user entered birth year\n" +
-            "·\tBDthisYear -– populated with TRUE/FALSE upon response\n" +
-            "·\tEverHadCancer – populated with TRUE/FALSE upon response\n" +
-            "·\tBreastCancer – N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of Cancers\n" +
-            "·\tEdometrialUterineCancer – N/A when user selects ‘’No’ on EverHadCancer, TRUE when selected from " +
-            "List Of Cancers\n" +
-            "·\tMelanoma – N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of Cancers\n" +
-            "·\tOvarianCancer – N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of Cancers\n" +
-            "·\tLungBronchialAdenocarcinoma – N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of" +
-            " Cancers\n" +
-            "·\tMeningioma – N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of Cancers\n" +
-            "·\tLiverCancerListOfCancers - N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of" +
-            " Cancers\n" +
-            "·\tOtherCancer - N/A when user selects ‘’No’ on EverHadCancer; TRUE when selected from List Of Cancers\n" +
-            "·\tBPMeds – populated with TRUE/FALSE upon response\n" +
-            "·\tChestPain – TRUE when selected from HeartConditions\n" +
-            "·\tHeartAttack – TRUE when selected from HeartConditions\n" +
-            "·\tStroke – TRUE when selected from HeartConditions\n" +
-            "·\tMiniStroke – TRUE when selected from HeartConditions\n" +
-            "·\tHeartConditionsNone – TRUE when selected from HeartConditions\n" +
-            "·\tBloodClots – TRUE when selected from BloodClots\n" +
-            "·\tBloodClottingDisorder – TRUE when selected from BloodClots\n" +
-            "·\tFamilyHistoryBloodClottingDisorder – TRUE when selected from BloodClots\n" +
-            "·\tBloodClotsNone – TRUE when selected from BloodClots\n" +
-            "·\tOtherHeartIssues – populated with TRUE/FALSE upon response\n" +
-            "·\tLiverDisease – TRUE when selected from LiverDisease\n" +
-            "·\tLiverCancerLiverDisease – TRUE when selected from LiverDisease\n" +
-            "·\tHepCLiverDisease – TRUE when selected from LiverDisease\n" +
-            "·\tLiverDiseaseNone – TRUE when selected from LiverDisease\n" +
-            "·\tUnexplainedVaginalBleeding – populated with TRUE/FALSE upon response\n" +
-            "·\tDiabetes – populated with TRUE/FALSE upon response\n" +
-            "·\tCurrentlyPregnant – populated with TRUE/FALSE upon response\n" +
-            "·\tBreastfeeding – populated with TRUE/FALSE upon response\n" +
-            "·\tPregnancyLoss – populated with TRUE/FALSE upon response\n" +
-            "·\tMigrainesWithAura – populated with TRUE/FALSE upon response\n" +
-            "·\tHeight – populated with user selected height\n" +
-            "·\tWeight – populated with user entered weight\n" +
-            "·\tBMI – populated with app calculated BMI based on user entered height and weight\n" +
-            "·\tHepCMedConditions – TRUE when selected from MedConditions\n" +
-            "·\tThyroidDisease – TRUE when selected from MedConditions\n" +
-            "·\tEpilepsy – TRUE when selected from MedConditions\n" +
-            "·\tBipolarDisorder – TRUE when selected from MedConditions\n" +
-            "·\tHIV – TRUE when selected from MedConditions\n" +
-            "·\tHighCholesterol – TRUE when selected from MedConditions\n" +
-            "·\tMedConditionsNone – TRUE when selected from MedConditions\n" +
-            "·\tOmbitasvir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HepCMeds\n" +
-            "·\tParitaprevir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HepCMeds\n" +
-            "·\tRitonavirWithDasabuvir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from " +
-            "HepCMeds\n" +
-            "·\tHepCMedsNone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HepCMeds\n" +
-            "·\tLevothyroxine – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from ThyroidMeds\n" +
-            "·\tOtherThyroidMed – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from ThyroidMeds\n" +
-            "·\tThyroidMedsNone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from ThyroidMeds\n" +
-            "·\tBarbiturates – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tFelbamate – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tLamotrigine – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tPhenytoin – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tPrimidone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tRufinamide – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tEpilepsyBipolarMedsNone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from EpilepsyBipolarMeds\n" +
-            "·\tFosamprenavir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tDarunavir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tEfavirenz – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tEtravirine – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tNelfinavir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tNevirapine – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tRitonavir – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tHIVMedsNone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from HIVMeds\n" +
-            "·\tAtorvastatin – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from CholesterolMeds\n" +
-            "·\tColesevelam – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from CholesterolMeds\n" +
-            "·\tRosuvastatin – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from CholesterolMeds\n" +
-            "·\tCholesterolMedsNone – N/A when user selects ‘None of these’ on MedConditions; TRUE when selected from CholesterolMeds\n" +
-            "·\tAntifungalProducts – populated with TRUE/FALSE upon response \n" +
-            "·\tFluconazole – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tGriseofulvin – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tGriseofulvinUltramicrocrystalline – N/A when user selects ‘’No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tItraconazole – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tKetoconazole – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tVoriconazole – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tAntifungalMedsNone – N/A when user selects ‘No’ on AntifungalProducts; TRUE when selected from AntifungalMeds\n" +
-            "·\tRifabutin – TRUE when selected from OtherMeds\n" +
-            "·\tRifampin – TRUE when selected from OtherMeds\n" +
-            "·\tPrednisone – TRUE when selected from OtherMeds\n" +
-            "·\tTemazepam – TRUE when selected from OtherMeds\n" +
-            "·\tStJohnsWort – TRUE when selected from OtherMeds\n" +
-            "·\tOtherMedsNone – TRUE when selected from OtherMeds\n" +
-            "·\tGallbladderDisease – populated with TRUE/FALSE upon response\n" +
-            "·\tDepression – populated with TRUE/FALSE upon response\n" +
-            "·\tClinicalDepression – populated with TRUE/FALSE upon response\n" +
-            "·\tClinicalDepressionModal – TRUE upon response\n" +
-            "·\tKnowsBP – populated with TRUE/FALSE upon response\n" +
-            "·\tBPConf – populated with TRUE/FALSE upon response, was BP measured in last 3 months\n" +
-            "·\tSysBP – populated with user entered Systolic BP upon response\n" +
-            "·\tDiaBP – populated with user entered Diastolic BP upon response \n" +
-            "·\tConfAnswers – populated with TRUE upon response\n" +
-            "·\tConfModal – populated with TRUE upon response\n" +
-            "·\tConfTimestamp – populated with timestamp of when user confirmed answers on ConfModal\n" +
-            "·\tADBU – populated with TRUE/FALSE upon response\n" +
-            "·\tADBUApprovedModal – N/A when user selects ‘No' on ADBU; populated with TRUE upon response\n" +
-            "·\tADBUApprovedTimestamp – N/A when user selects ‘No' on ADBU; populated with timestamp of when user " +
-            "selected checkbox and confirmed doctor approval\n" +
-            "·\tADBUNotApprovedModal – N/A when user selects ‘Yes' on ADBU; populated with TRUE upon response\n" +
-            "·\tADBUNotApprovedTimestamp – N/A when user selects ‘Yes' on ADBU; populated with timestamp of when user " +
-            "selected checkbox and confirmed doctor did not approve\n" +
-            "·\tFinalBPConf - populated with TRUE/FALSE upon response, was BP measured in last 3 months (if user did not " +
-            "initially submit BP, and has no other ADBU designation)\n" +
-            "·\tFinalSysBP – populated with user entered Systolic BP upon response (if user did not initially answer, " +
-            "and has no other ADBU designation) for initial flow\n" +
-            "·\tFinalDiaBP - populated with user entered Diastolic BP upon response (if user did not initially answer, " +
-            "and has no other ADBU designation) for initial flow\n" +
-            "·\tUpdatedInitialOutcome - N/A when InitialOutcome is OK, DNU, or ADBU; populated with OK when user " +
-            "submits acceptable BP numbers on the Final BP Numbers Screen; populated " +
-            "with DNU when user submits high or dangerously high BP numbers on the Final BP Numbers Screen\n";
-    static String NOTES = "This protocol contains the following verification scenario(s):\n" +
-            "-\tCorrect field values are captured for OK scenario";
-    static String REQUIREMENTS = "DEX_FRD_136";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_OK";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_OK() {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;28SEP2023;Per CADENCE-360: Update Test Steps for Correct Screen name and flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;24JUN2024;Per CADENCE-476/CADENCE-478: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
-        VERSIONHISTORY.add("4.0;16JUL2024;Per CADENCE-598: Update Test Objective and Metrics Verification table to include new " +
-                "column;Name Redacted");
-        VERSIONHISTORY.add("5.0;30JUL2024;Per CADENCE-626: Update CSV table to correct metrics capture of Prior Use Screen " +
-                "response from HappyFlow;Name Redacted");
+        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Tester");
     }
 
     @Test
@@ -190,7 +47,7 @@ public class VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_OK extends BaseTest 
         CSVHelpers csv = new CSVHelpers(driver);
         ConfigLoader cl = new ConfigLoader();
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.METRICS);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.METRICS);
         pageObj.pritUnl.load(UrlType.METRICS);
         user.systolic="115";
         user.diastolic="75";

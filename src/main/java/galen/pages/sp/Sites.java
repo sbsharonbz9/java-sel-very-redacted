@@ -23,7 +23,7 @@ public class Sites extends SPBasePage {
         reportText="Sites Screen";
     }
 
-    public Boolean verifySiteIDFormat(@Nullable GalenReport report) {
+    public void verifySiteIDFormat(@Nullable GalenReport report) {
         HashMap<String, Object> result = new LinkedHashMap<>();
         List<WebElement> options =
                 basicHelpers.getAllWebElements(By.xpath("//tbody/tr/td[1]"));
@@ -34,7 +34,6 @@ public class Sites extends SPBasePage {
             report.addMultipleVerificationStep("All Site IDs have three character format", result,
                     false);
         }
-        return result.containsValue(false);
     }
 
     //Param 1 - "On" or "Off"
@@ -52,5 +51,4 @@ public class Sites extends SPBasePage {
         WebElement toggle =basicHelpers.getWebElement(By.xpath("//tbody/tr/td[text()='"+siteName+"']/following-sibling::td/div"));
         basicHelpers.clickFlex(toggle, siteName, report);
     }
-
 }

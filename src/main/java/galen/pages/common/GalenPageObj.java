@@ -7,7 +7,6 @@ public class GalenPageObj {
     public PrivacyPage privacyPage;
     public PritUnlPage pritUnl;
     public Kickout kickoutPage;
-    public MoreInfo moreInfo;
     public OAuth oAuth;
     public String tenant;
 
@@ -17,7 +16,6 @@ public class GalenPageObj {
         welcomePage = new WelcomePage(driver);
         privacyPage = new PrivacyPage(driver);
         oAuth = new OAuth(driver);
-        moreInfo = new MoreInfo(driver);
         kickoutPage = new Kickout(driver);
     }
 }

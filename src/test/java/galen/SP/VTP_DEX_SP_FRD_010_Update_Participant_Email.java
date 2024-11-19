@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_SP_FRD_010_Update_Participant_Email extends BaseTest {
     static String OBJECTIVE = "To verify the portal shall provide the capability to update a participant’s email address.";
     static String NOTES = "This protocol contains the following scenarios:\n" +
@@ -41,11 +39,11 @@ public class VTP_DEX_SP_FRD_010_Update_Participant_Email extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_010_Update_Participant_Email()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Per CADENCE-173: Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("1.0;13OCT2022;Per 173: Initial Test Script;Tester");
     }
 
     @Test
-    public void VTP_DEX_SP_FRD_010_Update_Participant_Email_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_SP_FRD_010_Update_Participant_Email_Test() throws IOException {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_SP_FRD_010 – Update Participant Email";
@@ -59,8 +57,6 @@ public class VTP_DEX_SP_FRD_010_Update_Participant_Email extends BaseTest {
 
         for (RoleType r : roles) {
             pageObj.login.logIn(r.email, report);
-            sleep(1000);
-            par.verifyAtPage(report);
             par.openAddParticipant(report);
             ParticipantClass parUser = new ParticipantClass(bh.getUniqueEmail(), par.getEnabledSiteID(),
                     par.getEnabledStudyID());
@@ -71,8 +67,7 @@ public class VTP_DEX_SP_FRD_010_Update_Participant_Email extends BaseTest {
             par.findEmailInTable(parUser.email, report);
             report.addScreenshotStep("New email " + parUser.email + " in table");
 
-            bh.clickFlex(pageObj.login.getLogout(), "Log Out", report);
+            par.logout(report);
         }
-
     }
 }

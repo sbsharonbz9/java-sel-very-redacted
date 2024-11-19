@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DexterUser extends GalenUser {
-    public ArrayList<String> defaultNone = new ArrayList<>(Arrays.asList("None of these"));
+    public String defaultNoneText = "None of these";
+    public ArrayList<String> defaultNone = new ArrayList<>(Arrays.asList(defaultNoneText));
 
     public String productUsed = "No";
     public String orderForSelf = "Yes";
@@ -18,7 +19,7 @@ public class DexterUser extends GalenUser {
     public String hadBirthday="Yes";
     public String everHadCancer = "No";
     public ArrayList<String> cancerList = new ArrayList<>(Arrays.asList("Other cancer"));
-    public String bloodPressureMeds = "No";;
+    public String bloodPressureMeds = "No";
     public ArrayList<String> chestPainType = defaultNone;
     public ArrayList<String> bloodClot = defaultNone;
     public String irregularHeartBeat = "No";

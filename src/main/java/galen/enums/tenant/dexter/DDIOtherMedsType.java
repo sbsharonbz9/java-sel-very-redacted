@@ -1,7 +1,5 @@
 package galen.enums.tenant.dexter;
 
-import java.util.Arrays;
-
 public enum DDIOtherMedsType {
 
     RIFABUTIN("Rifabutin"),

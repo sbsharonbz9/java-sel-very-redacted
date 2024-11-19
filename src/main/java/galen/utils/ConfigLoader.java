@@ -8,7 +8,6 @@ import galen.enums.framework.EnvType;
 
 import java.util.Properties;
 
-/*Singleton Design pattern*/
 public class ConfigLoader {
 
 	private static final String SEND_EMAIL_TO_USERS = "send_email_to_users";
@@ -28,6 +27,7 @@ public class ConfigLoader {
 
 	private static final String CONFIG_PROPERTIES = "_config.properties";
 
+	/* Default config file is stg_config.properties */
 	private static final String STG_CONFIG_PROPERTIES = "stg" + CONFIG_PROPERTIES;
 	private static final String PROD_CONFIG_PROPERTIES = "prod" + CONFIG_PROPERTIES;
 	private static final String PREPROD_CONFIG_PROPERTIES = "preprod" + CONFIG_PROPERTIES;
@@ -36,7 +36,7 @@ public class ConfigLoader {
 	private static final String INT_CONFIG_PROPERTIES = "int" + CONFIG_PROPERTIES;
 
 	private static final String RESOURCES_PATH = System.getProperty("user.dir") + "/src/test/resources/";
-	private Properties properties;
+	private final Properties properties;
 	private static ConfigLoader configLoader;
 
 	public ConfigLoader() {

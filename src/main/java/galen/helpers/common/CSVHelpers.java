@@ -68,7 +68,7 @@ public class CSVHelpers {
          });
          if (report!=null) {
              String name = (fileName.toString().contains("Individual")) ? "Individual":"Bulk";
-             report.addMetricsVerificationStep(metricMap, name, false);
+             report.addMetricsVerificationStep(metricMap, false);
          }
     }
 

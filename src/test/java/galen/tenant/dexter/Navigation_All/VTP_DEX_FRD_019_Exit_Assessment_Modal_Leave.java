@@ -21,78 +21,10 @@ import java.util.HashMap;
 
 
 public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
-    static String OBJECTIVE = "To verify on the Exit Health Survey modal, if the user chooses to exit the assessment, " +
-            "the application shall end the assess-ment and navigate to the Welcome Screen.";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "-\tExit Health Survey Modal navigation and ending of the assessment on the following screens:\n" +
-            "o\tPrivacy Notice Screen\n" +
-            "o\tKnow Numbers Screen\n" +
-            "o\tLog In Selection Screen\n" +
-            "o\tPrior Use Screen\n" +
-            "o\tConfirm Customer Screen\n" +
-            "o\tConfirm Customer (More Info Modal) Screen\n" +
-            "o\tPrevent Pregnancy Screen\n" +
-            "o\tPrevent Pregnancy (More Info Modal) Screen\n" +
-            "o\tMenstruation Screen\n" +
-            "o\tHormonal Birth Control Screen\n" +
-            "o\tHormonal Birth Control (More Info Modal) Screen\n" +
-            "o\tSmoking or Vape Screen\n" +
-            "o\tSmoking or Vape (More Info Modal) Screen\n" +
-            "o\tSmoking or Vape Screen\n" +
-            "o\tSmoking or Vape – Birth Year Screen\n" +
-            "o\tSmoking or Vape (Risks) Screen\n" +
-            "o\tEver Had Cancer Screen\n" +
-            "o\tList of Cancers Screen\n" +
-            "o\tList of Cancers (More Info Modal) Screen\n" +
-            "o\tBlood Pressure Medication Screen\n" +
-            "o\tHeart Conditions Screen\n" +
-            "o\tHeart Conditions (More Info Modal) Screen\n" +
-            "o\tBlood Clot Screen\n" +
-            "o\tBlood Clot (More Info Modal) Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems (More Info Modal) Screen\n" +
-            "o\tLiver Disease or Liver Cancer Screen\n" +
-            "o\tLiver Disease or Liver Cancer (More Info Modal) Screen\n" +
-            "o\tUnexplained Vaginal Bleeding Screen\n" +
-            "o\tUnexplained Vaginal Bleeding (More Info Modal) Screen\n" +
-            "o\tDiabetes Screen\n" +
-            "o\tDiabetes (More Info Modal) Screen\n" +
-            "o\tPregnant Screen\n" +
-            "o\tBreastfeeding Screen\n" +
-            "o\tPregnancy Loss Screen\n" +
-            "o\tMigraines with Aura Screen\n" +
-            "o\tMigraines with Aura (More Info Modal) Screen\n" +
-            "o\tObesity/BMI Screen\n" +
-            "o\tDDI/Conditions Screen\n" +
-            "o\tDDI/Conditions (More Info Modal) Screen\n" +
-            "o\tDDI/Conditions – Hepatitis C Meds Screen\n" +
-            "o\tDDI/Conditions – Thyroid Disease Meds Screen\n" +
-            "o\tDDI/Conditions – Epilepsy or Bipolar Disorder Meds Screen\n" +
-            "o\tDDI/Conditions – HIV Meds Screen\n" +
-            "o\tDDI/Conditions – High Cholesterol Meds Screen\n" +
-            "o\tAntifungal Screen\n" +
-            "o\tAntifungal Meds Screen\n" +
-            "o\tAntifungal Meds (More Info Modal) Screen\n" +
-            "o\tOther Medication Screen\n" +
-            "o\tGallbladder Screen\n" +
-            "o\tGallbladder (More Info Modal) Screen\n" +
-            "o\tDepression Screen\n" +
-            "o\tDepression (More Info Modal) Screen\n" +
-            "o\tClinical Depression Screen \n" +
-            "o\tClinical Depression (More Info Modal) Screen\n" +
-            "o\tKnow BP Numbers Screen\n" +
-            "o\tKnow BP Numbers\n" +
-            "o\tKnow BP Numbers (Get BP Numbers) Screen\n" +
-            "o\tEnter BP Numbers Screen\n" +
-            "o\tEnter BP Numbers (More Info Modal) Screen\n" +
-            "o\tEditable Summary Screen\n" +
-            "o\tPurchase Options Screen\n" +
-            "o\tGet BP Measured Screen\n" +
-            "o\tADBU Screen";
-    static String REQUIREMENTS = "FRD_019";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx  \n" +
-            "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker.docx \n" +
-            "HappyFlow_IA_Initial_Assessment_ADBU_wBP.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     DexterPageObj pageObj;
     DexterUser user;
     String reportName = "VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave";
@@ -103,12 +35,7 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
     DexterHFWrappers hf;
 
     VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for" +
-                        " restructured cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;15JUN2024;Per CADENCE-476: Updated Test Steps for FDA Changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happyflow execution steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     void verifyMoreInfoExit(int step, BasePage page) {
@@ -118,7 +45,7 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
             pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         } else if (page == pageObj.orderForSelf) {
             hf.runDexterHFNonsmokingwBP(user, page, report);
-            pageObj.orderForSelf.clickClose(report);
+            pageObj.orderForSelf.clickCloseToDismiss(report);
         } else {
             hf.runDexterHFNonsmokingwBP(user, page, report);
        }
@@ -156,18 +83,18 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave_Test() throws IOException {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_019 – Exit Health Survey Modal (Leave)";
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+
         commonPageFeatures = new CommonPageFeatures(driver);
         hf = new DexterHFWrappers(driver);
-
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         verifyExit(3, pageObj.privacyPage);
         verifyExit(6, pageObj.numbers);
         verifyExit(9, pageObj.oAuth);

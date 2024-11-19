@@ -2,12 +2,10 @@ package galen.tenant.dexter.Navigation_Pages;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -29,7 +27,7 @@ public class VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP extends B
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP() {
-        VERSIONHISTORY.add("1.0;02FEB2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -41,7 +39,7 @@ public class VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP extends B
         DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         DexterPageObj pageObj = new DexterPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFADBUNoBP(user, pageObj.adbubpScreen, report);
         pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbubpNormal, report);
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);

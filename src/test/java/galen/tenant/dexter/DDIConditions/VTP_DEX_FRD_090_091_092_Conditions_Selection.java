@@ -1,16 +1,16 @@
 package galen.tenant.dexter.DDIConditions;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
 import galen.enums.tenant.dexter.DDIConditionType;
+import galen.enums.tenant.dexter.DDIThyroidType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
 import galen.pages.common.BasePage;
 import galen.pages.common.CheckboxPage;
-import galen.pages.common.PritUnlPage;
-import galen.pages.tenant.dexter.InitialAssessment.DDICondition;
-import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
+import galen.pages.tenant.dexter.InitialAssessment.*;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -18,66 +18,32 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
-    static String OBJECTIVE = "DEX_FRD_090: To verify the DDI/Conditions shall provide controls that require the user to" +
-            " select all conditions that they currently have or have had from the following list, or select “None of " +
-            "These”:\n" +
-            "o\tHepatitis C\n" +
-            "o\tThyroid Disease\n" +
-            "o\tEpilepsy \n" +
-            "o\tBipolar disorder\n" +
-            "o\tHIV\n" +
-            "o\tHigh Cholesterol\n" +
-            "DEX_FRD_091: To verify if the user selects “None of these” on the DDI/Condition Screen, the application " +
-            "shall navigate to the Anti-fungal screen.\n" +
-            "DEX_FRD_092: To verify if the user selects any of the listed conditions on the DDI/Condition Screen, the " +
-            "application shall navigate to a series of individual screens, one for each selected condition, that " +
-            "contains a list of DDI Medications for that condition.";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "o\tSelection of None of these navigates to the Conditions/DDI - Antifungal Product Screen\n" +
-            "o\tSelection of the following conditions and combinations of navigation (number of selections):\n" +
-            "•\tHepatitis C (1)\n" +
-            "•\tThyroid Disease (1)\n" +
-            "•\tEpilepsy (1)\n" +
-            "•\tBipolar disorder (1)\n" +
-            "•\tHIV (1)\n" +
-            "•\tHigh Cholesterol (1)\n" +
-            "•\tHepatitis C, Epilepsy (2)\n" +
-            "•\tHepatitis C, Bipolar Disorder (2)\n" +
-            "•\tHepatitis C, HIV (2)\n" +
-            "•\tHepatitis C, High Cholesterol (2)\n" +
-            "•\tThyroid Disease, HIV (2)\n" +
-            "•\tThyroid Disease, High Cholesterol (2)\n" +
-            "•\tEpilepsy, High Cholesterol (2)\n" +
-            "•\tHepatitis C, Thyroid Disease, Epilepsy, Bipolar Disorder, HIV, High Cholesterol (6)\n" +
-            "The scenarios listed above were planned with the intent of ensuring each of the screens can navigate " +
-            "appropriately the following screen depending on the user selection. \n";
-    static String REQUIREMENTS = "DEX_FRD_090, DEX_FRD_091, DEX_FRD_092";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_090_091_092_Conditions_Selection";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
     DexterPageObj pageObj;
+    DDICondition ddi;
 
     VTP_DEX_FRD_090_091_092_Conditions_Selection()  {
-        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-476: Updated Test Steps for FDA Changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for HappyFlow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
-    void verifySingleChoice(String step, DDICondition ddi, DexterUser user, String option, BasePage nextPage) {
-        user.conditionType= new ArrayList<String>(Arrays.asList(option));
+    void verifySingleChoice(String step, DexterUser user, String option, BasePage nextPage) {
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi, report);
-        ddi.selectCheckboxesAndProgress(user.conditionType,nextPage, report);
+        ddi.selectCheckboxAndProgress(option,nextPage, report);
         report.addScreenshotStep("Step"+step+"_"+option);
     }
 
-    void verifyTwoChoices(String step, DDICondition ddi, DexterUser user,
-                          CheckboxPage nextPage, BasePage secondPage) {
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi, report);
+    void verifyTwoChoices(String step, DexterUser user, CheckboxPage nextPage, BasePage secondPage) {
+        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi,report);
         ddi.selectCheckboxesAndProgress(user.conditionType, nextPage, report);
-        String none = (!nextPage.equals(pageObj.ddiThyroid))?"None of these":"No thyroid medication";
-        nextPage.selectCheckboxesAndProgress(new ArrayList<String>(Arrays.asList(none)), secondPage, report);
+        String none = (nextPage.equals(pageObj.ddiThyroid))? DDIThyroidType.NO_THYROID_MEDS.label:
+                user.defaultNoneText;
+        nextPage.selectCheckboxAndProgress(none, secondPage, report);
         report.addScreenshotStep("Step"+step+"_"+ secondPage.reportText.replace("/","_"));
     }
 
@@ -89,66 +55,76 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
 
         DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         pageObj = new DexterPageObj(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        ArrayList<String> allButOther = new ArrayList<String>(pageObj.ddiCondition.conditionOptions);
-        allButOther.remove("None of these");
-        DDICondition ddi = pageObj.ddiCondition;
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
+        ddi = pageObj.ddiCondition;
+        DDIHepC hepC = pageObj.ddiHepC;
+        DDIEpBipolar ep = pageObj.ddiEpBipolar;
+        DDIThyroid thyroid = pageObj.ddiThyroid;
+        DDIHIV hiv = pageObj.ddihiv;
+        DDIHighCholesterol hc = pageObj.ddiHighCholesterol;
+        
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi,report);
         ddi.verifyAllOptionsVisible(report);
         ddi.verifyNoOptionsSelected(report);
         ddi.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step2_InitialState");
 
-        ddi.selectCheckboxesAndProgress(user.conditionType, pageObj.antifungal, report); // user value is None by default
+        ddi.selectCheckboxesAndProgress(user.conditionType, pageObj.antifungal, report);
         report.addScreenshotStep("Step3_Antifungal");
 
-        verifySingleChoice("5", ddi, user, DDIConditionType.HEPATITIS_C.label, pageObj.ddiHepC);
-        verifySingleChoice("7", ddi, user, DDIConditionType.THYROID_DISEASE.label, pageObj.ddiThyroid);
-        verifySingleChoice("9", ddi, user, DDIConditionType.EPILEPSY.label, pageObj.ddiEpBipolar);
-        verifySingleChoice("11", ddi, user, DDIConditionType.BIPOLAR_DISORDER.label, pageObj.ddiEpBipolar);
-        verifySingleChoice("13", ddi, user, DDIConditionType.HIV.label, pageObj.ddihiv);
-        verifySingleChoice("15", ddi, user, DDIConditionType.HIGH_CHOLESTEROL.label, pageObj.ddiHighCholesterol);
+        verifySingleChoice("5",  user, DDIConditionType.HEPATITIS_C.label, hepC);
+        verifySingleChoice("7", user, DDIConditionType.THYROID_DISEASE.label, thyroid);
+        verifySingleChoice("9", user, DDIConditionType.EPILEPSY.label, ep);
+        verifySingleChoice("11", user, DDIConditionType.BIPOLAR_DISORDER.label, ep);
+        verifySingleChoice("13", user, DDIConditionType.HIV.label, hiv);
+        verifySingleChoice("15", user, DDIConditionType.HIGH_CHOLESTEROL.label, hc);
 
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
-                DDIConditionType.EPILEPSY.label));
-        verifyTwoChoices("18", ddi, user, pageObj.ddiHepC, pageObj.ddiEpBipolar);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
-                DDIConditionType.BIPOLAR_DISORDER.label));
-        verifyTwoChoices("21", ddi, user, pageObj.ddiHepC, pageObj.ddiEpBipolar);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
-                DDIConditionType.HIV.label));
-        verifyTwoChoices("24", ddi, user, pageObj.ddiHepC, pageObj.ddihiv);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
-                DDIConditionType.HIGH_CHOLESTEROL.label));
-        verifyTwoChoices("27", ddi, user, pageObj.ddiHepC, pageObj.ddiHighCholesterol);
-
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
-                DDIConditionType.HIV.label));
-        verifyTwoChoices("30", ddi, user, pageObj.ddiThyroid, pageObj.ddihiv);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
-                DDIConditionType.HIGH_CHOLESTEROL.label));
-        verifyTwoChoices("33", ddi, user, pageObj.ddiThyroid, pageObj.ddiHighCholesterol);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.EPILEPSY.label,
-                DDIConditionType.HIGH_CHOLESTEROL.label));
-        verifyTwoChoices("36", ddi, user, pageObj.ddiEpBipolar, pageObj.ddiHighCholesterol);
-
-        user.conditionType=allButOther;
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi, report);
-        ddi.selectCheckboxesAndProgress(user.conditionType, pageObj.ddiHepC, report);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+                DDIConditionType.EPILEPSY.label));
+        verifyTwoChoices("18", user, hepC, ep);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+                DDIConditionType.BIPOLAR_DISORDER.label));
+        verifyTwoChoices("21", user, hepC, ep);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+                DDIConditionType.HIV.label));
+        verifyTwoChoices("24", user, hepC, hiv);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+                DDIConditionType.HIGH_CHOLESTEROL.label));
+        verifyTwoChoices("27", user, hepC, hc);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
+                DDIConditionType.HIV.label));
+        verifyTwoChoices("30", user, thyroid,hiv);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
+                DDIConditionType.HIGH_CHOLESTEROL.label));
+        verifyTwoChoices("33", user, thyroid, hc);
+
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.EPILEPSY.label,
+                DDIConditionType.HIGH_CHOLESTEROL.label));
+        verifyTwoChoices("36", user, ep, hc);
+
+        user.conditionType=ddi.getAllButNone();
+        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user,ddi,report);
+
+        ddi.selectCheckboxesAndProgress(user.conditionType, hepC, report);
         report.addScreenshotStep("Step38_HepC");
 
-        pageObj.ddiHepC.selectCheckboxesAndProgress(user.hepCMeds, pageObj.ddiThyroid, report);
+        hepC.selectCheckboxesAndProgress(user.hepCMeds, thyroid, report);
         report.addScreenshotStep("Step39_Thyroid");
 
-        pageObj.ddiHepC.selectCheckboxesAndProgress(user.thyroidMeds, pageObj.ddiEpBipolar, report);
+        hepC.selectCheckboxesAndProgress(user.thyroidMeds, ep, report);
         report.addScreenshotStep("Step40_EpilepsyBipolar");
 
-        pageObj.ddiHepC.selectCheckboxesAndProgress(user.epBipolarMeds, pageObj.ddihiv, report);
+        hepC.selectCheckboxesAndProgress(user.epBipolarMeds, hiv, report);
         report.addScreenshotStep("Step41_HIV");
 
-        pageObj.ddiHepC.selectCheckboxesAndProgress(user.hivMeds, pageObj.ddiHighCholesterol, report);
+        hepC.selectCheckboxesAndProgress(user.hivMeds, hc, report);
         report.addScreenshotStep("Step42_HighCholesterol");
-
     }
 }

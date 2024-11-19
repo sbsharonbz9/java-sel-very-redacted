@@ -4,6 +4,7 @@ import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
 import galen.enums.tenant.dexter.BloodPressureType;
 import galen.enums.tenant.dexter.DDIConditionType;
+import galen.enums.tenant.dexter.ReviewAnswersLinks;
 import galen.enums.tenant.dexter.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
@@ -21,88 +22,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest {
-    static String OBJECTIVE = "DEX_FRD_015: To verify if the user selects the browser refresh button, the application " +
-            "shall remain on the current screen.\n" +
-            "DEX_FRD_249: To verify when a user refreshes the browser while a modal is being displayed, the application " +
-            "shall remain on the current screen.\n";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "-\tUsage of Refresh button on the following screens returns to itself:\n" +
-            "o\tPrivacy Notice Screen\n" +
-            "o\tKnow Numbers Screen More Info Modal\n" +
-            "o\tPrior Use Screen\n" +
-            "o\tConfirm Customer Screen\n" +
-            "o\tConfirm Customer More Info Modal\n" +
-            "o\tPrevent Pregnancy Screen\n" +
-            "o\tPrevent Pregnancy More Info Modal\n" +
-            "o\tMenstruation Screen\n" +
-            "o\tHormonal Birth Control Screen \n" +
-            "o\tHormonal Birth Control More Info Modal\n" +
-            "o\tSmoking or Vape Screen\n" +
-            "o\tSmoking or Vape More Info Modal\n" +
-            "o\tSmoking or Vape – Date of Birth Screen\n" +
-            "o\tSmoking or Vape (Risks) Screen\n" +
-            "o\tEver Had Cancer Screen\n" +
-            "o\tEver Had Cancer More Info Modal\n" +
-            "o\tList of Cancers Screen\n" +
-            "o\tList of Cancers More Info Modal\n" +
-            "o\tBlood Pressure Medication Screen\n" +
-            "o\tHeart Condition Screen \n" +
-            "o\tHeart Condition More Info Modal\n" +
-            "o\tBlood Clot Screen\n" +
-            "o\tBlood Clot More Info Modal\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems More Info Modal\n" +
-            "o\tLiver Disease or Liver Cancer Screen\n" +
-            "o\tLiver Disease or Liver Cancer More Info Modal\n" +
-            "o\tUnexplained Vaginal Bleeding Screen\n" +
-            "o\tUnexplained Vaginal Bleeding More Info Modal\n" +
-            "o\tDiabetes Screen\n" +
-            "o\tDiabetes More Info Modal\n" +
-            "o\tPregnant Screen\n" +
-            "o\tBreastfeeding Screen\n" +
-            "o\tPregnancy Loss Screen\n" +
-            "o\tObesity/BMI Screen\n" +
-            "o\tMigraines with Aura Screen\n" +
-            "o\tMigraines with Aura More Info Modal\n" +
-            "o\tDDI/Conditions Screen\n" +
-            "o\tDDI/Conditions Screen More Info Modal\n" +
-            "o\tDDI/Conditions – Hepatitis C Meds Screen\n" +
-            "o\tDDI/Conditions – Hepatitis C Meds More Info Modal\n" +
-            "o\tDDI/Conditions – Thyroid Disease Meds Screen\n" +
-            "o\tDDI/Conditions – Thyroid Disease Meds More Info Modal\n" +
-            "o\tDDI/Conditions – Epilepsy or Bipolar Disorder Meds Screen\n" +
-            "o\tDDI/Conditions – Epilepsy or Bipolar Disorder Meds More Info Modal\n" +
-            "o\tDDI/Conditions – HIV Meds Screen\n" +
-            "o\tDDI/Conditions – HIV Meds More Info Modal\n" +
-            "o\tDDI/Conditions – High Cholesterol Meds Screen\n" +
-            "o\tDDI/Conditions – High Cholesterol Meds More Info Modal\n" +
-            "o\tDDI/Conditions – Antifungal Product Screen\n" +
-            "o\tDDI/Conditions – Antifungal Product More Info Modal\n" +
-            "o\tDDI/Conditions – Antifungal Meds Screen\n" +
-            "o\tDDI/Conditions – Antifungal Product More Info Modal\n" +
-            "o\tDDI/Conditions – Other Medication Screen\n" +
-            "o\tDDI/Conditions – Other Medication More Info Modal\n" +
-            "o\tGallbladder Screen\n" +
-            "o\tGallbladder More Info Modal\n" +
-            "o\tDepression Screen\n" +
-            "o\tDepression More Info Modal \n" +
-            "o\tClinical Depression Screen\n" +
-            "o\tClinical Depression More Info Modal\n" +
-            "o\tKnow BP Numbers Screen\n" +
-            "o\tKnow BP Numbers More Info Modal \n" +
-            "o\tEnter BP Numbers Screen\n" +
-            "o\tEnter BP Numbers More Info Modal\n" +
-            "o\tEditable Summary\n" +
-            "o\tSafe to Use Screen\n" +
-            "o\tAttestation Screen\n" +
-            "o\tADBU ONLY Screen (Including Attestation Modal)\n" +
-            "o\tADBU – Reconfirmation Screen\n" +
-            "o\tADBU + Get BP Numbers Screen\n" +
-            "o\tGet BP Measured Screen\n" +
-            "o\tEnter BP (Final) Screen (Including 3 Month Modal)";
-    static String REQUIREMENTS = "DEX_FRD_016, DEX_FRD_249";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx\n" +
-            "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     DexterPageObj pageObj;
     DexterUser user;    
     String reportName =  "VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen";
@@ -112,7 +35,7 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     void refreshMoreInfo(int step, BasePage page) throws InterruptedException {
@@ -138,9 +61,8 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         report.reportTitle = "VTP_DEX_FRD_015_249 – Refresh Button Returns to Current Screen";
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);;
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(UrlType.DEXTER);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
         pageObj.welcomePage.verifyAtPage(report);
@@ -152,24 +74,21 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
 
         // OAuth to Product Used
         commonPageFeatures.clickNextToPage(pageObj.oAuth, report);
-        refresh(9, pageObj.usedProduct);
-        pageObj.oAuth.clickGuestButton(report);
-        refresh(11, pageObj.usedProduct);
+        refresh(9, pageObj.oAuth);
         pageObj.oAuth.chooseAccountType(user, report);
+        refresh(11, pageObj.oAuth);
+        pageObj.oAuth.chooseAccountTypeAndProgress(user, pageObj.usedProduct,report);
         pageObj.usedProduct.verifyAtPage(report);
         refresh(14, pageObj.usedProduct);
 
         commonPageFeatures.clickYesNoNext(user.productUsed, report);
         refresh(16, pageObj.orderForSelf);
 
-        pageObj.usedProduct.verifyTooltipDisplayed(report);
-        pageObj.usedProduct.clickCloseButton(report);
-        commonPageFeatures.clickMoreInfoToModal(report);
+        pageObj.orderForSelf.verifyModalDisplayed(report);
         bh.refreshPage("Confirm Customer page", report);
         report.addScreenshotStep("Step18_Refresh", driver);
-        pageObj.usedProduct.verifyTooltipDisplayed(report);
-        pageObj.usedProduct.clickCloseButton(report);
 
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickYesNoNextToPage(user.orderForSelf,pageObj.pregnancy, report);
         refresh(20, pageObj.pregnancy);
         refreshMoreInfo(22, pageObj.pregnancy);
@@ -245,13 +164,12 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         refresh(81, pageObj.obesity);
 
         // Obesity to DDI
-        pageObj.obesity.enterHeightAndWeight(user, report);
-        pageObj.obesity.clickNextToPage(pageObj.ddiCondition, report);
+        pageObj.obesity.enterHeightAndWeightAndProgress(user, pageObj.ddiCondition, report);
         refresh(83, pageObj.ddiCondition);
         refreshMoreInfo(85, pageObj.ddiCondition);
 
         // DDI to HepC
-        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.allButNone, pageObj.ddiHepC,report);
+        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.getAllButNone(), pageObj.ddiHepC,report);
         refresh(87, pageObj.ddiHepC);
         refreshMoreInfo(89, pageObj.ddiHepC);
 
@@ -306,30 +224,22 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.knowBPNumber,report);
         refresh(131, pageObj.knowBPNumber);
 
-        pageObj.knowBPNumber.selectRadioReponse(BloodPressureType.Yes_Know_BP.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        refresh(133, pageObj.enterBP);
+        pageObj.knowBPNumber.clickYesAndOpenModal(report);
+        refresh(133, pageObj.knowBPNumber);
 
-        pageObj.knowBPNumber.selectRadioReponse(BloodPressureType.Yes_Know_BP.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-        commonPageFeatures.verifyModalDismissed(report);
-        pageObj.enterBP.verifyAtPage(report);
+        pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP, "Yes", report);
         refresh(136, pageObj.enterBP);
         refreshMoreInfo(138, pageObj.enterBP);
 
-        user.systolic="115";
-        user.diastolic="75";
-        pageObj.enterBP.enterBP(user, report);
-        commonPageFeatures.clickNextToPage(pageObj.review,report);
+        user.systolic="110";
+        user.diastolic="70";
+        pageObj.enterBP.enterBPAndProgress(user, pageObj.review, report);
         refresh(140, pageObj.review);
 
-        pageObj.review.clickConfirm(report);
+        pageObj.review.clickConfirmToOpenModal(report);
         refresh(142, pageObj.review);
 
-        pageObj.review.clickEditMedicalConditionsLink(report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.HC, pageObj.ddiCondition, report);
         pageObj.ddiCondition.selectCheckboxAndProgress(DDIConditionType.HIGH_CHOLESTEROL.label, pageObj.review, report);
         refresh(142, pageObj.review);
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.review, report);
@@ -337,48 +247,37 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         pageObj.review.addressConfirmations(report);
         refresh(146, pageObj.oAuthPostReview);
 
-        pageObj.oAuthPostReview.chooseAccountType(user, report);
+        pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.purchaseOptions,report);
         refresh(148, pageObj.purchaseOptions);
 
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.depression, report);
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression,report);
         pageObj.diagnosedDepression.clickYesAndAddressModalToPage(pageObj.knowBPNumber, report);
-        pageObj.knowBPNumber.selectRadioReponse(BloodPressureType.Yes_Know_BP.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-        commonPageFeatures.verifyModalDismissed(report);
-        pageObj.enterBP.verifyAtPage(report);
+        pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP, "Yes", report);
 
         user.systolic="110";
         user.diastolic="75";
-        pageObj.enterBP.enterBP(user, report);
-        commonPageFeatures.clickNextToPage(pageObj.review,report);
+        pageObj.enterBP.enterBPAndProgress(user, pageObj.review,report);
         pageObj.review.addressConfirmations(report);
-        pageObj.oAuthPostReview.verifyAtPage(report);
-        pageObj.oAuthPostReview.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
+        pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbu, report);
         refresh(159, pageObj.adbu);
 
         pageObj.adbu.clickYesNoToOpenModal("Yes", report);
         refresh(161, pageObj.adbu);
         pageObj.adbu.clickYesNoToOpenModal("No", report);
         refresh(163, pageObj.adbu);
-        pageObj.adbu.clickConfirm(null);
+        pageObj.adbu.clickConfirmModal(null);
 
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
         pageObj.knowBPNumber.selectRadioResponseAndProgress(BloodPressureType.No_Know_BP.label, pageObj.review,
                 report);
         pageObj.review.addressConfirmations(report);
-        pageObj.oAuthPostReview.chooseAccountType(user, report);
-        pageObj.adbubpNormal.verifyAtPage(report);
+        pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbubpNormal, report);
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);
         refresh(171, pageObj.enterBPEnd);
         user.systolic="115";
         user.diastolic="75";
-        pageObj.enterBPEnd.enterBP(user, report);
-        commonPageFeatures.clickNext(report);
-        pageObj.enterBPEnd.verifyModalDisplayed(report);
+        pageObj.enterBPEnd.enterAndVerifyToModal(user, report);
         refresh(173, pageObj.enterBPEnd);
     }
 }

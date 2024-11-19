@@ -58,8 +58,7 @@ public class EnterBP extends BasePage {
     }
 
     public void clickChangeButton(@Nullable GalenReport report) {
-        basicHelpers.verifyClickToPageTransition(this, basicHelpers.getWebElement(modalChangeButton),
-                "Change button",report);
+        basicHelpers.verifyClickToPageTransition(this, modalChangeButton, "Change button",report);
     }
 
     public boolean enterBPAndProgress(DexterUser user, BasePage page,@Nullable GalenReport report) {

@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class SingleResponseRadioButtonPage extends BasePage {
     public SingleResponseRadioButtonPage(WebDriver driver) {
         super(driver);

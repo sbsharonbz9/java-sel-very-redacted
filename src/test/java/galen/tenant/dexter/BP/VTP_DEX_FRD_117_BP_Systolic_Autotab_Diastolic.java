@@ -7,7 +7,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -15,22 +14,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
-    static String OBJECTIVE = "Verify on the Enter BP Numbers Screen, if the user enters 3 digits in the Systolic BP " +
-            "field, the application shall automatically tab to the Diastolic input field.";
-    static String NOTES = "This protocol contains the following verification scenario(s):\n" +
-            "-\tSubmitting 1-digit integer in Systolic input field auto tabs focus to the Diastolic input field\n" +
-            "-\tSubmitting 2-digit integer in Systolic input field auto tabs focus to the Diastolic input field\n" +
-            "-\tSubmitting 3-digit integer in Systolic input field auto tabs focus to the Diastolic input field\n";
-    static String REQUIREMENTS = "DEX_FRD_117";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic() {
-        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script;Tester");
     }
 
     @Test
@@ -44,7 +37,7 @@ public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
         DexterPageObj pageObj = new DexterPageObj(driver);
         BasicHelpers basicHelpers = new BasicHelpers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.enterBP, report);
 
         basicHelpers.sendTextFlex(pageObj.enterBP.getInputSystolic(), "1", "Systolic", report);

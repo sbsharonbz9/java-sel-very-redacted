@@ -7,7 +7,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -15,21 +14,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_053_3MonthModal_No_GetBP extends BaseTest {
-    static String OBJECTIVE = "To verify if the user selects ‘No” on the BP Within 3 Months Modal, the application " +
-            "shall flag the health survey for Not Current BP numbers and navigate to the Health Survey Summary Screen";
-    static String NOTES = "The following scenario(s) are verified in this protocol:\n" +
-            "-\tSubmission of No to BP Numbers being within 3 Months navigates to the Editable Summary Screen\n" +
-            "-\tUser sees Get BP Measured Screen for triggering the Not Current BP flag";
-    static String REQUIREMENTS = "DEX_FRD_053";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_053_3MonthModal_No_GetBP";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_053_3MonthModal_No_GetBP()  {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Tester");
     }
 
     @Test
@@ -43,7 +37,7 @@ public class VTP_DEX_FRD_053_3MonthModal_No_GetBP extends BaseTest {
         DexterPageObj pageObj = new DexterPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
         pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.review, "No", report);
         report.addScreenshotStep("Step3_Editable Summary");

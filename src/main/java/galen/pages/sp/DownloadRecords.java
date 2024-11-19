@@ -4,7 +4,6 @@ import galen.helpers.common.GalenReport;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -18,8 +17,6 @@ public class DownloadRecords extends SPBasePage {
     public By clinician = By.id("clinicians");
     public By both = By.id("participants-clinicians");
     public By downloadButton = By.xpath("//button[text()='Download CSV']");
-    public By loadingButton = By.xpath("//button[text()='Loading...']");
-
 
     public DownloadRecords(WebDriver driver) {
         super(driver);
@@ -42,30 +39,30 @@ public class DownloadRecords extends SPBasePage {
         return basicHelpers.verifyCondition(reportSummaryFile::exists, "download successful", true, report);
     }
 
-    public boolean downloadParticipantRecords(String csvName, GalenReport report) throws IOException {
+    public void downloadParticipantRecords(String csvName, GalenReport report) throws IOException {
          basicHelpers.clickFlex(participants, "Participant Records option", report);
          basicHelpers.clickFlex(downloadButton, "Download CSV", report);
-         return verifyRecordDownload(csvName, report);
+        verifyRecordDownload(csvName, report);
     }
 
-    public boolean downloadClinicianRecords(String csvName, GalenReport report) throws IOException {
+    public void downloadClinicianRecords(String csvName, GalenReport report) throws IOException {
         basicHelpers.clickFlex(clinician, "Clinician Records option", report);
         basicHelpers.clickFlex(downloadButton, "Download CSV", report);
-        return verifyRecordDownload(csvName, report);
+        verifyRecordDownload(csvName, report);
     }
 
-    public boolean downloadAllRecords(String csvName, GalenReport report) throws IOException {
+    public void downloadAllRecords(String csvName, GalenReport report) throws IOException {
         basicHelpers.clickFlex(both, "Participant and Clinician Records option", report);
         basicHelpers.clickFlex(downloadButton, "Download CSV", report);
-        return verifyRecordDownload(csvName, report);
+        verifyRecordDownload(csvName, report);
     }
 
-    public boolean verifyAllElementsDisplayed(@Nullable GalenReport report) {
+    public void verifyAllElementsDisplayed(@Nullable GalenReport report) {
         LinkedHashMap<String, By> results = new LinkedHashMap<>();
         results.put("Download Participant", participants);
         results.put("Download Clinician", clinician);
         results.put("Download Participant and Clinician", both);
         results.put("Download Button", downloadButton);
-        return basicHelpers.verifyElementsDisplayed(results, report);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 }

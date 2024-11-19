@@ -2,58 +2,28 @@ package galen.tenant.dexter.Metrics;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.enums.tenant.dexter.*;
+import galen.enums.tenant.dexter.CancerType;
+import galen.enums.tenant.dexter.HeartConditionType;
+import galen.enums.tenant.dexter.LiverCancerType;
+import galen.enums.tenant.dexter.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.BasePage;
-import galen.pages.common.PritUnlPage;
-import galen.pages.tenant.dexter.InitialAssessment.CardiacRisk;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
-import galen.utils.ConfigLoader;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
-    static String OBJECTIVE = "To verify When a new user starts to take an initial health survey, the application shall " +
-            "assign an assessment ID to the health survey answers and this ID shall be displayed on the welcome screen" +
-            " and on the final notification screens";
-    static String NOTES = "This protocol contains the following scenario(s):\n" +
-            "-\tAssessment ID is displayed on the Welcome Screen\n" +
-            "-\tAssessment ID is displayed on Safe To Use Screen\n" +
-            "-\tAssessment ID is displayed on ADBU Screen\n" +
-            "-\tAssessment ID is displayed on ADBU/BP Screen\n" +
-            "-\tAssessment ID is displayed on Confirm Customer DNU Screen\n" +
-            "-\tAssessment ID is displayed on Menstruation DNU Screen\n" +
-            "-\tAssessment ID is displayed on Prevent Pregnancy DNU Screen\n" +
-            "-\tAssessment ID is displayed on Smoker Over 35 DNU Screen\n" +
-            "-\tAssessment ID is displayed on Cancers DNU Screen\n" +
-            "-\tAssessment ID is displayed on BP Meds DNU Screen\n" +
-            "-\tAssessment ID is displayed on Heart Conditions DNU Screen\n" +
-            "-\tAssessment ID is displayed on Blood Clots DNU Screen\n" +
-            "-\tAssessment ID is displayed on Irregular Heartbeat DNU Screen\n" +
-            "-\tAssessment ID is displayed on Liver Disease or Liver Cancer DNU Screen\n" +
-            "-\tAssessment ID is displayed on Vaginal Bleeding DNU Screen\n" +
-            "-\tAssessment ID is displayed on Diabetes DNU Screen\n" +
-            "-\tAssessment ID is displayed on Pregnant DNU Screen\n" +
-            "-\tAssessment ID is displayed on Breastfeeding DNU Screen\n" +
-            "-\tAssessment ID is displayed on Pregnancy Loss DNU Screen\n" +
-            "-\tAssessment ID is displayed on Migraines with Aura DNU Screen\n" +
-            "-\tAssessment ID is displayed on BP DNU Screen\n" +
-            "-\tAssessment ID is displayed on BP Immediate DNU Screen";
-    static String REQUIREMENTS = "FRD_118";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx \n" +
-            "HappyFlow_IA_Initial_Assessment_ADBU_wBP.docx\n" +
-            "HappyFlow_IA_Initial_Assessment_ADBU_NoBP.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     DexterPageObj pageObj;
     DexterUser user;
     String reportName = "VTP_DEX_FRD_118_Metrics_Assessment_ID_Display";
@@ -63,15 +33,11 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_118_Metrics_Assessment_ID_Display()  {
-        VERSIONHISTORY.add("1.0;09MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;21JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation\n" +
-                "Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
-    public void VTP_DEX_FRD_118_Metrics_Assessment_ID_Display_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_FRD_118_Metrics_Assessment_ID_Display_Test() throws IOException {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_118 – Metrics Assessment ID Display";
@@ -99,7 +65,7 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
         report.addScreenshotStep("Step7");
 
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         pageObj.kickoutPage.verifyAssessmentIDDisplayed(report);
         report.addScreenshotStep("Step10");
@@ -198,8 +164,5 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
         commonPageFeatures.clickNextToPage(pageObj.kickoutPage, report);
         pageObj.kickoutPage.verifyAssessmentIDDisplayed(report);
         report.addScreenshotStep("Step46");
-
-
     }
-
 }

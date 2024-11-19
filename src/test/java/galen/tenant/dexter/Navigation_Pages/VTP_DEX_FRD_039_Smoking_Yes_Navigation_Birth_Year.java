@@ -8,7 +8,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
@@ -38,10 +37,7 @@ public class VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year extends BaseTest 
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year()  {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Sharon Graves");
-        VERSIONHISTORY.add("3.0;26JUL2024;Per CADENCE-607: Updated Step 4 to reflect the FRD;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -56,7 +52,7 @@ public class VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year extends BaseTest 
         CommonPageFeatures common = new CommonPageFeatures(driver);
         int currentYear = Year.now().getValue();
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.smoking, report);
         pageObj.smoking.selectRadioResponseAndProgress(SmokeType.SMOKE_REGULARLY.label, pageObj.birthYear, report);
         common.verifyNextButtonDisabled(report);

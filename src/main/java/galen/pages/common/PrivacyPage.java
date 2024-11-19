@@ -1,13 +1,10 @@
 package galen.pages.common;
 
 import galen.helpers.common.GalenReport;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class PrivacyPage extends BasePage {
@@ -24,7 +21,6 @@ public class PrivacyPage extends BasePage {
     public By iAcceptBtn = By.className("accept-btn");
     public By privacyDropdownButton = By.className("privacy-drop-btn");
     public By fullPrivacyNotice = By.id("privacy-notice-full");
-    private static final Logger logger = LoggerFactory.getLogger(PrivacyPage.class);
 
     public PrivacyPage(WebDriver driver) {
         super(driver);
@@ -33,22 +29,13 @@ public class PrivacyPage extends BasePage {
         headingTitle=privacyHeader;
     }
 
-    public WebElement getIAcceptBtn() {
-        return basicHelpers.getWebElement(iAcceptBtn);
-    }
-
-    public void clickIAcceptBtn(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getIAcceptBtn(),"I Accept", report);
-        logger.info("Clicked the 'I Accept' button.");
-    }
-
     public boolean clickIAcceptBtnToPage(BasePage toPage, @Nullable GalenReport report) {
-        return basicHelpers.verifyClickToPageTransition(toPage, getIAcceptBtn(),"I Accept", report);
+        return basicHelpers.verifyClickToPageTransition(toPage, iAcceptBtn,"I Accept", report);
     }
 
-    public boolean isNoticeExpanded(@Nullable GalenReport report) throws Exception {
-        return basicHelpers.verifyCondition(()->driver.findElement(fullPrivacyNotice).isDisplayed(), "Privacy " +
-                "notice is expanded and full Privacy Notice is visible", false, report);
+    public boolean isNoticeExpanded(@Nullable GalenReport report)  {
+        return basicHelpers.verifyActionToNavDisplayed("Verify privacy notice is expanded", fullPrivacyNotice,
+                "Full privacy Notice", report);
     }
 
     public boolean verifyAllPageElementsPresent(@Nullable GalenReport report) {
@@ -59,41 +46,26 @@ public class PrivacyPage extends BasePage {
     }
 
     public void clickExpandedArrow(@Nullable GalenReport report) {
-        WebElement element = basicHelpers.getWebElement(privacyDropdownButton);
-        basicHelpers.clickFlex(element, "Extend Privacy Arrow",report);
+        if (!isNoticeExpanded(null)) {
+            basicHelpers.clickFlex(privacyDropdownButton, "Extend Privacy Arrow", report);
+        }
     }
 
     public void clickCloseArrow(@Nullable GalenReport report) {
-        WebElement element = basicHelpers.getWebElement(privacyDropdownButton);
-        basicHelpers.clickFlex(element, "Close Privacy Arrow",report);
+        if (isNoticeExpanded(null)) {
+            basicHelpers.clickFlex(privacyDropdownButton, "Close Privacy Arrow", report);
+        }
     }
 
     public void scrollToElement() {
-        WebElement element = driver.findElement(clickHereButton);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        basicHelpers.scrollToElement(clickHereButton, null);
     }
 
     public void scrollToElementBack() {
-        WebElement element = driver.findElement(privacyParagraph);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        basicHelpers.scrollToElement(privacyParagraph, null);
     }
 
-
-
-    public boolean isNoticeNotExpanded(@Nullable GalenReport report) throws Exception {
-        return basicHelpers.verifyCondition(
-                () -> {
-                    try {
-                        return wait.until(ExpectedConditions.invisibilityOfElementLocated(fullPrivacyNotice));
-                    } catch (Exception e) {
-                        return false;
-                    }
-                },
-                "Privacy notice is not expanded, full Privacy Notice is not visible",
-                true,
-                report
-        );
+    public boolean isNoticeNotExpanded(@Nullable GalenReport report) {
+        return basicHelpers.verifyNotDisplayedFlex(fullPrivacyNotice, "Full Privacy Notice", report);
     }
-
-
 }

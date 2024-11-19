@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config extends BaseTest {
     static String OBJECTIVE = "DEX_SP_FRD_015: To verify the portal shall provide the capability to configure study ID " +
             "with a 2-digit numeric study ID.\n" +
@@ -40,13 +38,13 @@ public class VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config extends BaseTest 
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config()  {
-        VERSIONHISTORY.add("1.0;28FEB2023;Per CADENCE-173: Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;09JUN2023;Per CADENCE-343: Update Test Steps to align language with user navigation;" +
-                "Name Redacted");
+        VERSIONHISTORY.add("1.0;28FEB2023;Per 173: Initial Test Script;Tester");
+        VERSIONHISTORY.add("2.0;09JUN2023;Per 343: Update Test Steps to align language with user navigation;" +
+                "Tester");
     }
 
     @Test
-    public void VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config_Test() throws IOException {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_SP_FRD_015_016 – Configure Study ID and Study Site ID";
@@ -59,21 +57,16 @@ public class VTP_DEX_SP_FRD_015_016_Study_ID_Study_Site_Config extends BaseTest 
 
         for (RoleType r : roles) {
             pageObj.login.logIn(r.email, report);
-            sleep(1000);
-            par.verifyAtPage(report);
 
-            par.selectTab(AccountTabs.STUDY, report);
-            sleep(1000);
-            pageObj.study.verifyAtPage(report);
-            pageObj.study.verifyStudyIDFormat(report);
+            par.selectTabToPage(AccountTabs.STUDY,pageObj.studies, report);
+            pageObj.studies.verifyStudyIDFormat(report);
             report.addScreenshotStep(r.name()+"Studies");
-            par.selectTab(AccountTabs.SITE, report);
-            sleep(1000);
-            pageObj.sites.verifyAtPage(report);
+
+            par.selectTabToPage(AccountTabs.SITE, pageObj.sites,report);
             pageObj.sites.verifySiteIDFormat(report);
             report.addScreenshotStep(r.name()+"Sites");
 
-            bh.clickFlex(pageObj.login.getLogout(), "Log Out", report);
+            par.logout(report);
         }
     }
 }

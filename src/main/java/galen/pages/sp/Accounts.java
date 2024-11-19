@@ -2,19 +2,15 @@ package galen.pages.sp;
 
 import galen.enums.SP.RoleType;
 import galen.helpers.common.GalenReport;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
-import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import static jodd.util.ThreadUtil.sleep;
 
 public class Accounts extends SPBasePage {
 
@@ -22,7 +18,6 @@ public class Accounts extends SPBasePage {
     public By addAccountButton = By.xpath("//button[text()='Add Account']");
 
     // Add Account Modal
-    public By saveButton = By.xpath("//button[text()='Save']");
     public By firstNameTextField = By.xpath("//input[@id='firstname']");
     public By lastNameTextField = By.xpath("//input[@id='lastname']");
     public By emailTextField = By.xpath("//input[@id='email']");
@@ -43,10 +38,6 @@ public class Accounts extends SPBasePage {
         modal=By.xpath(("//div[@aria-modal='true']"));
     }
 
-    public WebElement getSaveButton() { return basicHelpers.getWebElement(saveButton);}
-
-    public WebElement getAccountButton() { return basicHelpers.getWebElement(addAccountButton);}
-
     public WebElement getFirstNameField() { return basicHelpers.getWebElement(firstNameTextField);}
 
     public WebElement getLastNameField() { return basicHelpers.getWebElement(lastNameTextField);}
@@ -54,35 +45,6 @@ public class Accounts extends SPBasePage {
     public WebElement getEmailField() { return basicHelpers.getWebElement(emailTextField);}
 
     public WebElement getRoleDropdown() { return basicHelpers.getWebElement(roleDropdown);}
-
-    public WebElement getFirstNameHeader() { return basicHelpers.getWebElement(firstNameHeader);}
-
-    public WebElement getLastNameHeader() { return basicHelpers.getWebElement(lastNameHeader);}
-
-    public WebElement getEmailHeader() { return basicHelpers.getWebElement(emailHeader);}
-
-    public WebElement getRoleHeader() { return basicHelpers.getWebElement(roleHeader);}
-
-    public void clickSave(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getSaveButton(), "Save Button", report);
-        sleep(1500);
-    }
-
-    public void clickFirstNameHeader(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getFirstNameHeader(), "First Name", report);
-    }
-
-    public void clickEmailHeader(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getEmailHeader(), "Email Address", report);
-    }
-
-    public void clickLastNameHeader(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getLastNameHeader(), "Last Name", report);
-    }
-
-    public void clickRoleHeader(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getRoleHeader(), "Role", report);
-    }
 
     public void clickAddAccount(@Nullable GalenReport report) {
         basicHelpers.verifyClickToNavDisplayed(addAccountButton, "Add Account button",modal,
@@ -95,37 +57,43 @@ public class Accounts extends SPBasePage {
         basicHelpers.clickFlex(tableEntryBy, "Edit Account link", report);
     }
 
-    public void clickEditByRole(RoleType role, @Nullable GalenReport report) {
-       By tableEntryBy = By.xpath("//td[text()='" + role.ui_name + "']/following-sibling::td/button[contains(text(),'Edit')]");
+    public void clickEditByRole(String role, @Nullable GalenReport report) {
+       By tableEntryBy = By.xpath("//td[text()='" + role + "']/following-sibling::td/button[contains(text(),'Edit')]");
         basicHelpers.clickFlex(tableEntryBy, "Edit Account link", report);
     }
 
-    public void clickEditAnyAccount(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(editLink, "Edit Account link", report);
-    }
-
-    public boolean verifyAllModalElementsDisplayed(@Nullable GalenReport report) {
+    public void verifyAllModalElementsDisplayed(@Nullable GalenReport report) {
         LinkedHashMap<String, By> results = new LinkedHashMap<>();
         results.put("Email", emailTextField);
         results.put("First Name", firstNameTextField);
         results.put("Last Name", lastNameTextField);
         results.put("Account Status Toggle", statusToggle);
-        return basicHelpers.verifyElementsDisplayed(results, report);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 
-    public boolean findAccountInTable(String email, @Nullable GalenReport report) {
+    public void verifyAllColumnHeadersDisplayed(@Nullable GalenReport report) {
+        LinkedHashMap<String, By> results = new LinkedHashMap<>();
+        results.put("First Name", firstNameHeader);
+        results.put("Last Name", lastNameHeader);
+        results.put("Email", emailHeader);
+        results.put("Role", roleHeader);
+        results.put("Action", actionHeader);
+        results.put("Account Status Toggle", statusToggle);
+        basicHelpers.verifyElementsDisplayed(results, report);
+    }
+
+    public void findAccountInTable(String email, @Nullable GalenReport report) {
         try {
             basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-            return basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']"),
-                    "Email " + email+ " in table", report);
-        } catch (Exception e) {
-            return false;
+            basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']"),
+                    "Email " + email + " in table", report);
+        } catch (Exception ignored) {
         }
     }
 
-    public boolean verifyAccountNotInTable(String email, @Nullable GalenReport report) {
-        return basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']"),
-                "Email " + email+ "not in table", report);
+    public void verifyAccountNotInTable(String email, @Nullable GalenReport report) {
+        basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']"),
+                "Email " + email + "not in table", report);
     }
 
     public void enterNewAccountData(String role, String firstName, String lastName, String email,
@@ -136,11 +104,10 @@ public class Accounts extends SPBasePage {
                 "Enter email: '" + email;
         try {
             basicHelpers.selectDropDownByText(getRoleDropdown(), role, "Role: "+
-                    role, report);
-            basicHelpers.sendTextFlex(getFirstNameField(), firstName, "First Name", report);
-            basicHelpers.sendTextFlex(getLastNameField(), lastName, "Last Name", report);
-            basicHelpers.sendTextFlex(getEmailField(), email, "Email", report);
-
+                    role, null);
+            basicHelpers.sendTextFlex(getFirstNameField(), firstName, "First Name", null);
+            basicHelpers.sendTextFlex(getLastNameField(), lastName, "Last Name", null);
+            basicHelpers.sendTextFlex(getEmailField(), email, "Email", null);
             if (report != null) {
                 report.addStep(steps, "Account data is entered", "As expected", true, true);
             }
@@ -149,10 +116,9 @@ public class Accounts extends SPBasePage {
                 report.addStep(steps, steps, e.getMessage(), false, true);
             }
         }
-        verifyModalDisplayed(report);
     }
 
-    public boolean verifyAddAccountElementsDisplayed(@Nullable GalenReport report) {
+    public void verifyAddAccountElementsDisplayed(@Nullable GalenReport report) {
         LinkedHashMap<String, By> results = new LinkedHashMap<>();
         results.put("Role", roleDropdown);
         results.put("First Name", firstNameTextField);
@@ -160,7 +126,7 @@ public class Accounts extends SPBasePage {
         results.put("Email Address", emailTextField);
         results.put("Save Button", saveButton);
         results.put("Cancel Button", btnCancel);
-        return basicHelpers.verifyElementsDisplayed(results, report);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 
     public void verifyAddValuesCorrect(String role, String firstName, String lastName, String email,
@@ -171,22 +137,26 @@ public class Accounts extends SPBasePage {
         basicHelpers.verifyText(getEmailField(),"Email", email, report);
     }
 
-    public boolean verifyAllRoleDropdownOptions(@Nullable GalenReport report) {
+    public void verifyAllRoleDropdownOptions(@Nullable GalenReport report) {
         List<String> options = basicHelpers.getAllDropdownOptions(roleDropdown);
-        List<String> expectedOptions = new ArrayList<>(Arrays.asList("Central Assessor",
-                "Study Staff Lead", "Study Staff", "Clinician Lead", "Clinician"));
-        return basicHelpers.verifyCondition(()->options.equals(expectedOptions), "Role " +
-                "Options are:\n Central Assessor\nStudy Staff Lead\nStudy Staff\nClinician Lead\nClinician",
+        List<String> expectedOptions = getRolesList();
+        basicHelpers.verifyCondition(() -> options.equals(expectedOptions), "Role " +
+                        "Options are:\n Central Assessor\nStudy Staff Lead\nStudy Staff\nClinician Lead\nClinician",
                 false, report);
     }
 
-    public boolean verifyDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
+    public void verifyDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
         basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-        return basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='"+email+"']/preceding-sibling::td[3]/div"), "Red Dot Status for " + email, report);
+        basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']/preceding-sibling::td[3]/div"), "Red Dot Status for " + email, report);
     }
 
-    public boolean verifyNotDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
+    public void verifyNotDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
         basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-        return basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='"+email+"']/preceding-sibling::td[3]/div"), "Red Dot Status for " + email, report);
+        basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']/preceding-sibling::td[3]/div"), "Red Dot Status for " + email, report);
+    }
+
+    public ArrayList<String> getRolesList() {
+        return new ArrayList<>(Arrays.asList(RoleType.CENTRAL_ASSESSOR.ui_name, RoleType.STUDY_STAFF_LEAD.ui_name, RoleType.STUDY_STAFF.ui_name, RoleType.CLINICIAN_LEAD.ui_name,
+                RoleType.CLINICIAN.ui_name));
     }
 }

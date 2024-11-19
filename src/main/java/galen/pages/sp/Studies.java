@@ -1,11 +1,9 @@
 package galen.pages.sp;
 
 import galen.helpers.common.GalenReport;
-import galen.pages.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -42,7 +40,7 @@ public class Studies extends SPBasePage {
         basicHelpers.clickFlex(toggle, study, report);
     }
 
-    public Boolean verifyStudyIDFormat(@Nullable GalenReport report) {
+    public void verifyStudyIDFormat(@Nullable GalenReport report) {
         HashMap<String, Object> result = new LinkedHashMap<String, Object>();
         List<WebElement> options =
                 basicHelpers.getAllWebElements(By.xpath("//tbody/tr/td[1]"));
@@ -53,7 +51,6 @@ public class Studies extends SPBasePage {
             report.addMultipleVerificationStep("All Study IDs have two character format", result,
                     false);
         }
-        return result.containsValue(false);
     }
 
 }

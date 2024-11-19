@@ -2,14 +2,12 @@ package galen.tenant.dexter.Metrics;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.enums.tenant.dexter.*;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
@@ -19,23 +17,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
-    static String OBJECTIVE = "To verify the application shall capture a unique metrics record if users:\n" +
-            "•\tSuccessfully complete the assessment\n" +
-            "•\tUtilize the “exit assessment” modal";
-    static String NOTES = "This protocol contains the following verification scenarios:\n" +
-            "-\tCapture metrics InitialOutcome of OK for participant deemed as Safe to Use after completing health survey\n" +
-            "-\tCapture metrics InitialOutcome of EXIT for participant whom has exited the health survey";
-    static String REQUIREMENTS = "DEX_FRD_137";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes() {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;21JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation \n" +
-                "Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;Name Redacted");
-        VERSIONHISTORY.add("3.0;16JUL2024;Per CADENCE-598: Update Test Steps to reflect correct metrics column;Name Redacted\n");
+        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Tester");
     }
 
     @Test
@@ -50,7 +41,7 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
 
         //OK
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.purchaseOptions, report);
@@ -66,7 +57,8 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
         //EXIT
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.depression, report);
         common.clickBrowserBackToModal(report);
-        bh.verifyClickToPageTransition(pageObj.welcomePage, bh.getWebElement(common.exitLeaveButton),"Leave", report);
+        common.clickExitLeaveToModalDismissed(report);
+
         sp.login.load(UrlType.STUDY);
         bh.downloadCSVAndVerify("Step6_CSV_EXIT", sp, report);
         testOutputPath = "reports/"+reportName+"/Step6_CSV_EXIT";

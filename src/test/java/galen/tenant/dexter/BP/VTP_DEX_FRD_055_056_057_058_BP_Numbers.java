@@ -7,7 +7,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import galen.pages.tenant.dexter.InitialAssessment.EnterBP;
 import org.testng.annotations.Test;
@@ -16,38 +15,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_055_056_057_058_BP_Numbers extends BaseTest {
-    static String OBJECTIVE = "DEX_FRD_055: To verify If the user’s diastolic BP > systolic BP, the application shall " +
-            "provide an error message and provide an option to re-enter.\n" +
-            "DEX_FRD_056: To verify If the user’s BP is > 120/80 the application shall end the health survey and " +
-            "display the High Blood Pressure DNU Screen.\n" +
-            "DEX_FRD_057: To verify If the user’s BP is ≥ 180/120 the application shall end the health survey and " +
-            "display the Dangerously High Blood Pressure DNU Screen.\n" +
-            "DEX_FRD_058: If the user’s BP is ≤ 120/80, the application shall navigate to the Health Survey Summary " +
-            "screen.\n";
-    static String NOTES = "The following scenario(s) are verified in this protocol:\n" +
-            "-\tError message is provided when Diastolic is greater than Systolic\n" +
-            "-\tError message is provided when entering invalid characters\n" +
-            "-\tDNU message displays when Systolic is greater than 120\n" +
-            "-\tDNU message displays when Diastolic is greater than 80\n" +
-            "-\tDNU message displays when Systolic/Diastolic are both greater than 120/80\n" +
-            "-\tDNU Dangerously high BP message displays when Systolic is greater than 180\n" +
-            "-\tDNU Dangerously high BP message displays when Systolic is equal to 180\n" +
-            "-\tDNU Dangerously high BP message displays when Diastolic is greater than 120\n" +
-            "-\tDNU Dangerously high BP message displays when Diastolic is equal to 120\n" +
-            "-\tDNU Dangerously high BP message displays when Systolic/Diastolic are both greater than 180/120\n" +
-            "-\tDNU Dangerously high BP message displays when Systolic/Diastolic are both equal to 180/120\n" +
-            "-\tDNU message displays when Systolic/Diastolic are both equal to 179/119\n" +
-            "-\tEligible user is navigated to the Editable Summary when Systolic/Diastolic are both equal to 120/80\n";
-    static String REQUIREMENTS = "DEX_FRD_055, DEX_FRD_056, DEX_FRD_057, DEX_FRD_058";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_055_056_057_058_BP_Numbers";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_055_056_057_058_BP_Numbers()  {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Tester");
     }
 
     @Test
@@ -64,7 +41,7 @@ public class VTP_DEX_FRD_055_056_057_058_BP_Numbers extends BaseTest {
 
 
         // Sys 110, Dias 111 to Modal
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
 
         user.systolic="110";
         user.diastolic="111";

@@ -8,15 +8,13 @@ import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.tenant.dexter.InitialAssessment.*;
+import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker extends BaseTest {
     static String OBJECTIVE = "This Happy Path flow covers the use-case scenario where the user successfully takes the Initial Assessment and completes checkout.\n" +
@@ -32,14 +30,7 @@ public class HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker extends Base
     public BasicHelpers bh;
 
     HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker()  {
-        VERSIONHISTORY.add("1.0;16FEB2023;Initial Test Script; Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for " +
-                "restructured cancer flow; Name Redacted");
-        VERSIONHISTORY.add("3.0;12JUN2024;Per CADENCE-529: Updated Test Steps for adding verification and\n" +
-                "capture screenshot. Also added Test Steps and Post Execution Approvals section\n" +
-                "Per CADENCE-549: Removed Checkout related steps\n" +
-                "Per CADENCE-569: Update Test Steps to align with new assessment flow and options;" +
-                "Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -52,8 +43,9 @@ public class HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker extends Base
         pageObj = new DexterPageObj(driver);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker();
         CommonPageFeatures commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(UrlType.DEXTER);
 
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.load(UrlType.DEXTER);
         pageObj.welcomePage.verifyAtPage(report);
         report.addScreenshotStep("Welcome");
 

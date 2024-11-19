@@ -40,15 +40,9 @@ enum ReviewAnswersLinks {
     KNOW_BP("Knows Blood Pressure Numbers"),
     BP("Blood Pressure");
 
-    String reviewText;
-
+    String reviewText
 
     ReviewAnswersLinks(String reviewText) {
-        this.reviewText = reviewText;
+        this.reviewText = reviewText
     }
-
-    String getLink() {
-        return navigator
-    }
-
-    }
+}

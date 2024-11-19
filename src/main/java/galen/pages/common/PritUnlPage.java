@@ -1,16 +1,12 @@
 package galen.pages.common;
 
 import galen.enums.framework.UrlType;
-import galen.helpers.common.GalenReport;
 import galen.utils.ConfigLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
 
 import static java.lang.Thread.sleep;
 
@@ -25,26 +21,23 @@ public class PritUnlPage extends BasePage {
 
     public PritUnlPage(WebDriver driver) {
         super(driver);
+        headingTitle = usernameAndPasswordBtn;
     }
 
     public WebElement getUserNameAndPwdButton() {
-        return wait.until(ExpectedConditions.elementToBeClickable(usernameAndPasswordBtn));
+        return basicHelpers.getWebElement(usernameAndPasswordBtn);
     }
 
     public WebElement getUserNameTextField() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
+        return basicHelpers.getWebElement(usernameField);
     }
 
     public WebElement getPasswordTextField() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField));
+        return basicHelpers.getWebElement(passwordField);
     }
 
     public WebElement getLoginButton() {
-        return wait.until(ExpectedConditions.elementToBeClickable(loginButton));
-    }
-
-    public boolean verifyAtPage() {
-        return basicHelpers.getWebElement(usernameAndPasswordBtn)!=null;
+        return basicHelpers.getWebElement(loginButton);
     }
 
     public void authenticateUserIfRequired()  {
@@ -62,15 +55,6 @@ public class PritUnlPage extends BasePage {
         } catch(Exception e) {
             logger.info("No PritUnl page");
         }
-    }
-
-    public void getWelcomePage(@Nullable GalenReport report) {
-        load(UrlType.PETROS);
-        boolean result = driver.getTitle().contains("Avanafil OTC");
-        report.addStep("Navigate to the Petros Web Application Welcome Screen\n" +
-                        "Verify Petros Web Application Welcome Screen is displayed",
-                "Petros Web Application Welcome Screen is displayed",
-                "Petros Web Application Welcome Screen is displayed", result);
     }
 
     public void login() {

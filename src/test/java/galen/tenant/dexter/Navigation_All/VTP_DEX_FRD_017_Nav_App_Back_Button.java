@@ -2,13 +2,10 @@ package galen.tenant.dexter.Navigation_All;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.enums.tenant.dexter.BloodPressureType;
 import galen.enums.tenant.dexter.CancerType;
-import galen.enums.tenant.dexter.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterNavigations;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
@@ -17,74 +14,14 @@ import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
-    static String OBJECTIVE = "To verify upon selection of the Application back button, the application shall return to " +
-            "the previous screen in a health survey.";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "-\tNavigation of the Back button on the following screens:\n" +
-            "o\tKnow Numbers Screen\n" +
-            "o\tPrior Use Screen\n" +
-            "o\tConfirm Customer Screen\n" +
-            "o\tConfirm Customer (More Info Modal) Screen\n" +
-            "o\tPrevent Pregnancy Screen\n" +
-            "o\tPrevent Pregnancy (More Info Modal) Screen\n" +
-            "o\tMenstruation Screen\n" +
-            "o\tHormonal Birth Control (More Info Modal) Screen\n" +
-            "o\tHormonal Birth Control Screen (Both deviations)\n" +
-            "o\tSmoking or Vape (More Info Modal) Screen\n" +
-            "o\tSmoking or Vape Screen\n" +
-            "o\tSmoking or Vape – Year of Birth Screen\n" +
-            "o\tSmoking or Vape (Risks) Screen\n" +
-            "o\tEver Had Cancer Screen\n" +
-            "o\tList of Cancers Screen\n" +
-            "o\tList of Cancers (More Info Modal) Screen\n" +
-            "o\tBlood Pressure Medication Screen (Both deviations)\n" +
-            "o\tHeart Conditions (More Info Modal) Screen\n" +
-            "o\tHeart Conditions Screen (Both deviations)\n" +
-            "o\tBlood Clot (More Info Modal) Screen\n" +
-            "o\tBlood Clot Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems (More Info Modal) Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems Screen\n" +
-            "o\tLiver Disease or Liver Cancer (More Info Modal) Screen\n" +
-            "o\tLiver Disease or Liver Cancer Screen\n" +
-            "o\tUnexplained Vaginal Bleeding (More Info Modal) Screen\n" +
-            "o\tUnexplained Vaginal Bleeding Screen\n" +
-            "o\tDiabetes (More Info Modal) Screen\n" +
-            "o\tDiabetes Screen\n" +
-            "o\tPregnant Screen\n" +
-            "o\tBreastfeeding Screen\n" +
-            "o\tPregnancy Loss Screen\n" +
-            "o\tMigraines with Aura (More Info Modal) Screen\n" +
-            "o\tMigraines with Aura Screen\n" +
-            "o\tObesity/BMI Screen\n" +
-            "o\tConditions/DDI Screen\n" +
-            "o\tConditions/DDI – Hepatitis C Meds Screen\n" +
-            "o\tConditions/DDI – Thyroid Disease Meds Screen\n" +
-            "o\tConditions/DDI – Epilepsy or Bipolar Disorder Meds Screen\n" +
-            "o\tConditions/DDI – HIV Meds Screen\n" +
-            "o\tConditions/DDI – High Cholesterol Meds Screen\n" +
-            "o\tAntifungal Products Screen (Both deviations)\n" +
-            "o\tAntifungal Meds Screen\n" +
-            "o\tOther Medication More Info Modal) Screen\n" +
-            "o\tOther Medication Screen (Both deviations)\n" +
-            "o\tGallbladder (More Info Modal) Screen\n"+
-            "o\tGallbladder Screen\n" +
-            "o\tDepression (More Info Modal) Screen\n" +
-            "o\tDepression Screen\n" +
-            "o\tClinical Depression Screen\n" +
-            "o\tClinical Depression (More Info Modal) Screen \n" +
-            "o\tKnow BP Numbers Screen\n" +
-            "o\tKnow BP Numbers (Get BP Numbers) Screen\n" +
-            "o\tEnter BP Numbers (More Info Modal) Screen\n" +
-            "o\tEnter BP Numbers Screen\n";
-    static String REQUIREMENTS = "FRD_017";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     DexterPageObj pageObj;
     DexterUser user;
     String reportName = "DEX_FRD_017_Nav_App_Back_Button";
@@ -94,19 +31,16 @@ public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_017_Nav_App_Back_Button()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;13JUN2024;Per CADENCE-476: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happyflow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
-    void verifyMoreInfoBack(int step, BasePage page) throws InterruptedException {
+    void verifyMoreInfoBack(int step, BasePage page) {
         commonPageFeatures.clickBackToPage(page, report);
         report.addScreenshotStep("Step"+step, driver);
+        step = step +2;
         commonPageFeatures.clickMoreInfoToModal(report);
         commonPageFeatures.clickMoreInfoBackToModalDismissed(report);
-        report.addScreenshotStep("Step"+step+2, driver);
+        report.addScreenshotStep("Step"+step, driver);
     }
 
     @Test
@@ -116,10 +50,11 @@ public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_017 – Navigation of Application Back Button";
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
+
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         commonPageFeatures = new CommonPageFeatures(driver);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_Smoker();
-        user.conditionType=pageObj.ddiCondition.allButNone;
+        user.conditionType=pageObj.ddiCondition.getAllButNone();
         user.depression="Yes";
         user.isAntifungal="Yes";
         
@@ -196,7 +131,7 @@ public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
         verifyMoreInfoBack(126, pageObj.pregnancy);
         commonPageFeatures.clickBackToPage(pageObj.orderForSelf, report);
         report.addScreenshotStep("Step129");
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickMoreInfoToModal(report);
         commonPageFeatures.clickMoreInfoBackToModalDismissed(report);
         report.addScreenshotStep("Step131");

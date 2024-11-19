@@ -2,10 +2,10 @@ package galen.base;
 
 import galen.driver.DriverManager;
 import galen.driver.DriverManagerFactory;
+import galen.enums.framework.DriverType;
 import galen.helpers.common.GalenReport;
 import galen.utils.ConfigLoader;
 import org.openqa.selenium.WebDriver;
-import galen.enums.framework.DriverType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

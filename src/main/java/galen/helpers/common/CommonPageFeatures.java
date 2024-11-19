@@ -42,9 +42,5 @@ public class CommonPageFeatures extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(hideIcon));
     }
 
-    public WebElement getConfirmModalTitle() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(confirmModalTitle));
-    }
-
 }
 

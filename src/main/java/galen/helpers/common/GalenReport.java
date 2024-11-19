@@ -3,7 +3,6 @@ package galen.helpers.common;
 import galen.pages.common.BasePage;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -71,21 +70,28 @@ public class GalenReport {
     String references;
     String objective;
 
-    GalenReport(WebDriver driver, String reportName, String objective, String requirements, String references, String notes)
-            throws IOException {
+    GalenReport(WebDriver driver, String reportName, String objective, String requirements, String references, String
+            notes)
+    {
         this.reportName = reportName;
         this.requirement = requirements;
-        this.references = references.replace(";","");
-        this.objective = objective.replace(";","");
-        File reportDir = new File("reports/" + reportName);
-        if (reportDir.exists()) {
-            FileUtils.cleanDirectory(reportDir);
+        this.references = references.replace(";", "");
+        this.objective = objective.replace(";", "");
+        try {
+            File reportDir = new File("reports/" + reportName);
+            if (reportDir.exists()) {
+                FileUtils.cleanDirectory(reportDir);
+            }
+            this.screenshotDir = "reports/" + reportName + "/screenshots";
+            if (new File(screenshotDir).mkdirs()) {
+                startReport();
+            }
+            this.driver = driver;
+            createPrereqTable(this.objective, this.requirement, this.references, notes.replace(";", ""));
+        } catch (IOException e) {
+            System.out.println("Could not create report");
+            e.printStackTrace();
         }
-        this.screenshotDir = "reports/" + reportName + "/screenshots";
-        new File(screenshotDir).mkdirs();
-        startReport();
-        this.driver = driver;
-        createPrereqTable(this.objective, this.requirement, this.references, notes.replace(";",""));
     }
 
     public GalenReport(WebDriver driver, String reportName, String objective, String requirements, String references,
@@ -211,7 +217,7 @@ public class GalenReport {
         return !resultMap.containsValue(false);
     }
 
-    public boolean addMetricsVerificationStep( LinkedHashMap<String, Object[]> resultMap, String type, Boolean hardFail) {
+    public void addMetricsVerificationStep( LinkedHashMap<String, Object[]> resultMap,  Boolean hardFail) {
         String step = "Verify user expected metrics match CSV\n";
         String expectedResults = "User expected metrics match CSV\n";
         String actualResults = "Actual metrics\n";
@@ -234,7 +240,6 @@ public class GalenReport {
             metricComparisons.add(compResult);
         }
         addStep(step, expectedResults, actualResults, !metricComparisons.contains(false), hardFail);
-        return !metricComparisons.contains(false);
     }
 
     public void addStep(String step, String expectedResult, String actualResult, boolean passOrFail, boolean hardFail) {
@@ -521,16 +526,16 @@ public class GalenReport {
                         setFont(bold)));
     }
 
-    void selectDropDownByTextAndReport(WebElement element, String value, String navIdentifier, boolean hardFail) {
+    void selectDropDownByTextAndReport(WebElement element, String value, String navIdentifier) {
         String expectedResult = value.equals("") ? navIdentifier + " is blank " : "'" + value + "' is selected from '" +
                 navIdentifier + "'.";
         String step = value.equals("") ? navIdentifier + " is blank " : "Select '" + value + "' from '" + navIdentifier + "' field.";
         try {
             Select select = new Select(element);
             select.selectByVisibleText(value);
-            addStep(step, expectedResult, "As expected", true, hardFail);
+            addStep(step, expectedResult, "As expected", true, true);
         } catch (Exception e) {
-            addStep(step, expectedResult, "Error occurred " + e.getClass().getSimpleName(), false, hardFail);
+            addStep(step, expectedResult, "Error occurred " + e.getMessage(), false, false);
         }
     }
 

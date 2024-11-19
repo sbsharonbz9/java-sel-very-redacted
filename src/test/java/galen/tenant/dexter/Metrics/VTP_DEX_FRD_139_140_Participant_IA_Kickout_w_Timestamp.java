@@ -14,7 +14,6 @@ import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
 import galen.pages.common.BasePage;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
@@ -22,40 +21,13 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends BaseTest {
-    static String OBJECTIVE = "DEX_FRD_139: To verify the application shall record the reason that users are " +
-            "disqualified from taking Zena in the DNUReason field.\n" +
-            "DEX_FRD_140: To verify the application shall record the timestamp of when users are kicked out of the " +
-            "application qualification process in the DNUTimestamp field.";
-    static String NOTES = "This protocol contains the following verification scenarios:\n" +
-            "-\t Confirm Customer \n" +
-            "-\t Prevent Pregnancy \n" +
-            "-\t No Menstruation (w. No Hormonal BC)\n" +
-            "-\t Smoking or Vape and 35 or older\n" +
-            "-\t Cancer\n" +
-            "-\t Blood Pressure Medicine\n" +
-            "-\t Chest Pain\n" +
-            "-\t Blood Clots\n" +
-            "-\t Irregular Heartbeat\n" +
-            "-\t Liver Disease/Liver Cancer\n" +
-            "-\t Vaginal Bleeding\n" +
-            "-\t Diabetes\n" +
-            "-\t Pregnant\n" +
-            "-\t Breastfeeding\n" +
-            "-\t Pregnancy Loss\n" +
-            "-\t Migraines\n" +
-            "-\t BP over 120/80 (Combined)\n" +
-            "-\t BP over 180/120 (Combined Dangerous)\n" +
-            "-\tCapture metrics UpdatedInitialOutcome, DNUReason, of DNU and DNUTimestamp for participant disqualified for BP over 120/80 (Combined) – Final BP Screen\n" +
-            "-\tCapture metrics UpdatedInitialOutcome, DNUReason,of DNU and DNUTimestamp for participant disqualified for BP over 180/120 (Combined Dangerous) - Final BP " +
-            "Screen\n";
-    static String REQUIREMENTS = "FRD_139, FRD_140";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx\n" +
-            "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_FRD_139_140_Participant_IA_Kickout_w_Timestamp";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
@@ -68,14 +40,8 @@ public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends Base
     DexterPageObj pageObj;
 
     VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp()  {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;07DEC2023;Per CADENCE-468: Updated Step 2;Name Redacted");
-        VERSIONHISTORY.add("4.0;18JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow\n" +
-                "Per CADENCE 591: Update Test Steps for modified assessment and navigation;Name Redacted");
-        VERSIONHISTORY.add("5.0;17JUL2024;Per CADENCE-598: Update Test Objective and Metrics Verification table to include new column;Name Redacted");
-    }
+        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Tester");
+     }
 
     public void checkMetrics(String outcome,String step, String dnuReason) {
         sp.login.load(UrlType.STUDY);
@@ -119,7 +85,7 @@ public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends Base
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
 
         hf.runDexterHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         checkMetrics("InitialOutcome","3", "DNUSelfOrderScreen");
 

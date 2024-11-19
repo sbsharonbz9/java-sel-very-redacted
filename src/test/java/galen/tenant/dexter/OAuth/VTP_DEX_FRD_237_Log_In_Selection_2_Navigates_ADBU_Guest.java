@@ -1,51 +1,52 @@
 package galen.tenant.dexter.OAuth;
 
 import galen.base.BaseTest;
-import galen.enums.tenant.dexter.BloodPressureType;
-import galen.enums.tenant.dexter.DDIThyroidType;
-import galen.helpers.common.CommonPageFeatures;
+import galen.enums.framework.UrlType;
+import galen.enums.tenant.dexter.*;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
+import galen.helpers.tenant.dexter.DexterNavigations;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
-import galen.pages.tenant.dexter.InitialAssessment.*;
+import galen.pages.common.CheckboxPage;
+import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
+import java.util.Objects;
 
 public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_Guest extends BaseTest {
-    static String OBJECTIVE = "To verify on the Login Selection screen, if the user selects to continue as guest the application shall navigate to:\n" +
-            "-\tADBU screen if they triggered an ADBU and entered BP\n" +
-            "-\tADBU/BP screen if they triggered and ADBU and did not enter BP\n" +
-            "-\tBP Screen if they have no ADBU and did not enter BP\n";
-
-    static String NOTES = "This protocol verifies the following scenario(s):\n" +
-            "-\tGuest user entered BP and triggered ADBU for Obesity navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Other Cancer navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Hepatitis C Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Thyroid Disease Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Epilepsy Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for HIV Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for High Cholesterol Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Antifungal Meds navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Other Medicine navigated from Log In Selection (Post Assessment) Screen to ADBU Screen \n" +
-            "-\tGuest user entered BP and triggered ADBU for Gallbladder navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Clinical Depression navigated from Log In Selection (Post Assessment) Screen to ADBU Screen\n" +
-            "-\tGuest user entered BP and triggered ADBU for Multiple Triggers (All of the above) navigated from Log In Selection (Post As-sessment) Screen to ADBU Screen\n";
-
-    static String REQUIREMENTS = "DEX_FRD_237";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx;";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_Guest";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
+    DexterNavigations navs;
+    DexterPageObj po;
+    DexterUser user;
+    DexterHFWrappers wrapper;
 
     VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_Guest() {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
+    }
+
+    void navToADBU() {
+        navs.DDIPath(user, po.antifungal, report);
+        po.antifungal.clickYesNoNextToPage("No", po.otherMedication, report);
+        wrapper.runAntifungalToADBU(user, po.otherMedication, po.oAuthPostReview, report);
+        po.oAuthPostReview.chooseAccountTypeAndProgress(user, po.adbu, report);
+    }
+
+    void verifyDDI(String condition, String med, CheckboxPage page, String adbuMed) {
+        String adbu = (Objects.equals(adbuMed, ""))?med: adbuMed;
+        user.conditionType = page.getCondition(condition);
+        wrapper.runDexterHFNonsmokingwBP(user, po.ddiCondition, report);
+        navToADBU();
+        po.adbu.verifyConditionIsListed(adbu, report);
+        user.conditionType = user.defaultNone;
     }
 
     @Test
@@ -53,380 +54,122 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_Guest extends Bas
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
-        report.reportTitle = "TP_DEX_FRD_237 – Log In Selection (Post Assessment) Navigates to ADBU (If Triggered) Guest";
+        report.reportTitle = "VTP_DEX_FRD_237 – Log In Selection (Post Assessment) Navigates to ADBU (If Triggered) Guest";
 
-        DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
-        DexterPageObj pageObj = new DexterPageObj(driver);
+        user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
+        po = new DexterPageObj(driver);
+        navs = new DexterNavigations(driver);
+        wrapper = new DexterHFWrappers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.obesity, report);
+        po.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+        wrapper.runDexterHFNonsmokingwBP(user, po.obesity, report);
         user.weight = "212";
-        pageObj.obesity.enterHeightAndWeight(user, report);
-        pageObj.obesity.clickNextToPage(pageObj.ddiCondition, report);
+        po.obesity.enterHeightAndWeight(user, report);
+        po.obesity.clickNextToPage(po.ddiCondition, report);
+        navToADBU();
+        report.addScreenshotStep("Step4_ADBU_Obesity");
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickConfirm(report);
-        pageObj.review.verifyConfirmModalOpen(report);
-        pageObj.review.clickFinishToOauth(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step5_ADBU_Screen ");
+        user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
+        wrapper.runDexterHFNonsmokingwBP(user, po.everHadCancer, report);
+        po.everHadCancer.clickYesNoNextToPage("Yes", po.cancerList, report);
+        po.cancerList.selectCheckboxesAndProgress(user.cancerList, po.bloodPressureMeds, report);
+        user.everHadCancer = "Yes";
+        wrapper.runDexterHFNonsmokingwBP(user, po.oAuthPostReview, report);
+        po.oAuthPostReview.chooseAccountTypeAndProgress(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(po.adbu.otherCancerCondition, report);
+        report.addScreenshotStep("Step9_ADBU_OtherCancer ");
+        user.everHadCancer = "No";
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.everHadCancer, report);
-        pageObj.everHadCancer.clickYesNoNextToPage("Yes", pageObj.cancerList, report);
-        pageObj.cancerList.selectCheckboxReponse("Other cancer", report);
-        pageObj.cancerList.clickNextToPage(pageObj.bloodPressureMeds, report);
+        user.hepCMeds = po.ddiHepC.getCondition(DDIHepCType.OMBITASVIR.label);
+        verifyDDI(DDIConditionType.HEPATITIS_C.label, DDIHepCType.OMBITASVIR.label,po.ddiHepC, "");
+        report.addScreenshotStep("Step15_ADBU_Ombitasvir_Screen");
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickConfirm(report);
-        pageObj.review.verifyConfirmModalOpen(report);
-        pageObj.review.clickFinishToOauth(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step10_ADBU_Screen ");
+        user.thyroidMeds = po.ddiThyroid.getCondition(DDIThyroidType.LEVOTHYROXINE.label);
+        verifyDDI(DDIConditionType.THYROID_DISEASE.label, DDIThyroidType.LEVOTHYROXINE.label,
+                 po.ddiThyroid, DDIThyroidType.LEVOTHYROXINE.adbuText);
+        report.addScreenshotStep("Step21_ADBU_Levothyroxine_Screen");
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        pageObj.ddiCondition.selectCheckboxReponse("Hepatitis C", report);
-        pageObj.ddiCondition.clickNextToPage(pageObj.ddiHepC, report);
+        user.epBipolarMeds= po.ddiEpBipolar.getCondition(DDIEpBipolarType.BARBITUATES.label);
+        verifyDDI(DDIConditionType.EPILEPSY.label, DDIEpBipolarType.BARBITUATES.label, po.ddiEpBipolar,"");
+        report.addScreenshotStep("Step27_ADBU_Barbiturates_Screen");
 
-        pageObj.ddiHepC.selectCheckboxReponse("Ombitasvir", report);
-        pageObj.ddiHepC.clickNextToPage(pageObj.antifungal, report);
+        user.hivMeds = po.ddihiv.getCondition(DDIHIVType.FOSAMPRENAVIR.label);
+        verifyDDI(DDIConditionType.HIV.label, DDIHIVType.FOSAMPRENAVIR.label, po.ddihiv,"");
+        report.addScreenshotStep("Step33_ADBU_Fosamprenavir_Screen");
 
-        pageObj.antifungal.clickYesNoNextToPage("No", pageObj.otherMedication, report);
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
+        user.highCholMeds = po.ddiHighCholesterol.getCondition(DDIHighCholType.ATORVASTATIN.label);
+        verifyDDI(DDIConditionType.HIGH_CHOLESTEROL.label, DDIHighCholType.ATORVASTATIN.label,po.ddiHighCholesterol, "");
+        po.adbu.verifyConditionIsListed(po.adbu.highCholesterolCondition, report);
+        report.addScreenshotStep("Step39_ADBU_Atorvastatin_Screen");
 
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
+        user.antiFungalMeds = po.antifungalMeds.getCondition(AntifungalMedsType.FLUCONAZOLE.label);
+        wrapper.runDexterHFNonsmokingwBP(user, po.antifungal, report);
+        po.antifungal.clickYesNoNextToPage("Yes", po.antifungalMeds, report);
+        po.antifungalMeds.selectCheckboxAndProgress(AntifungalMedsType.FLUCONAZOLE.label, po.otherMedication, report);
+        wrapper.runAntifungalToADBU(user, po.antifungalMeds,po.oAuthPostReview, report);
+        po.oAuthPostReview.chooseAccountTypeAndProgress(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(AntifungalMedsType.FLUCONAZOLE.label, report);
+        report.addScreenshotStep("Step44_ADBU_Fluconazole");
 
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step16_ADBU_Ombitasvir_Screen");
+        wrapper.runDexterHFNonsmokingwBP(user, po.otherMedication, report);
+        po.otherMedication.selectCheckboxAndProgress(DDIOtherMedsType.RIFABUTIN.label, po.gallbladder, report);
+        po.gallbladder.clickYesNoNextToPage("No", po.depression, report);
+        wrapper.runAntifungalToADBU(user, po.depression, po.oAuthPostReview, report);
+        po.oAuthPostReview.chooseAccountTypeAndProgress(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(DDIOtherMedsType.RIFABUTIN.label, report);
+        report.addScreenshotStep("Step49_ADBU_Rifabutin");
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        pageObj.ddiCondition.selectCheckboxReponse("Thyroid disease", report);
-        pageObj.ddiCondition.clickNextToPage(pageObj.ddiThyroid, report);
+        user.conditionType = user.defaultNone;
+        wrapper.runDexterHFNonsmokingwBP(user, po.gallbladder, report);
+        po.gallbladder.clickYesNoNextToPage("Yes", po.depression, report);
+        navs.antiFungalToADBU(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(po.adbu.gallBladderCondition, report);
+        report.addScreenshotStep("Step53_ADBU_Gallbladder");
 
-        pageObj.ddiThyroid.selectCheckboxReponse("Levothyroxine", report);
-        pageObj.ddiThyroid.clickNextToPage(pageObj.antifungal, report);
+        user.depression = "Yes";
+        user.diagnosedDepression = "Yes";
+        wrapper.runDexterHFNonsmokingwBP(user, po.depression, report);
+        navs.antiFungalToADBU(user, po.oAuthPostReview, report);
+        po.oAuthPostReview.chooseAccountTypeAndProgress(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(po.adbu.depressionCondition, report);
+        report.addScreenshotStep("Step63_ADBU_Clinical_Depression_Screen");
 
-        pageObj.antifungal.clickYesNoNextToPage("No", pageObj.otherMedication, report);
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step22_ADBU_Levothyroxine_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        pageObj.ddiCondition.selectCheckboxReponse("Epilepsy", report);
-        pageObj.ddiCondition.clickNextToPage(pageObj.ddiEpBipolar, report);
-
-        pageObj.ddiEpBipolar.selectCheckboxReponse("Barbiturates", report);
-        pageObj.ddiEpBipolar.clickNextToPage(pageObj.antifungal, report);
-
-        pageObj.antifungal.clickYesNoNextToPage("No", pageObj.otherMedication, report);
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step28_ADBU_Barbiturates_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        pageObj.ddiCondition.selectCheckboxReponse("HIV", report);
-        pageObj.ddiCondition.clickNextToPage(pageObj.ddihiv, report);
-
-        pageObj.ddihiv.selectCheckboxReponse("Fosamprenavir", report);
-        pageObj.ddihiv.clickNextToPage(pageObj.antifungal, report);
-
-        pageObj.antifungal.clickYesNoNextToPage("No", pageObj.otherMedication, report);
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step34_ADBU_Fosamprenavir_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        pageObj.ddiCondition.selectCheckboxReponse("High cholesterol", report);
-        pageObj.ddiCondition.clickNextToPage(pageObj.ddiHighCholesterol, report);
-
-        pageObj.ddiHighCholesterol.selectCheckboxReponse("Atorvastatin", report);
-        pageObj.ddiHighCholesterol.clickNextToPage(pageObj.antifungal, report);
-
-        pageObj.antifungal.clickYesNoNextToPage("No", pageObj.otherMedication, report);
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step40_ADBU_Atorvastatin_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.antifungal, report);
-        pageObj.antifungal.clickYesNoNextToPage("Yes", pageObj.antifungalMeds, report);
-
-        pageObj.antifungalMeds.selectCheckboxReponse("Fluconazole", report);
-        pageObj.antifungalMeds.clickNextToPage(pageObj.otherMedication, report);
-
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step45_ADBU_Fluconazole_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.antifungal, report);
-        pageObj.antifungal.clickYesNoNextToPage("Yes", pageObj.antifungalMeds, report);
-
-        pageObj.antifungalMeds.selectCheckboxReponse("Griseofulvin", report);
-        pageObj.antifungalMeds.clickNextToPage(pageObj.otherMedication, report);
-
-        pageObj.otherMedication.selectCheckboxesAndProgress(user.otherMedicationType, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage(user.gallbladder, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step50_ADBU_Griseofulvin_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage("Yes", pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
-
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step54_ADBU_Gallbladder_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
-        pageObj.diagnosedDepression.clickYesOrNo("Yes", report);
-        pageObj.diagnosedDepression.clickNext(report);
-        pageObj.diagnosedDepression.verifyModalDisplayed(report);
-        pageObj.diagnosedDepression.clickConfirm(report);
-        sleep(1000);
-        pageObj.knowBPNumber.verifyAtPage(report);
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
-        report.addScreenshotStep("Step64_ADBU_Clinical_Depression_Screen");
-
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.everHadCancer, report);
-        pageObj.everHadCancer.clickYesNoNextToPage("Yes", pageObj.cancerList, report);
-
-        ArrayList<String> cancerOptions = new ArrayList<>(Arrays.asList("Other cancer"));
-        pageObj.cancerList.selectCheckboxesAndProgress(cancerOptions, pageObj.bloodPressureMeds, report);
-        pageObj.bloodPressureMeds.clickYesNoNextToPage("No", pageObj.cardiacRisk, report);
-
-        ArrayList<String> cardiacOptions = new ArrayList<>(Arrays.asList("None of these"));
-        pageObj.cardiacRisk.selectCheckboxesAndProgress(cardiacOptions, pageObj.bloodClot, report);
-
-        ArrayList<String> clotOptions = new ArrayList<>(Arrays.asList("None of these"));
-        pageObj.bloodClot.selectCheckboxesAndProgress(clotOptions, pageObj.irregularHeartBeat, report);
-
-        pageObj.irregularHeartBeat.clickYesNoNextToPage("No", pageObj.liverCancer, report);
-        ArrayList<String> liverOptions = new ArrayList<>(Arrays.asList("None of these"));
-        pageObj.liverCancer.selectCheckboxesAndProgress(liverOptions, pageObj.vaginalBleeding, report);
-
-        pageObj.vaginalBleeding.clickYesNoNextToPage("No", pageObj.diabetes, report);
-        pageObj.diabetes.clickYesNoNextToPage("No", pageObj.pregnant, report);
-        pageObj.pregnant.clickYesNoNextToPage("No", pageObj.breastFeeding, report);
-        pageObj.breastFeeding.clickYesNoNextToPage("No", pageObj.pregnancyLoss, report);
-        pageObj.pregnancyLoss.clickYesNoNextToPage("No", pageObj.migraines, report);
-        pageObj.migraines.clickYesNoNextToPage("No", pageObj.obesity, report);
-
+        user.isAntifungal = "Yes";
+        user.weight = "212";
         user.height = "5 feet, 5 inches";
-        user.weight = "212";
-        pageObj.obesity.enterHeightAndWeight(user, report);
-        pageObj.obesity.clickNextToPage(pageObj.ddiCondition, report);
-
-        ArrayList<String> allButNone = new ArrayList<>(Arrays.asList("Hepatitis C", "Thyroid disease",
-                "Epilepsy", "HIV","High cholesterol"));
-        pageObj.ddiCondition.selectCheckboxesAndProgress(allButNone, pageObj.ddiHepC, report);
-
-        ArrayList<String> hepCOptions = new ArrayList<>(Arrays.asList("Ombitasvir"));
-        pageObj.ddiHepC.selectCheckboxesAndProgress(hepCOptions, pageObj.ddiThyroid, report);
-
-        ArrayList<String> thyroidOptions = new ArrayList<>(Arrays.asList(DDIThyroidType.LEVOTHYROXINE.label));
-        pageObj.ddiThyroid.selectCheckboxesAndProgress(thyroidOptions, pageObj.ddiEpBipolar, report);
-
-        ArrayList<String> epOptions = new ArrayList<>(Arrays.asList("Barbiturates"));
-        pageObj.ddiEpBipolar.selectCheckboxesAndProgress(epOptions, pageObj.ddihiv, report);
-
-        ArrayList<String> hivOptions = new ArrayList<>(Arrays.asList("Fosamprenavir"));
-        pageObj.ddihiv.selectCheckboxesAndProgress(hivOptions, pageObj.ddiHighCholesterol, report);
-
-        ArrayList<String> highCOptions = new ArrayList<>(Arrays.asList("Atorvastatin"));
-        pageObj.ddiHighCholesterol.selectCheckboxesAndProgress(highCOptions, pageObj.antifungal, report);
-        pageObj.antifungal.clickYesNoNextToPage("Yes",  pageObj.antifungalMeds, report);
-
-        ArrayList<String> antifungalMedsOptions = new ArrayList<>(Arrays.asList("Fluconazole"));
-        pageObj.antifungalMeds.selectCheckboxesAndProgress(antifungalMedsOptions, pageObj.otherMedication, report);
-
-        ArrayList<String> otherMedsOptions = new ArrayList<>(Arrays.asList("Rifabutin"));
-        pageObj.otherMedication.selectCheckboxesAndProgress(otherMedsOptions, pageObj.gallbladder, report);
-        pageObj.gallbladder.clickYesNoNextToPage("Yes", pageObj.depression, report);
-        pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
-        pageObj.diagnosedDepression.clickYesOrNo("Yes", report);
-        pageObj.diagnosedDepression.clickNext(report);
-        pageObj.diagnosedDepression.verifyModalDisplayed(report);
-        pageObj.diagnosedDepression.clickConfirm(report);
-        sleep(1000);
-        pageObj.knowBPNumber.verifyAtPage(report);
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        if (user.knowBPType == BloodPressureType.Yes_Know_BP) {
-            pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-            pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-            if (user.measuredIn3Months.equals("Yes")) {
-                pageObj.enterBP.verifyAtPage(report);
-                pageObj.enterBP.enterBP(user, report);
-                pageObj.enterBP.clickNext(report);
-            }
-        }
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.adbu.verifyAtPage(report);
+        user.conditionType = po.ddiCondition.getAllButNone();
+        user.gallbladder = "Yes";
+        user.otherMedicationType = po.otherMedication.getCondition(DDIOtherMedsType.RIFABUTIN.label);
+        wrapper.runDexterHFNonsmokingwBP(user, po.everHadCancer, report);
+        po.everHadCancer.clickYesNoNextToPage("Yes", po.cancerList, report);
+        po.cancerList.selectCheckboxesAndProgress(user.cancerList, po.bloodPressureMeds, report);
+        po.bloodPressureMeds.clickYesNoNextToPage("No", po.cardiacRisk, report);
+        po.cardiacRisk.selectCheckboxesAndProgress(user.defaultNone, po.bloodClot, report);
+        po.bloodClot.selectCheckboxesAndProgress(user.defaultNone, po.irregularHeartBeat, report);
+        po.irregularHeartBeat.clickYesNoNextToPage("No", po.liverCancer, report);
+        po.liverCancer.selectCheckboxesAndProgress(user.defaultNone, po.vaginalBleeding, report);
+        po.vaginalBleeding.clickYesNoNextToPage("No", po.diabetes, report);
+        po.diabetes.clickYesNoNextToPage("No", po.pregnant, report);
+        po.pregnant.clickYesNoNextToPage("No", po.breastFeeding, report);
+        po.breastFeeding.clickYesNoNextToPage("No", po.pregnancyLoss, report);
+        po.pregnancyLoss.clickYesNoNextToPage("No", po.migraines, report);
+        po.migraines.clickYesNoNextToPage("No", po.obesity, report);
+        po.obesity.enterHeightAndWeight(user, report);
+        po.obesity.clickNextToPage(po.ddiCondition, report);
+        navs.DDIPath(user, po.antifungal,report);
+        navs.antiFungalToADBU(user, po.adbu, report);
+        po.adbu.verifyConditionIsListed(po.adbu.obesityCondition, report);
+        po.adbu.verifyConditionIsListed(po.adbu.otherCancerCondition, report);
+        po.adbu.verifyConditionIsListed(DDIHepCType.OMBITASVIR.label, report);
+        po.adbu.verifyConditionIsListed(DDIThyroidType.LEVOTHYROXINE.adbuText, report);
+        po.adbu.verifyConditionIsListed(DDIEpBipolarType.BARBITUATES.label, report);
+        po.adbu.verifyConditionIsListed(DDIHIVType.FOSAMPRENAVIR.label, report);
+        po.adbu.verifyConditionIsListed(po.adbu.highCholesterolCondition, report);
+        po.adbu.verifyConditionIsListed(DDIHighCholType.ATORVASTATIN.label, report);
+        po.adbu.verifyConditionIsListed(AntifungalMedsType.FLUCONAZOLE.label, report);
+        po.adbu.verifyConditionIsListed(DDIOtherMedsType.RIFABUTIN.label, report);
+        po.adbu.verifyConditionIsListed(po.adbu.gallBladderCondition, report);
+        po.adbu.verifyConditionIsListed(po.adbu.depressionCondition, report);
         report.addScreenshotStep("Step97_ADBU_Screen");
     }
 }

@@ -9,66 +9,25 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dexter.DexterHFWrappers;
 import galen.helpers.tenant.dexter.DexterUser;
 import galen.helpers.tenant.dexter.DexterUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
-    static String OBJECTIVE = "To verify the application shall display all user input controls (i.e. input fields, " +
-            "radio buttons, checkboxes, etc) as unpopulated, when screens are initially loaded.";
-    static String NOTES = "This protocol contains verification of the following scenario(s):\n" +
-            "-\tRadio button default unselected state on the Prior Use Screen\n" +
-            "-\tRadio button default unselected state on the Confirm Customer Screen\n" +
-            "-\tRadio button default unselected state on the Prevent Pregnancy Screen\n" +
-            "-\tRadio button default unselected state on the Menstruation Screen\n" +
-            "-\tRadio button default unselected state on the Hormonal BC (A) Screen\n" +
-            "-\tRadio button default unselected state on the Smoking and Vape Screen\n" +
-            "-\tInput field default empty state on the Smoking and Vape (Date of Birth) Screen\n" +
-            "-\tRadio button default unselected state on the Ever Had Cancer Screen\n" +
-            "-\tCheckboxes default unselected state on the List of Cancers Screen\n" +
-            "-\tRadio button default unselected state on the Blood Pressure Medicine Screen\n" +
-            "-\tCheckboxes default unselected state on the Blood Clot Screen\n" +
-            "-\tRadio button default unselected state on the Irregular Heartbeat Screen\n" +
-            "-\tCheckboxes default unselected state on the Liver Disease Screen\n" +
-            "-\tRadio button default unselected state on the Unexplained Vaginal Bleeding Screen\n" +
-            "-\tRadio button default unselected state on the Diabetes Screen\n" +
-            "-\tRadio button default unselected state on the Pregnant Screen\n" +
-            "-\tRadio button default unselected state on the Breastfeeding Screen\n" +
-            "-\tRadio button default unselected state on the Pregnancy Loss Screen\n" +
-            "-\tRadio button default unselected state on the Migraines with Aura Screen\n" +
-            "-\tInput fields default empty state on the Obesity/BMI Screen\n" +
-            "-\tCheckboxes default unselected state on the DDI/Conditions Screen\n" +
-            "-\tCheckboxes default unselected state on the Hep C Meds Screen\n" +
-            "-\tCheckboxes default unselected state on the Thyroid Meds Screen\n" +
-            "-\tCheckboxes default unselected state on the Epilepsy or Bipolar Disorder Meds Screen\n" +
-            "-\tCheckboxes default unselected state on the HIV Meds Screen\n" +
-            "-\tCheckboxes default unselected state on the Cholesterol Meds Screen\n" +
-            "-\tRadio button default unselected state on the Antifungal Product Screen\n" +
-            "-\tCheckboxes default unselected state on the Antifungal Meds Screen\n" +
-            "-\tCheckboxes default unselected state on the Other Meds Screen\n" +
-            "-\tRadio button default unselected state on the Gallbladder Screen\n" +
-            "-\tRadio button default unselected state on the Depression Screen\n" +
-            "-\tRadio button default unselected state on the Clinical Depression Screen \n" +
-            "-\tRadio button default unselected state on the Know Numbers Screen\n" +
-            "-\tInput fields default empty state on the Enter BP Screen";
-    static String REQUIREMENTS = "DEX_FRD_010";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx \n" +
-            "HappyFlow_IA_Initial_Assessment_ADBU_noBP_Google.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_010_Radio_Button_Default_Unselected";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
     BasicHelpers bh;
 
     VTP_DEX_FRD_010_Radio_Button_Default_Unselected()  {
-        VERSIONHISTORY.add("1.0;16FEB2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;13JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment flow and Test Objective;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -83,13 +42,13 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         CommonPageFeatures common = new CommonPageFeatures(driver);
         bh = new BasicHelpers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.usedProduct, report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("Step2_Prior Use");
 
         common.clickYesNoNextToPage("Yes", pageObj.orderForSelf,report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("Step3_ConfirmCustomer");
 
@@ -170,12 +129,11 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         bh.verifyText(pageObj.obesity.getWeightElement(), "Obesity weight field", "", report);
         report.addScreenshotStep("23_Obesity");
 
-        pageObj.obesity.enterHeightAndWeight(user, report);
-        pageObj.obesity.clickNextToPage(pageObj.ddiCondition, report);
+        pageObj.obesity.enterHeightAndWeightAndProgress(user, pageObj.ddiCondition, report);
         pageObj.ddiCondition.verifyNoOptionsSelected(report);
         report.addScreenshotStep("24_DDI Conditions");
 
-        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.allButNone, pageObj.ddiHepC, report);
+        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.getAllButNone(), pageObj.ddiHepC, report);
         pageObj.ddiHepC.verifyNoOptionsSelected(report);
         report.addScreenshotStep("25_HepC");
 
@@ -223,14 +181,9 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         pageObj.knowBPNumber.verifyNoOptionsSelected(report);
         report.addScreenshotStep("36_KnowBP");
 
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-        pageObj.enterBP.verifyAtPage(report);
+        pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP, "Yes", report);
         bh.verifyText(pageObj.enterBP.getInputSystolic(), "Systolic field", "", report);
         bh.verifyText(pageObj.enterBP.getInputDiastolic(), "Diastolic field", "", report);
         report.addScreenshotStep("38_Enter BP");
-
     }
 }

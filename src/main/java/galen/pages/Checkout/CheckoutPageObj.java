@@ -1,7 +1,7 @@
 package galen.pages.Checkout;
 
 import galen.pages.common.GalenPageObj;
-import galen.pages.tenant.dexter.InitialAssessment.*;
+import galen.pages.tenant.dexter.InitialAssessment.PurchaseOptions;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPageObj extends GalenPageObj {

@@ -3,6 +3,7 @@ package galen.tenant.dexter.Navigation_All;
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
 import galen.enums.tenant.dexter.BloodPressureType;
+import galen.enums.tenant.dexter.ReviewAnswersLinks;
 import galen.enums.tenant.dexter.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
@@ -22,81 +23,10 @@ import java.util.HashMap;
 import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
-    static String OBJECTIVE = "To verify the application shall include an application back button on every screen, " +
-            "except for the Welcome, DNU, Safe To Use, ADBU, ADBU/BP, Get BP, ADBU - Reconfirmation, Timeout, Purchase " +
-            "Verification screens.";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "-\tDisplay of the Back button on the following screens:\n" +
-            "o\tKnow Numbers Screen\n" +
-            "o\tKnow Numbers (More Info Modal) Screen\n" +
-            "o\tPrior Use Screen\n" +
-            "o\tConfirm Customer Screen\n" +
-            "o\tConfirm Customer (More Info Modal) Screen\n" +
-            "o\tPrevent Pregnancy Screen\n" +
-            "o\tPrevent Pregnancy (More Info Modal) Screen \n" +
-            "o\tMenstrual Periods Screen\n" +
-            "o\tHormonal Birth Control Screen\n" +
-            "o\tHormonal Birth Control (More Info Modal) Screen\n" +
-            "o\tSmoking or Vape Screen\n" +
-            "o\tSmoking or Vape (More Info Modal) Screen\n" +
-            "o\tSmoking or Vape – Year of Birth Screen\n" +
-            "o\tSmoking or Vape (Risks) Screen\n" +
-            "o\tEver Had Cancer Screen\n" +
-            "o\tList of Cancers Screen\n" +
-            "o\tList of Cancers (More Info Modal) Screen\n" +
-            "o\tBlood Pressure Meds Screen\n" +
-            "o\tHeart Conditions Screen\n" +
-            "o\tHeart Conditions (More Info Modal) Screen\n" +
-            "o\tBlood Clot Screen\n" +
-            "o\tBlood Clot (More Info Modal) Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems Screen\n" +
-            "o\tIrregular Heartbeat or Heart Valve Problems (More Info Modal) Screen\n" +
-            "o\tLiver Disease, Liver Cancer Screen\n" +
-            "o\tLiver Disease, Liver Cancer (More Info Modal) Screen\n" +
-            "o\tUnexplained Vaginal Bleeding Screen\n" +
-            "o\tUnexplained Vaginal Bleeding (More Info Modal) Screen\n" +
-            "o\tDiabetes Screen\n" +
-            "o\tDiabetes (More Info Modal) Screen\n" +
-            "o\tPregnant Screen\n" +
-            "o\tBreastfeeding Screen\n" +
-            "o\tPregnancy Loss Screen\n" +
-            "o\tObesity/BMI Screen\n" +
-            "o\tMigraines with Aura Screen\n" +
-            "o\tMigraines with Aura (More Info Modal) Screen\n" +
-            "o\tConditions/DDI Screen\n" +
-            "o\tConditions/DDI (More Info Modal) Screen\n" +
-            "o\tConditions/DDI - Hepatitis C Meds Screen\n" +
-            "o\tConditions/DDI - Hepatitis C Meds (More Info Modal) Screen\n" +
-            "o\tConditions/DDI - Thyroid Disease Meds Screen\n" +
-            "o\tConditions/DDI - Thyroid Disease (More Info Modal) Screen\n" +
-            "o\tConditions/DDI - Epilepsy or Bipolar Disorder Meds Screen\n" +
-            "o\tConditions/DDI - Epilepsy or Bipolar Disorder (More Info Modal) Screen\n" +
-            "o\tConditions/DDI - HIV Meds Screen\n" +
-            "o\tConditions/DDI - HIV Meds (More Info Modal) Screen\n" +
-            "o\tConditions/DDI – High Cholesterol Meds Screen\n" +
-            "o\tConditions/DDI - High Cholesterol Meds (More Info Modal) Screen\n" +
-            "o\tConditions/DDI – Antifungal Products Screen\n" +
-            "o\tConditions/DDI – Antifungal Meds Screen\n" +
-            "o\tConditions/DDI - Other Medications Screen\n" +
-            "o\tGallbladder Screen\n" +
-            "o\tGallbladder (More Info Modal) Screen\n" +
-            "o\tDepression Screen\n" +
-            "o\tDepression (More Info Modal) Screen\n" +
-            "o\tClinical Depression Screen\n" +
-            "o\tClinical Depression (More Info Modal) Screen \n" +
-            "o\tKnow BP Numbers Screen\n" +
-            "o\tKnow BP Numbers (Get BP Numbers) Screen\n" +
-            "o\t3-Month Confirmation Modal\n" +
-            "o\tEnter BP Numbers Screen\n" +
-            "-\tBack button is not displayed on the following screens:\n" +
-            "o\tEditable Summary Screen\n" +
-            "o\tDNU Screen\n" +
-            "o\tPurchase Options\n" +
-            "o\tADBU/BP Screen\n" +
-            "o\tGet BP Measured Screen\n" +
-            "o\tGet BP (Final) Screen";
-    static String REQUIREMENTS = "FRD_016";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     DexterPageObj pageObj;
     DexterUser user;
     String reportName = "DEX_FRD_016_Display_App_Back_Button";
@@ -106,39 +36,27 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_016_Display_App_Back_Button()  {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation\n" +
-                "for restructured cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;13JUN2024\n" +
-                ";Per CADENCE-476: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-549: Removed Checkout related steps\n" +
-                "Per CADENCE-455: Updated Test Steps to change the button selection\n" +
-                "Per CADENCE-569: Update Test Steps to remove any reference to OAuth, Returning User, or Checkout\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment flow and response options;Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
-    boolean verifyMoreInfoBackDisplayed(int step, BasePage page) throws InterruptedException {
-        commonPageFeatures.clickMoreInfoToModal(report);
-        boolean result =  bh.verifyDisplayedFlex(commonPageFeatures.moreInfoBack, "More Info Back button", report);
+    void verifyMoreInfoBackDisplayed(int step, BasePage page) throws InterruptedException {
+        page.clickMoreInfoToModal(report);
+        bh.verifyDisplayedFlex(page.moreInfoBack, "More Info Back button", report);
         report.addScreenshotStep("Step"+step +"_"+page.reportText + "_MoreInfo_BackButton", driver);
-        commonPageFeatures.clickMoreInfoBackToModalDismissed(report);
+        page.clickMoreInfoBackToModalDismissed(report);
         Thread.sleep(1000);
-        return result;
     }
 
-    boolean verifyBackDisplayed(int step, BasePage page) throws InterruptedException {
-        boolean result = bh.verifyDisplayedFlex(commonPageFeatures.btnBack, "Back button", report);
+    void verifyBackDisplayed(int step, BasePage page) throws InterruptedException {
+        bh.verifyDisplayedFlex(commonPageFeatures.btnBack, "Back button", report);
         report.addScreenshotStep("Step"+ step + "_"+page.reportText + "_BackButton", driver);
         Thread.sleep(1000);
-        return result;
     }
 
-    boolean verifyBackNotDisplayed(int step, BasePage page) throws InterruptedException {
-        boolean result = bh.verifyNotDisplayedFlex(commonPageFeatures.btnBack, "Back button", report);
+    void verifyBackNotDisplayed(int step, BasePage page) throws InterruptedException {
+        page.verifyBackButtonNotDisplayed(report);
         report.addScreenshotStep("Step"+ step + "_"+page.reportText + "_BackButton", driver);
         Thread.sleep(1000);
-        return result;
     }
 
     @Test
@@ -149,9 +67,10 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
         commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(UrlType.DEXTER);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
+        pageObj.pritUnl.load(UrlType.DEXTER);
         pageObj.welcomePage.verifyAtPage(report);
         pageObj.welcomePage.clickBegin(report);
         pageObj.privacyPage.clickIAcceptBtnToPage(pageObj.numbers, report);
@@ -160,15 +79,12 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
 
         // OAuth to Product Used
         commonPageFeatures.clickNextToPage(pageObj.oAuth, report);
-        pageObj.oAuth.chooseAccountType(user, report);
-        pageObj.usedProduct.verifyAtPage(report);
+        pageObj.oAuth.chooseAccountTypeAndProgress(user, pageObj.usedProduct, report);
         verifyBackDisplayed(8, pageObj.usedProduct);
 
-
         // Product Used to Prevent
-        commonPageFeatures.clickYesNoNext(user.productUsed, report);
-        pageObj.usedProduct.clickCloseButton(report);
-        pageObj.orderForSelf.verifyAtPage(report);
+        pageObj.orderForSelf.clickYesNoNextToModal(user.productUsed, "Tooltip",report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         verifyBackDisplayed(10, pageObj.orderForSelf);
         verifyMoreInfoBackDisplayed(11,pageObj.orderForSelf);
 
@@ -247,13 +163,12 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         verifyBackDisplayed(55, pageObj.obesity);
 
         // Obesity to DDI
-        pageObj.obesity.enterHeightAndWeight(user, report);
-        pageObj.obesity.clickNextToPage(pageObj.ddiCondition, report);
+        pageObj.obesity.enterHeightAndWeightAndProgress(user, pageObj.ddiCondition, report);
         verifyBackDisplayed(56, pageObj.ddiCondition);
         verifyMoreInfoBackDisplayed(57, pageObj.ddiCondition);
 
         // DDI to HepC
-        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.allButNone, pageObj.ddiHepC,report);
+        pageObj.ddiCondition.selectCheckboxesAndProgress(pageObj.ddiCondition.getAllButNone(), pageObj.ddiHepC,report);
         verifyBackDisplayed(59, pageObj.ddiHepC);
         verifyMoreInfoBackDisplayed(60, pageObj.ddiHepC);
 
@@ -279,8 +194,7 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
 
         // High Cholesterol to Antifungal
         sleep(500);
-        pageObj.ddiHighCholesterol.selectCheckboxesAndProgress(user.highCholMeds,
-                pageObj.antifungal, report);
+        pageObj.ddiHighCholesterol.selectCheckboxesAndProgress(user.highCholMeds, pageObj.antifungal, report);
         verifyBackDisplayed(74, pageObj.antifungal);
         verifyMoreInfoBackDisplayed(75, pageObj.antifungal);
 
@@ -309,28 +223,18 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.knowBPNumber,report);
         verifyBackDisplayed(92, pageObj.knowBPNumber);
 
-        pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-        commonPageFeatures.verifyModalDismissed(report);
-        pageObj.enterBP.verifyAtPage(report);
+        pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP,"Yes", report);
         verifyBackDisplayed(94, pageObj.enterBP);
 
         commonPageFeatures.clickBackToPage(pageObj.knowBPNumber, report);
         pageObj.knowBPNumber.selectRadioResponseAndProgress(BloodPressureType.No_Know_BP.label, pageObj.review,report);
-        sleep(500);
         verifyBackNotDisplayed(96, pageObj.review);
 
         pageObj.review.addressConfirmations(report);
-        pageObj.oAuthPostReview.chooseAccountType(user, report);
-        pageObj.adbubpScreen.verifyAtPage(report);
+        pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbubpScreen, report);
         verifyBackNotDisplayed(99, pageObj.adbubpScreen);
 
-        pageObj.adbubpScreen.clickYesNoToOpenModal("Yes", report);
-        pageObj.adbubpScreen.clickConfirmCheckbox(report);
-        pageObj.adbubpScreen.clickConfirm(report);
-        pageObj.adbubpNormal.verifyAtPage(report);
+        pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbubpNormal, report);
         verifyBackNotDisplayed(101, pageObj.adbubpNormal);
 
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);
@@ -338,20 +242,16 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
 
         user.systolic="115";
         user.diastolic="75";
-        pageObj.enterBPEnd.enterBP(user, report);
-        commonPageFeatures.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        commonPageFeatures.clickYesOrNoModal("Yes", report);
-        pageObj.purchaseOptions.verifyAtPage(report);
+        pageObj.enterBPEnd.enterAndVerifyToPage(user, pageObj.purchaseOptions,report);
         verifyBackNotDisplayed(104, pageObj.purchaseOptions);
 
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.orderForSelf.clickClose(null);
+        pageObj.orderForSelf.clickCloseToDismiss(null);
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         verifyBackNotDisplayed(106, pageObj.kickoutPage);
 
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickGallBladderEdit(report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.GALLBLADDER, pageObj.gallbladder, report);
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.review, report);
 
         pageObj.review.addressConfirmations(report);

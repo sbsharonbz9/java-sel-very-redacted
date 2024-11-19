@@ -25,37 +25,10 @@ import java.util.HashMap;
 import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
-    static String OBJECTIVE = "To verify upon receiving a result from an assessment performed by a clinician, the screen" +
-            " navigated to shall provide a link that closes the assessment tab and instructs the portal tab to refresh";
-    static String NOTES = "This protocol contains the following scenarios:\n" +
-            "-\tReturn to Study Portal link is displayed and clicking link to return to Study Portal closes the current " +
-            "tab and the new Clinician Record is displayed on the refreshed View Records Screen from the following final" +
-            " screens:\n" +
-            "o\tSafe To Use Screen\n" +
-            "o\tADBU End Screen\n" +
-            "o\tGet BP Measured Screen\n" +
-            "o\tConfirm Customer DNU Screen\n" +
-            "o\tPrevent Pregnancy DNU Screen\n" +
-            "o\tMenstruation DNU Screen\n" +
-            "o\tSmoker Over 35 DNU Screen\n" +
-            "o\tCancers DNU Screen\n" +
-            "o\tBP Meds DNU Screen\n" +
-            "o\tChest Pain DNU Screen\n" +
-            "o\tBlood Clots DNU Screen\n" +
-            "o\tIrregular Heartbeat DNU Screen\n" +
-            "o\tLiver Disease DNU Screen\n" +
-            "o\tVaginal Bleeding DNU Screen\n" +
-            "o\tDiabetes DNU Screen\n" +
-            "o\tPregnant DNU Screen\n" +
-            "o\tBreastfeeding DNU Screen\n" +
-            "o\tPregnancy Loss DNU Screen\n" +
-            "o\tMigraines with Aura DNU Screen\n" +
-            "o\tBP DNU Screen\n" +
-            "o\tBP Immediate DNU Screen";
-    static String REQUIREMENTS = "DEX_FRD_236";
-    static String REFERENCES = "HappyFlow_IA_Initial_Assessment_ADBU_wBP.docx;  \n" +
-            "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker.docx;\n" +
-            "HappyFlow_IA_Initial_Assessment_ADBU_noBP.docx";
+    static String OBJECTIVE = "Objective";
+    static String REQUIREMENTS = "Req";
+    static String REFERENCES = "Ref";
+    static String NOTES = "Notes";
     String reportName = "VTP_DEX_FRD_236_Clinicians_Return_To_Portal";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
@@ -66,13 +39,7 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
     BasicHelpers bh;
 
     VTP_DEX_FRD_236_Clinicians_Return_To_Portal() {
-        VERSIONHISTORY.add("1.0;28FEB2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;23OCT2023;Per CADENCE-359/360: Update Test Steps to reflect the List of Cancers screen " +
-                "flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;24JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation;" +
-                "Name Redacted");
-        VERSIONHISTORY.add("4.0;29JUL2024;Per CADENCE-615: Update Test Step Scenarios to align to assessment end screens" +
-                ";Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     void startNewRecord() {
@@ -135,7 +102,7 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
         startNewRecord();
         user=new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         hf.runDexterHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.orderForSelf.clickClose(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         endNewRecord(44);
 

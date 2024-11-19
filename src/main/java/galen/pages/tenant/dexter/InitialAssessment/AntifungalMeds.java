@@ -1,5 +1,6 @@
 package galen.pages.tenant.dexter.InitialAssessment;
 
+import galen.enums.tenant.dexter.AntifungalMedsType;
 import galen.pages.common.CheckboxPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,20 +12,13 @@ public class AntifungalMeds extends CheckboxPage {
 
     public By afHeader = By.className("AntiBacterialProductListScreen");
     public ArrayList<String> antifungalMedsOptions = new ArrayList<>(Arrays.asList(
-            "Fluconazole",// * Antifungal • Often called Diflucan®",
-            "Griseofulvin", //* Antifungal • Often called Grifulvin V®",
-            "Griseofulvin Ultramicrocrystalline", //* Antifungal • Often called Gris-PEG®",
-            "Itraconazole", //* Antifungal • Often called Sporanox®",
-            "Ketoconazole", //* Antifungal • Often called Nizoral®",
-            "Voriconazole", //* Antifungal • Often called Vfend®",
-            "None of these"));
-    public ArrayList<String> allButNone = new ArrayList<>(Arrays.asList(
-            "Fluconazole",// * Antifungal • Often called Diflucan®",
-            "Griseofulvin", //* Antifungal • Often called Grifulvin V®",
-            "Griseofulvin Ultramicrocrystalline", //* Antifungal • Often called Gris-PEG®",
-            "Itraconazole", //* Antifungal • Often called Sporanox®",
-            "Ketoconazole", //* Antifungal • Often called Nizoral®",
-            "Voriconazole")); //* Antifungal • Often called Vfend®");
+            AntifungalMedsType.FLUCONAZOLE.label,
+            AntifungalMedsType.GRISEOFULVIN.label,
+            AntifungalMedsType.GRISEOFULVIN_ULTRAMICROCRYSTALLINE.label,
+            AntifungalMedsType.ITRACONAZOLE.label,
+            AntifungalMedsType.KETOCONAZOLE.label,
+            AntifungalMedsType.VORICONAZOLE.label,
+            AntifungalMedsType.NONE_OF_THESE.label));
 
     public AntifungalMeds(WebDriver driver) {
         super(driver);

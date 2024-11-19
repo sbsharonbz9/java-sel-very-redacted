@@ -3,17 +3,14 @@
 <suite name="Automation Test Suite" parallel="tests" thread-count="10" data-provider-thread-count="2">
 	<test thread-count="2" name="Regression Tests execution over Chrome 
 		Browser" parallel="methods">
-		<parameter name="browser" value="CHROME"></parameter>
-<!--		<packages>-->
-<!--			<package name="org.selenium.tests"></package>-->
-<!--		</packages>-->
+		<parameter name="browser" value="CHROME"/>
 		<classes>
-			<class name="galen.tests.RegressionSuite.VTP_FRD_022_023_024_215_DOB_Sex_at_Birth_Screen">
+			<class name="galen.tenant.petros.VTP_FRD_029_030_031_Purchase_for_Self_Screen">
 				<methods>
-					<include name="VTP_FRD_022_023_024_215_DOB_Sex_at_Birth_Screen"></include>
+					<include name="VTP_FRD_029_030_031_Purchase_for_Self_Screen"/>
 				</methods>
 			</class>
 		</classes>
 	</test>
 
-</suite> <!-- Suite -->
+</suite>

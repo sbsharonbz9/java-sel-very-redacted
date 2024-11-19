@@ -28,13 +28,7 @@ public class HappyFlow_IA_Initial_Assessment_ADBU_wBP extends BaseTest {
     public BasicHelpers bh;
 
     HappyFlow_IA_Initial_Assessment_ADBU_wBP() throws IOException {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script; Name Redacted;");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured cancer flow; Name Redacted;");
-        VERSIONHISTORY.add("3.0;12JUN2024;Per Per CADENCE-476: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Updated Test Steps for adding verification and cap-ture screenshot. " +
-                "Also added Test Steps and Post Execution Approvals section\n" +
-                "Per CADENCE-569: Update Test Steps to align with new assessment flow and options;" +
-                "Name Redacted");
+        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Tester");
     }
 
     @Test
@@ -45,6 +39,7 @@ public class HappyFlow_IA_Initial_Assessment_ADBU_wBP extends BaseTest {
         bh = new BasicHelpers(driver);
         pageObj = new DexterPageObj(driver);
         user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DEXTER);
         CommonPageFeatures commonPageFeatures = new CommonPageFeatures(driver);
         pageObj.pritUnl.load(UrlType.DEXTER);
 

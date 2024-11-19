@@ -13,7 +13,7 @@ public class PropertyUtils {
 
 	public static Properties propertyLoader(String filePath) {
 		Properties properties = new Properties();
-		BufferedReader reader = null;
+		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
 		} catch (FileNotFoundException e1) {

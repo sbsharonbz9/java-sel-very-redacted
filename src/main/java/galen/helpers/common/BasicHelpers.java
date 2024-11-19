@@ -4,14 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import galen.constants.FrameworkConstants;
 import galen.enums.SP.AccountTabs;
 import galen.enums.SP.RoleType;
-import galen.helpers.tenant.petros.PetrosNavigations;
-import galen.helpers.tenant.petros.PetrosUser;
 import galen.pages.common.BasePage;
 import galen.pages.sp.StudyAdminPageObj;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.support.Color;
@@ -38,12 +35,11 @@ public class BasicHelpers {
         this.driver = driver;
     }
 
-    public boolean verifyActiveElement(Boolean expected, By by, String byText, @Nullable GalenReport report) {
+    public void verifyActiveElement(Boolean expected, By by, String byText, @Nullable GalenReport report) {
         WebElement actualElement = (WebElement)((JavascriptExecutor) driver).executeScript("return document.activeElement;");
         WebElement expectedElement = getWebElement(by);
         boolean result = actualElement.equals(expectedElement)==expected;
         verifyCondition(()->result,"Cursor in element "+byText+" is " + expected, false, report);
-        return actualElement.equals(expectedElement)==expected;
     }
 
     public void setOfflineMode(Boolean offline, @Nullable GalenReport report) throws IOException {
@@ -63,7 +59,7 @@ public class BasicHelpers {
     }
 
 
-    public boolean verifyAtPage(ExpectedCondition<Boolean> condition, String reportingText, @Nullable GalenReport report) {
+    public void verifyAtPage(ExpectedCondition<Boolean> condition, String reportingText, @Nullable GalenReport report) {
         boolean result;
         try {
             result = shortWait.until(condition);
@@ -73,20 +69,18 @@ public class BasicHelpers {
         if (report != null) {
             report.reportPageTransition(reportingText, result);
         }
-        return result;
     }
 
     public boolean verifyAtPage(Boolean condition, String reportingText, @Nullable GalenReport report) {
-        boolean result = condition;
         if (report != null) {
-            report.reportPageTransition(reportingText, result);
+            report.reportPageTransition(reportingText, condition);
         }
-        return result;
+        return condition;
     }
 
     public void reportHappyFlow(String HFType, String pageReportText, boolean result, @Nullable GalenReport report) {
-        String positiveResult = "See reference document "+ HFType;
-        String negativeResult = "User not at page " + pageReportText;
+        String positiveResult = "See reference document "+ HFType + "\nPage  " + pageReportText + " is displayed";
+        String negativeResult = "Page " + pageReportText + " is not displayed";
         if (report != null) {
             report.addStep("Execute "+ HFType+ " through to "+ pageReportText, pageReportText +
                             " is displayed",
@@ -104,29 +98,9 @@ public class BasicHelpers {
         }
     }
 
-    public void petrosHappyFlowTo(PetrosUser user, BasePage toPage, @Nullable GalenReport report) throws IOException, InterruptedException {
-        boolean atPage;
-        new PetrosNavigations(driver).partialNavigationIA(user, toPage, null);
-        atPage = toPage.verifyAtPage();
-        if (report != null) {
-            report.addStep("Execute HappyFlow to '" + toPage.titleText + "' page", "At '" +
-                    toPage.titleText + " page", atPage ? "As Expected" : "FAIL", atPage, true);
-        }
-    }
 
     public int getRandomValue(int max) {
         return (int) Math.floor(Math.random()*max);
-    }
-
-    public void doubleClickFlex(WebElement nav, String navigatorText, @Nullable GalenReport report) {
-        if (report == null) {
-            if (nav != null) {
-                new Actions(driver).doubleClick(nav).perform();
-            }
-
-        } else {
-            report.doubleClickAndReport(nav, navigatorText);
-        }
     }
 
     public void clickFlex(WebElement element, String navigatorText, @Nullable GalenReport report) {
@@ -194,15 +168,6 @@ public class BasicHelpers {
         }
     }
 
-    public void clickFlexJs(WebElement element, String navigatorText, @Nullable GalenReport report) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", element);
-        if (report != null) {
-            report.addStep("Click on " + navigatorText, navigatorText + " is clicked.", navigatorText + " is clicked.",
-                    element.getText().isEmpty());
-        }
-    }
-
     public Boolean verifyCondition(Callable<Boolean> callable, String closureText, boolean hardFail, @Nullable GalenReport report) {
         try {
             return (report != null) ?
@@ -232,8 +197,6 @@ public class BasicHelpers {
             return null;
         }
     }
-
-
 
     public Boolean verifyRadioButtonSelected(String expected, @Nullable GalenReport report) {
         WebElement element = getWebElement(By.id("assessment-radio-" + expected.toLowerCase()));
@@ -279,16 +242,19 @@ public class BasicHelpers {
         try {
             clickFlex(toClick, navText, null);
             sleep(1000);
-            return verifyActionToNavDisplayed("Click " + navText, getWebElement(toVerify), navText2, report);
+            return verifyActionToNavDisplayed("Click " + navText, toVerify, navText2, report);
         } catch (Exception e) {
-            return verifyActionToNavDisplayed("Click " + navText, null, navText2, report);
+            return false;
         }
     }
 
-    public Boolean verifyClickToNavNotDisplayed(By toClick, String navText, By toVerify, String navText2,
-                                             @Nullable GalenReport report) {
-        clickFlex(toClick, navText, null);
-        return verifyActionToNavNotDisplayed("Click "+ navText, getWebElement(toVerify, shortWait), navText2, report);
+    public void verifyClickToNavNotDisplayed(By toClick, String navText, By toVerify, String navText2,
+                                             @Nullable GalenReport report)  {
+        try {
+            clickFlex(toClick, navText, null);
+            sleep(500);
+        } catch (Exception ignored) {}
+        verifyActionToNavNotDisplayed("Click "+ navText, toVerify, navText2, report);
     }
 
     public Boolean verifyClickToPageTransition(BasePage expectedPage, WebElement element, String navText,
@@ -296,6 +262,21 @@ public class BasicHelpers {
         clickFlex(element, navText, null);
         return verifyActionToPageDisplayed("Click '" + navText + "'", expectedPage,
                 expectedPage.reportText, report);
+    }
+
+    public Boolean verifyClickToPageTransition(BasePage expectedPage, By navBy, String navText,
+                                               @Nullable GalenReport report) {
+        return verifyClickToPageTransition(expectedPage,getWebElement(navBy), navText, report);
+    }
+
+    public void verifyActionToNavNotDisplayed(String action, By by, String navText,
+                                              @Nullable GalenReport report) {
+        verifyActionToNavNotDisplayed(action, getWebElement(by), navText, report);
+    }
+
+    public Boolean verifyActionToNavDisplayed(String action, By by, String navText,
+                                                 @Nullable GalenReport report) {
+        return verifyActionToNavDisplayed(action, getWebElement(by),navText, report);
     }
 
     public Boolean verifyActionToNavDisplayed(String action, WebElement nav, String navText,
@@ -346,13 +327,16 @@ public class BasicHelpers {
     public Boolean verifyButtonEnabled(WebElement element, Boolean isEnabled, @Nullable GalenReport report) {
         boolean actualEnabled = element.isEnabled();
         Boolean result = actualEnabled == isEnabled;
-        String condition = element.getText() + " button is " + (isEnabled ? "" : " not ") + " enabled ";
+        String condition = element.getText() + " button is " + (isEnabled ? "" : "not") + " enabled ";
         if (report != null) {
             return report.verifyCondition(() -> result, condition, false);
         }
         return result;
     }
 
+    public Boolean verifyButtonEnabled(By by, Boolean isEnabled, @Nullable GalenReport report) {
+        return verifyButtonEnabled(getWebElement(by), isEnabled, report);
+    }
 
     public void clearTextField(WebElement element, @Nullable GalenReport report) {
         char[] c = element.getAttribute("value").toCharArray();
@@ -399,14 +383,14 @@ public class BasicHelpers {
         return addMultipleVerificationStep("the following elements are displayed:", result, report);
     }
 
-    public Boolean verifyElementsNotDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
+    public void verifyElementsNotDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
         WebElement element;
         for (Map.Entry<String, By> entry : elements.entrySet()) {
             element = getWebElement(entry.getValue(), shortWait);
                 result.put(entry.getKey(), element==null);
         }
-        return addMultipleVerificationStep("the following elements are not displayed:", result, report);
+        addMultipleVerificationStep("the following elements are not displayed:", result, report);
     }
 
 
@@ -429,7 +413,7 @@ public class BasicHelpers {
         }
     }
 
-    public boolean verifyCSVValuePresent(File fileName, String assessmentID, String column,
+    public void verifyCSVValuePresent(File fileName, String assessmentID, String column,
                                               @Nullable GalenReport report) {
         String condition = "CSV value of "+ column + " is not blank";
         boolean result;
@@ -437,13 +421,19 @@ public class BasicHelpers {
         CSVHelpers csv = new CSVHelpers();
         try {
             actualResult = column + " contains "+ csv.getCSVValueByAssessmentID(fileName, assessmentID, column);
-            result=csv.verifyCSVValuePresent(fileName, assessmentID, column);
+            result = csv.verifyCSVValuePresent(fileName, assessmentID, column);
         } catch(Exception e) {
             result=false;
         }
-        report.addStep("Verify "+ condition, StringUtils.capitalize(condition),
-                actualResult,result ,false);
-        return result;
+        if (report != null) {
+            report.addStep("Verify " + condition, StringUtils.capitalize(condition),
+                    actualResult, result, false);
+        }
+    }
+
+    public void verifyCurrentDropdownValue(By dropdown, String dropdownName, String item, @Nullable GalenReport report) {
+        verifyCondition(()->getCurrentDropdownOption(dropdown).contains(item), item + " is set in dropdown " +
+                        dropdownName, false,report );
     }
 
     public List<String> getAllDropdownOptions(By dropdown) {
@@ -458,29 +448,29 @@ public class BasicHelpers {
         return optionsText;
     }
 
-    public boolean verifyAllDropdownOptions(By dropdown, List<String> expected, @Nullable GalenReport report) {
+    public void verifyAllDropdownOptions(By dropdown, List<String> expected, @Nullable GalenReport report) {
         List<String> options =  getAllDropdownOptions(dropdown);
         LinkedHashMap<String, Object> results = new LinkedHashMap<>();
         for (String s : expected) {
             results.put(s,options.contains(s));
         }
-        return addMultipleVerificationStep("The following are in the dropdown: ",results, report);
+        addMultipleVerificationStep("The following are in the dropdown: ",results, report);
     }
 
-    public boolean verifyDropdownContains(By dropdown, String item, @Nullable GalenReport report) {
-        return verifyCondition  (()->getAllDropdownOptions(dropdown).contains(item), item + " present as dropdown " +
+    public void verifyDropdownContains(By dropdown, String item, @Nullable GalenReport report) {
+        verifyCondition(()->getAllDropdownOptions(dropdown).contains(item), item + " present as dropdown " +
                 "option", false,report );
     }
 
-    public boolean verifyDropdownNotContains(By dropdown, String item, @Nullable GalenReport report) {
-        return verifyCondition  (() -> !getAllDropdownOptions(dropdown).contains(item), item + " not present as dropdown " +
+    public void verifyDropdownNotContains(By dropdown, String item, @Nullable GalenReport report) {
+        verifyCondition(() -> !getAllDropdownOptions(dropdown).contains(item), item + " not present as dropdown " +
                 "option", false,report );
     }
 
     public void selectDropDownByText(WebElement element, String value, String identifier, @Nullable GalenReport
             report) {
         if (report != null)
-            report.selectDropDownByTextAndReport(element, value, identifier, false);
+            report.selectDropDownByTextAndReport(element, value, identifier);
         else {
             Select select = new Select(element);
             select.selectByVisibleText(value);
@@ -528,10 +518,9 @@ public class BasicHelpers {
         return  result;
     }
 
-    public boolean downloadIndividualCSVAndVerify(String csvName, String assessmentID,StudyAdminPageObj pageObj,
+    public void downloadIndividualCSVAndVerify(String csvName, String assessmentID,StudyAdminPageObj pageObj,
                                                   String email,GalenReport report) {
-        boolean result=true;
-        String actual="";
+        String actual;
         try {
             sleep(1000);
             pageObj.login.logIn(RoleType.CENTRAL_ASSESSOR.email, null);
@@ -541,13 +530,8 @@ public class BasicHelpers {
             pageObj.viewRecords.downloadIndividualRecords(csvName, assessmentID, report);
         } catch( Exception e) {
             actual = e.getMessage();
-            result = false;
-            if (report != null) {
-                report.addStep("Download Individual CSV", "Download Individual CSV\n" +
-                        "CSV metrics record captured\n", actual, result);
-            }
+            report.addStep("Download Individual CSV", "Download Individual CSV\n" +
+                        "CSV metrics record captured\n", actual, false);
         }
-        return  result;
     }
-
 }
