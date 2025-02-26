@@ -1,14 +1,8 @@
 package galen.pages.tenant.dexter.InitialAssessment;
 
-import galen.constants.FrameworkConstants;
-import galen.helpers.common.GalenReport;
-import galen.pages.common.BasePage;
-
 import galen.pages.common.CheckboxPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;

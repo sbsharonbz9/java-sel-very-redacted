@@ -3,9 +3,10 @@ package galen.pages.common;
 import galen.enums.framework.UrlType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.GalenReport;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.*;
 import galen.utils.ConfigLoader;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
 import javax.annotation.Nullable;
 import java.time.Duration;
@@ -18,10 +19,8 @@ public class BasePage {
     public String reportText = "Next page";
     public BasicHelpers basicHelpers;
     public By headingTitle = By.xpath("//h1[contains(@class,'primary')]");
-    public String questionText = "";
     public static By question = By.className("question");
     public  By nextBTN = By.xpath("//button[normalize-space()='Next']");
-    public static By confirmModalTitle = By.xpath("//h1[@class='secondary']");
     public By modal = By.className("modal");
     public By btnBack = By.xpath("//button[text()='Back']");
     public By btnCancel = By.xpath("//button[text()='Cancel']");
@@ -31,9 +30,9 @@ public class BasePage {
     public By btnYesModal = By.xpath("//button[@value='yes']");
     public By btnNoModal = By.xpath("//button[@value='no']");
     public By btnXModal = By.xpath("//button[@class='btn-close']");
+    public By btnClose = By.xpath("//button[text()='Close']");
     public By modalCheckbox = By.xpath("//input[@id='confirm']/following-sibling::span[1]");
-    public By btnConfirmModal = By.xpath("//button[text()='Confirm']");
-    public String moreInfoText="";
+    public By btnConfirm = By.xpath("//button[text()='Confirm']");
     public static By showIcon = By.xpath("//button/*[text()='Show']");
     public static By hideIcon = By.xpath("//button/*[text()='Hide']");
     public static By moreInfoLink = By.xpath("//button[@class='more-info__icon']");
@@ -70,36 +69,10 @@ public class BasePage {
     public WebElement getNextButton() {
         return basicHelpers.getWebElement(nextBTN);
     }
-    public WebElement getMoreInfoButton() {
-        return basicHelpers.getWebElement(moreInfoLink);
-    }
-    public WebElement getYesBtn() {
-        return basicHelpers.getWebElement(btnYes);
-    }
-    public WebElement getNoBtn() {
-        return basicHelpers.getWebElement(btnNo);
-    }
-    public WebElement getUnsureBtn() {
-        return basicHelpers.getWebElement(btnUnsure);
-    }
     public WebElement getModal() {
         return basicHelpers.getWebElement(modal);
     }
-    public WebElement getXBtn(){
-        return basicHelpers.getWebElement(btnXModal);
-    }
-    public WebElement getCancelBtn(){
-        return basicHelpers.getWebElement(btnCancel);
-    }
-    public WebElement getMoreInfoModal(){
-        return basicHelpers.getWebElement(moreInfoContent);
-    }
-    public WebElement getYesModalBtn() {
-        return basicHelpers.getWebElement(btnYesModal);
-    }
-    public WebElement getNoModalBtn() {
-        return basicHelpers.getWebElement(btnNoModal);
-    }
+
 
     public void load(UrlType type) {
         String thisURL;
@@ -128,20 +101,24 @@ public class BasePage {
         basicHelpers.clickFlex(btnCancel, "Cancel Button", report);
     }
 
-    public boolean verifyAssessmentIDDisplayed(@Nullable GalenReport report) {
-        return basicHelpers.verifyDisplayedFlex(assessmentID, "Assessment ID", report);
+    public void clickCancelToDismiss(String modalText, @Nullable GalenReport report) {
+        basicHelpers.verifyClickToNavNotDisplayed(btnCancel, "Cancel Button", modal, modalText, report);
+    }
+
+    public void verifyAssessmentIDDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyDisplayedFlex(assessmentID, "Assessment ID", report);
     }
 
     public boolean clickNextToPage(BasePage toPage, @Nullable GalenReport report) {
-        return basicHelpers.verifyClickToPageTransition(toPage, getNextButton(), "Next", report);
+        return basicHelpers.verifyClickToPageTransition(toPage, nextBTN, "Next", report);
     }
 
     public boolean clickBackToPage(BasePage toPage, @Nullable GalenReport report) {
-        return basicHelpers.verifyClickToPageTransition(toPage, driver.findElement(btnBack), "Back", report);
+        return basicHelpers.verifyClickToPageTransition(toPage, btnBack, "Back", report);
     }
 
     public void clickYesOrNo(String yesNo, @Nullable GalenReport report) {
-        WebElement response = (yesNo.equals("Yes")) ? getYesBtn() : getNoBtn();
+        By response = (yesNo.equals("Yes")) ? btnYes: btnNo;
         basicHelpers.clickFlex(response, yesNo, report);
     }
 
@@ -167,66 +144,77 @@ public class BasePage {
     }
 
     public boolean clickYesNoNextToModal(String yesNo, String modalDesc, @Nullable GalenReport report) {
+        clickYesNoNext(yesNo, null);
+        return basicHelpers.verifyActionToNavDisplayed("Click "+ yesNo+"\nClick Next\nVerify "+ modalDesc + " is " +
+                "displayed", nextBTN,modalDesc, report);
+    }
+
+    public void clickYesNo_NextEnabled(String yesNo, @Nullable GalenReport report) {
+        boolean result;
         clickYesOrNo(yesNo, null);
-        boolean result = basicHelpers.verifyClickToNavDisplayed(nextBTN, "Next", modal,
-                modalDesc, report);
-        String positiveResult = modalDesc + " is displayed";
+        result = verifyNextButtonEnabled(null);
         if (report!=null) {
-            report.addStep("Click "+ yesNo+"\nClick Next\nVerify "+ modalDesc + " is displayed",
-                    yesNo + " is clicked\nNext is clicked\n"+ modalDesc + " is displayed",
-                    result?positiveResult:"Failed", result, true);
+            report.addStep("Click "+ yesNo+"\nVerify ' Next' button is enabled",
+                    yesNo + " is clicked\n'Next' button is enabled",
+                    result?"'Next' button is enabled":"'Next' button is disabled", result, true);
         }
-        return result;
+    }
+
+    public void clickYesNo_NextDisabled(String yesNo, @Nullable GalenReport report) {
+        boolean result;
+        clickYesOrNo(yesNo, null);
+        result = verifyNextButtonDisabled(null);
+        if (report!=null) {
+            report.addStep("Click "+ yesNo+"\nVerify ' Next' button is disabled",
+                    yesNo + " is clicked\n'Next' button is disabled",
+                    result?"'Next' button is disabled":"'Next' button is enabled", result, true);
+        }
     }
 
     public void clickYesNoUnsure(String yesNoUnsure, @Nullable GalenReport report) {
-        WebElement response;
+        By response;
         switch (yesNoUnsure) {
             case "Yes":
-                response = getYesBtn();
+                response = btnYes;
                 break;
             case "No":
-                response = getNoBtn();
+                response = btnNo;
                 break;
             default:
-                response = getUnsureBtn();
+                response = btnUnsure;
                 break;
         }
         basicHelpers.clickFlex(response, yesNoUnsure, report);
     }
 
-    public boolean verifyYesNoUnsurePresent(@Nullable GalenReport report) {
-        LinkedHashMap<String, By> buttons = new LinkedHashMap<String, By>();
+    public void verifyYesNoUnsurePresent(@Nullable GalenReport report) {
+        LinkedHashMap<String, By> buttons = new LinkedHashMap<>();
         buttons.put("'Yes' button", btnYes);
         buttons.put("'No' button", btnNo);
         buttons.put("'Unsure' button", btnUnsure);
-        return basicHelpers.verifyElementsDisplayed(buttons, report);
+        basicHelpers.verifyElementsDisplayed(buttons, report);
     }
 
     public boolean verifyYesNoPresent(@Nullable GalenReport report) {
-        LinkedHashMap<String, By> buttons = new LinkedHashMap<String, By>();
+        LinkedHashMap<String, By> buttons = new LinkedHashMap<>();
         buttons.put("'Yes' button", btnYes);
         buttons.put("'No' button", btnNo);
         return basicHelpers.verifyElementsDisplayed(buttons, report);
     }
 
-    public boolean verifyYesNoUnselected(@Nullable GalenReport report) {
-        LinkedHashMap<String, Object> buttons = new LinkedHashMap<String, Object>();
-        buttons.put("'Yes' button", basicHelpers.verifyRadioButtonNotSelected("Yes", null));
-        buttons.put("'No' button", basicHelpers.verifyRadioButtonNotSelected("No", null));
-        return basicHelpers.addMultipleVerificationStep("not selected",buttons, report);
+    public void verifyYesNoUnselected(@Nullable GalenReport report) {
+        LinkedHashMap<String, Object> buttons = new LinkedHashMap<>();
+        buttons.put("'Yes' button not selected", basicHelpers.verifyRadioButtonNotSelected("Yes", null));
+        buttons.put("'No' button not selected", basicHelpers.verifyRadioButtonNotSelected("No", null));
+        basicHelpers.addMultipleVerificationStep("Yes and No not selected",buttons, report);
     }
 
-    public boolean verifyNextPresent(@Nullable GalenReport report) {
-        return basicHelpers.verifyDisplayedFlex(nextBTN, "Next button", report);
-    }
-
-    public void clickConfirm(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(btnConfirmModal,"Confirm button",report );
+    public void verifyNextPresent(@Nullable GalenReport report) {
+        basicHelpers.verifyDisplayedFlex(nextBTN, "Next button", report);
     }
 
     public void clickConfirmModal(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(btnConfirmModal,"Confirm button",report );
+        basicHelpers.clickFlex(btnConfirm,"Confirm button",report );
     }
 
     public void clickConfirmCheckbox(@Nullable GalenReport report) {
@@ -234,15 +222,15 @@ public class BasePage {
     }
 
     public void clickNext(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getNextButton(), "Next", report);
+        basicHelpers.clickFlex(nextBTN, "Next", report);
     }
 
     public void clickMoreInfo(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(basicHelpers.getWebElement(moreInfoLink), "More Info", report);
+        basicHelpers.clickFlex(moreInfoLink, "More Info", report);
     }
 
     public void clickMoreInfoBack(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(basicHelpers.getWebElement(moreInfoBack), "Back", report);
+        basicHelpers.clickFlex(moreInfoBack, "Back", report);
     }
 
     public boolean clickMoreInfoToModal(@Nullable GalenReport report) {
@@ -250,64 +238,75 @@ public class BasePage {
                 "More Info modal", report);
     }
 
-    public boolean clickBrowserBackToModal(@Nullable GalenReport report) {
+    public boolean clickConfirmToOpenModal(@Nullable GalenReport report) {
+        return basicHelpers.verifyClickToNavDisplayed(btnConfirm, "Confirm", modal, "Confirm Modal",
+                report);
+    }
+
+    public void clickBrowserBackToModal(@Nullable GalenReport report) {
         basicHelpers.clickBrowserBack(null);
-        return basicHelpers.verifyActionToNavDisplayed( "Click browser back button",
-                basicHelpers.getWebElement(exitAssessmentModal), "Exit Assessment Modal",
+        basicHelpers.verifyActionToNavDisplayed( "Click browser back button",
+                 exitAssessmentModal, "Exit Assessment Modal", report);
+    }
+
+    public void clickMoreInfoBackToModalDismissed(@Nullable GalenReport report)  {
+        basicHelpers.verifyClickToNavNotDisplayed(moreInfoBack, "Back button", modal, "Modal",
                 report);
     }
 
-    public boolean clickMoreInfoBackToModalDismissed(@Nullable GalenReport report) throws InterruptedException {
-        return basicHelpers.verifyClickToNavNotDisplayed(moreInfoBack, "Back button", modal, "Modal",
-                report);
-    }
-
-    public boolean clickExitCloseToModalDismissed(@Nullable GalenReport report)  {
-        return basicHelpers.verifyClickToNavNotDisplayed(exitCloseButton, "Close button", modal, "Exit " +
+    public void clickExitCloseToModalDismissed(@Nullable GalenReport report)  {
+        basicHelpers.verifyClickToNavNotDisplayed(exitCloseButton, "Close button", modal, "Exit " +
                 "Assessment modal", report);
     }
 
-    public boolean clickExitLeaveToModalDismissed(@Nullable GalenReport report) {
-        return basicHelpers.verifyClickToNavNotDisplayed(exitLeaveButton, "Leave button", modal, "Exit " +
+    public void clickExitLeaveToModalDismissed(@Nullable GalenReport report) {
+        basicHelpers.verifyClickToNavNotDisplayed(exitLeaveButton, "Leave button", modal, "Exit " +
                 "Assessment modal", report);
     }
 
-    public Boolean verifyMoreInfoLinkDisplayed(@Nullable GalenReport report) {
+    public boolean verifyMoreInfoLinkDisplayed(@Nullable GalenReport report) {
         return basicHelpers.verifyDisplayedFlex(moreInfoLink, "More Info link", report);
     }
 
-    public Boolean verifyMoreInfoDisplayed(@Nullable GalenReport report) {
-        return basicHelpers.verifyDisplayedFlex(moreInfoContent, "More Info modal", report);
+    public void verifyMoreInfoDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyDisplayedFlex(moreInfoContent, "More Info modal", report);
     }
 
-    public Boolean verifyMoreInfoNotDisplayed(@Nullable GalenReport report) {
-        return basicHelpers.verifyNotDisplayedFlex(moreInfoContent, "More Info modal", report);
+    public void verifyMoreInfoNotDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyNotDisplayedFlex(moreInfoContent, "More Info modal", report);
     }
 
-    public Boolean verifyNextButtonEnabled(@Nullable GalenReport report) {
-        return basicHelpers.verifyButtonEnabled(getNextButton(), true, report);
+    public void verifyBackButtonNotDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyNotDisplayedFlex(btnBack, "Back Button", report);
     }
 
-    public Boolean verifyNextButtonDisabled(@Nullable GalenReport report) {
-        return basicHelpers.verifyButtonEnabled(getNextButton(), false, report);
+    public boolean verifyNextButtonEnabled(@Nullable GalenReport report) {
+        return basicHelpers.verifyButtonEnabled(nextBTN, true, report);
+    }
+
+    public boolean verifyNextButtonDisabled(@Nullable GalenReport report) {
+        return basicHelpers.verifyButtonEnabled(nextBTN, false, report);
+    }
+
+    public void verifyConfirmButtonEnabled(@Nullable GalenReport report) {
+        basicHelpers.verifyButtonEnabled(btnConfirm, true, report);
+    }
+
+    public void verifyConfirmButtonDisabled(@Nullable GalenReport report) {
+        basicHelpers.verifyButtonEnabled(btnConfirm, false, report);
     }
 
     public void clickYesOrNoModal(String yesNo, @Nullable GalenReport report) {
-        WebElement response = (yesNo.equals("Yes")) ? getYesModalBtn() : getNoModalBtn() ;
-        wait.until(ExpectedConditions.elementToBeClickable(response));
-        basicHelpers.clickFlex(response, yesNo, report);
-        verifyModalDismissed(null);
+        By response = (yesNo.equals("Yes")) ? btnYesModal : btnNoModal;
+        basicHelpers.verifyClickToNavNotDisplayed(response, yesNo, modal, "modal",report);
     }
 
     public boolean clickConfirmModalToPage( BasePage page, @Nullable GalenReport report) {
-        WebElement response = basicHelpers.getWebElement(btnConfirmModal);
-        wait.until(ExpectedConditions.elementToBeClickable(btnConfirmModal));
-        return basicHelpers.verifyClickToPageTransition(page,response, "Confirm", report);
+        return basicHelpers.verifyClickToPageTransition(page,btnConfirm, "Confirm", report);
     }
 
     public boolean clickYesNoModalToPage(String yesNo, BasePage page, @Nullable GalenReport report) {
-        WebElement response = (yesNo.equals("Yes")) ? getYesModalBtn() : getNoModalBtn() ;
-        wait.until(ExpectedConditions.elementToBeClickable(response));
+        By response = (yesNo.equals("Yes")) ? btnYesModal : btnNoModal ;
         return basicHelpers.verifyClickToPageTransition(page,response, yesNo, report);
     }
 
@@ -319,18 +318,8 @@ public class BasePage {
         return basicHelpers.verifyDisplayedFlex(modal, "Modal", report);
     }
 
-    public Boolean verifyQuestionTextMatches(@Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(question), "Assessment question",
-                questionText, report);
-    }
-
-    public Boolean verifyMoreInfoTextMatches(@Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(moreInfoContent), "More info text",
-                moreInfoText, report);
-    }
-
     public void clickXButton(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getXBtn(), "X", report);
+        basicHelpers.clickFlex(btnXModal, "X", report);
     }
 
     public boolean clickYesNoToOpenModal(String response, String modalText, @Nullable GalenReport report) {
@@ -347,4 +336,16 @@ public class BasePage {
         }
     }
 
+    public void clickSAPLinkToHandle(String originalHandle, @Nullable GalenReport report) {
+        try {
+            basicHelpers.clickFlex(sapLink, "Study Portal link", report);
+            sleep(2000);
+            driver.switchTo().window(originalHandle);
+        } catch (Exception e) {
+            if (report != null) {
+                report.addStep("Click SAP link", "Return to original window", e.getMessage(),
+                        false, true);
+            }
+        }
+    }
 }

@@ -3,13 +3,14 @@ package galen.pages.tenant.petros.InitialAssessment;
 import galen.enums.common.Gender;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.petros.PetrosUser;
-import org.openqa.selenium.*;
+import galen.pages.common.BasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import galen.helpers.common.CommonPageFeatures;
-import galen.pages.common.BasePage;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -86,12 +87,6 @@ public class SexAndBirthYear extends BasePage {
         return result;
     }
 
-    public Boolean verifyMaleSelectionAndNextButtonDisabled(WebDriver driver, @Nullable GalenReport report) throws IOException {
-        CommonPageFeatures commonPageFeatures = new CommonPageFeatures(driver);
-        basicHelpers.clickFlex(driver.findElement(maleRadioBtn),"Male radio button", report);
-        return basicHelpers.verifyButtonEnabled(commonPageFeatures.getNextButton(), false, report);
-    }
-
     public void enterDateOfBirth(WebDriver driver, PetrosUser user, @Nullable GalenReport report) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement monthField = getMonthInput();
@@ -115,9 +110,9 @@ public class SexAndBirthYear extends BasePage {
 
     public void enterGender(PetrosUser user, @Nullable  GalenReport report) {
         if (user.gender == Gender.Male) {
-            basicHelpers.clickFlexJs(getMaleRadioButton(), "Male Radio Button", report);
+            basicHelpers.clickFlex(maleRadioBtn, "Male Radio Button", report);
         } else {
-            basicHelpers.clickFlexJs(getFemaleRadioButton(), "Female Radio Button", report);
+            basicHelpers.clickFlex(femaleRadioBtn, "Female Radio Button", report);
         }
     }
 
@@ -129,23 +124,7 @@ public class SexAndBirthYear extends BasePage {
             report.addStep("Input gender: "+ user.gender.name()+"\n" +
                             "Input DOB "+ user.dobMonth+"-"+user.dobDay+"-"+user.dobYear+"\n" +
                             "Click 'Next' button to OAuth screen", "Data is entered\n", "As Expected",true);
-                 //           "OAuth page is displayed", "As expected", new OAuth(driver).verifyAtPage(null) );
-        }
+      }
     }
 
-    public void verifyNextButtonIsEnabledAfterDOBEntry(WebDriver driver, PetrosUser user, GalenReport report) throws IOException {
-        enterDateOfBirth(driver, user, report);
-        basicHelpers.verifyButtonEnabled(getNextButton(),true, report);
-        String screenshotName = "DOB_And_Next_Button_Enabled_" + System.currentTimeMillis();
-        report.addScreenshotStep(screenshotName, driver);
-    }
-
-    public Boolean verifyNextButtonDisabledAfterClearingYear(WebDriver driver, PetrosUser user,GalenReport report) throws IOException, InterruptedException {
-        user.dobDay="";
-        user.dobYear="";
-        user.dobMonth="";
-        enterDateOfBirth(driver, user, report);
-        CommonPageFeatures commonPageFeatures=new CommonPageFeatures(driver);
-        return basicHelpers.verifyButtonEnabled(commonPageFeatures.getNextButton(),false, report);
-    }
 }

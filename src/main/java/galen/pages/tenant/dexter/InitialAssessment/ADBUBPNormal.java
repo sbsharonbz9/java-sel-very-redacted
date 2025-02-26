@@ -23,7 +23,7 @@ public class ADBUBPNormal extends BasePage {
     }
 
     public boolean clickGetBPButtonToEnterBP(@Nullable GalenReport report) {
-        return basicHelpers.verifyClickToPageTransition(new EnterBPEnd(driver), getEnterNumbersButton(),
+        return basicHelpers.verifyClickToPageTransition(new EnterBPEnd(driver), getBloodPressureNumbersButton,
                 "Enter numbers", report);
     }
 }

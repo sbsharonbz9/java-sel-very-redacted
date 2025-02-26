@@ -3,7 +3,6 @@ package galen.pages.tenant.dexter.InitialAssessment;
 import galen.helpers.common.GalenReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 

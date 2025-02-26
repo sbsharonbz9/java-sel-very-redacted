@@ -12,8 +12,7 @@ import java.util.LinkedHashMap;
 
 public class ObesityBMI extends BasePage {
     public  By title = By.className("BMIObesityScreen");
-    public  By selectHeight = By.xpath("//select");
-    public  By selectHeightOptions = By.xpath("//select[@name='height']/option[@value!='']");
+    public  By selectHeight = By.xpath("//select[@name='height']");
     public  By inputWeight = By.xpath("//input[@id='weight']");
     public By weightInputError = By.className("assessment-numeric-input__error");
     public String weightInputErrorText = "Please enter a valid weight over 40 pounds";
@@ -22,7 +21,7 @@ public class ObesityBMI extends BasePage {
         super(driver);
         headingTitle=title;
         titleText="Enter your current height and weight";
-        reportText="Obesity/BMI page";
+        reportText="Obesity and BMI page";
     }
 
     public WebElement getHeightElement() {
@@ -56,12 +55,12 @@ public class ObesityBMI extends BasePage {
         return clickNextToPage(nextPage, report);
     }
 
-    public boolean verifyWeightInputError(@Nullable GalenReport report) {
-        LinkedHashMap<String, Object> results = new LinkedHashMap<String, Object>();
+    public void verifyWeightInputError(@Nullable GalenReport report) {
+        LinkedHashMap<String, Object> results = new LinkedHashMap<>();
         String condition = "invalid weight error message";
         results.put("Is displayed", basicHelpers.verifyDisplayedFlex(weightInputError, condition , null));
         results.put("Contains correct text",basicHelpers.verifyText(getWeightErrorElement(),
                 "invalid weight error message", weightInputErrorText, null));
-        return basicHelpers.addMultipleVerificationStep(condition, results, report);
+        basicHelpers.addMultipleVerificationStep(condition, results, report);
     }
 }

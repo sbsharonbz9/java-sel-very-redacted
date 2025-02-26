@@ -20,6 +20,7 @@ public class ADBU extends BasePage {
     public String highCholesterolCondition = "high cholesterol";
     public String obesityCondition = "you have a BMI greater than 35";
     public String gallBladderCondition = "gallbladder";
+    public String otherCancerCondition = "you have or have had other cancer";
     public String depressionCondition = "clinically diagnosed depression";
     public By docMayDecide = By.xpath("//ul[@class='adbuList']/following-sibling::p[1]");
     public String docMayDecideText="Your doctor may decide that it is OK for you to use Zena or may prescribe an " +
@@ -40,23 +41,11 @@ public class ADBU extends BasePage {
         titleText="Ask a doctor if Zena is safe for you.";
         reportText="ADBU Screen";
         modal = confirmModal;
-        btnConfirmModal=confirmButton;
+        btnConfirm=confirmButton;
     }
 
     public WebElement getConditions() {
         return basicHelpers.getWebElement(conditions);
-    }
-
-    public boolean verifyConfirmModalOpen(@Nullable GalenReport report) {
-        return verifyModalDisplayed(report);
-    }
-
-    public WebElement getConfirmButton() {
-        return basicHelpers.getWebElement(confirmButton);
-    }
-
-    public void clickConfirm(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(confirmButton, "Confirm", report);
     }
 
     public boolean clickYesNoToOpenModal(String response, @Nullable GalenReport report) {
@@ -87,36 +76,27 @@ public class ADBU extends BasePage {
         return basicHelpers.verifyText(getConditions(), "Other Medication: "+ condition, fullCondition, report);
     }
 
-    public Boolean verifyConfirmButtonEnabled(@Nullable GalenReport report) {
-        return basicHelpers.verifyButtonEnabled(getConfirmButton(), true, report);
-    }
-
-    public Boolean verifyConfirmButtonDisabled(@Nullable GalenReport report) {
-        return basicHelpers.verifyButtonEnabled(getConfirmButton(), false, report);
-    }
-
     public Boolean verifyDocDecide( @Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(docMayDecide), "ADBU screen",
+        return basicHelpers.verifyText(basicHelpers.getWebElement(docMayDecide), reportText,
                 docMayDecideText,report);
     }
 
     public Boolean verifyZenaSafe(@Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(isZenaSafe),  "ADBU Screen",
+        return basicHelpers.verifyText(basicHelpers.getWebElement(isZenaSafe),  reportText,
                 isZenaSafeText,report);
     }
 
     public void addressConfirmations(String response, @Nullable GalenReport report)  {
         try {
-            clickYesNoToOpenModal(response, report);
-            clickConfirmCheckbox(report);
-            clickConfirmModal(report);
+            clickYesNoToOpenModal(response, "ADBU Confirmation modal", report);
+            addressOpenModalConfirmations(report);
             Thread.sleep(1000);
         } catch (Exception ignored) {
         }
     }
 
     public void addressConfirmationsAndProgress(String response, BasePage page,@Nullable GalenReport report) {
-        clickYesNoToOpenModal(response,report);
+        clickYesNoToOpenModal(response, "ADBU Confirmation modal", report);
         clickConfirmCheckbox(report);
         clickConfirmModalToPage(page,report);
     }

@@ -1,15 +1,11 @@
 package galen.pages.common;
 
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.petros.PetrosReport;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 
@@ -42,7 +38,7 @@ public class WelcomePage extends BasePage {
     }
 
     public void clickBegin(@Nullable GalenReport report) {
-        basicHelpers.verifyClickToPageTransition(new PrivacyPage(driver), getBeginButton(),
+        basicHelpers.verifyClickToPageTransition(new PrivacyPage(driver), btnBegin,
                 getBeginButton().getText() +" button", report );
     }
 

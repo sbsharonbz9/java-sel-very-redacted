@@ -3,10 +3,12 @@ package galen.helpers.tenant.petros;
 import galen.helpers.common.GalenReport;
 import galen.helpers.common.Navigations;
 import galen.pages.common.BasePage;
+import galen.pages.common.OAuth;
 import galen.pages.common.PrivacyPage;
 import galen.pages.tenant.petros.InitialAssessment.*;
 import org.openqa.selenium.WebDriver;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class PetrosNavigations extends Navigations {
@@ -16,22 +18,16 @@ public class PetrosNavigations extends Navigations {
         super(driver);
         this.pages = new PetrosPageObj(driver);
     }
-/*
-// Same as second similar function but with reporting
-    void resetUserForReorder(CutterUser user,CutterReport report) {
-        if (report!=null) {
-            report.addStep("Set DB to allow user to reorder", "User can reorder",
-                    "User can reorder", true)
-        }
-        resetUserForReorder(user)
-    }
 
-    void resetUserForReorder(PetrosUser user) {
-        new DatabaseHelpers().queryDBTriggerReorder(user.email, 6); // using DB, set delivery date 6 days back
-        to re-enable the "Reorder" button.
-        Navigate to Reorder page
-        reinitialize any metrics which might be overwritten
-    } */
+    public void petrosHappyFlowTo(PetrosUser user, BasePage toPage, @Nullable GalenReport report) throws IOException, InterruptedException {
+        boolean atPage;
+        new PetrosNavigations(driver).partialNavigationIA(user, toPage, null);
+        atPage = toPage.verifyAtPage();
+        if (report != null) {
+            report.addStep("Execute HappyFlow to '" + toPage.titleText + "' page", "At '" +
+                    toPage.titleText + " page", atPage ? "As Expected" : "FAIL", atPage, true);
+        }
+    }
 
     public BasePage partialNavigationIA(PetrosUser user, BasePage endPage, GalenReport report) throws IOException, InterruptedException {
 
@@ -53,7 +49,6 @@ public class PetrosNavigations extends Navigations {
         if (pages.sexAndBirthYear.verifyAtPage()) {
             if (endPage.getClass().equals(SexAndBirthYear.class)) { return endPage; }
             pages.sexAndBirthYear.fillOutForm(user, report);
-            pages.oAuth.verifyAtPage(report);
         }
 
         if (pages.oAuth.verifyAtPage()) {
@@ -254,20 +249,9 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.review.verifyAtPage()) {
             if (endPage.getClass().equals(ReviewAnswers.class)) { return endPage;}
-            pages.review.clickAnswersChecked(report);
-            pages.review.verifyConfirmModalOpen(report);
-            pages.review.clickConfirmCheckbox(report);
-            pages.review.verifyAuthModalOpen(report);
+            pages.review.addressConfirmationsAndProgress(pages.oAuth, report);
             pages.oAuth.chooseAccountType(user, report);
         }
-
         return endPage;
     }
-
-    public Class<? extends BasePage> partialNavigationRA(PetrosUser user, Class<? extends BasePage> endPage, PetrosReport report) throws IOException {
-        return endPage;
-    }
-
-
-
 }

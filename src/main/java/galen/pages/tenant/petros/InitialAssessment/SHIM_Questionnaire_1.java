@@ -1,9 +1,6 @@
 package galen.pages.tenant.petros.InitialAssessment;
 
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.petros.PetrosReport;
-import galen.helpers.tenant.petros.PetrosUser;
-import galen.pages.common.BasePage;
 import galen.pages.common.SingleResponseRadioButtonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

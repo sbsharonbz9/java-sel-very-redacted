@@ -1,17 +1,13 @@
 package galen.pages.tenant.dexter.InitialAssessment;
 
-import galen.enums.tenant.dexter.SmokeType;
-
 import galen.helpers.common.GalenReport;
 import galen.pages.common.SingleResponseRadioButtonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Smoking extends SingleResponseRadioButtonPage {
 

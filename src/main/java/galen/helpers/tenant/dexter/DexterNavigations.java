@@ -133,6 +133,12 @@ public class DexterNavigations extends Navigations {
             pages.adbubpScreen.addressConfirmations(user.askedDoctor,report);
         }
 
+        if (pages.adbubpNormal.verifyAtPage()) {
+            if (endPage.getClass().equals(ADBUBPNormal.class)) {return endPage;}
+            pages.adbubpNormal.verifyAtPage(report);
+            pages.adbubpNormal.clickGetBPButtonToEnterBP(report);
+        }
+
         if (pages.adbu.verifyAtPage()) {
             if (endPage.getClass().equals(ADBU.class)) {return endPage;}
             pages.adbu.verifyAtPage(report);
@@ -170,7 +176,7 @@ public class DexterNavigations extends Navigations {
         if (pages.usedProduct.verifyAtPage()) {
             if (endPage.getClass().equals(UsedProduct.class)) { return endPage; }
             pages.orderForSelf.clickYesNoNextToModal(user.productUsed, "Tooltip",report);
-            pages.orderForSelf.clickConfirmModalToPage(pages.orderForSelf, report);
+            pages.orderForSelf.clickCloseToDismiss(report);
         }
 
         if (pages.orderForSelf.verifyAtPage()) {
@@ -207,7 +213,7 @@ public class DexterNavigations extends Navigations {
                 if (endPage.getClass().equals(BirthYear.class)) {return endPage;}
                 pages.birthYear.fillOutBirthdayAndProgress(user,pages.smokingDisclaimer, report);
                 if (endPage.getClass().equals(SmokingDisclaimer.class)) {return endPage;}
-                pages.smokingDisclaimer.clickConfirmModalToPage(pages.everHadCancer,report);
+                pages.smokingDisclaimer.clickNextToPage(pages.everHadCancer,report);
             }
         }
 

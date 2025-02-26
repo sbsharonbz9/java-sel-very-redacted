@@ -9,26 +9,21 @@ import org.openqa.selenium.WebElement;
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 
+import static java.lang.Thread.sleep;
+
 public class Participants extends SPBasePage {
 
     //Table
     public By parHeader = By.xpath("//h1[text()='Participants']");
     public By participantList = By.xpath("//table[@role='table']");
     public By participants = By.tagName("tr");
-    public By participantId = By.xpath("//h1[contains(normalize-space(), 'Participant')]");
-    public By participantEmail = By.xpath("//span[contains(normalize-space(), 'Email')]");
-    public By participantIdHeader = By.xpath("//th[normalize-space()='Participant ID']"); // Use this
-    public By participantIdDropdown = By.xpath("//th[normalize-space()='Participant ID']"); // Redundant but can't
-    // delete because it is used in several tests
-    public By participantEmailHeader = By.xpath("//th[normalize-space()='Email Address']"); // use this
-    public By emailAddressId = By.xpath("//th[normalize-space()='Email Address']"); // Redundant but can't
-    // delete because it is used in several tests
+
+    // Table headers
+    public By participantIdHeader = By.xpath("//th[normalize-space()='Participant ID']");
+    public By participantEmailHeader = By.xpath("//th[normalize-space()='Email Address']");
     public By participantInitialOutcomeHeader= By.xpath("//th[normalize-space()='Initial Outcome']");
     public By participantSurveyDateHeader= By.xpath("//th[normalize-space()='Heath Survey Date']");
     public By actionHeader = By.xpath("//th[normalize-space()='Action']");
-    public By assessmentType=By.xpath("//th[normalize-space()='Assessment Type']");
-    public By completedBy=By.xpath("//th[normalize-space()='Completed By']");
-    public By completedDate=By.xpath("//th[normalize-space()='Completed Date']");
 
     // Records
     public By viewRecordsButton = By.xpath("//button[contains(text(), 'View Records')]");
@@ -40,7 +35,6 @@ public class Participants extends SPBasePage {
     public By studyIDDropdown = By.name("studyid");
     public By siteIDDropdown = By.name("siteid");
     public By createUserButton = By.xpath("//button[text()='Create user']");
-    public By addRecordButton = By.xpath("//button[contains(text(), 'Add Record')]");
 
     // Edit Participant Modal
     public By activeToggle = By.xpath("//div[contains(@class, 'react-toggle')]");
@@ -48,7 +42,6 @@ public class Participants extends SPBasePage {
             "contains(@class, 'checked'))]");
     public By editEmailField = By.xpath("//input[@id='email']");
     public By resetEmailLink = By.xpath("//*[text()='Resend Invitation Email Link']");
-    public By saveChangesButton = By.xpath("//button[text()='Save Changes']");
     public By addParticipantButton = By.xpath("//button[text()='Add Participant']");
     public By modals = By.xpath("//div[@class='ReactModalPortal']/div[contains(@class, 'after-open')]");
 
@@ -57,10 +50,6 @@ public class Participants extends SPBasePage {
         headingTitle = parHeader;
         reportText = "Participant Screen";
         modal = modals;
-    }
-
-    public WebElement getAddParticipantButton() {
-        return basicHelpers.getWebElement(addParticipantButton);
     }
 
     public WebElement getEmail() {
@@ -83,38 +72,6 @@ public class Participants extends SPBasePage {
         return basicHelpers.getWebElement(createUserButton);
     }
 
-    public WebElement getViewRecordsButton() {return basicHelpers.getWebElement(viewRecordsButton);}
-
-    public WebElement getAddRecordButton() {return basicHelpers.getWebElement(addRecordButton);}
-
-    public WebElement getEditButton() {
-        return basicHelpers.getWebElement(editButton);
-    }
-
-    public WebElement getParticipantIdDropdown() {return basicHelpers.getWebElement(participantIdHeader);}
-
-    public WebElement getAssessmentType() {return basicHelpers.getWebElement(assessmentType);}
-
-    public WebElement getCompletedBy() {return basicHelpers.getWebElement(completedBy);}
-
-    public WebElement getCompletedDate() {return basicHelpers.getWebElement(completedDate);}
-
-    public WebElement getCloseRecords() {
-        return basicHelpers.getWebElement(closeRecordButton);
-    }
-
-    public WebElement getEmailAddressIdColumn() {
-        return basicHelpers.getWebElement(emailAddressId);
-    }
-
-    public WebElement getInitialOutcomeColumn() {
-        return basicHelpers.getWebElement(participantInitialOutcomeHeader);
-    }
-
-    public WebElement getSurveyDatedColumn() {
-        return basicHelpers.getWebElement(participantSurveyDateHeader);
-    }
-
     public void addParticipant(String email, String studyID, String siteID, @Nullable GalenReport report) {
         enterNewParticipantData(email, studyID,siteID, report);
         basicHelpers.clickFlex(createUserButton, "Create User", report);
@@ -134,25 +91,25 @@ public class Participants extends SPBasePage {
         return basicHelpers.getRandomDropdownOption(siteIDDropdown);
     }
 
-    public boolean verifyCreateUserEnabledDisabled(boolean isEnabled, @Nullable GalenReport report) {
-        return basicHelpers.verifyButtonEnabled(getCreateUserButton(), isEnabled, report);
+    public void verifyCreateUserEnabledDisabled(boolean isEnabled, @Nullable GalenReport report) {
+        basicHelpers.verifyButtonEnabled(getCreateUserButton(), isEnabled, report);
     }
 
-    public boolean openAddParticipant(@Nullable GalenReport report) {
-        return basicHelpers.verifyClickToNavDisplayed(addParticipantButton, "Add Participant", createUserButton,
+    public void openAddParticipant(@Nullable GalenReport report) {
+        basicHelpers.verifyClickToNavDisplayed(addParticipantButton, "Add Participant", createUserButton,
                 "Add Participant modal", report);
     }
 
-    public boolean verifyAllModalElementsDisplayed(@Nullable GalenReport report) {
+    public void verifyAllModalElementsDisplayed(@Nullable GalenReport report) {
         LinkedHashMap<String, By> results = new LinkedHashMap<>();
         results.put("Email", emailField);
         results.put("Study ID", studyIDDropdown);
         results.put("Site ID", siteIDDropdown);
         results.put("Create User button", createUserButton);
-        return basicHelpers.verifyElementsDisplayed(results, report);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 
-    public boolean verifyAllEditModalElementsDisplayed(@Nullable GalenReport report) {
+    public void verifyAllEditModalElementsDisplayed(@Nullable GalenReport report) {
         LinkedHashMap<String, By> results = new LinkedHashMap<>();
 
         results.put("Email", editEmailField);
@@ -160,13 +117,23 @@ public class Participants extends SPBasePage {
         results.put("Site ID", siteIDDropdown);
         results.put("Save Changes button", saveChangesButton);
         results.put("Cancel button", btnCancel);
-        return basicHelpers.verifyElementsDisplayed(results, report);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 
     public void verifyAllAddModalFilledIn(String email, String studyID, String siteID, @Nullable GalenReport report) {
         basicHelpers.verifyText(getEmail(), "Email", email, report);
-        basicHelpers.verifyText(getStudyID(), "Study ID", studyID, report);
-        basicHelpers.verifyText(getSiteID(), "Site ID", siteID, report);
+        basicHelpers.verifyCurrentDropdownValue(studyIDDropdown, "Study ID dropdown",
+                studyID, report);
+        basicHelpers.verifyCurrentDropdownValue(siteIDDropdown, "SiteID dropdown",
+                siteID, report);
+    }
+
+    public void verifySSElementsDisplayed(@Nullable GalenReport report) {
+        LinkedHashMap<String, By> results = new LinkedHashMap<>();
+        results.put("Add Participant Button", addParticipantButton);
+        results.put("Edit Participant Button", editButton);
+        results.put("View Records", viewRecordsButton);
+        basicHelpers.verifyElementsDisplayed(results, report);
     }
 
     public void selectStudyID(String value, @Nullable GalenReport report) {
@@ -182,69 +149,36 @@ public class Participants extends SPBasePage {
     }
 
     public void clickCreateUser(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getCreateUserButton(), "Create User", report);
+        basicHelpers.clickFlex(createUserButton, "Create User", report);
     }
 
     public void clickViewRecords(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getViewRecordsButton(), "View Records", report);
-    }
-
-    public void clickAddRecords(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getAddRecordButton(), "Add Record", report);
+        basicHelpers.verifyClickToPageTransition(new ViewRecords(driver),viewRecordsButton,"View Records", report);
     }
 
     public void clickEditPart(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getEditButton(), "Edit Participant", report);
+        basicHelpers.clickFlex(editButton, "Edit Participant", report);
     }
 
     public void clickCloseButton(@Nullable GalenReport report) {
         basicHelpers.clickFlex(btnCancel, "Close Modal", report);
     }
 
-    public void clickPartId(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getParticipantIdDropdown(), "Participant Id ", report);
-    }
-
-    public void clickAssessmentType(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getAssessmentType(), "Assessment Type", report);
-    }
-
-    public void clickCompletedBy(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getCompletedBy(), "Completed By", report);
-    }
-
-    public void clickCompletedDate(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getCompletedDate(), "Completed Date", report);
-    }
-
-    public void clickEmailAddressId(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getEmailAddressIdColumn(), "Email Address", report);
-    }
-
-    public void clickInitialOutcome(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getInitialOutcomeColumn(), "Initial Outcome", report);
-    }
-
-    public void clickSurveyDate(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getSurveyDatedColumn(), "Survey Date", report);
-    }
-
     public void clickCloseRecords(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(getCloseRecords(), "Close Records", report);
+        basicHelpers.clickFlex(closeRecordButton, "Close Records", report);
     }
 
-    public void clickSaveChangesButton(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(saveChangesButton, "Save Changes", report);
+    public void verifyDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
+
+        basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), null);
+        basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']/preceding-sibling::td[2]/div"),
+                "Red Dot Status for " + email, report);
     }
 
-    public boolean verifyDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
-        basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-        return basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='"+email+"']/preceding-sibling::td[2]/div"), "Red Dot Status for " + email, report);
-    }
-
-    public boolean verifyNotDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
-        basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-        return basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='"+email+"']/preceding-sibling::td[2]/div"), "Red Dot Status for " + email, report);
+    public void verifyNotDisplayedRedDotStatus(String email, @Nullable GalenReport report) {
+        basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), null);
+        basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']/preceding-sibling::td[2]/div"),
+                "Red Dot Status for " + email, report);
     }
 
     public void clickEditParticipant(String email, @Nullable GalenReport report) {
@@ -256,18 +190,15 @@ public class Participants extends SPBasePage {
     public void clickViewRecords(String email, @Nullable GalenReport report) {
         basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
         By tableEntryBy = By.xpath("//td[text()='" + email + "']/following-sibling::td/div/button[contains(text(),'View Records')]");
-        basicHelpers.clickFlex(tableEntryBy, "Click View Records link", report);
+        basicHelpers.verifyClickToPageTransition(new ViewRecords(driver),tableEntryBy,"View Records", report);
     }
 
-
-
-    public boolean findEmailInTable(String email, @Nullable GalenReport report) {
+    public void findEmailInTable(String email, @Nullable GalenReport report) {
         try {
-            Thread.sleep(1000);
+            sleep(1000);
             basicHelpers.scrollToElement(By.xpath("//td[text()='" + email + "']"), report);
-            return basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']"), "Email " + email, report);
-        } catch (Exception e) {
-            return false;
+            basicHelpers.verifyDisplayedFlex(By.xpath("//td[text()='" + email + "']"), "Email " + email, report);
+        } catch (Exception ignored) {
         }
     }
 
@@ -290,33 +221,37 @@ public class Participants extends SPBasePage {
         verifyModalDisplayed(report);
     }
 
-    public boolean verifyEmailNotInTable(String email, @Nullable GalenReport report) {
-        return basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']"), "Email " + email, report);
+    public void verifyEmailNotInTable(String email, @Nullable GalenReport report) {
+        basicHelpers.verifyNotDisplayedFlex(By.xpath("//td[text()='" + email + "']"), "Email " + email, report);
     }
 
-    public Boolean verifyParticipantIDFormat(ParticipantClass par, @Nullable GalenReport report) {
+    public void verifyParticipantIDFormat(ParticipantClass par, @Nullable GalenReport report) {
 
         By tableEntryBy = By.xpath("//td[text()='" + par.email + "']/preceding-sibling::td[contains(text(),'" +
                 par.studyID + "')]");
         WebElement tableEntry = basicHelpers.getWebElement(tableEntryBy);
         if (tableEntry != null) {
             par.participantID = tableEntry.getText();
-            return basicHelpers.verifyCondition(() ->
+            basicHelpers.verifyCondition(() ->
                             par.participantID.contains(par.studyID + "-" + par.siteID + "-"),
                     "Participant ID " + par.participantID +
                             " format contains study ID " + par.studyID + " and site id " + par.siteID, false, report);
         } else {
-            return basicHelpers.verifyDisplayedFlex(tableEntryBy, "Table entry  for user " + par.email, report);
+            basicHelpers.verifyDisplayedFlex(tableEntryBy, "Table entry  for user " + par.email, report);
         }
     }
 
-    public boolean viewRecordWithMultipleAssessments(@Nullable GalenReport report) {
+    public void viewRecordWithMultipleAssessments(@Nullable GalenReport report) {
         int i=0;
         ViewRecords view = new ViewRecords(driver);
         int p = basicHelpers.getAllWebElements(participants).size();
         while ( i< p) {
             basicHelpers.clickFlex(basicHelpers.getAllWebElements(viewRecordsButton).get(i), "record",null);
             view.verifyAtPage();
+            try {
+                sleep(500);
+            } catch (InterruptedException ignored) {
+            }
             if (view.getAllCheckboxes().size() >= 2) {
                 break;
             }
@@ -324,8 +259,26 @@ public class Participants extends SPBasePage {
             verifyAtPage();
             i++;
         }
-        return basicHelpers.verifyActionToPageDisplayed("Click View Records on a participant with multiple assessments",
-                view, "View Records page",report);
+
+        basicHelpers.verifyActionToPageDisplayed("Click View Records on a participant with multiple assessments",
+                view, "View Records page", report);
     }
 
+    public void verifySS_CA_HeadersDisplayed(@Nullable GalenReport report) {
+        LinkedHashMap<String, By> results = new LinkedHashMap<>();
+        results.put("Participant ID Header", participantIdHeader);
+        results.put("Participant Email Header", participantEmailHeader);
+        results.put("Initial Outcome Header", participantInitialOutcomeHeader);
+        results.put("Survey Date Header", participantSurveyDateHeader);
+        results.put("Action Header", actionHeader);
+        basicHelpers.verifyElementsDisplayed(results, report);
+    }
+
+    public void verifyHeadersDisplayed(@Nullable GalenReport report) {
+        LinkedHashMap<String, By> results = new LinkedHashMap<>();
+        results.put("Participant ID Header", participantIdHeader);
+        results.put("Participant Email Header", participantEmailHeader);
+        results.put("Action Header", actionHeader);
+        basicHelpers.verifyElementsDisplayed(results, report);
+    }
 }

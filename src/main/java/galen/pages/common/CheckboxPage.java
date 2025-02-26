@@ -1,13 +1,16 @@
 package galen.pages.common;
 
+import galen.enums.tenant.dexter.CancerType;
+import galen.enums.tenant.dexter.DDIConditionType;
+import galen.enums.tenant.dexter.DDIThyroidType;
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.dexter.DexterUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CheckboxPage extends BasePage {
@@ -39,25 +42,18 @@ public class CheckboxPage extends BasePage {
 
     // Select a single checkbox
     public void selectCheckboxReponse(String optionValue, @Nullable GalenReport report) {
-        By selection = getOptionValueBy(optionValue);
-        WebElement checkBox = getSelected(selection);
-        basicHelpers.clickFlex(checkBox, optionValue, report);
+        selectCheckboxReponses(getCondition(optionValue), report);
     }
 
-    public boolean selectCheckboxAndProgress(String optionValue,
-                                             BasePage nextPage, @Nullable GalenReport report) {
-        By selection = getOptionValueBy(optionValue);
-        WebElement checkBox = getSelected(selection);
-        basicHelpers.clickFlex(checkBox, optionValue, report);
-        return clickNextToPage(nextPage, report);
+    public boolean selectCheckboxAndProgress(String optionValue, BasePage nextPage, @Nullable GalenReport report) {
+        return selectCheckboxesAndProgress(getCondition(optionValue), nextPage, report);
     }
 
-    // Select multiple checkboxes
     public void selectCheckboxReponses(ArrayList<String> optionValues, @Nullable GalenReport report) {
-        String step = "Input values:\n";
+        String step = "Select the following values:";
         for (String optionValue : optionValues) {
-            selectCheckboxReponse(optionValue, null);
-            step = step.concat(optionValue + "\n");
+            basicHelpers.clickFlex(getOptionValueBy(optionValue), optionValue, null);
+            step = step.concat("\n    "+optionValue);
         }
         if (report != null) {
             report.addStep(step, step, "As expected", true);
@@ -65,12 +61,22 @@ public class CheckboxPage extends BasePage {
     }
 
     public boolean selectCheckboxesAndProgress(ArrayList<String> checkboxes, BasePage nextPage, @Nullable GalenReport report) {
-        selectCheckboxReponses(checkboxes, report);
-        return clickNextToPage(nextPage, report);
+        String step = "Select the following values:";
+        for (String optionValue : checkboxes) {
+            selectCheckboxReponse(optionValue, null);
+            step = step.concat("\n    "+optionValue);
+        }
+        boolean atPage = clickNextToPage(nextPage, null);
+        step = step.concat("\nClick 'Next' to " + nextPage.reportText);
+        if (report != null) {
+            report.addStep(step, step, atPage?nextPage.reportText + " is displayed":nextPage.reportText + " is not " +
+                    "displayed", atPage);
+        }
+        return atPage;
     }
 
-    public void verifySelectedCheckboxes(ArrayList<String> optionValues, @Nullable GalenReport report) {
-        String step = "Verify Input values are selected:\n";
+    public void verifyCheckboxesSelected(ArrayList<String> optionValues, @Nullable GalenReport report) {
+        String step = "Verify the following values are selected:\n";
         boolean isFail = false;
         for (String optionValue : optionValues) {
             By selection = getOptionValueByForSelected(optionValue);
@@ -83,19 +89,32 @@ public class CheckboxPage extends BasePage {
             step = step.concat(optionValue + "\n");
         }
         if (report != null) {
-            if (isFail)
-                report.addStep(step, step, "Options are not selected", false);
-            else
-                report.addStep(step, step, "As expected", true);
+            report.addStep(step, step, isFail?"Options are not selected":"As expected", !isFail);
         }
     }
 
-    public Boolean verifyCheckboxSelected(String optionValue, @Nullable GalenReport report){
+    public ArrayList<String> getAllButNone() {
+        ArrayList<String> localOptions = options;
+        localOptions.remove(DDIConditionType.NONE_OF_THESE.label);
+        localOptions.remove(DDIThyroidType.NO_THYROID_MEDS.label);
+        return localOptions;
+    }
+
+    public ArrayList<String> getAllButOther() {
+        ArrayList<String> localOptions = options;
+        localOptions.remove(CancerType.Other_Cancer.label);
+        return localOptions;
+    }
+
+    public ArrayList<String> getCondition(String c) {
+        return new ArrayList<>(Arrays.asList(c));
+    }
+
+    public void verifyCheckboxSelected(String optionValue, @Nullable GalenReport report){
         By selection = getOptionValueByForSelected(optionValue);
         WebElement element =basicHelpers.getAllWebElements(selection).get(0);
-        return basicHelpers.verifyCondition( ()->element != null && element.isSelected(),"checkbox is selected",
+        basicHelpers.verifyCondition( ()->element != null && element.isSelected(),"checkbox is selected",
                 false, report);
-
     }
 
     public Boolean verifyCheckboxNotSelected(String optionValue, @Nullable GalenReport report) {
@@ -109,8 +128,8 @@ public class CheckboxPage extends BasePage {
         return isNotSelected;
     }
 
-    public boolean verifyAllOptionsVisible(@Nullable GalenReport report) {
-        HashMap<String, Object> results = new HashMap<String, Object>();
+    public void verifyAllOptionsVisible(@Nullable GalenReport report) {
+        HashMap<String, Object> results = new HashMap<>();
         By selection;
 
         for (String optionValue : options) {
@@ -121,33 +140,28 @@ public class CheckboxPage extends BasePage {
             report.addMultipleVerificationStep("The following values are displayed:", results,
                     false);
         }
-        return results.containsValue(false);
     }
 
-    public boolean verifyNoOptionsSelected(@Nullable GalenReport report) {
-        HashMap<String, Object> results = new HashMap<String, Object>();
-        for (String optionValue : options) {
+    public void verifyNoOptionsSelected(@Nullable GalenReport report) {
+        HashMap<String, Object> results = new HashMap<>();
+        for (String optionValue : getAllButNone()) {
             results.put(optionValue, verifyCheckboxNotSelected(optionValue, null));
         }
         if (report!=null) {
             report.addMultipleVerificationStep("The following values are not selected:", results,
                     false);
         }
-        return results.containsValue(false);
     }
 
     public boolean verifyAllOptionsInADBU(@Nullable GalenReport report) {
-        HashMap<String, Object> results = new HashMap<String, Object>();
-        ArrayList<String> localOptions = options;
+        HashMap<String, Object> results = new HashMap<>();
         WebElement adbuList = basicHelpers.getWebElement(By.className("adbuList"));
         if (adbuList==null && report!=null) {
             report.addStep("Verify all medications on "+this.reportText+" are displayed in ADBU", "All medications are listed",
                     "ADBU list is not present", false, true);
             return false;
         }
-        localOptions.remove("None of these");
-        localOptions.remove("No thyroid medication");
-        for (String optionValue : options) {
+        for (String optionValue : getAllButNone()) {
             results.put(optionValue, basicHelpers.verifyText(adbuList, optionValue, optionValue.toLowerCase(), null));
         }
         if (report!=null) {

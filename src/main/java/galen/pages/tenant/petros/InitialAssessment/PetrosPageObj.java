@@ -1,6 +1,9 @@
 package galen.pages.tenant.petros.InitialAssessment;
 
-import galen.pages.common.*;
+import galen.pages.common.DocAttestationNo;
+import galen.pages.common.GalenPageObj;
+import galen.pages.common.PritUnlPage;
+import galen.pages.common.PrivacyPage;
 import org.openqa.selenium.WebDriver;
 
 public class PetrosPageObj extends GalenPageObj {
@@ -48,11 +51,9 @@ public class PetrosPageObj extends GalenPageObj {
     public ADOPBU adopbu;
     public ADBU adbu;
     public DocAttestationNo docAttestationNo;
-    public Kickout kickout;
 
-    public PetrosPageObj(WebDriver driver) {
+    public PetrosPageObj(WebDriver driver)  {
         super(driver);
-        kickout = new Kickout(driver);
         pritUnl = new PritUnlPage(driver);
         welcomePage=new WelcomePage(driver);
         privacyPage=new PrivacyPage(driver);

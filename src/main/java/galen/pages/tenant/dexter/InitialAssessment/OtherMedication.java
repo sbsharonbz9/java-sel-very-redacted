@@ -16,9 +16,6 @@ public class OtherMedication extends CheckboxPage {
             DDIOtherMedsType.RIFAMPIN.label, DDIOtherMedsType.PREDNISONE.label,DDIOtherMedsType.TEMAZEPAM.label,
             DDIOtherMedsType.ST_JOHNS_WORT.label,
            DDIOtherMedsType.NONE_OF_THESE.label));
-    public ArrayList<String> allButNone = new ArrayList<>(Arrays.asList(DDIOtherMedsType.RIFABUTIN.label,
-            DDIOtherMedsType.RIFAMPIN.label, DDIOtherMedsType.PREDNISONE.label,DDIOtherMedsType.TEMAZEPAM.label,
-            DDIOtherMedsType.ST_JOHNS_WORT.label));
 
     public OtherMedication(WebDriver driver) {
         super(driver);

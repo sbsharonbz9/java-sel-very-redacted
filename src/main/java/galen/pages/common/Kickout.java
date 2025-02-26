@@ -2,8 +2,6 @@ package galen.pages.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Kickout extends BasePage {
     public By dnuHeader = By.className("kickout");
@@ -17,10 +15,6 @@ public class Kickout extends BasePage {
         headingTitle=dnuHeader;
         reportText="DNU Screen";
         assessmentID=assessmentNumber;
-    }
-
-    public WebElement getAssessmentNumber() {
-        return basicHelpers.getWebElement(assessmentNumber);
     }
 
 }

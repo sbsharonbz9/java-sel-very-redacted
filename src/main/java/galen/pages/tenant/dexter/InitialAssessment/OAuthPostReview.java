@@ -15,8 +15,7 @@ public class OAuthPostReview extends OAuth {
     }
 
     public void chooseAccountTypeAndProgress(GalenUser user, BasePage page, @Nullable GalenReport report) {
-        basicHelpers.verifyClickToPageTransition(page, basicHelpers.getWebElement(user.accountType.nav),
-                user.accountType.name(), report);
+        basicHelpers.verifyClickToPageTransition(page, user.accountType.nav, user.accountType.name(), report);
     }
 
 }

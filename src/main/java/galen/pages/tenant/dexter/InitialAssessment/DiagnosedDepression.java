@@ -4,7 +4,6 @@ import galen.helpers.common.GalenReport;
 import galen.pages.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 
@@ -19,29 +18,25 @@ public class DiagnosedDepression extends BasePage {
         headingTitle = title;
         titleText = "Is your depression clinically diagnosed?";
         reportText = "Clinical Depression Screen";
-        btnConfirmModal=btnModalConfirm;
+        btnConfirm=btnModalConfirm;
         modal=modalPopup;
+        btnBack = btnModalBack;
     }
 
-    public void clickBackButton(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(btnModalBack, "Back button", report);
-    }
-
-    public Boolean verifyConfirmModalOpen(@Nullable GalenReport report) {
-        return verifyModalDisplayed(report);
-    }
-
-    public void verifyConfirmButton(@Nullable GalenReport report) {
+    public void verifyConfirmButtonDisplayed(@Nullable GalenReport report) {
         basicHelpers.verifyDisplayedFlex(btnModalConfirm, "Confirm Button", report);
     }
 
-    public void verifyBackButton(@Nullable GalenReport report) {
-        basicHelpers.verifyDisplayedFlex(btnModalBack, "Back Button", report);
+    public void verifyBackButtonDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyDisplayedFlex(btnModalBack, "Go Back Button", report);
     }
 
     public boolean clickYesAndAddressModalToPage(BasePage toPage,@Nullable GalenReport report) {
-        clickYesNoNext("Yes", report);
-        verifyConfirmModalOpen(report);
+        clickYesNoNextToModal("Yes", "Clinical depression confirmation", report);
         return clickConfirmModalToPage(toPage, report);
+    }
+
+    public void clickYesAndOpenModal( @Nullable GalenReport report) {
+        clickYesNoNextToModal("Yes", "Clinical depression confirmation", report);
     }
 }
