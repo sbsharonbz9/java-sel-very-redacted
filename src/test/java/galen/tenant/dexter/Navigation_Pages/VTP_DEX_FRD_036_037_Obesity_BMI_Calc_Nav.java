@@ -37,10 +37,7 @@ public class VTP_DEX_FRD_036_037_Obesity_BMI_Calc_Nav extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_036_037_Obesity_BMI_Calc_Nav() {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;18JUN2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution " +
-                "related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

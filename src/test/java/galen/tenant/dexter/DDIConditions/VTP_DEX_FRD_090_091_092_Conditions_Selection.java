@@ -59,14 +59,11 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
     DexterPageObj pageObj;
 
     VTP_DEX_FRD_090_091_092_Conditions_Selection()  {
-        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-476: Updated Test Steps for FDA Changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for HappyFlow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     void verifySingleChoice(String step, DDICondition ddi, DexterUser user, String option, BasePage nextPage) {
-        user.conditionType= new ArrayList<String>(Arrays.asList(option));
+        user.conditionType= new ArrayList<>(Arrays.asList(option));
         new DexterHFWrappers(driver).runDexterHFNonsmokingwBP(user, ddi, report);
         ddi.selectCheckboxesAndProgress(user.conditionType,nextPage, report);
         report.addScreenshotStep("Step"+step+"_"+option);

@@ -38,7 +38,7 @@ public class VTP_FRD_064_065_066_067_068_Nitrate_Use_Screen extends BaseTest {
 
     VTP_FRD_064_065_066_067_068_Nitrate_Use_Screen() throws IOException {
         this.user = new PetrosUser();
-        VERSIONHISTORY.add("1.0;19JUL2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
 

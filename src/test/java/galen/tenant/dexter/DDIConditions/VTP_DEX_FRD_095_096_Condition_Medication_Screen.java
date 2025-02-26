@@ -73,10 +73,7 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_095_096_Condition_Medication_Screen()  {
-        VERSIONHISTORY.add("1.0;10NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-476: Updated Test Steps for FDA changes \n" +
-                "Per CADENCE-529: Removed from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     public void iterateThroughOptions(DexterUser user, DexterPageObj pageObj, String c) {

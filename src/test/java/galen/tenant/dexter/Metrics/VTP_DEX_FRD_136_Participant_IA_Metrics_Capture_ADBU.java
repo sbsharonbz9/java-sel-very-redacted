@@ -280,12 +280,7 @@ public class VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_ADBU extends BaseTes
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_ADBU() {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;28SEP2023;Per CADENCE-360: Update Test Steps for Correct Screen name and flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;24JUN2024;Per CADENCE-476/CADENCE-478: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
-        VERSIONHISTORY.add("4.0;16JUL2024;Per CADENCE-598: Update Test Objective and Metrics Verification table to include new column;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

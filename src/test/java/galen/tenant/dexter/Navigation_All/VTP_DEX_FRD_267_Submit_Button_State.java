@@ -78,9 +78,7 @@ public class VTP_DEX_FRD_267_Submit_Button_State extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_267_Submit_Button_State()  {
-        VERSIONHISTORY.add("1.0;03JUL2024;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;31JUL2024;Per CADENCE-631: Update Test Steps to align with correct assessment flow;James" +
-                " Reale");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     boolean verifyCheckboxSteps(int stepNo, String option, CheckboxPage thisPage, BasePage nextPage) {

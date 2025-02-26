@@ -39,7 +39,7 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
     public BasicHelpers bh;
 
-    VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest() throws IOException {
+    VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest() {
         this.user = new PetrosUser();
         VERSIONHISTORY.add(" ; ; ; ");
     }

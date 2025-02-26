@@ -63,11 +63,7 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_118_Metrics_Assessment_ID_Display()  {
-        VERSIONHISTORY.add("1.0;09MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Name Redacted");
-        VERSIONHISTORY.add("3.0;21JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation\n" +
-                "Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

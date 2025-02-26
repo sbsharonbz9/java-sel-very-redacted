@@ -30,13 +30,7 @@ public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
     public BasicHelpers bh;
 
     HappyFlow_IA_Initial_Assessment_noBP_NonSmoker() {
-        VERSIONHISTORY.add("1.0;13OCT2022;Initial Test Script; Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for " +
-                "restructured cancer flow; Name Redacted");
-        VERSIONHISTORY.add("3.0;12JUN2024;Per CADENCE-529: Updated Test Steps for adding verification and capture " +
-                "screenshot. Also added Test Steps and Post Execution Approvals section\n" +
-                "Per CADENCE-569: Update Test Steps to align with new assessment flow and options;" +
-                "Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

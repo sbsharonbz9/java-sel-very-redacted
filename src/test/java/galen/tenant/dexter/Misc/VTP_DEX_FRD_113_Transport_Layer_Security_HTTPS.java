@@ -25,7 +25,7 @@ public class VTP_DEX_FRD_113_Transport_Layer_Security_HTTPS extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_113_Transport_Layer_Security_HTTPS()  {
-        VERSIONHISTORY.add("1.0;07MAY2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

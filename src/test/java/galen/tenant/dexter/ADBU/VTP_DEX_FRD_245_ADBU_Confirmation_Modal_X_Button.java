@@ -32,7 +32,7 @@ public class VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button()  {
-        VERSIONHISTORY.add("1.0;24JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

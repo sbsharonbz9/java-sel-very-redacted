@@ -1,5 +1,6 @@
 package galen.enums.tenant.dexter;
 
+// All options listed are in UI. Unused ones were intended for use in future tests.
 public enum DDIHepCType {
     OMBITASVIR("Ombitasvir"),
     PARITAPREVIR("Paritaprevir"),

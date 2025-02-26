@@ -35,7 +35,7 @@ public class VTP_FRD_062_063_Once_a_Day_Instructional_Screen extends BaseTest {
 
     VTP_FRD_062_063_Once_a_Day_Instructional_Screen() throws IOException {
         this.user = new PetrosUser();
-        VERSIONHISTORY.add("1.0;19JUL2023;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

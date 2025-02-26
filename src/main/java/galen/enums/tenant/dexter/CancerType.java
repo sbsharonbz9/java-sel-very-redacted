@@ -1,6 +1,6 @@
 package galen.enums.tenant.dexter;
 
-
+// All options listed are in UI. Unused ones were intended for use in future tests.
 public enum CancerType {
     Breast_Cancer("Breast cancer"),
     Endometrial_Cancer("Endometrial (uterine) cancer"),

@@ -28,16 +28,13 @@ public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic() {
-        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test
     public void VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic_Test() throws Exception {
 
-        report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
-                VERSIONHISTORY, PREEXECUTION);
+        report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES, VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_117 - BP Number Entering 3 Digits in Systolic BP field Auto-tab to Diastolic " +
                 "field";
         DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();

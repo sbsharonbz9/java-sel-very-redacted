@@ -23,9 +23,7 @@ public class VTP_DEX_FRD_027_Confirm_Custome_No_DNU extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_027_Confirm_Custome_No_DNU()  {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted;" +
-                "2.0;28FEB2024;Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution" +
-                " related steps;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

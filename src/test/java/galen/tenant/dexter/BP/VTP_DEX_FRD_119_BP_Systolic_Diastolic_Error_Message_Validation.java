@@ -25,10 +25,7 @@ public class VTP_DEX_FRD_119_BP_Systolic_Diastolic_Error_Message_Validation exte
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_119_BP_Systolic_Diastolic_Error_Message_Validation() {
-        VERSIONHISTORY.add("1.0;14NOV2022;Initial Test Script ;Name Redacted");
-        VERSIONHISTORY.add("2.0;24JUN2024;Per CADENCE-478: Updated Test Steps for FDA changes \n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;Sharon Graves");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

@@ -32,10 +32,7 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes() {
-        VERSIONHISTORY.add("1.0;10MAR2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;21JUN2024;Per CADENCE-591: Update Test Steps for modified assessment and navigation \n" +
-                "Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow;Name Redacted");
-        VERSIONHISTORY.add("3.0;16JUL2024;Per CADENCE-598: Update Test Steps to reflect correct metrics column;Name Redacted\n");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

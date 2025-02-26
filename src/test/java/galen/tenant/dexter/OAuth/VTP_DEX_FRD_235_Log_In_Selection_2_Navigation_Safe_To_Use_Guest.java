@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_235_Log_In_Selection_2_Navigation_Safe_To_Use_Guest ext
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_235_Log_In_Selection_2_Navigation_Safe_To_Use_Guest() {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

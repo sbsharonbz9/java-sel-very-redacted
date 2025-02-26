@@ -51,12 +51,7 @@ public class VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields() {
-        VERSIONHISTORY.add("1.0;03NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;28FEB2024;Per CADENCE-478: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
-        VERSIONHISTORY.add("3.0;05SEP2024;Per CADENCE-640: Update Test Steps to include verification of all height " +
-                "values;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

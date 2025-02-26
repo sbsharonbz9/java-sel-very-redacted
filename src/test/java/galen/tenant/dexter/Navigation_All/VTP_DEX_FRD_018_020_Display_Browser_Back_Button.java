@@ -104,12 +104,7 @@ public class VTP_DEX_FRD_018_020_Display_Browser_Back_Button extends BaseTest {
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_018_020_Display_Browser_Back_Button()  {
-        VERSIONHISTORY.add("1.0;22FEB2023;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;19SEP2023;Per CADENCE-359/CADENCE-360: Updated Test Steps navigation for restructured " +
-                "cancer flow;Name Redacted");
-        VERSIONHISTORY.add( "3.0;15JUN2024;Per CADENCE-476: Updated Test Steps for FDA changes\n" +
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps\n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     void verifyMoreInfoExit(int step, BasePage page) throws InterruptedException {

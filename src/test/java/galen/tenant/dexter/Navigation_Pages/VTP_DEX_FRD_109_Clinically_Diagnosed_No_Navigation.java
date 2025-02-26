@@ -26,9 +26,7 @@ public class VTP_DEX_FRD_109_Clinically_Diagnosed_No_Navigation extends BaseTest
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_109_Clinically_Diagnosed_No_Navigation() {
-        VERSIONHISTORY.add("1.0;11NOV2022;Initial Test Script;Name Redacted");
-        VERSIONHISTORY.add("2.0;20JUN2024;Per CADENCE-567: Remove N/A from Expected Results column when using HappyFlow \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

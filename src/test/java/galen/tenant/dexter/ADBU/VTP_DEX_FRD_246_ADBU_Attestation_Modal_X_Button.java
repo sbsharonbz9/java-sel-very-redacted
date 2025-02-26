@@ -30,7 +30,7 @@ public class VTP_DEX_FRD_246_ADBU_Attestation_Modal_X_Button extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_246_ADBU_Attestation_Modal_X_Button()  {
-        VERSIONHISTORY.add("1.0;02FEB2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

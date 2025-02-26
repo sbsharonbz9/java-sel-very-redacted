@@ -4,17 +4,13 @@ import com.google.common.collect.ImmutableMap;
 import galen.constants.FrameworkConstants;
 import galen.enums.SP.AccountTabs;
 import galen.enums.SP.RoleType;
-import galen.helpers.tenant.petros.PetrosNavigations;
-import galen.helpers.tenant.petros.PetrosUser;
 import galen.pages.common.BasePage;
 import galen.pages.sp.StudyAdminPageObj;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
-import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.*;
 
 import javax.annotation.Nullable;
@@ -42,8 +38,7 @@ public class BasicHelpers {
         WebElement actualElement = (WebElement)((JavascriptExecutor) driver).executeScript("return document.activeElement;");
         WebElement expectedElement = getWebElement(by);
         boolean result = actualElement.equals(expectedElement)==expected;
-        verifyCondition(()->result,"Cursor in element "+byText+" is " + expected, false, report);
-        return actualElement.equals(expectedElement)==expected;
+        return verifyCondition(()->result,"Cursor in element "+byText+" is " + expected, false, report);
     }
 
     public void setOfflineMode(Boolean offline, @Nullable GalenReport report) throws IOException {
@@ -61,7 +56,6 @@ public class BasicHelpers {
             report.addStep(reportOffline, reportOffline,reportOffline, true );
         }
     }
-
 
     public boolean verifyAtPage(ExpectedCondition<Boolean> condition, String reportingText, @Nullable GalenReport report) {
         boolean result;
@@ -104,29 +98,8 @@ public class BasicHelpers {
         }
     }
 
-    public void petrosHappyFlowTo(PetrosUser user, BasePage toPage, @Nullable GalenReport report) throws IOException, InterruptedException {
-        boolean atPage;
-        new PetrosNavigations(driver).partialNavigationIA(user, toPage, null);
-        atPage = toPage.verifyAtPage();
-        if (report != null) {
-            report.addStep("Execute HappyFlow to '" + toPage.titleText + "' page", "At '" +
-                    toPage.titleText + " page", atPage ? "As Expected" : "FAIL", atPage, true);
-        }
-    }
-
     public int getRandomValue(int max) {
         return (int) Math.floor(Math.random()*max);
-    }
-
-    public void doubleClickFlex(WebElement nav, String navigatorText, @Nullable GalenReport report) {
-        if (report == null) {
-            if (nav != null) {
-                new Actions(driver).doubleClick(nav).perform();
-            }
-
-        } else {
-            report.doubleClickAndReport(nav, navigatorText);
-        }
     }
 
     public void clickFlex(WebElement element, String navigatorText, @Nullable GalenReport report) {
@@ -160,12 +133,7 @@ public class BasicHelpers {
         int randomNumber = (int) Math.round(Math.random() * 10000);
 
         // Construct the unique email string
-        return "auto.tester+" + shortDate + randomNumber + "@idea-evolver.com";
-    }
-
-    public void selectRandomDropdownOption(By name, String selectText, @Nullable GalenReport report ) {
-        String option = getRandomDropdownOption(name);
-        selectDropDownByText(getWebElement(name), option, selectText, report);
+        return "auto.tester+" + shortDate + randomNumber + "@domain.com";
     }
 
     public String getRandomDropdownOption(By name) {
@@ -175,11 +143,6 @@ public class BasicHelpers {
         }
         int index = getRandomValue(options.size());
         return options.get(index);
-    }
-
-    public String getCurrentDropdownOption(By dropdown) {
-        Select select = new Select(getWebElement(dropdown));
-        return select.getFirstSelectedOption().getText();
     }
 
     public void scrollToElement(By scrollToBy, @Nullable GalenReport report) {
@@ -232,8 +195,6 @@ public class BasicHelpers {
             return null;
         }
     }
-
-
 
     public Boolean verifyRadioButtonSelected(String expected, @Nullable GalenReport report) {
         WebElement element = getWebElement(By.id("assessment-radio-" + expected.toLowerCase()));
@@ -353,7 +314,6 @@ public class BasicHelpers {
         return result;
     }
 
-
     public void clearTextField(WebElement element, @Nullable GalenReport report) {
         char[] c = element.getAttribute("value").toCharArray();
         for (char ch : c) {
@@ -441,8 +401,9 @@ public class BasicHelpers {
         } catch(Exception e) {
             result=false;
         }
-        report.addStep("Verify "+ condition, StringUtils.capitalize(condition),
-                actualResult,result ,false);
+        if (report != null)
+            report.addStep("Verify "+ condition, StringUtils.capitalize(condition), actualResult,result ,false);
+
         return result;
     }
 
@@ -458,25 +419,6 @@ public class BasicHelpers {
         return optionsText;
     }
 
-    public boolean verifyAllDropdownOptions(By dropdown, List<String> expected, @Nullable GalenReport report) {
-        List<String> options =  getAllDropdownOptions(dropdown);
-        LinkedHashMap<String, Object> results = new LinkedHashMap<>();
-        for (String s : expected) {
-            results.put(s,options.contains(s));
-        }
-        return addMultipleVerificationStep("The following are in the dropdown: ",results, report);
-    }
-
-    public boolean verifyDropdownContains(By dropdown, String item, @Nullable GalenReport report) {
-        return verifyCondition  (()->getAllDropdownOptions(dropdown).contains(item), item + " present as dropdown " +
-                "option", false,report );
-    }
-
-    public boolean verifyDropdownNotContains(By dropdown, String item, @Nullable GalenReport report) {
-        return verifyCondition  (() -> !getAllDropdownOptions(dropdown).contains(item), item + " not present as dropdown " +
-                "option", false,report );
-    }
-
     public void selectDropDownByText(WebElement element, String value, String identifier, @Nullable GalenReport
             report) {
         if (report != null)
@@ -485,18 +427,6 @@ public class BasicHelpers {
             Select select = new Select(element);
             select.selectByVisibleText(value);
         }
-    }
-
-    // Required because not all red backgrounds have the same rgba code in this app
-    // Verifies red is the dominant color
-    public Boolean verifyBackgroundIsRed(WebElement nav, @Nullable GalenReport report) {
-        java.awt.Color fieldColor = Color.fromString(nav.getCssValue("background-color")).getColor();
-        Boolean isRed = (fieldColor.getRed() > fieldColor.getBlue()) &&
-                (fieldColor.getRed() > fieldColor.getGreen());
-        if (report != null) {
-            return report.verifyCondition(() -> isRed, "field is red", false);
-        }
-        return isRed;
     }
 
     public void refreshPage(String navText, @Nullable GalenReport report) {
@@ -531,7 +461,7 @@ public class BasicHelpers {
     public boolean downloadIndividualCSVAndVerify(String csvName, String assessmentID,StudyAdminPageObj pageObj,
                                                   String email,GalenReport report) {
         boolean result=true;
-        String actual="";
+        String actual;
         try {
             sleep(1000);
             pageObj.login.logIn(RoleType.CENTRAL_ASSESSOR.email, null);
@@ -541,13 +471,11 @@ public class BasicHelpers {
             pageObj.viewRecords.downloadIndividualRecords(csvName, assessmentID, report);
         } catch( Exception e) {
             actual = e.getMessage();
-            result = false;
             if (report != null) {
                 report.addStep("Download Individual CSV", "Download Individual CSV\n" +
-                        "CSV metrics record captured\n", actual, result);
+                        "CSV metrics record captured\n", actual, result=false);
             }
         }
         return  result;
     }
-
 }

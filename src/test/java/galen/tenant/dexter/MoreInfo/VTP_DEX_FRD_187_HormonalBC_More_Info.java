@@ -26,10 +26,7 @@ public class VTP_DEX_FRD_187_HormonalBC_More_Info extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_187_HormonalBC_More_Info() {
-        VERSIONHISTORY.add("1.0;09MAR2023;Initial Test Script ;Name Redacted");
-        VERSIONHISTORY.add("2.0;21JUN2024;Per CADENCE-478: Updated Test Steps for FDA changes \n"+
-                "Per CADENCE-529: Removed N/A from Actual Result column for Happy flow execution related steps \n" +
-                "Per CADENCE-591: Update Test Steps for modified assessment and navigation ;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

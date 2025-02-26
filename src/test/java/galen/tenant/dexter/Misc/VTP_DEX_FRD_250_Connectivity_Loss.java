@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_250_Connectivity_Loss extends BaseTest {
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
     VTP_DEX_FRD_250_Connectivity_Loss() {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test

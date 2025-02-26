@@ -1,5 +1,6 @@
 package galen.enums.SP;
 
+// All options listed are in UI. Unused ones were intended for use in future tests.
 public enum AccountTabs {
     ACCOUNTS("//a[@href='/dashboard/accounts']"),
     PARTICIPANTS("//a[@href='/dashboard/participants']"),

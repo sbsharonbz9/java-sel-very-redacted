@@ -112,7 +112,7 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
     public CommonPageFeatures commonPageFeatures;
 
     VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen()  {
-        VERSIONHISTORY.add("1.0;20JUN2024;Initial Test Script;Name Redacted");
+        VERSIONHISTORY.add(" ; ; ; ");
     }
 
     void refreshMoreInfo(int step, BasePage page) throws InterruptedException {
