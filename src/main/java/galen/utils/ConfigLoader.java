@@ -10,8 +10,6 @@ import java.util.Properties;
 
 public class ConfigLoader {
 
-	private static final String SEND_EMAIL_TO_USERS = "send_email_to_users";
-	private static final String OVERRIDE_REPORTS = "override_reports";
 	private static final String RETRY_FAILED_TESTS = "retry_failed_tests";
 	private static final String PASSWORD = "password";
 	private static final String USERNAME = "username";
@@ -21,7 +19,6 @@ public class ConfigLoader {
 	private static final String SP_PASSWORD= "spPassword";
 	private static final String DEXTER_URL = "dexterUrl";
 	private static final String PETROS_URL = "petrosUrl";
-	private static final String REQUEST_DETAILS_IN_REPORTS = "request_details_in_reports";
 	private static final String METRICS_EMAIL="metricsEmail";
 	private static final String METRICS_PARTID="metricsPartID";
 
