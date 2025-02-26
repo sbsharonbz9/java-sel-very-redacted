@@ -43,34 +43,33 @@ public class ConfigLoader {
 
 		String env = getBaseConfig("env");
 		switch (EnvType.valueOf(env)) {
-
-		case STAGE: {
-			properties = getConfigPropertyFile(STG_CONFIG_PROPERTIES);
-			break;
-		}
-		case INT: {
-			properties = getConfigPropertyFile(INT_CONFIG_PROPERTIES);
-			break;
-		}
-		case QA: {
-			properties = getConfigPropertyFile(QA_CONFIG_PROPERTIES);
-			break;
-		}
-		case PRODUCTION: {
-			properties = getConfigPropertyFile(PROD_CONFIG_PROPERTIES);
-			break;
-		}
-		case PREPROD: {
-			properties = getConfigPropertyFile(PREPROD_CONFIG_PROPERTIES);
-			break;
-		}
-		case DEV: {
-			properties = getConfigPropertyFile(DEV_CONFIG_PROPERTIES);
-			break;
-		}
-		default: {
-			throw new IllegalStateException("Invalid EnvType: " + env);
-		}
+			case STAGE: {
+				properties = getConfigPropertyFile(STG_CONFIG_PROPERTIES);
+				break;
+			}
+			case INT: {
+				properties = getConfigPropertyFile(INT_CONFIG_PROPERTIES);
+				break;
+			}
+			case QA: {
+				properties = getConfigPropertyFile(QA_CONFIG_PROPERTIES);
+				break;
+			}
+			case PRODUCTION: {
+				properties = getConfigPropertyFile(PROD_CONFIG_PROPERTIES);
+				break;
+			}
+			case PREPROD: {
+				properties = getConfigPropertyFile(PREPROD_CONFIG_PROPERTIES);
+				break;
+			}
+			case DEV: {
+				properties = getConfigPropertyFile(DEV_CONFIG_PROPERTIES);
+				break;
+			}
+			default: {
+				throw new IllegalStateException("Invalid EnvType: " + env);
+			}
 		}
 	}
 

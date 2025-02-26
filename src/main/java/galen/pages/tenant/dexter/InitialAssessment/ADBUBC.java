@@ -3,7 +3,7 @@ package galen.pages.tenant.dexter.InitialAssessment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ADBUBC extends ADBU{
+public class ADBUBC extends ADBU {
 
     public By adbuddiHeader = By.className("ADBUDDIScreen");
 
