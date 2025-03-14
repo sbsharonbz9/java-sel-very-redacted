@@ -102,7 +102,7 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
         common = new CommonPageFeatures(driver);
         original = driver.getWindowHandle();
         bh = new BasicHelpers(driver);
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.STUDY);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.STUDY);
 
         sp.viewRecords.load(UrlType.STUDY);
         sp.login.logIn(RoleType.CLINICIAN.email, report);

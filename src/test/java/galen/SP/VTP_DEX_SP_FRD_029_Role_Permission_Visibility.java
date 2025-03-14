@@ -79,8 +79,7 @@ public class VTP_DEX_SP_FRD_029_Role_Permission_Visibility extends BaseTest {
         report.addScreenshotStep("Step6_Admin_AddAccountModal");
 
         bh.clickFlex(acc.roleDropdown, "Role dropdown", report);
-        bh.verifyAllDropdownOptions(acc.roleDropdown, Arrays.asList("Central Assessor", "Study Staff Lead",
-                "Study Staff Lead", "Study Staff", "Clinician Lead", "Clinician"), report);
+        acc.verifyAllRoleDropdownOptions(report);
         report.addScreenshotStep("Step7_Admin_Roles");
 
         bh.clickFlex(acc.roleDropdown, "Role dropdown", report);
@@ -180,7 +179,8 @@ public class VTP_DEX_SP_FRD_029_Role_Permission_Visibility extends BaseTest {
         report.addScreenshotStep("Step38_SSL_AddAccountModal");
 
         bh.clickFlex(acc.roleDropdown, "Role dropdown", report);
-        bh.verifyAllDropdownOptions(acc.roleDropdown, Arrays.asList("Study Staff Lead", "Study Staff"), report);
+        bh.verifyDropdownContains(acc.roleDropdown, "Role", RoleType.STUDY_STAFF.ui_name, report);
+        bh.verifyDropdownContains(acc.roleDropdown, "Role", RoleType.STUDY_STAFF_LEAD.ui_name, report);
         report.addScreenshotStep("Step39_SSL_Roles");
 
         // Step 41-43
@@ -277,7 +277,8 @@ public class VTP_DEX_SP_FRD_029_Role_Permission_Visibility extends BaseTest {
         report.addScreenshotStep("Step63_CL_AddAccountModal");
 
         bh.clickFlex(acc.roleDropdown, "Role dropdown", report);
-        bh.verifyAllDropdownOptions(acc.roleDropdown, Arrays.asList("Clinician Lead", "Clinician"), report);
+        bh.verifyDropdownContains(acc.roleDropdown, "Role", RoleType.CLINICIAN.ui_name, report);
+        bh.verifyDropdownContains(acc.roleDropdown, "Role", RoleType.CLINICIAN_LEAD.ui_name, report);
         report.addScreenshotStep("Step64_CL_Roles");
 
         // Step 66-69

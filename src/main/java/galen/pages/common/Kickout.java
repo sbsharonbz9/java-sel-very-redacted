@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class Kickout extends BasePage {
     public By dnuHeader = By.className("kickout");
-    public By notRight = By.className("highlight");
-    public String notRightText="Avanafil OTC is not right for you.";
     public By assessmentNumber = By.className("assessment-base__assessment-number");
 
     public Kickout(WebDriver driver) {
@@ -16,5 +14,4 @@ public class Kickout extends BasePage {
         reportText="DNU Screen";
         assessmentID=assessmentNumber;
     }
-
 }

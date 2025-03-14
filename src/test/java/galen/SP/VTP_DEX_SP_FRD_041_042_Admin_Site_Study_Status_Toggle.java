@@ -69,7 +69,7 @@ public class VTP_DEX_SP_FRD_041_042_Admin_Site_Study_Status_Toggle extends BaseT
         par.openAddParticipant(report);
         par.verifyModalDisplayed(null);
         bh.clickFlex(par.siteIDDropdown, "Site ID", report);
-        bh.verifyDropdownNotContains(par.siteIDDropdown,site, report);
+        bh.verifyDropdownNotContains(par.siteIDDropdown, "Site", site, report);
         report.addScreenshotStep("Step7_SiteNotDisplayed");
 
         par.clickCloseButton(report);
@@ -81,10 +81,10 @@ public class VTP_DEX_SP_FRD_041_042_Admin_Site_Study_Status_Toggle extends BaseT
         sites.selectTabToPage(AccountTabs.PARTICIPANTS, par,report);
         par.openAddParticipant(report);
         bh.clickFlex(par.siteIDDropdown, "Site ID", null);
-        bh.verifyDropdownContains(par.siteIDDropdown,site, report);
+        bh.verifyDropdownContains(par.siteIDDropdown, "Site", site, report);
         report.addScreenshotStep("Step13_SiteDisplayed");
-        par.clickCloseButton(report);
 
+        par.clickCloseButton(report);
         par.selectTabToPage(AccountTabs.STUDY, studies,report);
         String study = studies.setActivationRandomStudy("Off", report);
         report.addScreenshotStep("Step16_StudyIDToggleOff");
@@ -93,7 +93,7 @@ public class VTP_DEX_SP_FRD_041_042_Admin_Site_Study_Status_Toggle extends BaseT
         par.openAddParticipant(report);
         bh.clickFlex(par.studyIDDropdown, "Study ID", null);
         report.addScreenshotStep("Step19_StudyIDNotDisplayed");
-        bh.verifyDropdownNotContains(par.studyIDDropdown,study, report);
+        bh.verifyDropdownNotContains(par.studyIDDropdown, "Study", study, report);
 
         par.clickCloseButton(report);
         par.selectTabToPage(AccountTabs.STUDY, studies,report);
@@ -103,7 +103,7 @@ public class VTP_DEX_SP_FRD_041_042_Admin_Site_Study_Status_Toggle extends BaseT
         studies.selectTabToPage(AccountTabs.PARTICIPANTS, par,report);
         par.openAddParticipant(report);
         bh.clickFlex(par.studyIDDropdown, "Study ID", null);
-        bh.verifyDropdownContains(par.studyIDDropdown,study, report);
+        bh.verifyDropdownContains(par.studyIDDropdown,"Study", study, report);
         report.addScreenshotStep("Step25_StudyIDDisplayed");
         par.clickCloseButton(report);
     }

@@ -39,8 +39,7 @@ public class VTP_DEX_FRD_265_Know_Numbers_Clinician extends BaseTest {
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
         DxPageObj dex = new DxPageObj(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired();
-        sp.participants.load(UrlType.STUDY);
+        sp.pritUnl.authenticateUserIfRequired(UrlType.STUDY);
         sp.login.logIn(RoleType.CLINICIAN.email, report);
         sp.participants.clickViewRecords(report);
         sp.viewRecords.createNewRecord(report);

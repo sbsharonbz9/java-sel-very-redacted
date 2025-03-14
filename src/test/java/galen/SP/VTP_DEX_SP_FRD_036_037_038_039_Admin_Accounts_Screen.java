@@ -127,7 +127,7 @@ public class VTP_DEX_SP_FRD_036_037_038_039_Admin_Accounts_Screen extends BaseTe
         report.addScreenshotStep("Step13");
 
         String role="Central Assessor";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, "Role Dropdown",report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, "Role Dropdown",report);
         String email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterCA", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterCA", email, report);
@@ -139,7 +139,7 @@ public class VTP_DEX_SP_FRD_036_037_038_039_Admin_Accounts_Screen extends BaseTe
 
         accounts.clickAddAccount(report);
         role="Study Staff Lead";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, role,report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, role,report);
         email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterSSL", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterSSL", email, report);
@@ -151,7 +151,7 @@ public class VTP_DEX_SP_FRD_036_037_038_039_Admin_Accounts_Screen extends BaseTe
 
         accounts.clickAddAccount(report);
         role="Study Staff";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, role,report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, role,report);
         email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterSS", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterSS", email, report);
@@ -163,29 +163,31 @@ public class VTP_DEX_SP_FRD_036_037_038_039_Admin_Accounts_Screen extends BaseTe
 
         accounts.clickAddAccount(report);
         role="Clinician Lead";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, role,report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, role,report);
         email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterCL", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterCL", email, report);
         report.addScreenshotStep("Step23");
+
         accounts.clickSave(report);
         accounts.findAccountInTable(email,report);
         report.addScreenshotStep("Step24");
 
         accounts.clickAddAccount(report);
         role="Clinician";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, role,report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, role,report);
         email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterC", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterC", email, report);
         report.addScreenshotStep("Step26");
+
         accounts.clickSave(report);
         accounts.findAccountInTable(email,report);
         report.addScreenshotStep("Step27");
 
         accounts.clickAddAccount(report);
         role="Central Assessor";
-        bh.selectDropDownByText(accounts.getRoleDropdown(), role, role,report);
+        bh.selectDropDownByText(accounts.roleDropdown, role, role,report);
         email = bh.getUniqueEmail();
         accounts.enterNewAccountData(role, "QA", "TesterCancel", email , report);
         accounts.verifyAddValuesCorrect(role, "QA", "TesterCancel", email, report);

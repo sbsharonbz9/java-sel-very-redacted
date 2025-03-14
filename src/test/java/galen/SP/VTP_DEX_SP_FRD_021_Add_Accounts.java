@@ -104,8 +104,8 @@ public class VTP_DEX_SP_FRD_021_Add_Accounts extends BaseTest {
         accounts.clickAddAccount(report);
 
         bh.clickFlex(accounts.roleDropdown, "Role Dropdown", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Study Staff Lead", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Study Staff", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown","Study Staff Lead", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown","Study Staff", report);
         report.addScreenshotStep("Step13_Role_Dropdown_Screen");
 
         email = bh.getUniqueEmail();
@@ -129,8 +129,8 @@ public class VTP_DEX_SP_FRD_021_Add_Accounts extends BaseTest {
         accounts.clickAddAccount(report);
 
         bh.clickFlex(accounts.roleDropdown, "Role Dropdown", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Clinician Lead", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Clinician", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown","Clinician Lead", report);
+        bh.verifyDropdownContains(accounts.roleDropdown,"Role Dropdown", "Clinician", report);
         report.addScreenshotStep("Step20_Role_Dropdown_Screen");
 
         email = bh.getUniqueEmail();

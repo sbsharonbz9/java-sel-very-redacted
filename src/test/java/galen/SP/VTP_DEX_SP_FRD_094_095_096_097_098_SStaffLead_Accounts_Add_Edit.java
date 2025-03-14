@@ -75,8 +75,8 @@ public class VTP_DEX_SP_FRD_094_095_096_097_098_SStaffLead_Accounts_Add_Edit ext
         report.addScreenshotStep("Step4_Add_Accounts_Screen");
 
         bh.clickFlex(accounts.roleDropdown, "Role Dropdown", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Study Staff Lead", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Study Staff", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role dropdown", "Study Staff Lead", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown", "Study Staff", report);
         report.addScreenshotStep("Step5_Role_Dropdown_Screen");
 
         String email = bh.getUniqueEmail();

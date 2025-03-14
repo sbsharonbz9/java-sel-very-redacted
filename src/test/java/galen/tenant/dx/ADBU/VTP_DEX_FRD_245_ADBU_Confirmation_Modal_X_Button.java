@@ -43,7 +43,7 @@ public class VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUwBP(user, pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbu,report);

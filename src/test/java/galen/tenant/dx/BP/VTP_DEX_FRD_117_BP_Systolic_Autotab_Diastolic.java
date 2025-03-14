@@ -41,7 +41,7 @@ public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         BasicHelpers basicHelpers = new BasicHelpers(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.enterBP, report);
 
         basicHelpers.sendTextFlex(pageObj.enterBP.inputSystolic, "1", "Systolic", report);

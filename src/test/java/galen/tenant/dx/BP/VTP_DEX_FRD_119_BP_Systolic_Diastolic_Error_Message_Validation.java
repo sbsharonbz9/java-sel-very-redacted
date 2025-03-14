@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_119_BP_Systolic_Diastolic_Error_Message_Validation exte
 
         user.systolic = "0";
         user.diastolic = "70";
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.enterBP, report);
         pageObj.enterBP.enterBP(user, report);
         common.clickNext(report);

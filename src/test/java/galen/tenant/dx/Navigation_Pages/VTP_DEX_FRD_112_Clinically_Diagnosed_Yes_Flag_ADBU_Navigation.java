@@ -41,7 +41,7 @@ public class VTP_DEX_FRD_112_Clinically_Diagnosed_Yes_Flag_ADBU_Navigation exten
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
         common.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         pageObj.diagnosedDepression.clickYesAndAddressModalToPage(pageObj.knowBPNumber, report);

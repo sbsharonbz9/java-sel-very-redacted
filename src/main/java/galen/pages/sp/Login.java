@@ -21,19 +21,13 @@ public class Login extends SPBasePage {
         reportText="Study Portal Sign In Screen";
     }
 
-    public WebElement getSubmitButton() { return basicHelpers.getWebElement(submitButton); }
-
-    public WebElement getEmailField() { return basicHelpers.getWebElement(emailTextField); }
-
-    public WebElement getPasswordField() { return basicHelpers.getWebElement(passwordTextField); }
-
     public void logIn(String email, @Nullable GalenReport report) {
         String steps = "Email and password entered\nClick 'Submit'";
         String actual;
         boolean result;
 
         try {
-            basicHelpers.sendTextFlex(getEmailField(), email, "Email", null);
+            basicHelpers.sendTextFlex(emailTextField, email, "Email", null);
             enterPassword(null);
             basicHelpers.verifyClickToPageTransition(new Participants(driver), submitButton, "Submit", null);
             actual = "As Expected";
@@ -48,7 +42,7 @@ public class Login extends SPBasePage {
     }
 
     public void enterPassword(@Nullable GalenReport report) {
-        basicHelpers.sendTextFlex(getPasswordField(), ConfigLoader.getInstance().getSPPassword(),
+        basicHelpers.sendTextFlex(passwordTextField, ConfigLoader.getInstance().getSPPassword(),
                 "Password", report);
     }
 }

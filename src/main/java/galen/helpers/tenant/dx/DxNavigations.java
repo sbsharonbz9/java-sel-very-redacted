@@ -151,7 +151,7 @@ public class DxNavigations extends Navigations {
     public BasePage partialNavigationIA(DxUser user, BasePage endPage, GalenReport report) throws IOException, InterruptedException {
         if (!pages.welcomePage.verifyAtPage() || (pages.welcomePage.getAssessmentID().equals("N/A")) &&
                 (!driver.getCurrentUrl().contains("clinician="))){
-            pages.welcomePage.load(UrlType.DEXTER);
+            pages.welcomePage.load(UrlType.DX);
         }
         user.assessmentID=pages.welcomePage.getAssessmentID();
         pages.welcomePage.verifyAtPage(report);

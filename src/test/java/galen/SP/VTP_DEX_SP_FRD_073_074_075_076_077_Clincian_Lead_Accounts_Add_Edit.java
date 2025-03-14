@@ -76,8 +76,8 @@ public class VTP_DEX_SP_FRD_073_074_075_076_077_Clincian_Lead_Accounts_Add_Edit 
         report.addScreenshotStep("Step4_Add_Accounts_Screen");
 
         bh.clickFlex(accounts.roleDropdown, "Role Dropdown", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Clinician Lead", report);
-        bh.verifyDropdownContains(accounts.roleDropdown, "Clinician", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown","Clinician Lead", report);
+        bh.verifyDropdownContains(accounts.roleDropdown, "Role Dropdown","Clinician", report);
         report.addScreenshotStep("Step5_Role_Dropdown_Screen");
 
         String emailCLead = bh.getUniqueEmail();

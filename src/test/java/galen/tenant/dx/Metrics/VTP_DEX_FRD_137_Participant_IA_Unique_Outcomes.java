@@ -46,7 +46,7 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
 
         //OK
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.purchaseOptions, report);

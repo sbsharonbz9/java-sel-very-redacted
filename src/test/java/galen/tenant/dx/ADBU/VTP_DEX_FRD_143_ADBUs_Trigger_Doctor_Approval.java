@@ -61,7 +61,7 @@ public class VTP_DEX_FRD_143_ADBUs_Trigger_Doctor_Approval extends BaseTest {
         user.diagnosedDepression="Yes";
         user.isAntifungal="Yes";
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxNavigations(driver).partialNavigationIA(user, pageObj.adbu, report);
 
         pageObj.adbubpScreen.verifyTitle(pageObj.adbu.titleText, report);

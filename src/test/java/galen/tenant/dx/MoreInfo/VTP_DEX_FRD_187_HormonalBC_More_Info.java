@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_187_HormonalBC_More_Info extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired();
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.birthControl, report);
         common.verifyMoreInfoLinkDisplayed(report);
         report.addScreenshotStep("Step2_MoreInfoLink");

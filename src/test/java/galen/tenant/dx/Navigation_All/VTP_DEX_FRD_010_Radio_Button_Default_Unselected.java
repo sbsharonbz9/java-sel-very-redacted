@@ -80,7 +80,7 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         CommonPageFeatures common = new CommonPageFeatures(driver);
         bh = new BasicHelpers(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.usedProduct, report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("Step2_Prior Use");
@@ -221,13 +221,9 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         report.addScreenshotStep("36_KnowBP");
 
         pageObj.knowBPNumber.selectRadioReponse(user.knowBPType.label, report);
-        pageObj.knowBPNumber.clickNext(report);
-        pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
-        pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
-        pageObj.enterBP.verifyAtPage(report);
+        pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP, "Yes", report);
         bh.verifyText(pageObj.enterBP.inputSystolic, "Systolic field", "", report);
         bh.verifyText(pageObj.enterBP.inputDiastolic, "Diastolic field", "", report);
         report.addScreenshotStep("38_Enter BP");
-
     }
 }

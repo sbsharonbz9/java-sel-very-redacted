@@ -35,7 +35,7 @@ public class BirthYear extends BasePage {
     }
 
     public void enterYear(String year,  @Nullable GalenReport report) {
-        basicHelpers.sendTextFlex(getBirthYearField(), year, "Year of birth", report);
+        basicHelpers.sendTextFlex(birthYearField, year, "Year of birth", report);
     }
 
     public boolean verifyYearErrorDisplayed(@Nullable GalenReport report) {

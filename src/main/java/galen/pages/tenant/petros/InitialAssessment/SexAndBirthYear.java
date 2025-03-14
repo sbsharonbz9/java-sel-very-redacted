@@ -16,7 +16,6 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class SexAndBirthYear extends BasePage {
-    private static final Logger logger = LoggerFactory.getLogger(SexAndBirthYear.class);
     public By title = By.xpath("//h1[contains(text(),'Sex at birth')]");
     public static By maleRadioBtn = By.xpath("//input[@type='radio' and @name='sexAtBirth' and @value='male']");
     public static By femaleRadioBtn = By.xpath("//label[@for='assessment-radio-female']//span[@class='assessment-radio__custom-radio']");
@@ -41,66 +40,10 @@ public class SexAndBirthYear extends BasePage {
         return basicHelpers.verifyAtPage(getHeader().isDisplayed(), reportText, report);
     }
 
-    public WebElement getMaleRadioButton() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(maleRadioBtn));
-    }
-
-    public WebElement verifySexAtBirthTxt() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(sexAtBirthTxt));
-    }
-    public WebElement verifyDateAtBirthTxt() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthTxt));
-    }
-
-
-    public WebElement getFemaleRadioButton() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(femaleRadioBtn));
-    }
-
-    public  WebElement getDayInput() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthInputLocatorDay));
-    }
-
-    public WebElement getMonthInput() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthInputLocatorMonth));
-    }
-
-    public WebElement getYearInput() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthInputLocatorYear));
-    }
-
-    public Boolean verifyDOBAndSexAtBirthScreen(WebDriver driver, PetrosUser user, GalenReport report) throws IOException {
-        Boolean result=true;
-        if (user.gender== Gender.Male) {
-            result=result && basicHelpers.verifyRadioButtonSelected("Male", report);
-        } else {
-            result=result && basicHelpers.verifyRadioButtonSelected("Female", report);
-        }
-        return result && verifyDOB(driver, user, report);
-    }
-
-    public Boolean verifyDOB(WebDriver driver, PetrosUser user, @Nullable GalenReport report) throws IOException {
-        boolean result=true;
-        result=result && basicHelpers.verifyText( getDayInput(), "Day", user.dobDay, report);
-        result=result && basicHelpers.verifyText( getMonthInput(), "Month", user.dobMonth, report);
-        result=result && basicHelpers.verifyText( getYearInput(), "Year", user.dobYear, report);
-        return result;
-    }
-
-    public void enterDateOfBirth(WebDriver driver, PetrosUser user, @Nullable GalenReport report) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement monthField = getMonthInput();
-        WebElement dayField = getDayInput();
-        WebElement yearField = getYearInput();
-
-        basicHelpers.sendTextFlex(dayField, user.dobDay, "Day", null);
-        basicHelpers.sendTextFlex(monthField, user.dobMonth, "Month", null);
-        basicHelpers.sendTextFlex(yearField, user.dobYear, "Year", null);
-
-        // Trigger any JavaScript events associated with the input fields
-        js.executeScript("arguments[0].dispatchEvent(new Event('change'));", monthField);
-        js.executeScript("arguments[0].dispatchEvent(new Event('change'));", dayField);
-        js.executeScript("arguments[0].dispatchEvent(new Event('change'));", yearField);
+    public void enterDateOfBirth(PetrosUser user, @Nullable GalenReport report) {
+        basicHelpers.sendTextFlex(dateOfBirthInputLocatorDay, user.dobDay, "Day", null);
+        basicHelpers.sendTextFlex(dateOfBirthInputLocatorMonth, user.dobMonth, "Month", null);
+        basicHelpers.sendTextFlex(dateOfBirthInputLocatorYear, user.dobYear, "Year", null);
 
         if (report!=null) {
             report.addStep("Input DOB "+ user.dobMonth+"-"+user.dobDay+"-"+user.dobYear, "DOB entered",
@@ -118,7 +61,7 @@ public class SexAndBirthYear extends BasePage {
 
     public void fillOutForm(PetrosUser user, @Nullable GalenReport report) {
         enterGender(user, null);
-        enterDateOfBirth( driver, user, null);
+        enterDateOfBirth( user, null);
         basicHelpers.clickFlex(getNextButton(), "Next",null);
         if (report!=null) {
             report.addStep("Input gender: "+ user.gender.name()+"\n" +
@@ -126,5 +69,4 @@ public class SexAndBirthYear extends BasePage {
                             "Click 'Next' button to OAuth screen", "Data is entered\n", "As Expected",true);
       }
     }
-
 }

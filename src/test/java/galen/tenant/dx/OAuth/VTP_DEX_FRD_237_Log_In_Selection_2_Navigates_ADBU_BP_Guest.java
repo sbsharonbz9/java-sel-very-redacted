@@ -56,7 +56,7 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends 
         DxPageObj pageObj = new DxPageObj(driver);
         DxHFWrappers dxHf = new DxHFWrappers(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         ArrayList<String> conditions = new ArrayList<String>();
         dxHf.runDxHFnoBPNonsmoker(user, pageObj.obesity, report);
         user.weight = "212";

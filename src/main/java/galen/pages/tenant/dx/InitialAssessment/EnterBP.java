@@ -12,13 +12,11 @@ import javax.annotation.Nullable;
 public class EnterBP extends BasePage {
     public By title = By.className("BPNumbersScreen");
     public By confirmBPModal = By.className("check-answer");
-    public static String confirmBPHeader="It looks like you may have mis-typed your blood pressure";
     public By modalChangeButton = By.xpath("//div[@class='check-modal-btn-group']/button");
     public By inputSystolic = By.xpath("//input[@id='systolic']");
     public By inputSystolicError = By.xpath("//input[@id='systolic'][@aria-invalid='true']");
     public By inputDiastolic = By.xpath("//input[@id='diastolic']");
     public  By inputDiastolicError = By.xpath("//input[@id='diastolic'][@aria-invalid='true']");
-    public static String errorText= "Please enter valid number";
 
 
     public EnterBP(WebDriver driver) {
@@ -29,17 +27,11 @@ public class EnterBP extends BasePage {
         modal=confirmBPModal;
     }
 
-    public WebElement getInputSystolic() {
-        return basicHelpers.getWebElement(inputSystolic);
-    }
-
-    public WebElement getInputDiastolic() { return basicHelpers.getWebElement(inputDiastolic);}
-
     public void enterBP(DxUser user, @Nullable GalenReport report) {
         String reportResponse="As expected";
         try {
-            basicHelpers.sendTextFlex(getInputSystolic(), user.systolic, "Systolic BP", null);
-            basicHelpers.sendTextFlex(getInputDiastolic(), user.diastolic, "Diastolic BP", null);
+            basicHelpers.sendTextFlex(inputSystolic, user.systolic, "Systolic BP", null);
+            basicHelpers.sendTextFlex(inputDiastolic, user.diastolic, "Diastolic BP", null);
         } catch(Exception e) {
             reportResponse=e.getMessage();
         }

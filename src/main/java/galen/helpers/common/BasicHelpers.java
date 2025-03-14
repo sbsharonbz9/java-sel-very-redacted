@@ -414,6 +414,11 @@ public class BasicHelpers {
         return optionsText;
     }
 
+    public String getCurrentDropdownOption(By dropdown) {
+        Select select = new Select(getWebElement(dropdown));
+        return select.getFirstSelectedOption().getText();
+    }
+
     public void selectDropDownByText(By by, String value, String identifier, @Nullable GalenReport report) {
         WebElement element = getWebElement(by);
         if (report != null)
@@ -428,6 +433,18 @@ public class BasicHelpers {
         WebElement element = getWebElement(by);
         verifyCondition((()-> new Select(element).getFirstSelectedOption().getText().equals(value)),
                     "Selected value of '" + identifier + " equals '" + value + "'", false, report);
+    }
+
+    public void verifyDropdownContains(By by, String identifier, String value, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
+        verifyCondition((()-> new Select(element).getOptions().contains(element)),
+                "Dropdown '" + identifier + " contains '" + value + "'", false, report);
+    }
+
+    public void verifyDropdownNotContains(By by, String identifier, String value, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
+        verifyCondition((()-> !(new Select(element).getOptions().contains(element))),
+                "Dropdown '" + identifier + " does not contain '" + value + "'", false, report);
     }
 
     public void refreshPage(String navText, @Nullable GalenReport report) {

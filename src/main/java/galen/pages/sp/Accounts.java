@@ -38,14 +38,6 @@ public class Accounts extends SPBasePage {
         modal=By.xpath(("//div[@aria-modal='true']"));
     }
 
-    public WebElement getFirstNameField() { return basicHelpers.getWebElement(firstNameTextField);}
-
-    public WebElement getLastNameField() { return basicHelpers.getWebElement(lastNameTextField);}
-
-    public WebElement getEmailField() { return basicHelpers.getWebElement(emailTextField);}
-
-    public WebElement getRoleDropdown() { return basicHelpers.getWebElement(roleDropdown);}
-
     public void clickAddAccount(@Nullable GalenReport report) {
         basicHelpers.verifyClickToNavDisplayed(addAccountButton, "Add Account button",modal,
                 "Add Account modal", report);
@@ -103,11 +95,11 @@ public class Accounts extends SPBasePage {
                 "Enter last name: '" + lastName+"'\n" +
                 "Enter email: '" + email;
         try {
-            basicHelpers.selectDropDownByText(getRoleDropdown(), role, "Role: "+
+            basicHelpers.selectDropDownByText(roleDropdown, role, "Role: "+
                     role, null);
-            basicHelpers.sendTextFlex(getFirstNameField(), firstName, "First Name", null);
-            basicHelpers.sendTextFlex(getLastNameField(), lastName, "Last Name", null);
-            basicHelpers.sendTextFlex(getEmailField(), email, "Email", null);
+            basicHelpers.sendTextFlex(firstNameTextField, firstName, "First Name", null);
+            basicHelpers.sendTextFlex(lastNameTextField, lastName, "Last Name", null);
+            basicHelpers.sendTextFlex(emailTextField, email, "Email", null);
             if (report != null) {
                 report.addStep(steps, "Account data is entered", "As expected", true, true);
             }
@@ -131,10 +123,10 @@ public class Accounts extends SPBasePage {
 
     public void verifyAddValuesCorrect(String role, String firstName, String lastName, String email,
                                           @Nullable GalenReport report) {
-        basicHelpers.verifyText(getRoleDropdown(),"Role", role, report);
-        basicHelpers.verifyText(getFirstNameField(),"First Name", firstName, report);
-        basicHelpers.verifyText(getLastNameField(),"Last Name", lastName, report);
-        basicHelpers.verifyText(getEmailField(),"Email", email, report);
+        basicHelpers.verifyText(roleDropdown,"Role", role, report);
+        basicHelpers.verifyText(firstNameTextField,"First Name", firstName, report);
+        basicHelpers.verifyText(lastNameTextField,"Last Name", lastName, report);
+        basicHelpers.verifyText(emailTextField,"Email", email, report);
     }
 
     public void verifyAllRoleDropdownOptions(@Nullable GalenReport report) {

@@ -41,7 +41,7 @@ public class PritUnlPage extends BasePage {
     }
 
     public void authenticateUserIfRequired()  {
-        authenticateUserIfRequired(UrlType.DEXTER);
+        authenticateUserIfRequired(UrlType.DX);
     }
 
     public void authenticateUserIfRequired(UrlType type)  {

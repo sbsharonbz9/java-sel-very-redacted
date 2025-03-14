@@ -295,7 +295,7 @@ public class VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_ADBU extends BaseTes
         CSVHelpers csv = new CSVHelpers(driver);
         ConfigLoader cl = new ConfigLoader();
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.METRICS);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.METRICS);
         pageObj.pritUnl.load(UrlType.METRICS);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.usedProduct, report);
         report.addStep("Note assessment id", "Assessment id noted", "Assessment id is "+

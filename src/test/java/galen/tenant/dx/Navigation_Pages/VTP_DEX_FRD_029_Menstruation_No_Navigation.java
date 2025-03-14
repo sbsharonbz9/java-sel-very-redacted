@@ -37,7 +37,7 @@ public class VTP_DEX_FRD_029_Menstruation_No_Navigation extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.menstrual, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.birthControlB, report);
         report.addScreenshotStep("Step2_Hormonal BC(B)");
