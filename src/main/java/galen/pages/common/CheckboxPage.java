@@ -1,8 +1,7 @@
 package galen.pages.common;
 
-import galen.enums.tenant.dexter.CancerType;
-import galen.enums.tenant.dexter.DDIConditionType;
-import galen.enums.tenant.dexter.DDIThyroidType;
+import galen.enums.tenant.dx.DDIConditionType;
+import galen.enums.tenant.dx.DDIThyroidType;
 import galen.helpers.common.GalenReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class CheckboxPage extends BasePage {
     public ArrayList<String> options = new ArrayList<>();
@@ -100,12 +100,6 @@ public class CheckboxPage extends BasePage {
         return localOptions;
     }
 
-    public ArrayList<String> getAllButOther() {
-        ArrayList<String> localOptions = options;
-        localOptions.remove(CancerType.Other_Cancer.label);
-        return localOptions;
-    }
-
     public ArrayList<String> getCondition(String c) {
         return new ArrayList<>(Arrays.asList(c));
     }
@@ -154,20 +148,19 @@ public class CheckboxPage extends BasePage {
     }
 
     public boolean verifyAllOptionsInADBU(@Nullable GalenReport report) {
-        HashMap<String, Object> results = new HashMap<>();
+        LinkedHashMap<String, Object> results = new LinkedHashMap<>();
         WebElement adbuList = basicHelpers.getWebElement(By.className("adbuList"));
         if (adbuList==null && report!=null) {
-            report.addStep("Verify all medications on "+this.reportText+" are displayed in ADBU", "All medications are listed",
-                    "ADBU list is not present", false, true);
+            report.addStep("Verify all medications on "+this.reportText+" are displayed in ADBU", "All " +
+                            "medications are listed", "ADBU list is not present", false, true);
             return false;
         }
         for (String optionValue : getAllButNone()) {
-            results.put(optionValue, basicHelpers.verifyText(adbuList, optionValue, optionValue.toLowerCase(), null));
+            results.put(optionValue, basicHelpers.verifyText(By.className("adbuList"), optionValue, optionValue.toLowerCase(), null));
         }
-        if (report!=null) {
-            report.addMultipleVerificationStep("The following medications on "+ this.reportText+" are displayed in ADBU list:", results,
-                    false);
-        }
+        basicHelpers.addMultipleVerificationStep("The following medications on "+ this.reportText+" are " +
+                        "displayed in ADBU list:", results,
+                    report);
         return results.containsValue(false);
     }
 }

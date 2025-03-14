@@ -45,12 +45,13 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
     }
 
     @Test
-    public void VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest() throws IOException, InterruptedException {
+    public void VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest_Test() throws IOException, InterruptedException {
         WebDriver driver = DriverManager.getDriver();
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest";
         bh = new BasicHelpers(driver);
+
         pageObj = new PetrosPageObj(driver);
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);;
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.sexAndBirthYear, report);
@@ -58,13 +59,12 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         pageObj.sexAndBirthYear.fillOutForm(user, report);
         report.addScreenshotStep("OAuth Screen Step 2", driver);
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.kickout.verifyAtPage(report);
+        pageObj.review.addressConfirmationsAndProgress(pageObj.kickoutPage, report);
         report.addScreenshotStep("Kickout Page Step 4", driver);
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         user.gender = Gender.Male;
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.sexAndBirthYear, report);
         LocalDate dobFor17YearOld = LocalDate.now().minusYears(17).withMonth(1).withDayOfMonth(1);
@@ -73,13 +73,12 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         pageObj.oAuth.verifyAtPage(report);
         report.addScreenshotStep("Step 6 oath is seen ");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.kickout.verifyAtPage(report);
+        pageObj.review.addressConfirmationsAndProgress(pageObj.kickoutPage, report);
         report.addScreenshotStep("Kickout Page Step 8", driver);
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         user.gender = Gender.Male;
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.sexAndBirthYear, report);
         LocalDate dobFor18YearOld = LocalDate.now().minusYears(18).withMonth(1).withDayOfMonth(1);
@@ -88,7 +87,7 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         pageObj.oAuth.verifyAtPage(report);
         report.addScreenshotStep("Step 10 oath is seen ");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         user.gender = Gender.Male;
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.sexAndBirthYear, report);
         LocalDate dobFor76YearOld = LocalDate.now().minusYears(76).withMonth(1).withDayOfMonth(1);
@@ -97,23 +96,20 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         pageObj.oAuth.verifyAtPage(report);
         report.addScreenshotStep("Step 12 oath is seen ");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.adbu.verifyAtPage(report);
+        pageObj.review.addressConfirmationsAndProgress(pageObj.adbu, report);
         pageObj.adbu.verifyAgeCondition(report);
         report.addScreenshotStep("Step 15 oath ADBU 75");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
         pageObj.review.clickDateOfBirthEditButton(report);
         LocalDate dobFor76YearOldLast = LocalDate.now().minusYears(76).withMonth(1).withDayOfMonth(1);
         user.dobYear = String.valueOf(dobFor76YearOldLast.getYear());
         pageObj.sexAndBirthYear.fillOutForm(user, report);
-        pageObj.sexAndBirthYear.clickNextToPage(pageObj.sexAndBirthYear, report);
-        pageObj.review.verifyAtPage(report);
-        pageObj.review.addressConfirmations(report);
-        pageObj.adbu.verifyAtPage(report);
+        pageObj.sexAndBirthYear.clickNextToPage(pageObj.review, report);
+        pageObj.review.addressConfirmationsAndProgress(pageObj.adbu, report);
         report.addScreenshotStep("Step 22 oath ADBU 75 Last Step");
     }
 }

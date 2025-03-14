@@ -84,8 +84,7 @@ public class VTP_FRD_126_127_128_HIV_Medicines_Screen extends BaseTest {
         pageObj.review.clickHivMedicineEditLink(report);
         pageObj.hivMedicines.verifyAtPage(report);
         user.hiv = "Yes";
-        pageObj.hivMedicines.clickYesOrNo(user.hiv, report);
-        pageObj.hivMedicines.clickNextToPage(pageObj.review, report);
+        pageObj.hivMedicines.clickYesNoNextToPage(user.hiv, pageObj.review, report);
         pageObj.review.addressConfirmationsAndProgress(pageObj.kickoutPage, report);
         report.addScreenshotStep("Step15_DNU Page");
     }

@@ -7,12 +7,12 @@ import galen.enums.framework.UrlType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
-import galen.helpers.tenant.dexter.DexterNavigations;
-import galen.helpers.tenant.dexter.DexterUser;
-import galen.helpers.tenant.dexter.DexterUserTemplates;
+import galen.helpers.tenant.dx.DxNavigations;
+import galen.helpers.tenant.dx.DxUser;
+import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.sp.Participants;
 import galen.pages.sp.StudyAdminPageObj;
-import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
+import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -48,9 +48,9 @@ public class VTP_DEX_SP_FRD_020_Complete_Return_To_Portal extends BaseTest {
         report.reportTitle = "VTP_DEX_SP_FRD_020 – Completed Assessment Return to Study Portal";
 
         bh = new BasicHelpers(driver);
-        DexterUser user = new DexterUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
+        DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         pageObj = new StudyAdminPageObj(driver);
-        DexterPageObj dex = new DexterPageObj(driver);
+        DxPageObj dex = new DxPageObj(driver);
         Participants par = pageObj.participants;
 
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.STUDY);
@@ -60,10 +60,10 @@ public class VTP_DEX_SP_FRD_020_Complete_Return_To_Portal extends BaseTest {
         String original = driver.getWindowHandle();
         pageObj.viewRecords.createNewRecord(report);
 
-        new DexterNavigations(driver).partialNavigationIA(user, dex.review, report );
+        new DxNavigations(driver).partialNavigationIA(user, dex.review, report );
         dex.review.clickConfirmToOpenModal(report);
-        bh.verifyClickToPageTransition(dex.purchaseOptions,dex.review.finishButton, "Finish", report);
-        bh.verifyDisplayedFlex(dex.purchaseOptions.sapLink, "Link back to SAP", report);
+        bh.verifyClickToNavDisplayed(dex.review.finishButton, "Finish", dex.purchaseOptions.sapLink,
+                "Link back to SAP", report);
         report.addScreenshotStep("Step37_ClinicianLeadLink");
 
         dex.purchaseOptions.clickSAPLinkToHandle(original, report);
@@ -77,10 +77,10 @@ public class VTP_DEX_SP_FRD_020_Complete_Return_To_Portal extends BaseTest {
         par.clickViewRecords(report);
         pageObj.viewRecords.createNewRecord(report);
 
-        new DexterNavigations(driver).partialNavigationIA(user, dex.review, report );
+        new DxNavigations(driver).partialNavigationIA(user, dex.review, report );
         dex.review.clickConfirmToOpenModal(report);
-        bh.verifyClickToPageTransition(dex.purchaseOptions,dex.review.finishButton, "Finish", report);
-        bh.verifyDisplayedFlex(dex.purchaseOptions.sapLink, "Link back to SAP", report);
+        bh.verifyClickToNavDisplayed(dex.review.finishButton, "Finish", dex.purchaseOptions.sapLink,
+                "Link back to SAP", report);
         report.addScreenshotStep("Step75_ClinicianLink");
 
         dex.purchaseOptions.clickSAPLinkToHandle(original, report);

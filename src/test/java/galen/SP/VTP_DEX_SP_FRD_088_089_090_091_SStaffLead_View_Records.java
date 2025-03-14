@@ -8,7 +8,7 @@ import galen.helpers.common.GalenReport;
 import galen.pages.sp.Participants;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.sp.ViewRecords;
-import galen.pages.tenant.dexter.InitialAssessment.DexterPageObj;
+import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class VTP_DEX_SP_FRD_088_089_090_091_SStaffLead_View_Records extends Base
         report.reportTitle = "VTP_DEX_SP_FRD_088_089_090_091 – Study Staff Lead View Records";
         bh = new BasicHelpers(driver);
         StudyAdminPageObj pageObj;
-        DexterPageObj dexPageObj;
+        DxPageObj dexPageObj;
         pageObj = new StudyAdminPageObj(driver);
         Participants par = pageObj.participants;
         ViewRecords view = pageObj.viewRecords;

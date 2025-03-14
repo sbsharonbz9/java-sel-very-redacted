@@ -53,23 +53,21 @@ public class VTP_FRD_064_065_066_067_068_Nitrate_Use_Screen extends BaseTest {
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);;
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.nitrateUse, report);
         pageObj.nitrateUse.verifyYesNoUnsurePresent(report);
-        report.addScreenshotStep("Nitrate USe Screen Options", driver);
-        pageObj.nitrateUse.clickYesOrNo("Yes", report);
-        pageObj.nitrateUse.clickNextToPage(pageObj.clarification, report);
-        report.addScreenshotStep("Clarification on Nitrate Use Screen ", driver);
+        report.addScreenshotStep("Nitrate Use Screen Options");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.nitrateUse.clickYesNoNextToPage("Yes",pageObj.clarification, report);
+        report.addScreenshotStep("Clarification on Nitrate Use Screen ");
+
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.nitrateUse, report);
         pageObj.nitrateUse.clickYesNoUnsure("Unsure", report);
         pageObj.nitrateUse.clickNextToPage(pageObj.clarification, report);
-        report.addScreenshotStep("Not Sure Clarification", driver);
-        report.addScreenshotStep("Clarification Is seen Screen Options", driver);
+        report.addScreenshotStep("Clarification Is seen Screen Options");
 
-        pageObj.pritUnl.getWelcomePage(report);
+        pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.nitrateUse, report);
-        pageObj.nitrateUse.clickYesOrNo("No", report);
-        pageObj.nitrateUse.clickNextToPage(pageObj.clarification, report);
-        report.addScreenshotStep("Clarification Is seen Screen Options 3", driver);
+        pageObj.nitrateUse.clickYesNoNextToPage("No",pageObj.clarification, report);
+        report.addScreenshotStep("Clarification Is seen Screen Options 3");
 
 
     }

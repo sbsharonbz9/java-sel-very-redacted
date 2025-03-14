@@ -46,20 +46,20 @@ public class VTP_DEX_SP_FRD_022_024_Sign_In_Screen_Login extends BaseTest {
 
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.STUDY);
         log.verifyAtPage(report);
-        bh.verifyButtonEnabled(log.getSubmitButton(), false, report);
+        bh.verifyButtonEnabled(log.submitButton, false, report);
         report.addScreenshotStep("Step1_LoginInitial");
 
-        bh.sendTextFlex(log.getEmailField(), RoleType.ADMIN.email, "Email text field", report);
-        bh.verifyButtonEnabled(log.getSubmitButton(), false, report);
+        bh.sendTextFlex(log.emailTextField, RoleType.ADMIN.email, "Email text field", report);
+        bh.verifyButtonEnabled(log.submitButton, false, report);
         report.addScreenshotStep("Step2_PasswordOnly");
 
-        bh.clearTextField(log.getEmailField(), report);
+        bh.clearTextField(log.emailTextField, report);
         log.enterPassword(report);
-        bh.verifyButtonEnabled(log.getSubmitButton(), false, report);
+        bh.verifyButtonEnabled(log.submitButton, false, report);
         report.addScreenshotStep("Step3_PasswordOnly");
 
-        bh.sendTextFlex(log.getEmailField(), RoleType.ADMIN.email, "Email text field", report);
-        bh.verifyButtonEnabled(log.getSubmitButton(), true, report);
+        bh.sendTextFlex(log.emailTextField, RoleType.ADMIN.email, "Email text field", report);
+        bh.verifyButtonEnabled(log.submitButton, true, report);
         report.addScreenshotStep("Step4_SubmitEnabled");
 
         bh.verifyClickToPageTransition(pageObj.participants, log.submitButton,"Submit button", report);

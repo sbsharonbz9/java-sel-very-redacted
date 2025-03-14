@@ -157,15 +157,6 @@ public class BasicHelpers {
         }
     }
 
-    public void clickFlexJs(WebElement element, String navigatorText, @Nullable GalenReport report) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", element);
-        if (report != null) {
-            report.addStep("Click on " + navigatorText, navigatorText + " is clicked.", navigatorText + " is clicked.",
-                    element.getText().isEmpty());
-        }
-    }
-
     public Boolean verifyCondition(Callable<Boolean> callable, String closureText, boolean hardFail, @Nullable GalenReport report) {
         try {
             return (report != null) ?
@@ -226,8 +217,9 @@ public class BasicHelpers {
                 "Verify " + navigatorText + " displayed", getWebElement(byStatement), navigatorText, false);
     }
 
-    public void sendTextFlex(WebElement element, String inputText, String identifier, @Nullable GalenReport report) {
-        clearTextField(element, null);
+    public void sendTextFlex(By by, String inputText, String identifier, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
+        clearTextField(by, null);
         if (report != null) {
             report.sendTextAndReport(element, inputText, identifier, false);
         } else {
@@ -240,7 +232,7 @@ public class BasicHelpers {
         try {
             clickFlex(toClick, navText, null);
             sleep(1000);
-            return verifyActionToNavDisplayed("Click " + navText, getWebElement(toVerify), navText2, report);
+            return verifyActionToNavDisplayed("Click " + navText, toVerify, navText2, report);
         } catch (Exception e) {
             return verifyActionToNavDisplayed("Click " + navText, null, navText2, report);
         }
@@ -249,18 +241,18 @@ public class BasicHelpers {
     public Boolean verifyClickToNavNotDisplayed(By toClick, String navText, By toVerify, String navText2,
                                              @Nullable GalenReport report) {
         clickFlex(toClick, navText, null);
-        return verifyActionToNavNotDisplayed("Click "+ navText, getWebElement(toVerify, shortWait), navText2, report);
+        return verifyActionToNavNotDisplayed("Click "+ navText, toVerify, navText2, report);
     }
 
-    public Boolean verifyClickToPageTransition(BasePage expectedPage, WebElement element, String navText,
-                                               @Nullable GalenReport report) {
+    public Boolean verifyClickToPageTransition(BasePage expectedPage, By by, String navText, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
         clickFlex(element, navText, null);
         return verifyActionToPageDisplayed("Click '" + navText + "'", expectedPage,
                 expectedPage.reportText, report);
     }
 
-    public Boolean verifyActionToNavDisplayed(String action, WebElement nav, String navText,
-                                              @Nullable GalenReport report) {
+    public Boolean verifyActionToNavDisplayed(String action, By by, String navText, @Nullable GalenReport report) {
+        WebElement nav = getWebElement(by);
         if (report != null) {
             try {
                 return report.verifyActionToNavDisplayed(action, nav, navText, true);
@@ -273,8 +265,9 @@ public class BasicHelpers {
         return nav != null && nav.isDisplayed();
     }
 
-    public Boolean verifyActionToNavNotDisplayed(String action, WebElement nav, String navText,
-                                              @Nullable GalenReport report) {
+    public Boolean verifyActionToNavNotDisplayed(String action, By by, String navText,
+                                                 @Nullable GalenReport report) {
+        WebElement nav = getWebElement(by, shortWait);
         String result;
         if (report != null) {
             result = nav==null? navText + " is not displayed":navText+ " is displayed";
@@ -304,7 +297,8 @@ public class BasicHelpers {
         return toPage.verifyAtPage();
     }
 
-    public Boolean verifyButtonEnabled(WebElement element, Boolean isEnabled, @Nullable GalenReport report) {
+    public Boolean verifyButtonEnabled(By by, Boolean isEnabled, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
         boolean actualEnabled = element.isEnabled();
         Boolean result = actualEnabled == isEnabled;
         String condition = element.getText() + " button is " + (isEnabled ? "" : " not ") + " enabled ";
@@ -314,7 +308,8 @@ public class BasicHelpers {
         return result;
     }
 
-    public void clearTextField(WebElement element, @Nullable GalenReport report) {
+    public void clearTextField(By by, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
         char[] c = element.getAttribute("value").toCharArray();
         for (char ch : c) {
             element.sendKeys(Keys.BACK_SPACE);
@@ -337,8 +332,8 @@ public class BasicHelpers {
         return response;
     }
 
-    public Boolean verifyText(WebElement element, String navText, String textToVerify, @Nullable GalenReport
-            report) {
+    public Boolean verifyText(By by, String navText, String textToVerify, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
         if (report != null) {
             return report.addTextVerificationStep(element, navText, textToVerify, false);
         }
@@ -419,14 +414,20 @@ public class BasicHelpers {
         return optionsText;
     }
 
-    public void selectDropDownByText(WebElement element, String value, String identifier, @Nullable GalenReport
-            report) {
+    public void selectDropDownByText(By by, String value, String identifier, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
         if (report != null)
-            report.selectDropDownByTextAndReport(element, value, identifier, false);
+            report.selectDropDownByTextAndReport(element, value, identifier);
         else {
             Select select = new Select(element);
             select.selectByVisibleText(value);
         }
+    }
+
+    public void verifyCurrentDropdownValue(By by, String identifier, String value, @Nullable GalenReport report) {
+        WebElement element = getWebElement(by);
+        verifyCondition((()-> new Select(element).getFirstSelectedOption().getText().equals(value)),
+                    "Selected value of '" + identifier + " equals '" + value + "'", false, report);
     }
 
     public void refreshPage(String navText, @Nullable GalenReport report) {

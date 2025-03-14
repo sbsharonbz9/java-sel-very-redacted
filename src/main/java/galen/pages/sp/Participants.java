@@ -56,29 +56,13 @@ public class Participants extends SPBasePage {
         return basicHelpers.getWebElement(emailField);
     }
 
-    public WebElement getEditEmail() {
-        return basicHelpers.getWebElement(editEmailField);
-    }
-
-    public WebElement getStudyID() {
-        return basicHelpers.getWebElement(studyIDDropdown);
-    }
-
-    public WebElement getSiteID() {
-        return basicHelpers.getWebElement(siteIDDropdown);
-    }
-
-    public WebElement getCreateUserButton() {
-        return basicHelpers.getWebElement(createUserButton);
-    }
-
     public void addParticipant(String email, String studyID, String siteID, @Nullable GalenReport report) {
         enterNewParticipantData(email, studyID,siteID, report);
         basicHelpers.clickFlex(createUserButton, "Create User", report);
     }
 
     public void editParticipant(ParticipantClass par, @Nullable GalenReport report) {
-        basicHelpers.sendTextFlex(getEditEmail(), par.email, "Email", report);
+        basicHelpers.sendTextFlex(editEmailField, par.email, "Email", report);
         basicHelpers.verifyClickToNavNotDisplayed(saveChangesButton, "Save Changes",
                 modals, "Edit Participant modal",report);
     }
@@ -92,7 +76,7 @@ public class Participants extends SPBasePage {
     }
 
     public void verifyCreateUserEnabledDisabled(boolean isEnabled, @Nullable GalenReport report) {
-        basicHelpers.verifyButtonEnabled(getCreateUserButton(), isEnabled, report);
+        basicHelpers.verifyButtonEnabled(createUserButton, isEnabled, report);
     }
 
     public void openAddParticipant(@Nullable GalenReport report) {
@@ -121,7 +105,7 @@ public class Participants extends SPBasePage {
     }
 
     public void verifyAllAddModalFilledIn(String email, String studyID, String siteID, @Nullable GalenReport report) {
-        basicHelpers.verifyText(getEmail(), "Email", email, report);
+        basicHelpers.verifyText(emailField, "Email", email, report);
         basicHelpers.verifyCurrentDropdownValue(studyIDDropdown, "Study ID dropdown",
                 studyID, report);
         basicHelpers.verifyCurrentDropdownValue(siteIDDropdown, "SiteID dropdown",
@@ -137,15 +121,15 @@ public class Participants extends SPBasePage {
     }
 
     public void selectStudyID(String value, @Nullable GalenReport report) {
-        basicHelpers.selectDropDownByText(getStudyID(), value, "Study ID", report);
+        basicHelpers.selectDropDownByText(studyIDDropdown, value, "Study ID", report);
     }
 
     public void selectSiteID(String value, @Nullable GalenReport report) {
-        basicHelpers.selectDropDownByText(getSiteID(), value, "Site ID", report);
+        basicHelpers.selectDropDownByText(siteIDDropdown, value, "Site ID", report);
     }
 
     public void enterEmail(String email, @Nullable GalenReport report) {
-        basicHelpers.sendTextFlex(getEmail(), email, "Email", report);
+        basicHelpers.sendTextFlex(emailField, email, "Email", report);
     }
 
     public void clickCreateUser(@Nullable GalenReport report) {
@@ -207,9 +191,9 @@ public class Participants extends SPBasePage {
                 "Select Study: '" + study+"'\n" +
                 "Select Site: '" + site;
         try {
-            basicHelpers.sendTextFlex(getEmail(), email, "Email", report);
-            basicHelpers.selectDropDownByText(getStudyID(), study, "Study: "+study, report);
-            basicHelpers.selectDropDownByText(getSiteID(), site, "Site: "+site, report);
+            basicHelpers.sendTextFlex(emailField, email, "Email", report);
+            basicHelpers.selectDropDownByText(studyIDDropdown, study, "Study: "+study, report);
+            basicHelpers.selectDropDownByText(siteIDDropdown, site, "Site: "+site, report);
             if (report != null) {
                 report.addStep(steps, "Participant data is filled in", "As expected", true, true);
             }

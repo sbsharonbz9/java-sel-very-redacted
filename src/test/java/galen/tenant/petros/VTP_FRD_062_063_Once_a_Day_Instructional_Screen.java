@@ -33,7 +33,7 @@ public class VTP_FRD_062_063_Once_a_Day_Instructional_Screen extends BaseTest {
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
 
-    VTP_FRD_062_063_Once_a_Day_Instructional_Screen() throws IOException {
+    VTP_FRD_062_063_Once_a_Day_Instructional_Screen() {
         this.user = new PetrosUser();
         VERSIONHISTORY.add(" ; ; ; ");
     }
@@ -45,12 +45,11 @@ public class VTP_FRD_062_063_Once_a_Day_Instructional_Screen extends BaseTest {
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_FRD_062_063 - Once a Day Instructional Screen";
         pageObj = new PetrosPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);;
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);
 
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.otherEDMeds, report);
-        pageObj.otherEDMeds.clickYesOrNo( "Yes", report);
-        pageObj.otherEDMeds.clickNextToPage(pageObj.onceADayInstruction, report);
-        pageObj.edAndHeartDiseaseInfo.verifyNextPresent(report);
+        pageObj.otherEDMeds.clickYesNoNextToPage( "Yes", pageObj.heartProblemsInstruction, report);
+        pageObj.heartProblemsInstruction.verifyNextPresent(report);
         report.addScreenshotStep("Step2_InstructionalScreen", driver);
 
         pageObj.heartProblemsInstruction.clickNextToPage(pageObj.nitrateUse, report);

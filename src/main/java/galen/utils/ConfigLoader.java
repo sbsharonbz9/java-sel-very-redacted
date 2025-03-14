@@ -17,7 +17,7 @@ public class ConfigLoader {
 	private static final String METRIC_URL = "metricsUser";
 	private static final String SP_DEX_SUFFIX = "spDexSuffix";
 	private static final String SP_PASSWORD= "spPassword";
-	private static final String DEXTER_URL = "dexterUrl";
+	private static final String DX_URL = "dxUrl";
 	private static final String PETROS_URL = "petrosUrl";
 	private static final String METRICS_EMAIL="metricsEmail";
 	private static final String METRICS_PARTID="metricsPartID";
@@ -111,8 +111,8 @@ public class ConfigLoader {
 		return getPropertyValue(SP_PASSWORD);
 	}
 
-	public String getDexterUrl() {
-		return getPropertyValue(DEXTER_URL);
+	public String getDxUrl() {
+		return getPropertyValue(DX_URL);
 	}
 
 	public String getPetrosUrl() {

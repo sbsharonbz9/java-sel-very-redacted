@@ -19,7 +19,6 @@ public class BasePage {
     public String reportText = "Next page";
     public BasicHelpers basicHelpers;
     public By headingTitle = By.xpath("//h1[contains(@class,'primary')]");
-    public static By question = By.className("question");
     public  By nextBTN = By.xpath("//button[normalize-space()='Next']");
     public By modal = By.className("modal");
     public By btnBack = By.xpath("//button[text()='Back']");
@@ -59,7 +58,8 @@ public class BasePage {
     }
 
     public boolean verifyAtPage() {
-        return basicHelpers.verifyAtPage(getHeadingTitle()!=null, reportText, null);
+        return basicHelpers.verifyAtPage(getHeadingTitle()!=null, reportText,
+                null);
     }
 
     public boolean verifyAtPage(@Nullable GalenReport report) {
@@ -79,8 +79,8 @@ public class BasePage {
 
         if (type == UrlType.PETROS)
             thisURL =ConfigLoader.getInstance().getPetrosUrl();
-         else if (type == UrlType.DEXTER)
-            thisURL =ConfigLoader.getInstance().getDexterUrl();
+         else if (type == UrlType.DX)
+            thisURL =ConfigLoader.getInstance().getDxUrl();
          else if (type == UrlType.STUDY)
             thisURL =ConfigLoader.getInstance().getStudyUrl();
          else
@@ -113,8 +113,8 @@ public class BasePage {
         return basicHelpers.verifyClickToPageTransition(toPage, nextBTN, "Next", report);
     }
 
-    public boolean clickBackToPage(BasePage toPage, @Nullable GalenReport report) {
-        return basicHelpers.verifyClickToPageTransition(toPage, btnBack, "Back", report);
+    public void clickBackToPage(BasePage toPage, @Nullable GalenReport report) {
+        basicHelpers.verifyClickToPageTransition(toPage, btnBack, "Back", report);
     }
 
     public void clickYesOrNo(String yesNo, @Nullable GalenReport report) {
@@ -195,11 +195,11 @@ public class BasePage {
         basicHelpers.verifyElementsDisplayed(buttons, report);
     }
 
-    public boolean verifyYesNoPresent(@Nullable GalenReport report) {
+    public void verifyYesNoPresent(@Nullable GalenReport report) {
         LinkedHashMap<String, By> buttons = new LinkedHashMap<>();
         buttons.put("'Yes' button", btnYes);
         buttons.put("'No' button", btnNo);
-        return basicHelpers.verifyElementsDisplayed(buttons, report);
+        basicHelpers.verifyElementsDisplayed(buttons, report);
     }
 
     public void verifyYesNoUnselected(@Nullable GalenReport report) {
@@ -233,13 +233,13 @@ public class BasePage {
         basicHelpers.clickFlex(moreInfoBack, "Back", report);
     }
 
-    public boolean clickMoreInfoToModal(@Nullable GalenReport report) {
-        return basicHelpers.verifyClickToNavDisplayed(moreInfoLink, "More Info button", moreInfoContent,
+    public void clickMoreInfoToModal(@Nullable GalenReport report) {
+        basicHelpers.verifyClickToNavDisplayed(moreInfoLink, "More Info button", moreInfoContent,
                 "More Info modal", report);
     }
 
-    public boolean clickConfirmToOpenModal(@Nullable GalenReport report) {
-        return basicHelpers.verifyClickToNavDisplayed(btnConfirm, "Confirm", modal, "Confirm Modal",
+    public void clickConfirmToOpenModal(@Nullable GalenReport report) {
+        basicHelpers.verifyClickToNavDisplayed(btnConfirm, "Confirm", modal, "Confirm Modal",
                 report);
     }
 
@@ -264,8 +264,8 @@ public class BasePage {
                 "Assessment modal", report);
     }
 
-    public boolean verifyMoreInfoLinkDisplayed(@Nullable GalenReport report) {
-        return basicHelpers.verifyDisplayedFlex(moreInfoLink, "More Info link", report);
+    public void verifyMoreInfoLinkDisplayed(@Nullable GalenReport report) {
+        basicHelpers.verifyDisplayedFlex(moreInfoLink, "More Info link", report);
     }
 
     public void verifyMoreInfoDisplayed(@Nullable GalenReport report) {

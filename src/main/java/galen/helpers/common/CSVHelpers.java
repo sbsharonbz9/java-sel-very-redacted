@@ -1,6 +1,6 @@
 package galen.helpers.common;
 
-import galen.helpers.tenant.dexter.DexterMetricsRecord;
+import galen.helpers.tenant.dx.DxMetricsRecord;
 import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nullable;
@@ -52,10 +52,10 @@ public class CSVHelpers {
         return localRecordMap;
     }
 
-    public void verifyAllMetricsValues(DexterMetricsRecord dmr, File fileName, @Nullable GalenReport report) throws IOException {
+    public void verifyAllMetricsValues(DxMetricsRecord dmr, File fileName, @Nullable GalenReport report) throws IOException {
         LinkedHashMap<String, Object[]> metricMap = new LinkedHashMap<>();
         LinkedHashMap<String, String> localRecordMap = parseCSV(fileName, "AssessmentNumber", dmr.AssessmentNumber);
-        List<Field> fieldlist = Arrays.asList(DexterMetricsRecord.class.getDeclaredFields());
+        List<Field> fieldlist = Arrays.asList(DxMetricsRecord.class.getDeclaredFields());
 
         fieldlist.forEach((Field it)->
         {

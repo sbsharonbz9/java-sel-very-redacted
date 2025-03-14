@@ -49,7 +49,7 @@ public class VTP_FRD_120_121_122_Antibiotics_Screen extends BaseTest {
 
         common.verifyYesNoPresent(report);
         common.verifyNextButtonDisabled(report);
-        report.addScreenshotStep("antibiotics_screem", driver);
+        report.addScreenshotStep("Antibiotics_screen", driver);
 
         common.clickYesOrNo("No", report);
         common.verifyNextButtonEnabled(report);
@@ -57,12 +57,12 @@ public class VTP_FRD_120_121_122_Antibiotics_Screen extends BaseTest {
 
         common.clickYesOrNo("No", report);
         bh.verifyRadioButtonSelected("No", report);
-        bh.verifyButtonEnabled(pageObj.antibiotics.getNextButton(), true, report);
+        common.verifyNextButtonEnabled(report);
         report.addScreenshotStep("No_NextEnabled_2", driver);
 
         common.clickYesOrNo("Yes", report);
         bh.verifyRadioButtonSelected("Yes", report);
-        bh.verifyButtonEnabled(pageObj.antibiotics.getNextButton(), true, report);
+        common.verifyNextButtonEnabled(report);
         report.addScreenshotStep("Yes_NextEnabled", driver);
 
         common.clickYesNoNextToPage(user.antibiotics="No", pageObj.antidepressants,report);
