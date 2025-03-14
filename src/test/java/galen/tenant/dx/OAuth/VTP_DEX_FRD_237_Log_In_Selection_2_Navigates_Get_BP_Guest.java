@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_Get_BP_Guest  extends 
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_noBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         new DxHFWrappers(driver).runDxHFnoBPNonsmoker(user, pageObj.adbubpNormal, report);
         report.addScreenshotStep("Step2_Get_BP_Screen");
     }

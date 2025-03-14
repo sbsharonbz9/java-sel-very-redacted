@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_230_ADBU_DDI_Backup_Contraceptives_Navigates_To_BP exte
         DxPageObj pageObj = new DxPageObj(driver);
         user.conditionType = pageObj.ddiCondition.getCondition(DDIConditionType.HIV.label);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUNoBP(user, pageObj.review, report);
 
         pageObj.review.clickEditToPage(ReviewAnswersLinks.HIV, pageObj.ddihiv, report);

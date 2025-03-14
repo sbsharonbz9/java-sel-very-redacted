@@ -45,7 +45,7 @@ public class VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA extends BaseTe
         DxPageObj pageObj = new DxPageObj(driver);
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.purchaseOptions, report);
         report.addStep("Note assessment id", "Assessment id noted", "Assessment id is "+
                 user.assessmentID, true);

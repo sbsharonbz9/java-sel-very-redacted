@@ -46,7 +46,7 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
 
         //OK
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.purchaseOptions, report);
@@ -62,9 +62,10 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
         //EXIT
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
         common.clickBrowserBackToModal(report);
-        bh.verifyClickToPageTransition(pageObj.welcomePage, bh.getWebElement(common.exitLeaveButton),"Leave", report);
+        pageObj.depression.clickExitLeaveToModalDismissed(report);
         sp.login.load(UrlType.STUDY);
         bh.downloadCSVAndVerify("Step6_CSV_EXIT", sp, report);
+
         testOutputPath = "reports/"+reportName+"/Step6_CSV_EXIT";
         testOutput = new File(testOutputPath);
         report.addStep("Note assessment id", "Assessment id noted", "Assessment id is "+

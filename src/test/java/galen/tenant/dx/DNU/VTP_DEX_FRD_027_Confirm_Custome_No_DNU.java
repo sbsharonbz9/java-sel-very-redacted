@@ -36,9 +36,9 @@ public class VTP_DEX_FRD_027_Confirm_Custome_No_DNU extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         pageObj.orderForSelf.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         report.addScreenshotStep("Step4_Confirm Customer DNU");
     }

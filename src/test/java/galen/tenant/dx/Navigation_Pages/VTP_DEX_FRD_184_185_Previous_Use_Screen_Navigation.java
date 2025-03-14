@@ -55,7 +55,7 @@ public class VTP_DEX_FRD_184_185_Previous_Use_Screen_Navigation extends BaseTest
         CommonPageFeatures common = new CommonPageFeatures(driver);
         BasicHelpers bh = new BasicHelpers(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.usedProduct, report);
         report.addScreenshotStep("Step3_Prior Use");
 
@@ -73,7 +73,7 @@ public class VTP_DEX_FRD_184_185_Previous_Use_Screen_Navigation extends BaseTest
         bh.compareCSVValueByAssessmentID(testOutput, user.assessmentID, "PriorUse",
                 "TRUE", report);
 
-        common.load(URLType.DX);
+        common.load(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.usedProduct, report);
         common.clickYesNoNextToPage("No", pageObj.orderForSelf, report);
         report.addScreenshotStep("Step9_Confirm Customer");

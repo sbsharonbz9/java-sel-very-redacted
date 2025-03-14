@@ -37,7 +37,7 @@ public class VTP_DEX_FRD_100_101_Antifungal_Medication_Selection extends BaseTes
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.antifungal, report);
         common.clickYesNoNextToPage("No", pageObj.otherMedication, report);
         report.addScreenshotStep("Step3_OtherMeds");

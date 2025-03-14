@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_241_List_Of_Cancers_Screen_Control extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         CancerList cancers = pageObj.cancerList;
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.everHadCancer, report);
         pageObj.everHadCancer.clickYesNoNextToPage("Yes", cancers, report);
         cancers.verifyNextButtonDisabled(report);

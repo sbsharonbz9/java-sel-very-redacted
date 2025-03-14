@@ -1,6 +1,7 @@
 package galen.tenant.dx.SinglePageContent;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
@@ -35,7 +36,7 @@ public class VTP_DEX_FRD_031_HormonalBC_Yes_HormonalBC_RiskModal extends BaseTes
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.menstrual, report);
         pageObj.menstrual.clickYesNoNextToPage("No", pageObj.birthControlB, report);
         pageObj.birthControlB.clickYesNoNext("Yes", report);

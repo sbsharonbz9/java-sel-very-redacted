@@ -80,13 +80,13 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         CommonPageFeatures common = new CommonPageFeatures(driver);
         bh = new BasicHelpers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.usedProduct, report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("Step2_Prior Use");
 
         common.clickYesNoNextToPage("Yes", pageObj.orderForSelf,report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("Step3_ConfirmCustomer");
 
@@ -107,7 +107,7 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         report.addScreenshotStep("7_Smoking");
 
         pageObj.smoking.selectRadioResponseAndProgress(SmokeType.RARELY_SMOKE.label, pageObj.birthYear,report);
-        bh.verifyText(pageObj.birthYear.getBirthYearField(), "Birth Year field", "", report);
+        bh.verifyText(pageObj.birthYear.birthYearField, "Birth Year field", "", report);
         common.verifyYesNoUnselected(report);
         report.addScreenshotStep("8_YOB");
 
@@ -164,7 +164,7 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         report.addScreenshotStep("22_Migraines");
 
         common.clickYesNoNextToPage(user.migraines, pageObj.obesity,report);
-        bh.verifyText(pageObj.obesity.getWeightElement(), "Obesity weight field", "", report);
+        bh.verifyText(pageObj.obesity.inputWeight, "Obesity weight field", "", report);
         report.addScreenshotStep("23_Obesity");
 
         pageObj.obesity.enterHeightAndWeight(user, report);
@@ -225,8 +225,8 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
         pageObj.knowBPNumber.verifyModalThreeMonthsOpen(report);
         pageObj.knowBPNumber.clickYesOrNoModal(user.measuredIn3Months, report);
         pageObj.enterBP.verifyAtPage(report);
-        bh.verifyText(pageObj.enterBP.getInputSystolic(), "Systolic field", "", report);
-        bh.verifyText(pageObj.enterBP.getInputDiastolic(), "Diastolic field", "", report);
+        bh.verifyText(pageObj.enterBP.inputSystolic, "Systolic field", "", report);
+        bh.verifyText(pageObj.enterBP.inputDiastolic, "Diastolic field", "", report);
         report.addScreenshotStep("38_Enter BP");
 
     }

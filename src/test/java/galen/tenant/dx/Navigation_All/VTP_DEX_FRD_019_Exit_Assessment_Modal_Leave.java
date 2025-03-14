@@ -113,7 +113,7 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
             pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         } else if (page == pageObj.orderForSelf) {
             hf.runDxHFNonsmokingwBP(user, page, report);
-            pageObj.orderForSelf.clickClose(report);
+            pageObj.orderForSelf.clickCloseToDismiss(report);
         } else {
             hf.runDxHFNonsmokingwBP(user, page, report);
        }
@@ -157,7 +157,7 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_019 – Exit Health Survey Modal (Leave)";
         bh = new BasicHelpers(driver);
         pageObj = new DxPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         commonPageFeatures = new CommonPageFeatures(driver);
         hf = new DxHFWrappers(driver);
 
@@ -208,8 +208,10 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
         DDIMoreInfo(175, pageObj.ddiHighCholesterol, DDIConditionType.HIGH_CHOLESTEROL.label);
 
         verifyExit(183, pageObj.antifungal);
+
         user.isAntifungal="Yes";
         verifyMoreInfoExit(187, pageObj.antifungalMeds);
+
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         verifyMoreInfoExit(195, pageObj.otherMedication);
         verifyMoreInfoExit(202, pageObj.gallbladder);
@@ -217,6 +219,7 @@ public class VTP_DEX_FRD_019_Exit_Assessment_Modal_Leave extends BaseTest {
 
         user.depression="Yes";
         verifyMoreInfoExit(217, pageObj.diagnosedDepression);
+
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         verifyExit(225, pageObj.knowBPNumber);
         verifyMoreInfoExit(228, pageObj.enterBP);

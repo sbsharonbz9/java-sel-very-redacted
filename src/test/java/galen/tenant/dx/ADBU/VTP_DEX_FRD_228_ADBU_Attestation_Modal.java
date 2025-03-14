@@ -35,7 +35,7 @@ public class VTP_DEX_FRD_228_ADBU_Attestation_Modal extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUwBP(user, pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbu, report);

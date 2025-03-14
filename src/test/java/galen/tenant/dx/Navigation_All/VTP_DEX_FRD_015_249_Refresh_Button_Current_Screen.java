@@ -4,6 +4,7 @@ import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
 import galen.enums.tenant.dx.BloodPressureType;
 import galen.enums.tenant.dx.DDIConditionType;
+import galen.enums.tenant.dx.ReviewAnswersLinks;
 import galen.enums.tenant.dx.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
@@ -138,9 +139,8 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         report.reportTitle = "VTP_DEX_FRD_015_249 – Refresh Button Returns to Current Screen";
         bh = new BasicHelpers(driver);
         pageObj = new DxPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);;
         commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
         pageObj.welcomePage.verifyAtPage(report);
@@ -153,8 +153,10 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         // OAuth to Product Used
         commonPageFeatures.clickNextToPage(pageObj.oAuth, report);
         refresh(9, pageObj.usedProduct);
+
         pageObj.oAuth.clickGuestButton(report);
         refresh(11, pageObj.usedProduct);
+
         pageObj.oAuth.chooseAccountType(user, report);
         pageObj.usedProduct.verifyAtPage(report);
         refresh(14, pageObj.usedProduct);
@@ -162,14 +164,12 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         commonPageFeatures.clickYesNoNext(user.productUsed, report);
         refresh(16, pageObj.orderForSelf);
 
-        pageObj.usedProduct.verifyTooltipDisplayed(report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickMoreInfoToModal(report);
         bh.refreshPage("Confirm Customer page", report);
         report.addScreenshotStep("Step18_Refresh", driver);
-        pageObj.usedProduct.verifyTooltipDisplayed(report);
-        pageObj.usedProduct.clickCloseButton(report);
 
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickYesNoNextToPage(user.orderForSelf,pageObj.pregnancy, report);
         refresh(20, pageObj.pregnancy);
         refreshMoreInfo(22, pageObj.pregnancy);
@@ -281,7 +281,6 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         refresh(107, pageObj.antifungal);
         refreshMoreInfo(109, pageObj.antifungal);
 
-        // Antifungal to AF Meds
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.antifungalMeds, report);
         refresh(111, pageObj.antifungalMeds);
         refreshMoreInfo(113, pageObj.antifungalMeds);
@@ -326,10 +325,10 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         commonPageFeatures.clickNextToPage(pageObj.review,report);
         refresh(140, pageObj.review);
 
-        pageObj.review.clickConfirm(report);
+        pageObj.review.clickConfirmToOpenModal(report);
         refresh(142, pageObj.review);
 
-        pageObj.review.clickEditMedicalConditionsLink(report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.DDI,pageObj.ddiCondition, report);
         pageObj.ddiCondition.selectCheckboxAndProgress(DDIConditionType.HIGH_CHOLESTEROL.label, pageObj.review, report);
         refresh(142, pageObj.review);
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.review, report);
@@ -364,7 +363,7 @@ public class VTP_DEX_FRD_015_249_Refresh_Button_Current_Screen extends BaseTest 
         refresh(161, pageObj.adbu);
         pageObj.adbu.clickYesNoToOpenModal("No", report);
         refresh(163, pageObj.adbu);
-        pageObj.adbu.clickConfirm(null);
+        pageObj.adbu.addressConfirmations(user.askedDoctor, report);
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
         pageObj.knowBPNumber.selectRadioResponseAndProgress(BloodPressureType.No_Know_BP.label, pageObj.review,

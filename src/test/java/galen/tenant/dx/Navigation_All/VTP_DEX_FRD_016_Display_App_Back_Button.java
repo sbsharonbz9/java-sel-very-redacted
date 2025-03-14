@@ -3,6 +3,7 @@ package galen.tenant.dx.Navigation_All;
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
 import galen.enums.tenant.dx.BloodPressureType;
+import galen.enums.tenant.dx.ReviewAnswersLinks;
 import galen.enums.tenant.dx.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
@@ -140,7 +141,7 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         bh = new BasicHelpers(driver);
         pageObj = new DxPageObj(driver);
         commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.load(UrlType.DX);
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
         pageObj.welcomePage.verifyAtPage(report);
@@ -158,7 +159,7 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
 
         // Product Used to Prevent
         commonPageFeatures.clickYesNoNext(user.productUsed, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         pageObj.orderForSelf.verifyAtPage(report);
         verifyBackDisplayed(10, pageObj.orderForSelf);
         verifyMoreInfoBackDisplayed(11,pageObj.orderForSelf);
@@ -318,10 +319,7 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         pageObj.adbubpScreen.verifyAtPage(report);
         verifyBackNotDisplayed(99, pageObj.adbubpScreen);
 
-        pageObj.adbubpScreen.clickYesNoToOpenModal("Yes", report);
-        pageObj.adbubpScreen.clickConfirmCheckbox(report);
-        pageObj.adbubpScreen.clickConfirm(report);
-        pageObj.adbubpNormal.verifyAtPage(report);
+        pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbubpNormal, report);
         verifyBackNotDisplayed(101, pageObj.adbubpNormal);
 
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);
@@ -337,12 +335,12 @@ public class VTP_DEX_FRD_016_Display_App_Back_Button extends BaseTest {
         verifyBackNotDisplayed(104, pageObj.purchaseOptions);
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.orderForSelf.clickClose(null);
+        pageObj.orderForSelf.clickCloseToDismiss(null);
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         verifyBackNotDisplayed(106, pageObj.kickoutPage);
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickGallBladderEdit(report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.GALLBLADDER, pageObj.gallbladder, report);
         commonPageFeatures.clickYesNoNextToPage("Yes", pageObj.review, report);
 
         pageObj.review.addressConfirmations(report);

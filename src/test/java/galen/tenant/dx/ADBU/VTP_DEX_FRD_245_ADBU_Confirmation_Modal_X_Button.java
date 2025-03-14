@@ -13,8 +13,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button extends BaseTest {
     static String OBJECTIVE = "To verify on the ADBU Doctor Approved Modal, if the user selects the ‘X’ button on the modal,"+
             "the application shall close the modal.";
@@ -45,20 +43,20 @@ public class VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUwBP(user, pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbu,report);
         pageObj.adbu.clickYesNoToOpenModal("Yes", "ADBU Confirm modal",report);
         report.addScreenshotStep("Step2_ADBU_Doctor_Not_Approved_Modal");
      
-        pageObj.adbu.clickXButton(report);;
+        pageObj.adbu.clickXButton(report);
         pageObj.adbu.verifyModalDismissed(report);
         report.addScreenshotStep("Step3_ADBU_Screen");
 
         pageObj.adbu.clickYesNoToOpenModal("Yes", "ADBU Confirm modal",report);
         pageObj.adbu.clickConfirmCheckbox(report);
-        pageObj.adbu.clickXButton(report);;
+        pageObj.adbu.clickXButton(report);
         pageObj.adbu.verifyModalDismissed(report);
         report.addScreenshotStep("Step5_ADBU_Screen");
 
@@ -69,13 +67,13 @@ public class VTP_DEX_FRD_245_ADBU_Confirmation_Modal_X_Button extends BaseTest {
         pageObj.adbubpScreen.clickYesNoToOpenModal("Yes", "ADBU BP Confirm modal",report);
         report.addScreenshotStep("Step7_ADBUBP_Modal");
 
-        pageObj.adbubpScreen.clickXButton(report);;
+        pageObj.adbubpScreen.clickXButton(report);
         pageObj.adbubpScreen.verifyModalDismissed(report);
         report.addScreenshotStep("Step8_ADBUBP_Screen");
 
         pageObj.adbubpScreen.clickYesNoToOpenModal("Yes", "ADBU BP screen",report);
         pageObj.adbubpScreen.clickConfirmCheckbox(report);
-        pageObj.adbubpScreen.clickXButton(report);;
+        pageObj.adbubpScreen.clickXButton(report);
         pageObj.adbubpScreen.verifyModalDismissed(report);
         report.addScreenshotStep("Step10_ADBUBP_Screen");
     }

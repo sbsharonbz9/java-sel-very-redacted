@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_038_Smoking_No_Navigation extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.smoking, report);
         pageObj.smoking.selectRadioResponseAndProgress( user.smokingType.label, pageObj.everHadCancer,report);
         report.addScreenshotStep("Step2_Ever Had Cancer");

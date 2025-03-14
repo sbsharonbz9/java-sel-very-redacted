@@ -47,7 +47,7 @@ public class VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         EnterBPEnd enterBPEnd = pageObj.enterBPEnd;
         
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFnoBPNonsmoker(user, pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbubpNormal,report);

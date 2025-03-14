@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_022_Participant_Token_Admittance extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_022_Participant_Token_Admittance";
         WelcomePage welcomePage = new WelcomePage(driver);
         bh = new BasicHelpers(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DX);
         commonPageFeatures = new CommonPageFeatures(driver);
 
         sleep(1000);
@@ -53,7 +53,7 @@ public class VTP_DEX_FRD_022_Participant_Token_Admittance extends BaseTest {
         welcomePage.verifyAtPage(report);
         report.addScreenshotStep("Step1_Welcome Page");
 
-        welcomePage.load(URLType.DX);
+        welcomePage.load(UrlType.DX);
         report.addStep("Open browser with valid token", "Browser opens to Welcome page",
                 "At Welcome page", welcomePage.verifyAtPage());
         welcomePage.clickBegin(report);

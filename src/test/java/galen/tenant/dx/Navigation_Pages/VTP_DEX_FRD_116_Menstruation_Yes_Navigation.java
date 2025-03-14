@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_116_Menstruation_Yes_Navigation extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.menstrual, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("Yes", pageObj.menstrual, report);
         pageObj.birthControl.verifyAtPage(report);

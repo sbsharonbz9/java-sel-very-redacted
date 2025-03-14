@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_073_Other_Cancers_Flag_ADBU_Navigation extends BaseTest
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.everHadCancer, report);
         common.clickYesNoNextToPage(user.everHadCancer="Yes", pageObj.cancerList, report);
         pageObj.cancerList.selectCheckboxesAndProgress(user.cancerList, pageObj.bloodPressureMeds, report);

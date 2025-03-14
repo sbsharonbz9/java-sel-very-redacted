@@ -42,7 +42,7 @@ public class VTP_DEX_FRD_049_050_Know_BP_More_Info extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.enterBP, report);
         common.verifyMoreInfoLinkDisplayed(report);
         report.addScreenshotStep("Step2_MoreInfoLink");

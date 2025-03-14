@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_081_HormonalBC_No_Navigation extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.birthControl, report);
         common.clickYesNoNextToPage("No", pageObj.smoking, report);
         report.addScreenshotStep("Step2_SmokingScreen");

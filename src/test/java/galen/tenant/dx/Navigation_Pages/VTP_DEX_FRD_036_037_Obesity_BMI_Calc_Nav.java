@@ -53,7 +53,7 @@ public class VTP_DEX_FRD_036_037_Obesity_BMI_Calc_Nav extends BaseTest {
 
         user.weight="210";
         user.height="5 feet, 5 inches";
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.obesity, report);
         pageObj.obesity.enterHeightAndWeightAndProgress(user, pageObj.ddiCondition,report);
         report.addScreenshotStep("Step2_210_5_5");
@@ -64,7 +64,7 @@ public class VTP_DEX_FRD_036_037_Obesity_BMI_Calc_Nav extends BaseTest {
         bh.compareCSVValueByAssessmentID(testOutput,user.assessmentID, "BMI", "34.95", report );
 
         user.weight="211";
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.load(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.obesity, report);
         pageObj.obesity.enterHeightAndWeightAndProgress(user, pageObj.ddiCondition, report);
         report.addScreenshotStep("Step5_211_5_5");

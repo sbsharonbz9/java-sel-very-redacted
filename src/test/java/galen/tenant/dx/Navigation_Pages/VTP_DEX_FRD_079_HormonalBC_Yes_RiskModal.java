@@ -41,7 +41,7 @@ public class VTP_DEX_FRD_079_HormonalBC_Yes_RiskModal extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.birthControl, report);
         pageObj.birthControl.clickYesNoNextToModal("Yes", "Birth Control", report);
         report.addScreenshotStep("Step2_BC_A_Yes");

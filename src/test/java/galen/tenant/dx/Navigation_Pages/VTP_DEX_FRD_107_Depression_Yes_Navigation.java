@@ -2,11 +2,10 @@ package galen.tenant.dx.Navigation_Pages;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.helpers.common.CommonPageFeatures;
+import galen.enums.tenant.dx.ReviewAnswersLinks;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -37,18 +36,19 @@ public class VTP_DEX_FRD_107_Depression_Yes_Navigation extends BaseTest {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_107_Depression_Yes_Navigation";
+
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
+        DxHFWrappers dw = new DxHFWrappers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
-        new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
-        new CommonPageFeatures(driver).clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
+        dw.runDxHFNonsmokingwBP(user, pageObj.depression, report);
+        pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         report.addScreenshotStep("Step2_DiagnosedDepression_Screen");
 
-        new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickDepressionEdit(report);
-        pageObj.depression.verifyAtPage(report);
-        new CommonPageFeatures(driver).clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
+        dw.runDxHFNonsmokingwBP(user, pageObj.review, report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.DEPRESSION, pageObj.depression, report);
+        pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         report.addScreenshotStep("Step5_DiagnosedDepression_Screen");
     }
 }

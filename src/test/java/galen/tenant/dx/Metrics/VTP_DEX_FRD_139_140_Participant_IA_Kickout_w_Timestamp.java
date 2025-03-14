@@ -106,14 +106,12 @@ public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends Base
         basicHelpers = new BasicHelpers(driver);
         hf = new DxHFWrappers(driver);
 
-        pageObj.pritUnl.load(URLType.DX);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
 
         hf.runDxHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         checkMetrics("InitialOutcome","3", "DNUSelfOrderScreen");
-
         yesNoKickouts("6", "DNUPreventPregnancyScreen", pageObj.pregnancy, "No");
 
         hf.runDxHFNonsmokingwBP(user, pageObj.menstrual, report);

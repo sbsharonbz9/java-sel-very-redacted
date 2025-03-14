@@ -62,7 +62,7 @@ public class VTP_DEX_FRD_055_056_057_058_BP_Numbers extends BaseTest {
 
 
         // Sys 110, Dias 111 to Modal
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
 
         user.systolic="110";
         user.diastolic="111";

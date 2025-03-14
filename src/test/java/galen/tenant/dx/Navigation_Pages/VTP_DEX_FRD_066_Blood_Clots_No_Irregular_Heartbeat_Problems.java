@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_066_Blood_Clots_No_Irregular_Heartbeat_Problems extends
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.bloodClot, report);
         pageObj.bloodClot.selectCheckboxesAndProgress(user.bloodClot, pageObj.irregularHeartBeat, report);
         report.addScreenshotStep("Step2_Irregular Heartbeat");

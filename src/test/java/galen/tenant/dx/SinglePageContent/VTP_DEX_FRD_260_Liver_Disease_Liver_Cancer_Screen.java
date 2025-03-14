@@ -1,11 +1,10 @@
 package galen.tenant.dx.SinglePageContent;
 
 import galen.base.BaseTest;
-import galen.helpers.common.CommonPageFeatures;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -46,9 +45,8 @@ public class VTP_DEX_FRD_260_Liver_Disease_Liver_Cancer_Screen extends BaseTest 
 
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
-        CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.liverCancer, report);
         pageObj.liverCancer.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step2_Liver_Cancer_Screen");
@@ -56,18 +54,18 @@ public class VTP_DEX_FRD_260_Liver_Disease_Liver_Cancer_Screen extends BaseTest 
         user.cancerList=new ArrayList<>(Arrays.asList("Liver disease", "Liver cancer", "Hepatitis C"));
         pageObj.liverCancer.selectCheckboxReponses(user.cancerList, report);
         sleep(1000);
-        pageObj.liverCancer.verifySelectedCheckboxes(user.cancerList, report);
+        pageObj.liverCancer.verifyCheckboxesSelected(user.cancerList, report);
         pageObj.liverCancer.verifyNextButtonEnabled(report);
         report.addScreenshotStep("Step3_Next_Button_Enabled");
 
-        user.cancerList=new ArrayList<>(Arrays.asList("None of these"));
+        user.cancerList = user.defaultNone;
         pageObj.liverCancer.selectCheckboxReponses(user.cancerList, report);
         sleep(1000);
-        pageObj.liverCancer.verifySelectedCheckboxes(user.cancerList, report);
+        pageObj.liverCancer.verifyCheckboxesSelected(user.cancerList, report);
         pageObj.liverCancer.verifyNextButtonEnabled(report);
         report.addScreenshotStep("Step4_Next_Button_Enabled");
 
-        user.cancerList=new ArrayList<>(Arrays.asList("None of these"));
+        user.cancerList=user.defaultNone;
         pageObj.liverCancer.selectCheckboxReponses(user.cancerList, report);
         sleep(1000);
         pageObj.liverCancer.verifyNextButtonDisabled(report);

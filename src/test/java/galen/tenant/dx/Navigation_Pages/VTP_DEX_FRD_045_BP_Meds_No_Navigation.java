@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_045_BP_Meds_No_Navigation extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.bloodPressureMeds, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.cardiacRisk, report);
         report.addScreenshotStep("Step2_Heart Conditions");

@@ -12,10 +12,6 @@ import java.util.Arrays;
 public class Smoking extends SingleResponseRadioButtonPage {
 
     public By title = By.className("SmokingScreen");
-    public static By doNotSmokeRdBtn = By.xpath("//input[@id='no']");
-    public static By smokeRegularlyRdBtn = By.xpath("//input[@id='regular']");
-    public static By occasionallyRdBtn = By.xpath("//input[@id='occasional']");
-    public static By rarelyRdBtn = By.xpath("//input[@id='rare']");
     public ArrayList<String> smokeOptions = new ArrayList<>(Arrays.asList("I don't smoke or Vape",
             "I smoke and/or Vape regularly", "I smoke or Vape occasionally", "I rarely smoke or Vape"));
 

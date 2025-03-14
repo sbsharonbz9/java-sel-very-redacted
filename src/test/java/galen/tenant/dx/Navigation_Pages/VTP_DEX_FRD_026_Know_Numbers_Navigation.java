@@ -34,7 +34,7 @@ public class VTP_DEX_FRD_026_Know_Numbers_Navigation extends BaseTest {
 
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         pageObj.welcomePage.clickBegin(report);
         pageObj.privacyPage.clickIAcceptBtnToPage(pageObj.numbers, report);
         new CommonPageFeatures(driver).clickNextToPage(pageObj.oAuth, report);

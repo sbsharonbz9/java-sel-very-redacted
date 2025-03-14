@@ -109,7 +109,7 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
 
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
 
         // Step 1 - 20
         user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label));

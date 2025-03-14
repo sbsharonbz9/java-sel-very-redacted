@@ -18,7 +18,6 @@ public class ReviewAnswers extends BasePage {
     public By confirmButton = By.className("summary-button");
     By uniqueID = By.className("assessment-content");
     public By confirmModal = By.className("confirm-answers-modal");
-    public By getGoBackButton = By.cssSelector(".confirm-answers-buttons > button:nth-child(1)");
     public By finishButton = By.cssSelector(".confirm-answers-buttons > button:nth-child(2)");
 
     public ReviewAnswers(WebDriver driver) {

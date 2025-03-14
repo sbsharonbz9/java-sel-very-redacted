@@ -181,7 +181,7 @@ public class VTP_DEX_FRD_136_Participant_IA_Metrics_Capture_OK extends BaseTest 
         CSVHelpers csv = new CSVHelpers(driver);
         ConfigLoader cl = new ConfigLoader();
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.METRICS);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.METRICS);
         pageObj.pritUnl.load(UrlType.METRICS);
         user.systolic="115";
         user.diastolic="75";

@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP extends B
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUNoBP(user, pageObj.adbubpScreen, report);
         pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbubpNormal, report);
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);

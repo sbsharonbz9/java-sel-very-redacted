@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_083_Diabetes_No_Pregnant extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.diabetes, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.pregnant, report);
         report.addScreenshotStep("Step2_Pregnancy_Screen");

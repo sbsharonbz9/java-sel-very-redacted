@@ -22,10 +22,10 @@ public class ADBUBP extends ADBU{
     }
 
     public Boolean verifyTitle(String toFind, @Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(adbubpTitle), "ADBU BP Screen", toFind,report);
+        return basicHelpers.verifyText(adbubpTitle, "ADBU BP Screen Title", toFind,report);
     }
 
     public Boolean verifySubtitle(String toFind, @Nullable GalenReport report) {
-        return basicHelpers.verifyText(basicHelpers.getWebElement(adbubpSubtitle), "ADBU BP Screen", toFind,report);
+        return basicHelpers.verifyText(adbubpSubtitle, "ADBU BP Screen Subtitle", toFind,report);
     }
 }

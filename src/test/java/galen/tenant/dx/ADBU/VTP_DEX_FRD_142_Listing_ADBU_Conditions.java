@@ -64,7 +64,7 @@ public class VTP_DEX_FRD_142_Listing_ADBU_Conditions extends BaseTest {
         user.diagnosedDepression="Yes";
         user.isAntifungal="Yes";
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxNavigations(driver).partialNavigationIA(user, pageObj.adbubpScreen, report);
 
         pageObj.adbubpScreen.verifyTitle(pageObj.adbubpScreen.titleText, report);

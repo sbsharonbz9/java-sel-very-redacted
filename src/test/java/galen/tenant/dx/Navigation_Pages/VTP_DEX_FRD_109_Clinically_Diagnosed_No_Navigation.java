@@ -39,7 +39,7 @@ public class VTP_DEX_FRD_109_Clinically_Diagnosed_No_Navigation extends BaseTest
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
         common.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);
         common.clickYesNoNextToPage("No", pageObj.knowBPNumber, report);

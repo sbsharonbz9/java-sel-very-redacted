@@ -53,7 +53,7 @@ public class VTP_DEX_FRD_039_Smoking_Yes_Navigation_Birth_Year extends BaseTest 
         CommonPageFeatures common = new CommonPageFeatures(driver);
         int currentYear = Year.now().getValue();
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.smoking, report);
         pageObj.smoking.selectRadioResponseAndProgress(SmokeType.SMOKE_REGULARLY.label, pageObj.birthYear, report);
         common.verifyNextButtonDisabled(report);

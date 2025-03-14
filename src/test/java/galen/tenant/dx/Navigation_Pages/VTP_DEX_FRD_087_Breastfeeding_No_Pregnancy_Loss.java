@@ -37,7 +37,7 @@ public class VTP_DEX_FRD_087_Breastfeeding_No_Pregnancy_Loss extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.breastFeeding, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.pregnancyLoss, report);
         report.addScreenshotStep("Step2_PregnancyLoss_Screen");

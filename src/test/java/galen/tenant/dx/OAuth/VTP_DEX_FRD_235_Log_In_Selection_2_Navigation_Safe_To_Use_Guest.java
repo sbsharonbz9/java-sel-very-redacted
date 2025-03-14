@@ -1,6 +1,7 @@
 package galen.tenant.dx.OAuth;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
@@ -39,11 +40,9 @@ public class VTP_DEX_FRD_235_Log_In_Selection_2_Navigation_Safe_To_Use_Guest ext
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.verifyAtPage(report);
         pageObj.review.addressConfirmations(report);
-        pageObj.oAuthPostReview.verifyAtPage(report);
         pageObj.oAuthPostReview.chooseAccountType(user, report);
         report.addScreenshotStep("Step2_Safe_To_Use_Screen");
     }

@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_047_Get_BP_Triggered_No extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
         pageObj.knowBPNumber.selectRadioResponseAndProgress(BloodPressureType.No_DO_NOT_Know_BP.label,
                 pageObj.review, report);

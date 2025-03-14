@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_108_Depression_No_Navigation extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.knowBPNumber, report);
         report.addScreenshotStep("Step2_No_BP_Screen");

@@ -33,7 +33,8 @@ public class VTP_DEX_FRD_231_ADBU_Confirmation_Modal_Navigates_Ready_To_Purchase
         report.reportTitle = "VTP_DEX_FRD_231_ADBU_Confirmation_Modal_Navigates_Ready_To_Purchase";
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         DxPageObj pageObj = new DxPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUNoBP(user, pageObj.knowBPNumber, report);
 
         pageObj.knowBPNumber.clickYesAndAddressModalToPage(pageObj.enterBP, "Yes",report);

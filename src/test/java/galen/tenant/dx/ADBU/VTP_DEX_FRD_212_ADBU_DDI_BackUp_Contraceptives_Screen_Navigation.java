@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation ex
         DxPageObj pageObj = new DxPageObj(driver);
         user.conditionType = pageObj.ddiCondition.getCondition(DDIConditionType.HIGH_CHOLESTEROL.label);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUwBP(user, pageObj.review, report);
 
         pageObj.review.clickEditToPage(ReviewAnswersLinks.HC, pageObj.ddiHighCholesterol, report);

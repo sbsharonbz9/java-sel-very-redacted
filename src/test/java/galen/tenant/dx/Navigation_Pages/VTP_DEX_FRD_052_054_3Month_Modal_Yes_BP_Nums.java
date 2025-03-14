@@ -39,7 +39,7 @@ public class VTP_DEX_FRD_052_054_3Month_Modal_Yes_BP_Nums extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
 
         pageObj.knowBPNumber.clickYesAndOpenModal(report);

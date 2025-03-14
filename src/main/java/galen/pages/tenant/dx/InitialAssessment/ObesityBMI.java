@@ -24,23 +24,11 @@ public class ObesityBMI extends BasePage {
         reportText="Obesity and BMI page";
     }
 
-    public WebElement getHeightElement() {
-        return basicHelpers.getWebElement(selectHeight);
-    }
-
-    public WebElement getWeightElement() {
-        return basicHelpers.getWebElement(inputWeight);
-    }
-
-    public WebElement getWeightErrorElement() {
-        return basicHelpers.getWebElement(weightInputError);
-    }
-
     public void enterHeightAndWeight(DxUser user, @Nullable GalenReport report) {
         String finalMessage="As expected";
         try {
-            basicHelpers.selectDropDownByText(getHeightElement(), user.height, "Height", null);
-            basicHelpers.sendTextFlex(getWeightElement(), user.weight, "Weight", null);
+            basicHelpers.selectDropDownByText(selectHeight, user.height, "Height", null);
+            basicHelpers.sendTextFlex(inputWeight, user.weight, "Weight", null);
         } catch(Exception e) {
             finalMessage=e.getMessage();
         }
@@ -59,7 +47,7 @@ public class ObesityBMI extends BasePage {
         LinkedHashMap<String, Object> results = new LinkedHashMap<>();
         String condition = "invalid weight error message";
         results.put("Is displayed", basicHelpers.verifyDisplayedFlex(weightInputError, condition , null));
-        results.put("Contains correct text",basicHelpers.verifyText(getWeightErrorElement(),
+        results.put("Contains correct text",basicHelpers.verifyText(weightInputError,
                 "invalid weight error message", weightInputErrorText, null));
         basicHelpers.addMultipleVerificationStep(condition, results, report);
     }

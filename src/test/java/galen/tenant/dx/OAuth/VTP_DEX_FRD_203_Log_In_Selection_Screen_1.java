@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_203_Log_In_Selection_Screen_1 extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_noBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFnoBPNonsmoker(user, pageObj.review, report);
 
         pageObj.review.addressConfirmations(report);

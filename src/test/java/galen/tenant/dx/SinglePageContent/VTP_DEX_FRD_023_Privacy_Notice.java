@@ -1,6 +1,7 @@
 package galen.tenant.dx.SinglePageContent;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxNavigations;
@@ -37,7 +38,7 @@ public class VTP_DEX_FRD_023_Privacy_Notice extends BaseTest {
         BasicHelpers bh = new BasicHelpers(driver);
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxNavigations(driver).partialNavigationIA(user, pageObj.privacyPage, report);
 
         pageObj.privacyPage.verifyAllPageElementsPresent(report);

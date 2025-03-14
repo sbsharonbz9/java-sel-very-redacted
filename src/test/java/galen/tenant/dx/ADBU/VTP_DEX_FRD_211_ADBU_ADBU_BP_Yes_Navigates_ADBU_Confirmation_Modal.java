@@ -35,7 +35,7 @@ public class VTP_DEX_FRD_211_ADBU_ADBU_BP_Yes_Navigates_ADBU_Confirmation_Modal 
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUNoBP(user, pageObj.adbubpScreen, report);
 
         pageObj.adbubpScreen.clickYesNoToOpenModal("Yes", report);

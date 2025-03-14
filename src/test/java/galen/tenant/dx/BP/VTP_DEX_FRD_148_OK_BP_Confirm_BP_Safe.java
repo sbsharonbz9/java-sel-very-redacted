@@ -37,7 +37,7 @@ public class VTP_DEX_FRD_148_OK_BP_Confirm_BP_Safe extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         EnterBPEnd bpPage = pageObj.enterBPEnd;
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.knowBPNumber, report);
 
         pageObj.knowBPNumber.selectRadioResponseAndProgress(BloodPressureType.No_Know_BP.label,

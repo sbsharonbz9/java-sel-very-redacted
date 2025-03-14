@@ -41,9 +41,8 @@ public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
         bh = new BasicHelpers(driver);
         pageObj = new DxPageObj(driver);
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_noBP_NonSmoker();
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);;
         CommonPageFeatures commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.load(UrlType.DX);
 
         pageObj.welcomePage.verifyAtPage(report);
         report.addScreenshotStep("1_Welcome");
@@ -61,7 +60,7 @@ public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
         pageObj.oAuth.verifyConfirmDisplayed(report);
         report.addScreenshotStep("5_Guest Confirmation Modal");
 
-        pageObj.oAuth.clickConfirmToPage(pageObj.usedProduct,report);
+        pageObj.oAuth.clickConfirmModalToPage(pageObj.usedProduct,report);
         report.addScreenshotStep("6_HaveUsedProduct");
 
         pageObj.orderForSelf.clickYesNoNextToModal(user.productUsed, "Tooltip",report);

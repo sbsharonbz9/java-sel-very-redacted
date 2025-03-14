@@ -39,7 +39,7 @@ public class VTP_DEX_FRD_093_High_Cholesterol_ADBU_Navigation extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
         
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
         user.conditionType=new ArrayList<>(Arrays.asList(DDIConditionType.HIGH_CHOLESTEROL.label));
         pageObj.ddiCondition.selectCheckboxesAndProgress(user.conditionType, pageObj.ddiHighCholesterol,report);

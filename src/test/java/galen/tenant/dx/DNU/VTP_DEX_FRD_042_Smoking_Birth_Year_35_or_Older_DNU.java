@@ -76,7 +76,7 @@ public class VTP_DEX_FRD_042_Smoking_Birth_Year_35_or_Older_DNU extends BaseTest
         smokingSettings.put(SmokeType.RARELY_SMOKE.label,"6");
         smokingSettings.put(SmokeType.SMOKE_OCCASIONALLY.label,"9");
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         loopSmokingOptions(user, smokingSettings);
 
         user.dobYear=String.valueOf((currentYear-35));

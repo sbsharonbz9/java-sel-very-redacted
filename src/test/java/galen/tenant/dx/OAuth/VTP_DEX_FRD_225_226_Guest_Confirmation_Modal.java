@@ -1,6 +1,7 @@
 package galen.tenant.dx.OAuth;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
@@ -39,20 +40,16 @@ public class VTP_DEX_FRD_225_226_Guest_Confirmation_Modal extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_225_226_Guest_Confirmation_Modal";
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
+
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.oAuth, report);
         pageObj.oAuth.clickGuestButton(report);
         pageObj.oAuth.verifyConfirmDisplayed(report);
         pageObj.oAuth.clickXButton(report);
         pageObj.oAuth.verifyAtPage(report);
         report.addScreenshotStep("Step_3_Login_Selection");
-        pageObj.oAuth.clickGuestButton(report);
-        pageObj.oAuth.verifyConfirmDisplayed(report);
-        pageObj.oAuth.clickConfirm(report);
-        pageObj.usedProduct.verifyAtPage(report);
+
+        pageObj.oAuth.chooseAccountTypeAndProgress(user, pageObj.usedProduct, report);
         report.addScreenshotStep("Step_5_Prior_Use");
-
-
-
     }
 }

@@ -63,33 +63,33 @@ public class VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields extends BaseTest {
         CommonPageFeatures common = new CommonPageFeatures(driver);
         ObesityBMI obesity = pageObj.obesity;
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.obesity, report);
         common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step2_Initial");
 
-        bh.sendTextFlex(obesity.getWeightElement(), "110", "Weight", report);
+        bh.sendTextFlex(pageObj.obesity.inputWeight, "110", "Weight", report);
         common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step3_WeightOnly");
 
-        List<String> heights = bh.getAllDropdownOptions(obesity.selectHeightOptions);
+        List<String> heights = bh.getAllDropdownOptions(obesity.selectHeight);
         for (String height : heights) {
-            bh.selectDropDownByText(obesity.getHeightElement(),height, "Height", report);
+            bh.selectDropDownByText(obesity.selectHeight,height, "Height", report);
             common.verifyNextButtonEnabled(report);
             report.addScreenshotStep(height);
         }
 
-        bh.sendTextFlex(obesity.getWeightElement(), "0", "Weight", null);
+        bh.sendTextFlex(obesity.inputWeight, "0", "Weight", null);
         common.clickNext(report);
         obesity.verifyWeightInputError(report);
         report.addScreenshotStep("Step29_Weight0");
 
-        bh.sendTextFlex(obesity.getWeightElement(), "9", "Weight", null);
+        bh.sendTextFlex(obesity.inputWeight, "9", "Weight", null);
         common.clickNext(report);
         obesity.verifyWeightInputError(report);
         report.addScreenshotStep("Step30_Weight9");
 
-        bh.sendTextFlex(obesity.getWeightElement(), "39", "Weight", null);
+        bh.sendTextFlex(obesity.inputWeight, "39", "Weight", null);
         common.clickNext(report);
         obesity.verifyWeightInputError(report);
         report.addScreenshotStep("Step31_Weight39");
@@ -100,10 +100,9 @@ public class VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields extends BaseTest {
         report.addScreenshotStep("Step32_DDI");
 
         StudyAdminPageObj sp = new StudyAdminPageObj(driver);
-        sleep(1000);
         sp.login.load(UrlType.STUDY);
-        sleep(1000);
         bh.downloadCSVAndVerify("Step33_BMI", sp, report);
+
         String testOutputPath = "reports/"+reportName+"/Step33_BMI";
         File testOutput = new File(testOutputPath);
         bh.compareCSVValueByAssessmentID(testOutput,user.assessmentID, "BMI", "58.41", report );

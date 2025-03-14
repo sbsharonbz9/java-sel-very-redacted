@@ -43,7 +43,7 @@ public class VTP_DEX_FRD_239_240_Ever_Had_Cancer_Navigations extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.everHadCancer, report);
         common.clickYesNoNextToPage("Yes", pageObj.cancerList, report);
         report.addScreenshotStep("Step2_CancerList_Screen");

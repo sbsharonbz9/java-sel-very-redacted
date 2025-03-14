@@ -44,7 +44,7 @@ public class VTP_DEX_FRD_040_Smoking_Year_of_Birth_Field extends BaseTest {
         CommonPageFeatures common = new CommonPageFeatures(driver);
         int currentYear = Year.now().getValue();
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.smoking, report);
         pageObj.smoking.selectRadioResponseAndProgress(SmokeType.SMOKE_REGULARLY.label, pageObj.birthYear, report);
         user.dobYear="1750";

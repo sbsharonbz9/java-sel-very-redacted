@@ -32,7 +32,7 @@ public class VTP_DEX_FRD_024_Privacy_Notice_Navigate_KnowNumbers extends BaseTes
 
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         pageObj.welcomePage.clickBegin(report);
         pageObj.privacyPage.clickIAcceptBtnToPage(pageObj.numbers, report);
         report.addScreenshotStep("Step3_Know Numbers Page");

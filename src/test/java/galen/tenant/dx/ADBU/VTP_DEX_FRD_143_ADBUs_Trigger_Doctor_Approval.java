@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 public class VTP_DEX_FRD_143_ADBUs_Trigger_Doctor_Approval extends BaseTest {
 
-
     static String OBJECTIVE = "To verify on the ADBU/BP screen, if the user previously entered " +
             "a valid BP and triggered ADBUs, the application shall display a listing of all ADBUs that " +
             "were triggered, ask the user if they have talked to a doctor about whether Zena is safe to " +
@@ -62,7 +61,7 @@ public class VTP_DEX_FRD_143_ADBUs_Trigger_Doctor_Approval extends BaseTest {
         user.diagnosedDepression="Yes";
         user.isAntifungal="Yes";
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxNavigations(driver).partialNavigationIA(user, pageObj.adbu, report);
 
         pageObj.adbubpScreen.verifyTitle(pageObj.adbu.titleText, report);

@@ -42,7 +42,7 @@ public class VTP_DEX_FRD_080_HormonalBC_RiskModal_Acknowledge_Smoking extends Ba
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.birthControl, report);
         common.clickYesNoNextToPage("No", pageObj.smoking, report);
         report.addScreenshotStep("Step3_Smoking Page");

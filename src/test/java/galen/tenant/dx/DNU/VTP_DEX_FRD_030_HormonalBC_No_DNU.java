@@ -1,6 +1,8 @@
 package galen.tenant.dx.DNU;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
+import galen.enums.tenant.dx.ReviewAnswersLinks;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
@@ -38,14 +40,14 @@ public class VTP_DEX_FRD_030_HormonalBC_No_DNU extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.menstrual, report);
         pageObj.menstrual.clickYesNoNextToPage("No", pageObj.birthControlB, report);
         pageObj.birthControlB.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         report.addScreenshotStep("Step3_DNU");
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.review, report);
-        pageObj.review.clickMenstrualEdit(report);
+        pageObj.review.clickEditToPage(ReviewAnswersLinks.MENSTRUAL, pageObj.menstrual, report);
         pageObj.menstrual.clickYesNoNextToPage("No", pageObj.birthControlB, report);
         pageObj.birthControlB.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         report.addScreenshotStep("Step7_DNU");

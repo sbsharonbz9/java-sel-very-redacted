@@ -86,7 +86,7 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
 
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         pageObj = new DxPageObj(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         ArrayList<String> allButOther = new ArrayList<String>(pageObj.ddiCondition.conditionOptions);
         allButOther.remove("None of these");
         DDICondition ddi = pageObj.ddiCondition;

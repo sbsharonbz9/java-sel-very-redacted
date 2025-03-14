@@ -36,7 +36,7 @@ public class VTP_DEX_FRD_113_Transport_Layer_Security_HTTPS extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_113 – Transport Layer Security with HTTPS";
         BasicHelpers bh = new BasicHelpers(driver);
         DxPageObj pageObj = new DxPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         String httpsURL="https://cadence.qa.codescripts.com/?invite=7GZ6F66T_fKn1bhuLq5Ei_LT8NQ";
         sleep(1000);
         driver.navigate().to(httpsURL);

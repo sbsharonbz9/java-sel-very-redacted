@@ -30,7 +30,7 @@ public class VTP_DEX_FRD_012_021_Welcome_Screen extends BaseTest {
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_012_021 – Welcome Screen";
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage.verifyAtPage(report);
         welcomePage.verifyBeginButtonPresent(report);

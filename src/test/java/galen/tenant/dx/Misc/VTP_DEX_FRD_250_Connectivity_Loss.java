@@ -41,7 +41,7 @@ public class VTP_DEX_FRD_250_Connectivity_Loss extends BaseTest {
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         new DxNavigations(driver).partialNavigationIA(user, pageObj.privacyPage, report);
         new BasicHelpers(driver).setOfflineMode(true, report);
         new CommonPageFeatures(driver).verifyModalDisplayed(report);

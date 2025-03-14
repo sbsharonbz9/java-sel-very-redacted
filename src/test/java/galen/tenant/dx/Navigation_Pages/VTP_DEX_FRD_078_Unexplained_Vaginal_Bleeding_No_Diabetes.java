@@ -38,7 +38,7 @@ public class VTP_DEX_FRD_078_Unexplained_Vaginal_Bleeding_No_Diabetes extends Ba
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.vaginalBleeding, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("No", pageObj.diabetes, report);
         report.addScreenshotStep("Step2_Diabetes_Screen");

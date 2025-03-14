@@ -40,7 +40,7 @@ public class VTP_DEX_FRD_105_Gallbladder_Yes_Flag_ADBU_Navigation extends BaseTe
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.gallbladder, report);
         new CommonPageFeatures(driver).clickYesNoNextToPage("Yes", pageObj.depression, report);
         report.addScreenshotStep("Step2_DepressionScreen");

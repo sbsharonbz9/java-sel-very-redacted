@@ -1,6 +1,8 @@
 package galen.tenant.dx.SinglePageContent;
 
 import galen.base.BaseTest;
+import galen.enums.framework.UrlType;
+import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
@@ -41,25 +43,19 @@ public class VTP_DEX_FRD_261_262_Clinical_Depression_Modal extends BaseTest {
 
         DxUser user = new DxUser();
         DxPageObj pageObj = new DxPageObj(driver);
+        CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
-        new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
-        pageObj.depression.clickYesOrNo("Yes", report);
-        pageObj.depression.clickNextToPage(pageObj.diagnosedDepression, report);
-        pageObj.diagnosedDepression.clickYesOrNo("Yes", report);
-        pageObj.diagnosedDepression.clickNext(report);
-        pageObj.diagnosedDepression.verifyConfirmModalOpen(report);
-        pageObj.diagnosedDepression.verifyConfirmButton(report);
-        pageObj.diagnosedDepression.verifyBackButton(report);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
+        user.depression = "Yes";
+        new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.diagnosedDepression, report);
+        pageObj.diagnosedDepression.clickYesNoNextToModal("Yes", "Clinical Depression Modal", report);
+        common.basicHelpers.verifyDisplayedFlex(common.btnBack, "Back", report);
         report.addScreenshotStep("Step3_Clinical_Depression_Modal");
 
-        pageObj.diagnosedDepression.clickBackButton(report);
-        pageObj.diagnosedDepression.verifyAtPage(report);
+        common.clickBackToPage(pageObj.diagnosedDepression, report);
         report.addScreenshotStep("Step4_Clinical_Depression_Screen");
-        pageObj.diagnosedDepression.clickNext(report);
-        pageObj.diagnosedDepression.verifyConfirmModalOpen(report);
-        pageObj.diagnosedDepression.clickConfirm(report);
-        pageObj.knowBPNumber.verifyAtPage(report);
-        report.addScreenshotStep("Step6_Clinical_Depression_Screen");
+
+        pageObj.diagnosedDepression.clickYesAndAddressModalToPage(pageObj.knowBPNumber, report);
+        report.addScreenshotStep("Step6_Know BP Number_Screen");
     }
 }

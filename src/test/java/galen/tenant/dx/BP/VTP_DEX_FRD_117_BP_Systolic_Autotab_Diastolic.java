@@ -41,18 +41,18 @@ public class VTP_DEX_FRD_117_BP_Systolic_Autotab_Diastolic extends BaseTest {
         DxPageObj pageObj = new DxPageObj(driver);
         BasicHelpers basicHelpers = new BasicHelpers(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.enterBP, report);
 
-        basicHelpers.sendTextFlex(pageObj.enterBP.getInputSystolic(), "1", "Systolic", report);
+        basicHelpers.sendTextFlex(pageObj.enterBP.inputSystolic, "1", "Systolic", report);
         basicHelpers.verifyActiveElement(false, pageObj.enterBP.inputDiastolic, "Diastolic", report);
         report.addScreenshotStep("Step2_Cursor not in Diastolic");
 
-        basicHelpers.sendTextFlex(pageObj.enterBP.getInputSystolic(), "12", "Systolic", report);
+        basicHelpers.sendTextFlex(pageObj.enterBP.inputSystolic, "12", "Systolic", report);
         basicHelpers.verifyActiveElement(false, pageObj.enterBP.inputDiastolic, "Diastolic", report);
         report.addScreenshotStep("Step3_Cursor not in Diastolic");
 
-        basicHelpers.sendTextFlex(pageObj.enterBP.getInputSystolic(), "120", "Systolic", report);
+        basicHelpers.sendTextFlex(pageObj.enterBP.inputSystolic, "120", "Systolic", report);
         basicHelpers.verifyActiveElement(true, pageObj.enterBP.inputDiastolic, "Diastolic", report);
         report.addScreenshotStep("Step4_Cursor is in Diastolic");
     }

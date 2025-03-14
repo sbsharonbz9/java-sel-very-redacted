@@ -68,11 +68,11 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
         report.reportTitle = "VTP_DEX_FRD_118 – Metrics Assessment ID Display";
         bh = new BasicHelpers(driver);
         pageObj = new DxPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         commonPageFeatures = new CommonPageFeatures(driver);
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
 
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.load(UrlType.DX);
         pageObj.welcomePage.verifyAtPage(report);
         commonPageFeatures.verifyAssessmentIDDisplayed(report);
         report.addScreenshotStep("Step1");
@@ -90,7 +90,7 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
         report.addScreenshotStep("Step7");
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.usedProduct.clickCloseButton(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         commonPageFeatures.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         pageObj.kickoutPage.verifyAssessmentIDDisplayed(report);
         report.addScreenshotStep("Step10");
@@ -189,8 +189,6 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
         commonPageFeatures.clickNextToPage(pageObj.kickoutPage, report);
         pageObj.kickoutPage.verifyAssessmentIDDisplayed(report);
         report.addScreenshotStep("Step46");
-
-
     }
 
 }

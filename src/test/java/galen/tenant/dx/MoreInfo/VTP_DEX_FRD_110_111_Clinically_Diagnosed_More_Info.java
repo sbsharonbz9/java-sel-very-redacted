@@ -48,7 +48,7 @@ public class VTP_DEX_FRD_110_111_Clinically_Diagnosed_More_Info extends BaseTest
         DxPageObj pageObj = new DxPageObj(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired();
+        pageObj.pritUnlauthenticateUserIfRequired();
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.depression, report);
 
         pageObj.depression.clickYesNoNextToPage("Yes", pageObj.diagnosedDepression, report);

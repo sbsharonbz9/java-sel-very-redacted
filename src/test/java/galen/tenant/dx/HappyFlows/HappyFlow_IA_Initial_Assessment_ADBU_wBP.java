@@ -40,7 +40,7 @@ public class HappyFlow_IA_Initial_Assessment_ADBU_wBP extends BaseTest {
         pageObj = new DxPageObj(driver);
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
         CommonPageFeatures commonPageFeatures = new CommonPageFeatures(driver);
-        pageObj.pritUnl.load(URLType.DX);
+        pageObj.pritUnl.load(UrlType.DX);
 
         pageObj.welcomePage.verifyAtPage(report);
         report.addScreenshotStep("Welcome");

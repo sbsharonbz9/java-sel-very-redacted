@@ -39,7 +39,7 @@ public class VTP_DEX_FRD_102_103_104_Other_Medications_Selection extends BaseTes
         CommonPageFeatures common = new CommonPageFeatures(driver);
         ArrayList<String> allButOther = pageObj.otherMedication.getAllButNone();
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.otherMedication, report);
         pageObj.otherMedication.verifyAllOptionsVisible(report);
         common.verifyNextButtonDisabled(report);

@@ -102,7 +102,7 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
         common = new CommonPageFeatures(driver);
         original = driver.getWindowHandle();
         bh = new BasicHelpers(driver);
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.STUDY);
+        pageObj.pritUnlauthenticateUserIfRequired(UrlType.STUDY);
 
         sp.viewRecords.load(UrlType.STUDY);
         sp.login.logIn(RoleType.CLINICIAN.email, report);
@@ -129,7 +129,7 @@ public class VTP_DEX_FRD_236_Clinicians_Return_To_Portal extends BaseTest {
         startNewRecord();
         user=new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         hf.runDxHFNonsmokingwBP(user, pageObj.orderForSelf, report);
-        pageObj.orderForSelf.clickClose(report);
+        pageObj.orderForSelf.clickCloseToDismiss(report);
         common.clickYesNoNextToPage("No", pageObj.kickoutPage, report);
         endNewRecord(44);
 

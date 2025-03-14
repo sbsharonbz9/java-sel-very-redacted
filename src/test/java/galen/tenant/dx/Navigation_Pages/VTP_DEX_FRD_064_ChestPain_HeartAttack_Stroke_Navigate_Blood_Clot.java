@@ -37,7 +37,7 @@ public class VTP_DEX_FRD_064_ChestPain_HeartAttack_Stroke_Navigate_Blood_Clot ex
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        pageObj.pritUnl.authenticateUserIfRequired(URLType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.cardiacRisk, report);
         pageObj.cardiacRisk.selectCheckboxesAndProgress(user.conditionType, pageObj.bloodClot, report);
         report.addScreenshotStep("Step2_Blood Clot Page");

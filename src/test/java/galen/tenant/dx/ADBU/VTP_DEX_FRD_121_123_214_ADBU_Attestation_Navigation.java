@@ -48,7 +48,7 @@ public class VTP_DEX_FRD_121_123_214_ADBU_Attestation_Navigation extends BaseTes
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_wBP();
         DxPageObj pageObj = new DxPageObj(driver);
 
-        new PritUnlPage(driver).authenticateUserIfRequired(UrlType.DX);
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFADBUwBP(user, pageObj.adbu, report);
         pageObj.adbu.clickYesNoToOpenModal("No", report);
         report.addScreenshotStep("Step2_Not_Approved_Modal");
