@@ -26,7 +26,7 @@ public class VTP_DEX_FRD_066_Blood_Clots_No_Irregular_Heartbeat_Problems extends
     }
 
     @Test
-    public void VTP_DEX_FRD_066_Blood_Clots_No_Irregular_Heartbeat_Problems_Test() throws Exception {
+    public void VTP_DEX_FRD_066_Blood_Clots_No_Irregular_Heartbeat_Problems_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

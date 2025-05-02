@@ -31,7 +31,7 @@ public class VTP_DEX_FRD_093_High_Cholesterol_ADBU_Navigation extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_093_High_Cholesterol_ADBU_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_093_High_Cholesterol_ADBU_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
@@ -41,7 +41,7 @@ public class VTP_DEX_FRD_093_High_Cholesterol_ADBU_Navigation extends BaseTest {
         
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        user.conditionType=new ArrayList<>(Arrays.asList(DDIConditionType.HIGH_CHOLESTEROL.label));
+        user.conditionType= pageObj.ddiCondition.getCondition(DDIConditionType.HIGH_CHOLESTEROL.label);
         pageObj.ddiCondition.selectCheckboxesAndProgress(user.conditionType, pageObj.ddiHighCholesterol,report);
         report.addScreenshotStep("Step2_HighCholesterolMedsScreen");
 

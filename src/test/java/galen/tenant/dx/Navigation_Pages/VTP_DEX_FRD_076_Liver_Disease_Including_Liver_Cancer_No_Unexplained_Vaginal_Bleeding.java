@@ -27,7 +27,7 @@ public class VTP_DEX_FRD_076_Liver_Disease_Including_Liver_Cancer_No_Unexplained
     }
 
     @Test
-    public void VTP_DEX_FRD_076_Liver_Disease_Including_Liver_Cancer_No_Unexplained_Vaginal_Bleeding_Test() throws Exception {
+    public void VTP_DEX_FRD_076_Liver_Disease_Including_Liver_Cancer_No_Unexplained_Vaginal_Bleeding_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

@@ -6,7 +6,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import galen.pages.tenant.dx.InitialAssessment.EnterBPEnd;
 import org.testng.annotations.Test;
@@ -38,7 +37,7 @@ public class VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts_Test() throws Exception {
+    public void VTP_DEX_FRD_146_147_Confirm_GetBP_Kickouts_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

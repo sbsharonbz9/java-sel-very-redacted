@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_048_Get_BP_Triggered_No_But_Normal extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_048_Get_BP_Triggered_No_But_Normal_Test() throws Exception {
+    public void VTP_DEX_FRD_048_Get_BP_Triggered_No_But_Normal_Test() {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

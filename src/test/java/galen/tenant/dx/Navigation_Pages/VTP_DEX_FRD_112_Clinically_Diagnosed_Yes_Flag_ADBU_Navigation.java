@@ -6,7 +6,6 @@ import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -32,7 +31,7 @@ public class VTP_DEX_FRD_112_Clinically_Diagnosed_Yes_Flag_ADBU_Navigation exten
     }
 
     @Test
-    public void VTP_DEX_FRD_112_Clinically_Diagnosed_Yes_Flag_ADBU_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_112_Clinically_Diagnosed_Yes_Flag_ADBU_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

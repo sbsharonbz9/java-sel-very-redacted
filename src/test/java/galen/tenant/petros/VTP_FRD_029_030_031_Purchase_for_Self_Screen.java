@@ -10,7 +10,6 @@ import galen.helpers.tenant.petros.PetrosUser;
 import galen.pages.tenant.petros.InitialAssessment.PetrosPageObj;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,9 +30,9 @@ public class VTP_FRD_029_030_031_Purchase_for_Self_Screen extends BaseTest {
     }
 
     @Test
-    public void VTP_FRD_029_030_031_Purchase_for_Self_Screen_Test() throws IOException {
-        report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
-                VERSIONHISTORY, PREEXECUTION);
+    public void VTP_FRD_029_030_031_Purchase_for_Self_Screen_Test()  {
+        report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES, VERSIONHISTORY,
+                PREEXECUTION);
         report.reportTitle = "VTP_FRD_029_030_031_Purchase_for_Self_Screen";
         bh = new BasicHelpers(driver);
         pageObj = new PetrosPageObj(driver);
@@ -47,16 +46,13 @@ public class VTP_FRD_029_030_031_Purchase_for_Self_Screen extends BaseTest {
         common.verifyNextPresent(report);
         report.addScreenshotStep("Purchase Self Screen Step 2", driver);
 
-        common.clickYesOrNo("Yes", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Purchase Self Screen next button Enabled Step 3", driver);
 
-        common.clickYesOrNo("Yes", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Purchase Self Screen next button Enabled Step 4", driver);
 
-        common.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         common.clickYesNoNextToPage("Yes", pageObj.sexAndBirthYear, report);
         report.addScreenshotStep("Date Of Birth Screen Step 5 ", driver);
 

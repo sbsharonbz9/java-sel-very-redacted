@@ -58,8 +58,7 @@ public class BasePage {
     }
 
     public boolean verifyAtPage() {
-        return basicHelpers.verifyAtPage(getHeadingTitle()!=null, reportText,
-                null);
+        return basicHelpers.verifyAtPage(getHeadingTitle()!=null, reportText, null);
     }
 
     public boolean verifyAtPage(@Nullable GalenReport report) {
@@ -95,10 +94,6 @@ public class BasePage {
         } catch (TimeoutException e) {
             load(type);
         }
-    }
-
-    public void clickCancelButton(@Nullable GalenReport report) {
-        basicHelpers.clickFlex(btnCancel, "Cancel Button", report);
     }
 
     public void clickCancelToDismiss(String modalText, @Nullable GalenReport report) {
@@ -143,9 +138,9 @@ public class BasePage {
         return result;
     }
 
-    public boolean clickYesNoNextToModal(String yesNo, String modalDesc, @Nullable GalenReport report) {
+    public void clickYesNoNextToModal(String yesNo, String modalDesc, @Nullable GalenReport report) {
         clickYesNoNext(yesNo, null);
-        return basicHelpers.verifyActionToNavDisplayed("Click "+ yesNo+"\nClick Next\nVerify "+ modalDesc + " is " +
+        basicHelpers.verifyActionToNavDisplayed("Click "+ yesNo+"\nClick Next\nVerify "+ modalDesc + " is " +
                 "displayed", nextBTN,modalDesc, report);
     }
 
@@ -157,17 +152,6 @@ public class BasePage {
             report.addStep("Click "+ yesNo+"\nVerify ' Next' button is enabled",
                     yesNo + " is clicked\n'Next' button is enabled",
                     result?"'Next' button is enabled":"'Next' button is disabled", result, true);
-        }
-    }
-
-    public void clickYesNo_NextDisabled(String yesNo, @Nullable GalenReport report) {
-        boolean result;
-        clickYesOrNo(yesNo, null);
-        result = verifyNextButtonDisabled(null);
-        if (report!=null) {
-            report.addStep("Click "+ yesNo+"\nVerify ' Next' button is disabled",
-                    yesNo + " is clicked\n'Next' button is disabled",
-                    result?"'Next' button is disabled":"'Next' button is enabled", result, true);
         }
     }
 
@@ -274,10 +258,6 @@ public class BasePage {
 
     public void verifyMoreInfoNotDisplayed(@Nullable GalenReport report) {
         basicHelpers.verifyNotDisplayedFlex(moreInfoContent, "More Info modal", report);
-    }
-
-    public void verifyBackButtonNotDisplayed(@Nullable GalenReport report) {
-        basicHelpers.verifyNotDisplayedFlex(btnBack, "Back Button", report);
     }
 
     public boolean verifyNextButtonEnabled(@Nullable GalenReport report) {

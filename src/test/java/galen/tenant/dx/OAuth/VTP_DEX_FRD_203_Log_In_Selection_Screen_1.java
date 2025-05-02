@@ -27,7 +27,7 @@ public class VTP_DEX_FRD_203_Log_In_Selection_Screen_1 extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_203_Log_In_Selection_Screen_1_Test() throws Exception {
+    public void VTP_DEX_FRD_203_Log_In_Selection_Screen_1_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

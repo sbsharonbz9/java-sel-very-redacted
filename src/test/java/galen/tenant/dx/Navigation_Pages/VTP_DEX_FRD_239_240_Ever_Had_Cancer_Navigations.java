@@ -33,7 +33,7 @@ public class VTP_DEX_FRD_239_240_Ever_Had_Cancer_Navigations extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_239_240_Ever_Had_Cancer_Navigations_Test() throws Exception {
+    public void VTP_DEX_FRD_239_240_Ever_Had_Cancer_Navigations_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

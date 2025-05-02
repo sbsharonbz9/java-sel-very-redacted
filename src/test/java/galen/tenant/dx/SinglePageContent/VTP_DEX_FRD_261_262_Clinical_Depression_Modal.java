@@ -6,14 +6,11 @@ import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_261_262_Clinical_Depression_Modal extends BaseTest {
     static String OBJECTIVE = "DEX_FRD_261: To verify Clinical Depression Modal shall provide a control that allow users " +
@@ -35,7 +32,7 @@ public class VTP_DEX_FRD_261_262_Clinical_Depression_Modal extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_261_262_Clinical_Depression_Modal_Test() throws Exception {
+    public void VTP_DEX_FRD_261_262_Clinical_Depression_Modal_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

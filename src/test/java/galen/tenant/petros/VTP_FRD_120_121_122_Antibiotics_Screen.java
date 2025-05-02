@@ -51,8 +51,7 @@ public class VTP_FRD_120_121_122_Antibiotics_Screen extends BaseTest {
         common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Antibiotics_screen", driver);
 
-        common.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("No", report);
         report.addScreenshotStep("No_NextEnabled", driver);
 
         common.clickYesOrNo("No", report);

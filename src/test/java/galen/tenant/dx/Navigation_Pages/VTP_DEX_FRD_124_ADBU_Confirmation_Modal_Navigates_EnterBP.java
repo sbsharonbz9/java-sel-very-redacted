@@ -6,7 +6,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -32,7 +31,7 @@ public class VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP extends B
     }
 
     @Test
-    public void VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP_Test() throws Exception {
+    public void VTP_DEX_FRD_124_ADBU_Confirmation_Modal_Navigates_EnterBP_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

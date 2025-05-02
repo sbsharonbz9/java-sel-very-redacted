@@ -34,7 +34,7 @@ public class VTP_DEX_FRD_040_Smoking_Year_of_Birth_Field extends BaseTest {
     }
 
     @Test
-    public void  VTP_DEX_FRD_040_Smoking_Year_of_Birth_Field_Test() throws Exception {
+    public void  VTP_DEX_FRD_040_Smoking_Year_of_Birth_Field_Test()  {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_040 – Smoking Year of Birth";

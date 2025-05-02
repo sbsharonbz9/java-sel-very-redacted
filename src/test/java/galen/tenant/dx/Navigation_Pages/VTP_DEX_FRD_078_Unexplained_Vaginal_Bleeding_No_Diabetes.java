@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_078_Unexplained_Vaginal_Bleeding_No_Diabetes extends Ba
     }
 
     @Test
-    public void VTP_DEX_FRD_078_Unexplained_Vaginal_Bleeding_No_Diabetes_Test() throws Exception {
+    public void VTP_DEX_FRD_078_Unexplained_Vaginal_Bleeding_No_Diabetes_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

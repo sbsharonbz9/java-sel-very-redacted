@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_241_List_Of_Cancers_Screen_Control extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_241_List_Of_Cancers_Screen_Control_Test() throws Exception {
+    public void VTP_DEX_FRD_241_List_Of_Cancers_Screen_Control_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

@@ -39,7 +39,7 @@ public class VTP_DEX_FRD_041_043_Smoking_Birth_Year_Under_35_Navigation extends 
     }
 
     @Test
-    public void  VTP_DEX_FRD_041_043_Smoking_Birth_Year_Under_35_Navigation_Test() throws Exception {
+    public void  VTP_DEX_FRD_041_043_Smoking_Birth_Year_Under_35_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

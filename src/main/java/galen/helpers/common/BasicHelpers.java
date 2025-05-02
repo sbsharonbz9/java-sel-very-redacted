@@ -11,7 +11,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -34,14 +37,14 @@ public class BasicHelpers {
         this.driver = driver;
     }
 
-    public boolean verifyActiveElement(Boolean expected, By by, String byText, @Nullable GalenReport report) {
+    public void verifyActiveElement(boolean expected, By by, String byText, @Nullable GalenReport report) {
         WebElement actualElement = (WebElement)((JavascriptExecutor) driver).executeScript("return document.activeElement;");
         WebElement expectedElement = getWebElement(by);
         boolean result = actualElement.equals(expectedElement)==expected;
-        return verifyCondition(()->result,"Cursor in element "+byText+" is " + expected, false, report);
+        verifyCondition(()->result,"Cursor in element "+byText+" is " + expected, false, report);
     }
 
-    public void setOfflineMode(Boolean offline, @Nullable GalenReport report) throws IOException {
+    public void setOfflineMode(boolean offline, @Nullable GalenReport report) throws IOException {
         HashMap<String, Object> map = new HashMap<>();
         map.put("offline", offline);
         map.put("latency", 0);
@@ -70,12 +73,11 @@ public class BasicHelpers {
         return result;
     }
 
-    public boolean verifyAtPage(Boolean condition, String reportingText, @Nullable GalenReport report) {
-        boolean result = condition;
+    public Boolean verifyAtPage(Boolean condition, String reportingText, @Nullable GalenReport report) {
         if (report != null) {
-            report.reportPageTransition(reportingText, result);
+            report.reportPageTransition(reportingText, condition);
         }
-        return result;
+        return condition;
     }
 
     public void reportHappyFlow(String HFType, String pageReportText, boolean result, @Nullable GalenReport report) {
@@ -157,7 +159,7 @@ public class BasicHelpers {
         }
     }
 
-    public Boolean verifyCondition(Callable<Boolean> callable, String closureText, boolean hardFail, @Nullable GalenReport report) {
+    public boolean verifyCondition(Callable<Boolean> callable, String closureText, boolean hardFail, @Nullable GalenReport report) {
         try {
             return (report != null) ?
                     report.verifyCondition(callable, closureText, hardFail) :
@@ -187,7 +189,7 @@ public class BasicHelpers {
         }
     }
 
-    public Boolean verifyRadioButtonSelected(String expected, @Nullable GalenReport report) {
+    public boolean verifyRadioButtonSelected(String expected, @Nullable GalenReport report) {
         WebElement element = getWebElement(By.id("assessment-radio-" + expected.toLowerCase()));
         boolean isSelected = element != null && element.isSelected();
         if (report != null) {
@@ -197,7 +199,7 @@ public class BasicHelpers {
         return isSelected;
     }
 
-    public Boolean verifyRadioButtonNotSelected(String expected, @Nullable GalenReport report) {
+    public boolean verifyRadioButtonNotSelected(String expected, @Nullable GalenReport report) {
         WebElement element = getWebElement(By.id("assessment-radio-" + expected.toLowerCase()));
         boolean isNotSelected = element != null && !element.isSelected();
         if (report != null) {
@@ -207,12 +209,12 @@ public class BasicHelpers {
         return isNotSelected;
     }
 
-    public Boolean verifyNotDisplayedFlex(By byStatement, String navigatorText, @Nullable GalenReport report) {
+    public boolean verifyNotDisplayedFlex(By byStatement, String navigatorText, @Nullable GalenReport report) {
         return (report == null) ? getWebElement(byStatement, shortWait) == null : report.verifyNotDisplayed(
                 getWebElement(byStatement, shortWait), navigatorText, false);
     }
 
-    public Boolean verifyDisplayedFlex(By byStatement, String navigatorText, @Nullable GalenReport report) {
+    public boolean verifyDisplayedFlex(By byStatement, String navigatorText, @Nullable GalenReport report) {
         return (report == null) ? getWebElement(byStatement) != null : report.verifyActionToNavDisplayed(
                 "Verify " + navigatorText + " displayed", getWebElement(byStatement), navigatorText, false);
     }
@@ -227,7 +229,7 @@ public class BasicHelpers {
         }
     }
 
-    public Boolean verifyClickToNavDisplayed(By toClick, String navText, By toVerify, String navText2,
+    public boolean verifyClickToNavDisplayed(By toClick, String navText, By toVerify, String navText2,
                                              @Nullable GalenReport report) {
         try {
             clickFlex(toClick, navText, null);
@@ -238,20 +240,20 @@ public class BasicHelpers {
         }
     }
 
-    public Boolean verifyClickToNavNotDisplayed(By toClick, String navText, By toVerify, String navText2,
+    public void verifyClickToNavNotDisplayed(By toClick, String navText, By toVerify, String navText2,
                                              @Nullable GalenReport report) {
         clickFlex(toClick, navText, null);
-        return verifyActionToNavNotDisplayed("Click "+ navText, toVerify, navText2, report);
+        verifyActionToNavNotDisplayed("Click "+ navText, toVerify, navText2, report);
     }
 
-    public Boolean verifyClickToPageTransition(BasePage expectedPage, By by, String navText, @Nullable GalenReport report) {
+    public boolean verifyClickToPageTransition(BasePage expectedPage, By by, String navText, @Nullable GalenReport report) {
         WebElement element = getWebElement(by);
         clickFlex(element, navText, null);
         return verifyActionToPageDisplayed("Click '" + navText + "'", expectedPage,
                 expectedPage.reportText, report);
     }
 
-    public Boolean verifyActionToNavDisplayed(String action, By by, String navText, @Nullable GalenReport report) {
+    public boolean verifyActionToNavDisplayed(String action, By by, String navText, @Nullable GalenReport report) {
         WebElement nav = getWebElement(by);
         if (report != null) {
             try {
@@ -265,7 +267,7 @@ public class BasicHelpers {
         return nav != null && nav.isDisplayed();
     }
 
-    public Boolean verifyActionToNavNotDisplayed(String action, By by, String navText,
+    public boolean verifyActionToNavNotDisplayed(String action, By by, String navText,
                                                  @Nullable GalenReport report) {
         WebElement nav = getWebElement(by, shortWait);
         String result;
@@ -283,7 +285,7 @@ public class BasicHelpers {
         return nav == null || !nav.isDisplayed();
     }
 
-    public Boolean verifyActionToPageDisplayed(String action, BasePage toPage, String pageText,
+    public boolean verifyActionToPageDisplayed(String action, BasePage toPage, String pageText,
                                                @Nullable GalenReport report) {
         if (report != null) {
             try {
@@ -297,10 +299,10 @@ public class BasicHelpers {
         return toPage.verifyAtPage();
     }
 
-    public Boolean verifyButtonEnabled(By by, Boolean isEnabled, @Nullable GalenReport report) {
+    public boolean verifyButtonEnabled(By by, boolean isEnabled, @Nullable GalenReport report) {
         WebElement element = getWebElement(by);
         boolean actualEnabled = element.isEnabled();
-        Boolean result = actualEnabled == isEnabled;
+        boolean result = actualEnabled == isEnabled;
         String condition = element.getText() + " button is " + (isEnabled ? "" : " not ") + " enabled ";
         if (report != null) {
             return report.verifyCondition(() -> result, condition, false);
@@ -332,7 +334,7 @@ public class BasicHelpers {
         return response;
     }
 
-    public Boolean verifyText(By by, String navText, String textToVerify, @Nullable GalenReport report) {
+    public boolean verifyText(By by, String navText, String textToVerify, @Nullable GalenReport report) {
         WebElement element = getWebElement(by);
         if (report != null) {
             return report.addTextVerificationStep(element, navText, textToVerify, false);
@@ -340,7 +342,7 @@ public class BasicHelpers {
         return element.getText().toLowerCase().contains(textToVerify.toLowerCase());
     }
 
-    public Boolean verifyElementsDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
+    public boolean verifyElementsDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
         WebElement element;
         for (Map.Entry<String, By> entry : elements.entrySet()) {
@@ -354,14 +356,14 @@ public class BasicHelpers {
         return addMultipleVerificationStep("the following elements are displayed:", result, report);
     }
 
-    public Boolean verifyElementsNotDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
+    public void verifyElementsNotDisplayed(LinkedHashMap<String, By> elements, @Nullable GalenReport report) {
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
         WebElement element;
         for (Map.Entry<String, By> entry : elements.entrySet()) {
             element = getWebElement(entry.getValue(), shortWait);
                 result.put(entry.getKey(), element==null);
         }
-        return addMultipleVerificationStep("the following elements are not displayed:", result, report);
+        addMultipleVerificationStep("the following elements are not displayed:", result, report);
     }
 
 
@@ -375,7 +377,7 @@ public class BasicHelpers {
         String condition = "CSV value of "+ column + " equals " + value;
         String actualResult;
         try {
-            actualResult = new CSVHelpers().getCSVValueByAssessmentID(fileName, assessmentID, column);
+            actualResult = new CSVHelpers(driver).getCSVValueByAssessmentID(fileName, assessmentID, column);
         } catch(Exception e) {
             actualResult="";
         }
@@ -384,12 +386,12 @@ public class BasicHelpers {
         }
     }
 
-    public boolean verifyCSVValuePresent(File fileName, String assessmentID, String column,
+    public void verifyCSVValuePresent(File fileName, String assessmentID, String column,
                                               @Nullable GalenReport report) {
         String condition = "CSV value of "+ column + " is not blank";
         boolean result;
         String actualResult=column + " is blank";
-        CSVHelpers csv = new CSVHelpers();
+        CSVHelpers csv = new CSVHelpers(driver);
         try {
             actualResult = column + " contains "+ csv.getCSVValueByAssessmentID(fileName, assessmentID, column);
             result=csv.verifyCSVValuePresent(fileName, assessmentID, column);
@@ -397,9 +399,7 @@ public class BasicHelpers {
             result=false;
         }
         if (report != null)
-            report.addStep("Verify "+ condition, StringUtils.capitalize(condition), actualResult,result ,false);
-
-        return result;
+            report.addStep("Verify "+ condition, StringUtils.capitalize(condition), actualResult, result ,false);
     }
 
     public List<String> getAllDropdownOptions(By dropdown) {
@@ -459,26 +459,22 @@ public class BasicHelpers {
             report.addStep("Click the browser back button", "Browser back", "As Expected", true);
     }
 
-    public boolean downloadCSVAndVerify(String csvName, StudyAdminPageObj pageObj, @Nullable GalenReport report) {
-        boolean result=true;
+    public void downloadCSVAndVerify(String csvName, StudyAdminPageObj pageObj, @Nullable GalenReport report) {
         try {
             pageObj.login.logIn(RoleType.CENTRAL_ASSESSOR.email, null);
             pageObj.participants.verifyAtPage();
             pageObj.participants.selectTab(AccountTabs.RECORDS, null);
             pageObj.downloadRecords.downloadParticipantRecords(csvName, report);
         } catch( Exception e) {
-            result = false;
             if (report != null) {
                 report.addStep("Generate Metrics CSV", "Generated  Metrics CSV\n" +
                         "CSV metrics record captured\n", e.getMessage(), false);
             }
         }
-        return  result;
     }
 
-    public boolean downloadIndividualCSVAndVerify(String csvName, String assessmentID,StudyAdminPageObj pageObj,
+    public void downloadIndividualCSVAndVerify(String csvName, String assessmentID,StudyAdminPageObj pageObj,
                                                   String email,GalenReport report) {
-        boolean result=true;
         String actual;
         try {
             sleep(1000);
@@ -491,9 +487,8 @@ public class BasicHelpers {
             actual = e.getMessage();
             if (report != null) {
                 report.addStep("Download Individual CSV", "Download Individual CSV\n" +
-                        "CSV metrics record captured\n", actual, result=false);
+                        "CSV metrics record captured\n", actual, false);
             }
         }
-        return  result;
     }
 }

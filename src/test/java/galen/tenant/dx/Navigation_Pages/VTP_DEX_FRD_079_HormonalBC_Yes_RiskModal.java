@@ -32,7 +32,7 @@ public class VTP_DEX_FRD_079_HormonalBC_Yes_RiskModal extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_079_HormonalBC_Yes_RiskModal_Test() throws Exception {
+    public void VTP_DEX_FRD_079_HormonalBC_Yes_RiskModal_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

@@ -27,7 +27,7 @@ public class VTP_DEX_FRD_211_ADBU_ADBU_BP_Yes_Navigates_ADBU_Confirmation_Modal 
     }
 
     @Test
-    public void VTP_DEX_FRD_211_ADBU_ADBU_BP_Yes_Navigates_ADBU_Confirmation_Modal_Test() throws Exception {
+    public void VTP_DEX_FRD_211_ADBU_ADBU_BP_Yes_Navigates_ADBU_Confirmation_Modal_Test() {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

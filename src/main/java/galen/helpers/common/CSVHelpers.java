@@ -4,7 +4,10 @@ import galen.helpers.tenant.dx.DxMetricsRecord;
 import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nullable;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -15,9 +18,6 @@ public class CSVHelpers {
 
     public CSVHelpers (WebDriver driver) {
         this.driver=driver;
-    }
-
-    public CSVHelpers () {
     }
 
     LinkedHashMap<String, String> parseCSV(File fileName, String columnName, String columnValue) throws IOException {
@@ -67,7 +67,6 @@ public class CSVHelpers {
             }
          });
          if (report!=null) {
-             String name = (fileName.toString().contains("Individual")) ? "Individual":"Bulk";
              report.addMetricsVerificationStep(metricMap, false);
          }
     }
@@ -86,5 +85,4 @@ public class CSVHelpers {
         if (localRecordMap.size()==0) { return false; }
         return  !localRecordMap.get(column.toUpperCase()).equalsIgnoreCase("");
     }
-
 }

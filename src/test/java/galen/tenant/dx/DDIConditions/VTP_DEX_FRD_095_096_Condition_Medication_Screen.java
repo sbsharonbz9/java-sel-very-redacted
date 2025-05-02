@@ -7,12 +7,10 @@ import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxNavigations;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
@@ -101,7 +99,7 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_095_096_Condition_Medication_Screen_Test() throws Exception {
+    public void VTP_DEX_FRD_095_096_Condition_Medication_Screen_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES, VERSIONHISTORY,
                 PREEXECUTION);
@@ -112,45 +110,45 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
         pageObj.pritUnl.authenticateUserIfRequired();
 
         // Step 1 - 20
-        user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label));
+        user.conditionType= pageObj.ddiCondition.getCondition(DDIConditionType.HEPATITIS_C.label);
         for (String c : pageObj.ddiHepC.getAllButNone()) {
-            user.hepCMeds = new ArrayList<>(Arrays.asList(c));
+            user.hepCMeds = pageObj.ddiHepC.getCondition(c);
             iterateThroughOptions(user,pageObj, c);
         }
         user.hepCMeds = pageObj.ddiHepC.getAllButNone();
         iterateThroughAllOptions(user,pageObj, pageObj.ddiHepC.getAllButNone(), "Hep C");
 
         // Step 21 -35
-        user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label));
+        user.conditionType=pageObj.ddiCondition.getCondition(DDIConditionType.THYROID_DISEASE.label);;
         for (String c : pageObj.ddiThyroid.getAllButNone()) {
-            user.thyroidMeds = new ArrayList<>(Arrays.asList(c));
+            user.thyroidMeds = pageObj.ddiThyroid.getCondition(c);
             iterateThroughOptions(user,pageObj, c);
         }
         user.thyroidMeds = pageObj.ddiThyroid.getAllButNone();
         iterateThroughAllOptions(user,pageObj, pageObj.ddiThyroid.allButNoneThyroidADBU, "Thyroid");
 
         // Step 36 -70
-        user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.EPILEPSY.label));
+        user.conditionType= pageObj.ddiCondition.getCondition(DDIConditionType.EPILEPSY.label);
         for (String c : pageObj.ddiEpBipolar.getAllButNone()) {
-            user.epBipolarMeds = new ArrayList<>(Arrays.asList(c));
+            user.epBipolarMeds = pageObj.ddiEpBipolar.getCondition(c);
             iterateThroughOptions(user,pageObj, c);
         }
         user.epBipolarMeds = pageObj.ddiEpBipolar.getAllButNone();
         iterateThroughAllOptions(user,pageObj, pageObj.ddiEpBipolar.getAllButNone(), "Epilepsy_Bipolar");
 
         // Step 71-110
-        user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.HIV.label));
+        user.conditionType= pageObj.ddiCondition.getCondition(DDIConditionType.HIV.label);
         for (String c : pageObj.ddihiv.getAllButNone()) {
-            user.hivMeds = new ArrayList<>(Arrays.asList(c));
+            user.hivMeds = pageObj.ddihiv.getCondition(c);
             iterateThroughOptions(user,pageObj, c);
         }
         user.hivMeds = pageObj.ddihiv.getAllButNone();
         iterateThroughAllOptions(user,pageObj, pageObj.ddihiv.getAllButNone(), "HIV");
 
         // Step 111-130
-        user.conditionType= new ArrayList<>(Arrays.asList(DDIConditionType.HIGH_CHOLESTEROL.label));
+        user.conditionType= pageObj.ddiCondition.getCondition(DDIConditionType.HIGH_CHOLESTEROL.label);
         for (String c : pageObj.ddiHighCholesterol.getAllButNone()) {
-            user.highCholMeds = new ArrayList<>(Arrays.asList(c));
+            user.highCholMeds = pageObj.ddiHighCholesterol.getCondition(c);
             iterateThroughOptions(user,pageObj, c);
         }
         user.highCholMeds = pageObj.ddiHighCholesterol.getAllButNone();
@@ -158,11 +156,11 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
 
         // Step 131-139
         user.conditionType= pageObj.ddiCondition.getAllButNone();
-        user.hepCMeds=new ArrayList<>(Arrays.asList(DDIHepCType.OMBITASVIR.label));
-        user.thyroidMeds =new ArrayList<>(Arrays.asList(DDIThyroidType.LEVOTHYROXINE.label));
-        user.epBipolarMeds = new ArrayList<>(Arrays.asList(DDIEpBipolarType.BARBITUATES.label));
-        user.hivMeds =new ArrayList<>(Arrays.asList(DDIHIVType.FOSAMPRENAVIR.label));
-        user.highCholMeds=new ArrayList<>(Arrays.asList(DDIHighCholType.ATORVASTATIN.label));
+        user.hepCMeds = pageObj.ddiHepC.getCondition(DDIHepCType.OMBITASVIR.label);
+        user.thyroidMeds =pageObj.ddiThyroid.getCondition(DDIThyroidType.LEVOTHYROXINE.label);
+        user.epBipolarMeds = pageObj.ddiEpBipolar.getCondition(DDIEpBipolarType.BARBITUATES.label);
+        user.hivMeds = pageObj.ddiCondition.getCondition(DDIHIVType.FOSAMPRENAVIR.label);
+        user.highCholMeds = pageObj.ddiCondition.getCondition(DDIHighCholType.ATORVASTATIN.label);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
         new DxNavigations(driver).DDIPath(user, pageObj.antifungal, report);
         report.addScreenshotStep("Step137_Antifungal");
@@ -185,6 +183,7 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
         new DxNavigations(driver).DDIPath(user, pageObj.antifungal, report);
         report.addScreenshotStep("Step146_Antifungal");
+
         new DxHFWrappers(driver).runAntifungalToADBU(user, pageObj.antifungal, pageObj.adbu, report);
         pageObj.adbu.verifyConditionsListed(pageObj.ddiHepC.getAllButNone(), report);
         pageObj.adbu.verifyConditionsListed(pageObj.ddiThyroid.allButNoneThyroidADBU, report);
@@ -194,13 +193,13 @@ public class VTP_DEX_FRD_095_096_Condition_Medication_Screen extends BaseTest {
         report.addScreenshotStep("Step148_ADBU");
 
         //149-164 Rotate through DDI conditions. No meds on follow-up. Verify at antifungals
-        user.hepCMeds=new ArrayList<>(Arrays.asList(DDIHepCType.NONE_OF_THESE.label));
-        user.thyroidMeds =new ArrayList<>(Arrays.asList(DDIThyroidType.NO_THYROID_MEDS.label));
-        user.epBipolarMeds = new ArrayList<>(Arrays.asList(DDIEpBipolarType.NONE_OF_THESE.label));
-        user.hivMeds =new ArrayList<>(Arrays.asList(DDIHIVType.NONE_OF_THESE.label));
-        user.highCholMeds=new ArrayList<>(Arrays.asList(DDIHighCholType.NONE_OF_THESE.label));
+        user.hepCMeds = user.defaultNone;
+        user.thyroidMeds = pageObj.ddiThyroid.getCondition(DDIThyroidType.NO_THYROID_MEDS.label);
+        user.epBipolarMeds = user.defaultNone;
+        user.hivMeds = user.defaultNone;
+        user.highCholMeds = user.defaultNone;
         for (String c : pageObj.ddiCondition.getAllButNone()) {
-            user.conditionType= new ArrayList<>(Arrays.asList(c));
+            user.conditionType= pageObj.ddiCondition.getCondition(c);
             new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.antifungal, report);
             report.addScreenshotStep(c+"None_Antifungal");
         }

@@ -1,40 +1,34 @@
 package galen.helpers.common;
 
-import galen.pages.common.BasePage;
-
-import java.io.File;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-import java.util.HashMap;
-
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
-
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 import com.itextpdf.layout.property.VerticalAlignment;
-
+import galen.pages.common.BasePage;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
-import com.itextpdf.kernel.geom.PageSize;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.Callable;
 
 public class GalenReport {
@@ -95,30 +89,34 @@ public class GalenReport {
     }
 
     public GalenReport(WebDriver driver, String reportName, String objective, String requirements, String references,
-                        String notes, ArrayList<String> versionEntries) throws IOException {
+                        String notes, ArrayList<String> versionEntries)  {
         this(driver, reportName, objective, requirements, references, notes);
         this.reportVersionUpdates = versionEntries;
         createVersionHistoryTable();
     }
 
     public GalenReport(WebDriver driver, String reportName, String objective, String requirements, String references,
-                        String notes, ArrayList<String> versionEntries, HashMap<String, String[]> preExecApprovalList) throws IOException {
+                        String notes, ArrayList<String> versionEntries, HashMap<String, String[]> preExecApprovalList)  {
         this(driver, reportName, objective, requirements, references, notes, versionEntries);
         this.preExecApprovals = preExecApprovalList;
     }
 
-    public void startReport() throws IOException {
+    public void startReport() {
         runTime = new Date();
-        fos = new FileOutputStream("reports/" + reportName + "/" + reportName + ".pdf");
-        pdfw = new PdfWriter(fos);
-        pdfd = new PdfDocument(pdfw);
-        document = new Document(pdfd, PageSize.A4.rotate());
-        font = PdfFontFactory.createFont(FontConstants.HELVETICA);
-        bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
-        initializeTables();
-        writeStepHeader();
-        reportVersionUpdates = new ArrayList<>();
-        preExecApprovals = new HashMap<>();
+        try {
+            fos = new FileOutputStream("reports/" + reportName + "/" + reportName + ".pdf");
+            pdfw = new PdfWriter(fos);
+            pdfd = new PdfDocument(pdfw);
+            document = new Document(pdfd, PageSize.A4.rotate());
+            font = PdfFontFactory.createFont(FontConstants.HELVETICA);
+            bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+            initializeTables();
+            writeStepHeader();
+            reportVersionUpdates = new ArrayList<>();
+            preExecApprovals = new HashMap<>();
+        } catch (IOException e) {
+            System.out.println("Could not create report");
+        }
     }
 
     void initializeTables() {
@@ -144,19 +142,21 @@ public class GalenReport {
         stepTable.addCell(new Cell(1, 3).add(screenShot));
     }
 
-    public Image takeScreenshot(String ssName, WebDriver driver) throws IOException  {
+    public Image takeScreenshot(String ssName, WebDriver driver) throws IOException {
         int bodyHeight = driver.findElement(By.tagName("body")).getSize().getHeight();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String zoom = "document.body.style.zoom = '60.0%'";
-        js.executeScript(zoom);
         Dimension originalSize = driver.manage().window().getSize();
         Dimension size = new Dimension(originalSize.getWidth(), bodyHeight);
         driver.manage().window().setSize(size);
-
-        File ss = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File screenShot = new File(screenshotDir + "/" + ssName + ".png");
-        FileUtils.copyFile(ss, screenShot);
-        ImageData imageData = ImageDataFactory.create(screenShot.getPath());
+        ImageData imageData;
+        File ss;
+        String screenShot;
+        js.executeScript(zoom);
+        ss = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        screenShot = screenshotDir + "/" + ssName + ".png";
+        FileUtils.copyFile(ss, new File(screenShot));
+        imageData = ImageDataFactory.create(screenShot);
         zoom = "document.body.style.zoom = '100.0%'";
         js.executeScript(zoom);
         driver.manage().window().setSize(originalSize);
@@ -347,18 +347,6 @@ public class GalenReport {
         addStep(step, expected, result?expected:actualFail, result, true);
     }
 
-    public void doubleClickAndReport(WebElement nav, String navIdentifier) {
-        if (navIdentifier.isEmpty() && nav.getText() != null) {
-            navIdentifier = nav.getText();
-        }
-        try {
-            new Actions(this.driver).doubleClick(nav).perform();
-            addStep("Double-click '" + navIdentifier + "'", "'" + navIdentifier + "' is double-clicked", "As expected", true);
-        } catch (Exception e) {
-            addStep("Double-click " + navIdentifier + "'", "'" + navIdentifier + "' is double-clicked", "Error occurred " + e.getClass().getSimpleName(), false);
-        }
-    }
-
     public boolean verifyActionToNavDisplayed(String actionText, WebElement element, String navText, boolean hardFail) {
         String expected = "'" + navText + "' is displayed";
         String actualPass = "'" + navText + "' is displayed";
@@ -369,14 +357,13 @@ public class GalenReport {
         return result;
     }
 
-    public Boolean verifyActionToPageDisplayed(String actionText, BasePage thisPage,
-                                               String pageText, Boolean hardFail) {
+    public void verifyActionToPageDisplayed(String actionText, BasePage thisPage,
+                                            String pageText, Boolean hardFail) {
         String expected =  pageText + " is displayed";
         String actualPass = pageText + " is displayed";
         String actualFail = pageText + " is NOT displayed";
         boolean result = thisPage.verifyAtPage();
         addStep(actionText, expected, result ? actualPass : actualFail, result, hardFail);
-        return result;
     }
 
     public Boolean verifyNotDisplayed(WebElement element, String navText, boolean hardFail) {

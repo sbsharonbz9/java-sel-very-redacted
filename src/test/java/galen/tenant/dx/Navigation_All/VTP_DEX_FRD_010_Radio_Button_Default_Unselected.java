@@ -9,14 +9,11 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
     static String OBJECTIVE = "To verify the application shall display all user input controls (i.e. input fields, " +
@@ -69,7 +66,7 @@ public class VTP_DEX_FRD_010_Radio_Button_Default_Unselected extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_010_Radio_Button_Default_Unselected_Test() throws Exception {
+    public void VTP_DEX_FRD_010_Radio_Button_Default_Unselected_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES, VERSIONHISTORY,
                 PREEXECUTION);

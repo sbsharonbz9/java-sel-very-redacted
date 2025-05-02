@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_230_ADBU_DDI_Backup_Contraceptives_Navigates_To_BP exte
     }
 
     @Test
-    public void VTP_DEX_FRD_230_ADBU_DDI_Backup_Contraceptives_Navigates_To_BP_Test() throws Exception {
+    public void VTP_DEX_FRD_230_ADBU_DDI_Backup_Contraceptives_Navigates_To_BP_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
@@ -45,8 +45,8 @@ public class VTP_DEX_FRD_230_ADBU_DDI_Backup_Contraceptives_Navigates_To_BP exte
         pageObj.ddihiv.selectCheckboxesAndProgress(pageObj.ddihiv.getAllButNone(), pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbubpScreen,report);
-        pageObj.adbu.addressConfirmationsAndProgress("Yes", pageObj.adbuddi, report);
-        pageObj.adbuddi.clickNextToPage(pageObj.adbubpNormal, report);
+        pageObj.adbu.addressConfirmationsAndProgress("Yes", pageObj.adbubc, report);
+        pageObj.adbubc.clickNextToPage(pageObj.adbubpNormal, report);
         pageObj.adbubpNormal.clickGetBPButtonToEnterBP(report);
         report.addScreenshotStep("Step10_Enter_BP_Screen");
     }

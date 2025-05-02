@@ -210,9 +210,9 @@ public class DxNavigations extends Navigations {
                 pages.smoking.selectRadioResponseAndProgress(user.smokingType.label, pages.everHadCancer, report);
             } else {
                 pages.smoking.selectRadioResponseAndProgress(user.smokingType.label, pages.birthYear, report);
-                if (endPage.getClass().equals(BirthYear.class)) {return endPage;}
+                if (endPage.getClass().equals(BirthYear.class)) { return endPage; }
                 pages.birthYear.fillOutBirthdayAndProgress(user,pages.smokingDisclaimer, report);
-                if (endPage.getClass().equals(SmokingDisclaimer.class)) {return endPage;}
+                if (endPage.getClass().equals(SmokingDisclaimer.class)) { return endPage; }
                 pages.smokingDisclaimer.clickNextToPage(pages.everHadCancer,report);
             }
         }

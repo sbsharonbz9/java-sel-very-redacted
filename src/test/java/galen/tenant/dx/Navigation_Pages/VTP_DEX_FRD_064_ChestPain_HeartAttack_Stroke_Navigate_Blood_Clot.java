@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_064_ChestPain_HeartAttack_Stroke_Navigate_Blood_Clot ex
     }
 
     @Test
-    public void VTP_DEX_FRD_064_ChestPain_HeartAttack_Stroke_Navigate_Blood_Clot_Test() throws Exception {
+    public void VTP_DEX_FRD_064_ChestPain_HeartAttack_Stroke_Navigate_Blood_Clot_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

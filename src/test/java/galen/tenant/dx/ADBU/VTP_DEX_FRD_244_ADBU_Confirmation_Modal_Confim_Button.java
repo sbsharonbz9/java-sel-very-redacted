@@ -26,7 +26,7 @@ public class VTP_DEX_FRD_244_ADBU_Confirmation_Modal_Confim_Button extends BaseT
     }
 
     @Test
-    public void VTP_DEX_FRD_244_ADBU_Confirmation_Modal_Confim_Button_Test() throws Exception {
+    public void VTP_DEX_FRD_244_ADBU_Confirmation_Modal_Confim_Button_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

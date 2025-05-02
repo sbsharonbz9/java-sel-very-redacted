@@ -26,7 +26,7 @@ public class VTP_DEX_FRD_231_ADBU_Confirmation_Modal_Navigates_Ready_To_Purchase
     }
 
     @Test
-    public void VTP_DEX_FRD_231_ADBU_Confirmation_Modal_Navigates_Ready_To_Purchase_Test() throws Exception {
+    public void VTP_DEX_FRD_231_ADBU_Confirmation_Modal_Navigates_Ready_To_Purchase_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

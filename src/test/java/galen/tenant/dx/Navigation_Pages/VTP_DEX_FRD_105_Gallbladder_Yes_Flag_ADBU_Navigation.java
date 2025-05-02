@@ -32,7 +32,7 @@ public class VTP_DEX_FRD_105_Gallbladder_Yes_Flag_ADBU_Navigation extends BaseTe
     }
 
     @Test
-    public void VTP_DEX_FRD_105_Gallbladder_Yes_Flag_ADBU_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_105_Gallbladder_Yes_Flag_ADBU_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

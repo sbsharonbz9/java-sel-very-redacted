@@ -49,17 +49,14 @@ public class VTP_FRD_132_133_134_Non_Cardiac_Allergic_Reaction_Screen extends Ba
         common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Non Cardiac Allergic Reactions Screen Options", driver);
 
-        common.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("No", report);
 
         //reselect no button
-        common.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("No", report);
         report.addScreenshotStep("Non Cardiac Allergic Reactions Screen No Options", driver);
 
         //select yes button
-        common.clickYesOrNo("Yes", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Non Cardiac Allergic Reactions Screen Yes Options", driver);
 
         common.clickYesNoNextToPage("No", pageObj.erectionLongerThan4Hours, report);
@@ -70,8 +67,7 @@ public class VTP_FRD_132_133_134_Non_Cardiac_Allergic_Reaction_Screen extends Ba
         common.verifyYesNoPresent(report);
         report.addScreenshotStep("Non Cardiac Allergic Reactions Screen Options");
 
-        common.clickYesOrNo("Yes", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Non Cardiac Allergic Reactions Screen Yes Options");
 
         common.clickYesNoNextToPage("No", pageObj.erectionLongerThan4Hours, report);

@@ -10,11 +10,8 @@ import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
     static String OBJECTIVE = "This Happy Path flow covers the use-case scenario where the user takes the Initial " +
@@ -24,7 +21,6 @@ public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
     static String REFERENCES = "None";
     DxPageObj pageObj;
     DxUser user;
-    String reportName = "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker";
     ArrayList<String> VERSIONHISTORY = new ArrayList<>();
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
     public BasicHelpers bh;
@@ -34,7 +30,8 @@ public class HappyFlow_IA_Initial_Assessment_noBP_NonSmoker extends BaseTest {
     }
 
     @Test
-    public void HappyFlow_IA_Initial_Assessment_noBP_NonSmoker_Test() throws IOException, InterruptedException {
+    public void HappyFlow_IA_Initial_Assessment_noBP_NonSmoker_Test()  {
+        String reportName = "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker";
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "HappyFlow_IA_Initial_Assessment_noBP_NonSmoker";

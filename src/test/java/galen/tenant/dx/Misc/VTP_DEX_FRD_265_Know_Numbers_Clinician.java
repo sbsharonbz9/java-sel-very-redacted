@@ -4,15 +4,12 @@ import galen.base.BaseTest;
 import galen.enums.SP.RoleType;
 import galen.enums.framework.UrlType;
 import galen.helpers.common.GalenReport;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_265_Know_Numbers_Clinician extends BaseTest {
     static String OBJECTIVE = "To verify the Know Numbers Screen shall provide a control that allows the user to " +
@@ -30,7 +27,7 @@ public class VTP_DEX_FRD_265_Know_Numbers_Clinician extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_265_Know_Numbers_Clinician_Test() throws Exception {
+    public void VTP_DEX_FRD_265_Know_Numbers_Clinician_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

@@ -24,16 +24,9 @@ public class DriverManagerFactory {
 		case EDGE: {
 			return new DriverManagerEdge();
 		}
-//		case SAFARI: {
-//			return new DriverManagerSafari();
-//		}
-//		case OPERA: {
-//			return new DriverManagerOpera();
-//		}
 		default:
 			throw new IllegalArgumentException("Invalid Driver: " + driverType);
 		}
-
 	}
 
 }

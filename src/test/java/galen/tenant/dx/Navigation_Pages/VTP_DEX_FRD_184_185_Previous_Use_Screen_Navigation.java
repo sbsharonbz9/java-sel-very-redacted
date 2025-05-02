@@ -44,7 +44,7 @@ public class VTP_DEX_FRD_184_185_Previous_Use_Screen_Navigation extends BaseTest
     }
 
     @Test
-    public void VTP_DEX_FRD_184_185_Previous_Use_Screen_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_184_185_Previous_Use_Screen_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

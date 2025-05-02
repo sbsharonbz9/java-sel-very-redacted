@@ -30,7 +30,7 @@ public class VTP_DEX_FRD_073_Other_Cancers_Flag_ADBU_Navigation extends BaseTest
     }
 
     @Test
-    public void VTP_DEX_FRD_073_Other_Cancers_Flag_ADBU_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_073_Other_Cancers_Flag_ADBU_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

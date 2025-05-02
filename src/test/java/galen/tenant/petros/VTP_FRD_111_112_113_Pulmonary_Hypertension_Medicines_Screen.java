@@ -44,11 +44,10 @@ public class VTP_FRD_111_112_113_Pulmonary_Hypertension_Medicines_Screen extends
 
         navs.petrosHappyFlowTo(user, pageObj.hypertensionsMedicine,report);
         common.verifyYesNoPresent(report);
-        common.verifyNextButtonEnabled(report);
+        common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step2_Blank_NextDisabled", driver);
 
-        common.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Step3_No_NextEnabled", driver);
 
         common.clickYesOrNo("No", report);

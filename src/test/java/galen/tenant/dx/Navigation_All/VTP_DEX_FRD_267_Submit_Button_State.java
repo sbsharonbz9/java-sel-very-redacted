@@ -20,8 +20,6 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_FRD_267_Submit_Button_State extends BaseTest {
     static String OBJECTIVE = "To verify the application button to submit shall only become active once the user has " +
             "input a response (i.e. input field, checkbox, drop down, or radio button), on the current assessment screen" +
@@ -96,8 +94,7 @@ public class VTP_DEX_FRD_267_Submit_Button_State extends BaseTest {
     void verifyYesNoSteps(int stepNo, String yesNo, BasePage nextPage) {
         commonPageFeatures.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step"+ stepNo+"_Next disabled");
-        commonPageFeatures.clickYesOrNo(yesNo, report);
-        commonPageFeatures.verifyNextButtonEnabled(report);
+        commonPageFeatures.clickYesNo_NextEnabled(yesNo, report);
         stepNo++;
         report.addScreenshotStep("Step"+stepNo+"_Next enabled");
         if (stepNo==85) {
@@ -146,8 +143,7 @@ public class VTP_DEX_FRD_267_Submit_Button_State extends BaseTest {
         commonPageFeatures.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step11");
 
-        commonPageFeatures.clickYesOrNo("Yes", report);
-        commonPageFeatures.verifyNextButtonEnabled(report);
+        commonPageFeatures.clickYesNo_NextEnabled("Yes", report);
         report.addScreenshotStep("Step12");
 
         bh.verifyClickToNavDisplayed(commonPageFeatures.nextBTN, "Next", pageObj.birthControl.modal,

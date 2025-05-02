@@ -8,7 +8,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
@@ -35,7 +34,7 @@ public class VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes_Test() throws Exception {
+    public void VTP_DEX_FRD_137_Participant_IA_Unique_Outcomes_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

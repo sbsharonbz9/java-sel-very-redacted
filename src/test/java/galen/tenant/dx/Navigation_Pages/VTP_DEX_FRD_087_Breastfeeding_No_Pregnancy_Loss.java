@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_087_Breastfeeding_No_Pregnancy_Loss extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_087_Breastfeeding_No_Pregnancy_Loss_Test() throws Exception {
+    public void VTP_DEX_FRD_087_Breastfeeding_No_Pregnancy_Loss_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

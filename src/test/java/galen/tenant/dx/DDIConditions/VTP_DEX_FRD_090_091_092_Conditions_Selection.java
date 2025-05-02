@@ -8,7 +8,6 @@ import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.common.BasePage;
 import galen.pages.common.CheckboxPage;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DDICondition;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
@@ -63,7 +62,7 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
     }
 
     void verifySingleChoice(String step, DDICondition ddi, DxUser user, String option, BasePage nextPage) {
-        user.conditionType= new ArrayList<>(Arrays.asList(option));
+        user.conditionType= pageObj.ddiCondition.getCondition(option);
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, ddi, report);
         ddi.selectCheckboxesAndProgress(user.conditionType,nextPage, report);
         report.addScreenshotStep("Step"+step+"_"+option);
@@ -74,12 +73,12 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, ddi, report);
         ddi.selectCheckboxesAndProgress(user.conditionType, nextPage, report);
         String none = (!nextPage.equals(pageObj.ddiThyroid))?"None of these":"No thyroid medication";
-        nextPage.selectCheckboxesAndProgress(new ArrayList<String>(Arrays.asList(none)), secondPage, report);
+        nextPage.selectCheckboxesAndProgress(new ArrayList<>(Arrays.asList(none)), secondPage, report);
         report.addScreenshotStep("Step"+step+"_"+ secondPage.reportText.replace("/","_"));
     }
 
     @Test
-    public void VTP_DEX_FRD_090_091_092_Conditions_Selection_Test() throws Exception {
+    public void VTP_DEX_FRD_090_091_092_Conditions_Selection_Test()  {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_090_091_092 – Conditions Screen Selection ";
@@ -87,8 +86,6 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         pageObj = new DxPageObj(driver);
         pageObj.pritUnl.authenticateUserIfRequired();
-        ArrayList<String> allButOther = new ArrayList<String>(pageObj.ddiCondition.conditionOptions);
-        allButOther.remove("None of these");
         DDICondition ddi = pageObj.ddiCondition;
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
         ddi.verifyAllOptionsVisible(report);
@@ -107,30 +104,30 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
         verifySingleChoice("15", ddi, user, DDIConditionType.HIGH_CHOLESTEROL.label, pageObj.ddiHighCholesterol);
 
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.ddiCondition, report);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
                 DDIConditionType.EPILEPSY.label));
         verifyTwoChoices("18", ddi, user, pageObj.ddiHepC, pageObj.ddiEpBipolar);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
                 DDIConditionType.BIPOLAR_DISORDER.label));
         verifyTwoChoices("21", ddi, user, pageObj.ddiHepC, pageObj.ddiEpBipolar);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
                 DDIConditionType.HIV.label));
         verifyTwoChoices("24", ddi, user, pageObj.ddiHepC, pageObj.ddihiv);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.HEPATITIS_C.label,
                 DDIConditionType.HIGH_CHOLESTEROL.label));
         verifyTwoChoices("27", ddi, user, pageObj.ddiHepC, pageObj.ddiHighCholesterol);
 
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
                 DDIConditionType.HIV.label));
         verifyTwoChoices("30", ddi, user, pageObj.ddiThyroid, pageObj.ddihiv);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.THYROID_DISEASE.label,
                 DDIConditionType.HIGH_CHOLESTEROL.label));
         verifyTwoChoices("33", ddi, user, pageObj.ddiThyroid, pageObj.ddiHighCholesterol);
-        user.conditionType = new ArrayList<String>(Arrays.asList(DDIConditionType.EPILEPSY.label,
+        user.conditionType = new ArrayList<>(Arrays.asList(DDIConditionType.EPILEPSY.label,
                 DDIConditionType.HIGH_CHOLESTEROL.label));
         verifyTwoChoices("36", ddi, user, pageObj.ddiEpBipolar, pageObj.ddiHighCholesterol);
 
-        user.conditionType=allButOther;
+        user.conditionType=pageObj.ddiCondition.getAllButNone();
         new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, ddi, report);
         ddi.selectCheckboxesAndProgress(user.conditionType, pageObj.ddiHepC, report);
         report.addScreenshotStep("Step38_HepC");
@@ -146,6 +143,5 @@ public class VTP_DEX_FRD_090_091_092_Conditions_Selection extends BaseTest {
 
         pageObj.ddiHepC.selectCheckboxesAndProgress(user.hivMeds, pageObj.ddiHighCholesterol, report);
         report.addScreenshotStep("Step42_HighCholesterol");
-
     }
 }

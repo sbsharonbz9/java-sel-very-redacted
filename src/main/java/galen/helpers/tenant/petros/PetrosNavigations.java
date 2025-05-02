@@ -42,8 +42,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.purchaseSelf.verifyAtPage()) {
             if (endPage.getClass().equals(PurchaseSelf.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.forSelf, report);
-            pages.purchaseSelf.clickNextToPage(pages.sexAndBirthYear, report);
+            commonPageFeatures.clickYesNoNextToPage( user.forSelf, pages.sexAndBirthYear, report);
         }
 
         if (pages.sexAndBirthYear.verifyAtPage()) {
@@ -95,8 +94,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.otherEDMeds.verifyAtPage()) {
             if (endPage.getClass().equals(ADOPBU_OtherED_Meds.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.otherEDMeds, report);
-            pages.otherEDMeds.clickNextToPage(pages.nitrateUse, report);
+            commonPageFeatures.clickYesNoNextToPage( user.otherEDMeds, pages.nitrateUse, report);
         }
 
         if (user.otherEDMeds.equals("Yes") && pages.onceADayInstruction.verifyAtPage()) {
@@ -128,8 +126,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.heartNotSafeForSex.verifyAtPage()) {
             if (endPage.getClass().equals(HeartNotSafeForSex.class)) { return endPage; }
-            pages.heartNotSafeForSex.clickYesOrNo( user.heartNotSafeForSex, report);
-            pages.heartNotSafeForSex.clickNextToPage(pages.cardiacConditions1, report);
+            pages.heartNotSafeForSex.clickYesNoNextToPage( user.heartNotSafeForSex, pages.cardiacConditions1,report);
         }
 
         if (pages.cardiacConditions1.verifyAtPage()) {
@@ -172,26 +169,22 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.antifungals.verifyAtPage()) {
             if (endPage.getClass().equals(Antifungals.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.antifungals, report);
-            pages.antifungals.clickNextToPage(pages.antibiotics, report);
+            commonPageFeatures.clickYesNoNextToPage( user.antifungals, pages.antibiotics, report);
         }
 
         if (pages.antibiotics.verifyAtPage()) {
             if (endPage.getClass().equals(Antibiotics.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.antibiotics, report);
-            pages.antifungals.clickNextToPage(pages.antidepressants, report);
+            commonPageFeatures.clickYesNoNextToPage( user.antibiotics, pages.antidepressants,report);
         }
 
         if (pages.antidepressants.verifyAtPage()) {
             if (endPage.getClass().equals(Antidepressants.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.antidepressants, report);
-            pages.antidepressants.clickNextToPage(pages.hivMedicines, report);
+            commonPageFeatures.clickYesNoNextToPage( user.antidepressants, pages.hivMedicines, report);
         }
 
         if (pages.hivMedicines.verifyAtPage()) {
             if (endPage.getClass().equals(HIVMedicines.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.hiv, report);
-            pages.hivMedicines.clickNextToPage(pages.noncardiacHealthConditions, report);
+            commonPageFeatures.clickYesNoNextToPage( user.hiv, pages.noncardiacHealthConditions,report);
         }
 
         if (pages.noncardiacHealthConditions.verifyAtPage()) {
@@ -202,8 +195,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.noncardiacAllergicReactions.verifyAtPage()) {
             if (endPage.getClass().equals(NoncardiacAllergicReactions.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.allergies, report);
-            pages.noncardiacAllergicReactions.clickNextToPage(pages.erectionLongerThan4Hours, report);
+            commonPageFeatures.clickYesNoNextToPage( user.allergies, pages.erectionLongerThan4Hours, report);
         }
 
         if (pages.erectionLongerThan4Hours.verifyAtPage()) {
@@ -220,8 +212,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.peyroniesDisease.verifyAtPage()) {
             if (endPage.getClass().equals(ADBU_PeyroniesDisease.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.peyronies, report);
-            pages.peyroniesDisease.clickNextToPage(pages.noncardiacConditions2, report);
+            commonPageFeatures.clickYesNoNextToPage( user.peyronies, pages.noncardiacConditions2, report);
         }
 
         if (pages.noncardiacConditions2.verifyAtPage()) {
@@ -238,8 +229,7 @@ public class PetrosNavigations extends Navigations {
 
         if (pages.enlargedProstateMedicine.verifyAtPage()) {
             if (endPage.getClass().equals(ADOPBU_EnlargedProstateMedicine.class)) { return endPage; }
-            commonPageFeatures.clickYesOrNo( user.enlargedProstate, report);
-            pages.enlargedProstateMedicine.clickNextToPage(pages.edAndHeartDiseaseInfo,report);
+            commonPageFeatures.clickYesNoNextToPage( user.enlargedProstate, pages.edAndHeartDiseaseInfo, report);
         }
 
         if (pages.edAndHeartDiseaseInfo.verifyAtPage()) {

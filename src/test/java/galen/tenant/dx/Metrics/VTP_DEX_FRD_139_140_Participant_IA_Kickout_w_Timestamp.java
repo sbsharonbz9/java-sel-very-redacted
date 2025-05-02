@@ -101,7 +101,7 @@ public class VTP_DEX_FRD_139_140_Participant_IA_Kickout_w_Timestamp extends Base
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         pageObj = new DxPageObj(driver);
         sp= new StudyAdminPageObj(driver);
-        csv = new CSVHelpers();
+        csv = new CSVHelpers(driver);
         common = new CommonPageFeatures(driver);
         basicHelpers = new BasicHelpers(driver);
         hf = new DxHFWrappers(driver);

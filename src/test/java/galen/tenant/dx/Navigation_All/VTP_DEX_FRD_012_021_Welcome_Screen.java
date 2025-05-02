@@ -6,7 +6,6 @@ import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.WelcomePage;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,7 +24,7 @@ public class VTP_DEX_FRD_012_021_Welcome_Screen extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_012_021_Welcome_Screen_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_FRD_012_021_Welcome_Screen_Test() {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_012_021 – Welcome Screen";

@@ -29,7 +29,7 @@ public class VTP_DEX_FRD_068_Irregular_Heartbeat_No_Navigation extends BaseTest 
     }
 
     @Test
-    public void VTP_DEX_FRD_068_Irregular_Heartbeat_No_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_068_Irregular_Heartbeat_No_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

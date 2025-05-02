@@ -47,11 +47,10 @@ public class VTP_FRD_126_127_128_HIV_Medicines_Screen extends BaseTest {
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.hivMedicines, report);
 
         pageObj.hivMedicines.verifyYesNoPresent(report);
-        common.verifyNextButtonEnabled(report);
+        common.verifyNextButtonDisabled(report);
         report.addScreenshotStep("Step2_Blank_NextDisabled", driver);
 
-        pageObj.hivMedicines.clickYesOrNo("No", report);
-        common.verifyNextButtonEnabled(report);
+        common.clickYesNo_NextEnabled("No", report);
         report.addScreenshotStep("Step3_No_NextEnabled", driver);
 
         pageObj.hivMedicines.clickYesOrNo("No", report);

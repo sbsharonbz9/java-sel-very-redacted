@@ -30,7 +30,7 @@ public class VTP_DEX_FRD_052_054_3Month_Modal_Yes_BP_Nums extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_052_054_3Month_Modal_Yes_BP_Nums_Test() throws Exception {
+    public void VTP_DEX_FRD_052_054_3Month_Modal_Yes_BP_Nums_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

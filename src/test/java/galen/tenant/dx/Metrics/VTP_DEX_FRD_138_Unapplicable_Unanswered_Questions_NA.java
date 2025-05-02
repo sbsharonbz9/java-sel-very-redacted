@@ -8,7 +8,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
@@ -16,8 +15,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA extends BaseTest {
     static String OBJECTIVE = "To verify for any assessment questions that are not applicable to a specific user, the " +
@@ -35,7 +32,7 @@ public class VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA extends BaseTe
     }
 
     @Test
-    public void VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA_Test() throws Exception {
+    public void VTP_DEX_FRD_138_Unapplicable_Unanswered_Questions_NA_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

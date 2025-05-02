@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation ex
     }
 
     @Test
-    public void VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation_Test() throws Exception {
+    public void VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
@@ -45,8 +45,8 @@ public class VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation ex
         pageObj.ddiHighCholesterol.selectCheckboxesAndProgress(pageObj.ddiHighCholesterol.getAllButNone(), pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbu,report);
-        pageObj.adbu.addressConfirmationsAndProgress("Yes", pageObj.adbuddi, report);
-        report.addScreenshotStep("Step8_ADBU_DDI_Screen");
+        pageObj.adbu.addressConfirmationsAndProgress("Yes", pageObj.adbubc, report);
+        report.addScreenshotStep("Step8_ADBU_Screen");
 
         user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_ADBU_noBP();
         new DxHFWrappers(driver).runDxHFADBUNoBP(user, pageObj.review, report);
@@ -55,7 +55,7 @@ public class VTP_DEX_FRD_212_ADBU_DDI_BackUp_Contraceptives_Screen_Navigation ex
         pageObj.ddiHighCholesterol.selectCheckboxesAndProgress(pageObj.ddiHighCholesterol.getAllButNone(), pageObj.review, report);
         pageObj.review.addressConfirmations(report);
         pageObj.oAuthPostReview.chooseAccountTypeAndProgress(user, pageObj.adbubpScreen,report);
-        pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbuddi, report);
+        pageObj.adbubpScreen.addressConfirmationsAndProgress("Yes", pageObj.adbubc, report);
         report.addScreenshotStep("Step16_ADBU_DDI_Screen");
     }
 }

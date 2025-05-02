@@ -8,7 +8,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import galen.pages.tenant.dx.InitialAssessment.ObesityBMI;
@@ -18,8 +17,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields extends BaseTest {
     static String OBJECTIVE = "DEX_FRD_032: The application provide a control that requires the user to enter their " +
@@ -51,7 +48,7 @@ public class VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields_Test() throws Exception {
+    public void VTP_DEX_FRD_032_033_034_035_Obesity_BMI_Fields_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

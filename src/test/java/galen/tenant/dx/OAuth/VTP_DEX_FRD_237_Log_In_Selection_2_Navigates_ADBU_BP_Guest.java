@@ -8,12 +8,10 @@ import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxNavigations;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends BaseTest {
@@ -46,7 +44,7 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends 
     }
 
     @Test
-    public void VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest_Test() throws Exception {
+    public void VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
@@ -57,7 +55,7 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends 
         DxHFWrappers dxHf = new DxHFWrappers(driver);
 
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
-        ArrayList<String> conditions = new ArrayList<String>();
+        ArrayList<String> conditions = new ArrayList<>();
         dxHf.runDxHFnoBPNonsmoker(user, pageObj.obesity, report);
         user.weight = "212";
         pageObj.obesity.enterHeightAndWeight(user, report);
@@ -68,7 +66,7 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends 
         report.addScreenshotStep("Step4_ADBU_BP_Screen");
 
         user.weight="125";
-        user.cancerList= new ArrayList<>(Arrays.asList("Other cancer"));
+        user.cancerList= pageObj.cancerList.getCondition(CancerType.Other_Cancer.label);
         user.everHadCancer="Yes";
         dxHf.runDxHFnoBPNonsmoker(user, pageObj.adbubpScreen, report);
         pageObj.adbubpScreen.verifyConditionIsListed("Other cancer", report);
@@ -144,25 +142,25 @@ public class VTP_DEX_FRD_237_Log_In_Selection_2_Navigates_ADBU_BP_Guest extends 
 
         conditions= new ArrayList<>();
         user.everHadCancer="Yes";
-        user.cancerList=new ArrayList<>(Arrays.asList("Other cancer"));
+        user.cancerList=pageObj.cancerList.getCondition(CancerType.Other_Cancer.label);
         conditions.add(CancerType.Other_Cancer.label);
         user.weight = "212";
         conditions.add(pageObj.adbu.obesityCondition);
         user.conditionType=pageObj.ddiCondition.getAllButNone();
-        user.hepCMeds = new ArrayList<>(Arrays.asList("Ombitasvir"));
+        user.hepCMeds = pageObj.ddiHepC.getCondition(DDIHepCType.OMBITASVIR.label);
         conditions.addAll(user.hepCMeds);
-        user.thyroidMeds = new ArrayList<>(Arrays.asList(DDIThyroidType.LEVOTHYROXINE.label));
+        user.thyroidMeds = pageObj.ddiThyroid.getCondition(DDIThyroidType.LEVOTHYROXINE.label);
         conditions.add(DDIThyroidType.LEVOTHYROXINE.adbuText);
-        user.epBipolarMeds= new ArrayList<>(Arrays.asList("Barbiturates"));
+        user.epBipolarMeds= pageObj.ddiEpBipolar.getCondition(DDIEpBipolarType.BARBITUATES.label);
         conditions.addAll(user.epBipolarMeds);
-        user.hivMeds = new ArrayList<>(Arrays.asList("Fosamprenavir"));
+        user.hivMeds = pageObj.ddihiv.getCondition(DDIHIVType.FOSAMPRENAVIR.label);
         conditions.addAll(user.hivMeds);
-        user.highCholMeds = new ArrayList<>(Arrays.asList("Atorvastatin"));
+        user.highCholMeds = pageObj.ddiHighCholesterol.getCondition(DDIHighCholType.ATORVASTATIN.label);
         conditions.addAll(user.highCholMeds);
         user.isAntifungal="Yes";
-        user.antiFungalMeds=new ArrayList<>(Arrays.asList("Fluconazole"));
+        user.antiFungalMeds=pageObj.antifungalMeds.getCondition(AntifungalMedsType.FLUCONAZOLE.label);
         conditions.addAll(user.antiFungalMeds);
-        user.otherMedicationType=new ArrayList<>(Arrays.asList("Rifabutin"));
+        user.otherMedicationType=pageObj.otherMedication.getCondition(DDIOtherMedsType.RIFABUTIN.label);
         conditions.addAll(user.otherMedicationType);
 
         dxHf.runDxHFnoBPNonsmoker(user, pageObj.adbubpScreen, report);

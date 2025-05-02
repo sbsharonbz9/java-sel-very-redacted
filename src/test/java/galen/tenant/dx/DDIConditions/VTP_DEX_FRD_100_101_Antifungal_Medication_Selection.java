@@ -28,13 +28,14 @@ public class VTP_DEX_FRD_100_101_Antifungal_Medication_Selection extends BaseTes
     }
 
     @Test
-    public void VTP_DEX_FRD_100_101_Antifungal_Medication_Selection_Test() throws Exception {
+    public void VTP_DEX_FRD_100_101_Antifungal_Medication_Selection_Test()  {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_100_101 – Antifungal Antibacterial Medication Selection ";
 
         DxUser user = new DxUserTemplates().createHappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker();
         DxPageObj pageObj = new DxPageObj(driver);
+        DxHFWrappers dxHFWrappers = new DxHFWrappers(driver);
         CommonPageFeatures common = new CommonPageFeatures(driver);
 
         pageObj.pritUnl.authenticateUserIfRequired(UrlType.DX);
@@ -45,23 +46,23 @@ public class VTP_DEX_FRD_100_101_Antifungal_Medication_Selection extends BaseTes
         // Steps 4-33
         user.isAntifungal="Yes";
         pageObj.antifungalMeds.getAllButNone().forEach((c) -> {
-            new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.antifungalMeds, report);
+            dxHFWrappers.runDxHFNonsmokingwBP(user, pageObj.antifungalMeds, report);
             user.antiFungalMeds = new CheckboxPage(driver).getCondition(c);
             pageObj.antifungalMeds.selectCheckboxesAndProgress(user.antiFungalMeds, pageObj.otherMedication, report);
             report.addScreenshotStep(c);
 
-            new DxHFWrappers(driver).runAntifungalToADBU(user, pageObj.otherMedication,pageObj.adbu, report);
+            dxHFWrappers.runAntifungalToADBU(user, pageObj.otherMedication,pageObj.adbu, report);
             pageObj.adbu.verifyConditionIsListed(c, report);
             report.addScreenshotStep(c+"_ADBU");
         });
 
         //Step 34-38
-        new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.antifungalMeds, report);
+        dxHFWrappers.runDxHFNonsmokingwBP(user, pageObj.antifungalMeds, report);
         pageObj.antifungalMeds.selectCheckboxesAndProgress(pageObj.antifungalMeds.getAllButNone(),
                 pageObj.otherMedication, report);
         report.addScreenshotStep("Step36_OtherMeds");
 
-        new DxHFWrappers(driver).runAntifungalToADBU(user, pageObj.otherMedication,pageObj.adbu, report);
+        dxHFWrappers.runAntifungalToADBU(user, pageObj.otherMedication,pageObj.adbu, report);
         pageObj.antifungalMeds.verifyAllOptionsInADBU(report);
         report.addScreenshotStep("Step38_All_ADBU");
     }

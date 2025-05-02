@@ -36,7 +36,7 @@ public class DxPageObj extends GalenPageObj {
     public ADBU adbu;
     public ADBUBP adbubpScreen;
     public ADBUBPNormal adbubpNormal;
-    public ADBUBC adbuddi;
+    public ADBUBC adbubc;
     public EnterBP enterBP;
     public EnterBPEnd enterBPEnd;
     public Gallbladder gallbladder;
@@ -97,7 +97,7 @@ public class DxPageObj extends GalenPageObj {
         review = new ReviewAnswers(driver);
         oAuthPostReview = new OAuthPostReview(driver);
         adbu = new ADBU(driver);
-        adbuddi= new ADBUBC(driver);
+        adbubc= new ADBUBC(driver);
         adbubpScreen = new ADBUBP(driver);
         adbubpNormal = new ADBUBPNormal(driver);
         enterBPEnd = new EnterBPEnd(driver);

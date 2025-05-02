@@ -28,7 +28,7 @@ public class VTP_DEX_FRD_148_OK_BP_Confirm_BP_Safe extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_148_OK_BP_Confirm_BP_Safe_Test() throws Exception {
+    public void VTP_DEX_FRD_148_OK_BP_Confirm_BP_Safe_Test()  {
 
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
