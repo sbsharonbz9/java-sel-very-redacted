@@ -4,7 +4,6 @@ import galen.enums.SP.RoleType;
 import galen.helpers.common.GalenReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

@@ -7,7 +7,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -47,7 +46,7 @@ public class VTP_DEX_FRD_042_Smoking_Birth_Year_35_or_Older_DNU extends BaseTest
         VERSIONHISTORY.add(" ; ; ; ");
     }
 
-    void loopSmokingOptions(DxUser user, LinkedHashMap<String,String> smokingSettings) throws InterruptedException {
+    void loopSmokingOptions(DxUser user, LinkedHashMap<String,String> smokingSettings) {
         for ( HashMap.Entry<String, String> e: smokingSettings.entrySet()) {
             new DxHFWrappers(driver).runDxHFNonsmokingwBP(user, pageObj.smoking, report);
             pageObj.smoking.selectRadioResponseAndProgress(e.getKey(), pageObj.birthYear, report);

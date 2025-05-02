@@ -10,11 +10,8 @@ import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker extends BaseTest {
     static String OBJECTIVE = "This Happy Path flow covers the use-case scenario where the user successfully takes the Initial Assessment and completes checkout.\n" +
@@ -29,12 +26,12 @@ public class HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker extends B
     HashMap<String, String[]> PREEXECUTION = new HashMap<>();
     public BasicHelpers bh;
 
-    HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker() throws IOException {
+    HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker() {
         VERSIONHISTORY.add(" ; ; ; ");
     }
 
     @Test
-    public void HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker_Test() throws IOException, InterruptedException {
+    public void HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker_Test() {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "HappyFlow_IA_Initial_Assessment_to_Checkout_wBP_NonSmoker";

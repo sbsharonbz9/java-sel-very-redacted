@@ -14,7 +14,6 @@ import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.common.BasePage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
-import galen.utils.ConfigLoader;
 import org.testng.annotations.Test;
 
 import java.io.IOException;

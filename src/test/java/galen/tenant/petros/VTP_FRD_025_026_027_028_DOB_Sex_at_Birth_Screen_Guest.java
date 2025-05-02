@@ -53,16 +53,16 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         bh = new BasicHelpers(driver);
 
         pageObj = new PetrosPageObj(driver);
-        pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);;
+        pageObj.pritUnl.authenticateUserIfRequired(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.sexAndBirthYear, report);
         user.gender = Gender.Female;
         pageObj.sexAndBirthYear.fillOutForm(user, report);
-        report.addScreenshotStep("OAuth Screen Step 2", driver);
+        report.addScreenshotStep("OAuth Screen Step 2");
 
         pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
         pageObj.review.addressConfirmationsAndProgress(pageObj.kickoutPage, report);
-        report.addScreenshotStep("Kickout Page Step 4", driver);
+        report.addScreenshotStep("Kickout Page Step 4");
 
         pageObj.pritUnl.load(UrlType.PETROS);
         user.gender = Gender.Male;
@@ -76,7 +76,7 @@ public class VTP_FRD_025_026_027_028_DOB_Sex_at_Birth_Screen_Guest extends BaseT
         pageObj.pritUnl.load(UrlType.PETROS);
         new PetrosNavigations(driver).partialNavigationIA(user, pageObj.review, report);
         pageObj.review.addressConfirmationsAndProgress(pageObj.kickoutPage, report);
-        report.addScreenshotStep("Kickout Page Step 8", driver);
+        report.addScreenshotStep("Kickout Page Step 8");
 
         pageObj.pritUnl.load(UrlType.PETROS);
         user.gender = Gender.Male;

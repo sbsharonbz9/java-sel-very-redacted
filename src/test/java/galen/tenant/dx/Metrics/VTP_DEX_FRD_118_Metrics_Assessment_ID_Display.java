@@ -2,7 +2,10 @@ package galen.tenant.dx.Metrics;
 
 import galen.base.BaseTest;
 import galen.enums.framework.UrlType;
-import galen.enums.tenant.dx.*;
+import galen.enums.tenant.dx.CancerType;
+import galen.enums.tenant.dx.HeartConditionType;
+import galen.enums.tenant.dx.LiverCancerType;
+import galen.enums.tenant.dx.SmokeType;
 import galen.helpers.common.BasicHelpers;
 import galen.helpers.common.CommonPageFeatures;
 import galen.helpers.common.GalenReport;
@@ -12,11 +15,8 @@ import galen.helpers.tenant.dx.DxUserTemplates;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
     static String OBJECTIVE = "To verify When a new user starts to take an initial health survey, the application shall " +
@@ -62,7 +62,7 @@ public class VTP_DEX_FRD_118_Metrics_Assessment_ID_Display extends BaseTest {
     }
 
     @Test
-    public void VTP_DEX_FRD_118_Metrics_Assessment_ID_Display_Test() throws IOException, InterruptedException {
+    public void VTP_DEX_FRD_118_Metrics_Assessment_ID_Display_Test()  {
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);
         report.reportTitle = "VTP_DEX_FRD_118 – Metrics Assessment ID Display";

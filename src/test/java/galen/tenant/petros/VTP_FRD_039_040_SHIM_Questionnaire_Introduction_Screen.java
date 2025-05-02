@@ -8,7 +8,6 @@ import galen.helpers.tenant.petros.PetrosUser;
 import galen.pages.tenant.petros.InitialAssessment.PetrosPageObj;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,7 +27,7 @@ public class VTP_FRD_039_040_SHIM_Questionnaire_Introduction_Screen extends Base
     }
 
     @Test
-    public void VTP_FRD_039_040_SHIM_Questionnaire_Introduction_Screen_Test() throws IOException {
+    public void VTP_FRD_039_040_SHIM_Questionnaire_Introduction_Screen_Test() {
         
         report = new GalenReport(driver, reportName, OBJECTIVE, REQUIREMENTS, REFERENCES, NOTES,
                 VERSIONHISTORY, PREEXECUTION);

@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
     static String OBJECTIVE = "To verify upon selection of the Application back button, the application shall return to " +
             "the previous screen in a health survey.";
@@ -93,7 +91,7 @@ public class VTP_DEX_FRD_017_Nav_App_Back_Button extends BaseTest {
         VERSIONHISTORY.add(" ; ; ; ");
     }
 
-    void verifyMoreInfoBack(int step, BasePage page) throws InterruptedException {
+    void verifyMoreInfoBack(int step, BasePage page) {
         commonPageFeatures.clickBackToPage(page, report);
         report.addScreenshotStep("Step"+step, driver);
         commonPageFeatures.clickMoreInfoToModal(report);

@@ -9,7 +9,6 @@ import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxMetricsRecord;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.sp.StudyAdminPageObj;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import galen.utils.ConfigLoader;

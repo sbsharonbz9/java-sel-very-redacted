@@ -8,7 +8,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxNavigations;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 

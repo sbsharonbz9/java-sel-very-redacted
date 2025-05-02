@@ -1,7 +1,6 @@
 package galen.helpers.tenant.petros;
 
 import galen.enums.common.Gender;
-import galen.helpers.common.GalenUser;
 
 public class PetrosUserTemplates {
 

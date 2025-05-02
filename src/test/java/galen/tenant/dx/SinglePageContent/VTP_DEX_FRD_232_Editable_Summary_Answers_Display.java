@@ -10,7 +10,6 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.dx.DxHFWrappers;
 import galen.helpers.tenant.dx.DxUser;
 import galen.helpers.tenant.dx.DxUserTemplates;
-import galen.pages.common.PritUnlPage;
 import galen.pages.tenant.dx.InitialAssessment.DxPageObj;
 import org.testng.annotations.Test;
 
@@ -77,7 +76,7 @@ public class VTP_DEX_FRD_232_Editable_Summary_Answers_Display extends BaseTest {
         pageObj.review.clickEditToPage(ReviewAnswersLinks.ANITFUNGAL, pageObj.antifungal, report);
         user.isAntifungal = "Yes";
         pageObj.antifungal.clickYesNoNextToPage(user.isAntifungal, pageObj.antifungalMeds, report);
-        user.antiFungalMeds=new ArrayList<>(Arrays.asList(AntifungalMedsType.FLUCONAZOLE.label));
+        user.antiFungalMeds= pageObj.antifungalMeds.getCondition(AntifungalMedsType.FLUCONAZOLE.label);
         pageObj.antifungalMeds.selectCheckboxesAndProgress(user.antiFungalMeds, pageObj.review, report);
 
         pageObj.review.clickEditToPage(ReviewAnswersLinks.DEPRESSION, pageObj.depression, report);

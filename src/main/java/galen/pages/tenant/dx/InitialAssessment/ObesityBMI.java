@@ -5,7 +5,6 @@ import galen.helpers.tenant.dx.DxUser;
 import galen.pages.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -38,9 +37,9 @@ public class ObesityBMI extends BasePage {
         }
     }
 
-    public Boolean enterHeightAndWeightAndProgress(DxUser user, BasePage nextPage, @Nullable GalenReport report) {
+    public void enterHeightAndWeightAndProgress(DxUser user, BasePage nextPage, @Nullable GalenReport report) {
         enterHeightAndWeight(user, report);
-        return clickNextToPage(nextPage, report);
+        clickNextToPage(nextPage, report);
     }
 
     public void verifyWeightInputError(@Nullable GalenReport report) {

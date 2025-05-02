@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class VTP_FRD_062_063_Once_a_Day_Instructional_Screen extends BaseTest {
     static String OBJECTIVE = "FRD_062: To verify the Once a Day Instructional Screen shall provide a control that " +
             "allows the user to input an acknowledgement response.\n" +

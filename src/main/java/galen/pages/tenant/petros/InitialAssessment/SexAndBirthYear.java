@@ -5,15 +5,11 @@ import galen.helpers.common.GalenReport;
 import galen.helpers.tenant.petros.PetrosUser;
 import galen.pages.common.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 
 public class SexAndBirthYear extends BasePage {
     public By title = By.xpath("//h1[contains(text(),'Sex at birth')]");
